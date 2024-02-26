@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Ecofrontiers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <input type ="checkbox" name ="" id ="chk1">
+        <div class="logo"><a href="https://ecofrontiers.xyz/"><img src="images/logo.png" alt="logo"></a></div>
+            <!-- <div class="search-box">
+                <form>
+                    <input type ="text" name ="search" id ="srch" placeholder="Search">
+                    <button type ="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div> -->
+            <ul>
+                <li><a href="#">Assets Type</a></li>
+                <li><a href="#">Issuer</a></li>
+                <li><a href="#">Location</a></li>
+                <!-- <li><a href="#">Text</a></li> -->
+                <li><div class="buttons"><a href="https://www.google.com/" class="button1" target="_blank" rel="noopener">Add Assets</a></div></li>
+            </ul>
+            <div class="menu">
+                <label for="chk1">
+                    <i class="fa fa-bars"></i>
+                </label>
+            </div>
+    </header>
+    <div id="map"></div>
+<!-- <br>
+<button id="fly">Fly</button> -->
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYWJieWNsIiwiYSI6ImNsc3lwMHF3ODA1MXoybW5yb29vd3RsbmIifQ.dwY1ecm1bGatBCXGOdRCWQ';
+    // These options control the camera position after animation
+    const start = {
+        center: [80, 36],
+        zoom: 1,
+        pitch: 0,
+        bearing: 0
+    };
+    const end = {
+        center: [8.11862, 46.58842],
+        zoom: 12.5,
+        bearing: 130,
+        pitch: 75
+    };
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/satellite-streets-v12',
+        ...start
+    });
+
+    map.on('style.load', () => {
+        // Custom atmosphere styling
+        map.setFog({
+            'color': 'rgb(220, 159, 159)', // Pink fog / lower atmosphere
+            'high-color': 'rgb(36, 92, 223)', // Blue sky / upper atmosphere
+            'horizon-blend': 0.4 // Exaggerate atmosphere (default is .1)
+        });
+
+        map.addSource('mapbox-dem', {
+            'type': 'raster-dem',
+            'url': 'mapbox://mapbox.terrain-rgb'
+        });
+
+        map.setTerrain({
+            'source': 'mapbox-dem',
+            'exaggeration': 1.5
+        });
+    });
+
+    let isAtStart = true;
+
+    document.getElementById('fly').addEventListener('click', () => {
+        // depending on whether we're currently at point a or b,
+        // aim for point a or b
+        const target = isAtStart ? end : start;
+        isAtStart = !isAtStart;
+
+        map.flyTo({
+            ...target, // Fly to the selected target
+            duration: 12000, // Animate over 12 seconds
+            essential: true // This animation is considered essential with
+            //respect to prefers-reduced-motion
+        });
+    });
+</script>
+</body>
+</html>

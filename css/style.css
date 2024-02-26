@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+/* #fly {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #ee8a65;
+} */
+body{
+    background: url(bg.jpg);
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+}
+header{
+    width:100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 99;
+    box-shadow: 0 0 10px #000;
+    background: rgba(0,0,0,0.5);
+}
+#chk1{
+    display: none;     
+}
+i{
+    color: #fff;
+    cursor: pointer;
+}
+header .logo{
+    flex: 1;
+}
+.logo img{
+    width: 50%;
+}
+header .search-box{
+    flex: 1;
+    position: relative;
+}
+.search-box input{
+    width:100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background:#f2f2f2;
+    border-radius: 30px;
+    color:gray;
+    font-size: 16px;
+    padding-left: 23px;
+    padding-right: 40px;
+    text-align: left;
+     
+}
+h1 {
+	color: white;
+	font: 1.5em;
+	letter-spacing: 1px;
+	text-align: center;
+}
+ a {
+        padding: 15px 20px;
+        font: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        margin: 1em;
+    }
+    .button1 {
+        color: white;
+        background-color: #5f9ea0;
+        border: 5px solid transparent;
+        transition: .2s ease;
+        border-radius: 50px;
+    }
+    
+    .button1:hover {
+        color: #5f9ea0;
+        background-color: white;
+        transform: scale(1.1);
+        border: 5px solid #5f9ea0;
+    }
+.search-box button{
+    cursor: pointer;
+    width:40px;
+    height: 40px;
+    border-radius: 30px;
+    border:none;
+    position: absolute;
+    top:0;
+    right: 0;
+    transform: scale(0.9);
+    background: cadetblue;
+    color: #fff;
+}
+header ul {
+    flex:2;
+    display: flex;
+    justify-content: space-evenly;
+}
+header ul li{
+    list-style: none;
+}
+header ul li a{
+    text-decoration: none;
+    color:#fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 15px;
+}
+header ul li a:hover{
+    border-bottom: 2px solid cadetblue;
+}
+header .menu{
+    font-size: 2.5em;
+    display: none;
+}
+.mapboxgl-control-container{
+    display: none;
+}
+@media(max-width:1000px){
+    .search-box button{
+        position: absolute;
+    }
+    header ul{
+        position: fixed;
+        top:100px;
+        right: -100%;
+        background: rgba(0,0,0,0.5);
+        height: calc(100vh - 100px);
+        width:50%;
+        flex-direction: column;
+        align-items: center;
+        transition: right 0.5s linear;
+    }
+     
+    header .menu{
+        display: block;
+        width:100px;
+        text-align: center;
+    }
+    #chk1:checked ~ ul{
+        right: 0;
+        
+    }
+  
+}
