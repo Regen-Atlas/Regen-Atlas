@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Ecofrontiers</title>
+    <title>Regen Atlas</title>
+    <link rel="icon" type="images/1.png" href="images/1.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
@@ -14,18 +15,11 @@
     <header>
         <input type ="checkbox" name ="" id ="chk1">
         <div class="logo"><a href="https://ecofrontiers.xyz/"><img src="images/logo.png" alt="logo"></a></div>
-            <!-- <div class="search-box">
-                <form>
-                    <input type ="text" name ="search" id ="srch" placeholder="Search">
-                    <button type ="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div> -->
             <ul>
                 <li><a href="#">Assets Type</a></li>
                 <li><a href="#">Issuer</a></li>
                 <li><a href="#">Location</a></li>
-                <!-- <li><a href="#">Text</a></li> -->
-                <li><div class="buttons"><a href="https://www.google.com/" class="button1" target="_blank" rel="noopener">Add Assets</a></div></li>
+                <li><div class="buttons"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform" class="button1" target="_blank" rel="noopener">Add Assets</a></div></li>
             </ul>
             <div class="menu">
                 <label for="chk1">
@@ -34,64 +28,141 @@
             </div>
     </header>
     <div id="map"></div>
-<!-- <br>
-<button id="fly">Fly</button> -->
+    <div id="info-boxs"></div>
+
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiYWJieWNsIiwiYSI6ImNsc3lwMHF3ODA1MXoybW5yb29vd3RsbmIifQ.dwY1ecm1bGatBCXGOdRCWQ';
     // These options control the camera position after animation
-    const start = {
-        center: [80, 36],
-        zoom: 1,
-        pitch: 0,
-        bearing: 0
-    };
-    const end = {
-        center: [8.11862, 46.58842],
-        zoom: 12.5,
-        bearing: 130,
-        pitch: 75
-    };
     const map = new mapboxgl.Map({
         container: 'map',
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/satellite-streets-v12',
-        ...start
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center:[50,20],
+        zoom:3
+    });
+    
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // extend mapboxGL Marker so we can pass in an onClick handler
+    class ClickableMarker extends mapboxgl.Marker {
+      // new method onClick, sets _handleClick to a function you pass in
+      onClick(handleClick) {
+        this._handleClick = handleClick;
+        return this;
+      }
+
+      // the existing _onMapClick was there to trigger a popup
+      // but we are hijacking it to run a function we define
+      _onMapClick(e) {
+        const targetElement = e.originalEvent.target;
+        const element = this._element;
+
+        if (this._handleClick && (targetElement === element || element.contains((targetElement)))) {
+          this._handleClick();
+        }
+      }
+    };
+    
+
+    const cities = [
+      {
+        name: 'Myanmar 1764',
+        Image:'images/myanmmar.jpg',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text: '<b>Description</b>: The Reforestation and Restoration of Degraded Mangrove Lands, Sustainable Livelihood and Community Development in Myanmar project will be implemented on degraded lands of the Northern part of Ayeyarwady Division of Myanmar.',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/5/myanmar-1764">Buy Here</a></button>',
+        coordinates: [ 96.1103153, 21.9621047 ],
+      },
+      {
+        name: 'Myanmar 2088',
+        Image:'images/myanmars.png',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text: '<b>Description</b>: The Reforestation and Restoration of Degraded Mangrove Lands, Sustainable Livelihood and Community Development in Myanmar project will be implemented on degraded lands of the Northern part of Ayeyarwady Division of Myanmar.',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/5/myanmar-1764">Buy Here</a></button>',
+        coordinates: [ 96.1103153, 18.9621047 ],
+      },
+      {
+        name: 'Vlinder Papariko',
+        Image:'images/VlinderPapariko.webp',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text:'The Restoration of Degraded Mangrove Areas in Kenya project aims to boost natural removal of CO2 through creating a healthy mangrove ecosystem in degraded lands of Kwale county, Kenya',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/4/vlinder-papariko">Buy Here</a></button>',
+        coordinates: [ 38.4313975, 1.4419683 ],
+      },
+      {
+        name: 'ALLCOT Blue Carbon Mangrove Senegal',
+        Image:'images/myanmars.png',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text:'The Restoration of Degraded Mangrove Areas in Kenya project aims to boost natural removal of CO2 through creating a healthy mangrove ecosystem in degraded lands of Kwale county, Kenya',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/6/allcot-blue-carbon-mangrove-senegal">Buy Here</a></button>',
+        coordinates: [ -14.4529612, 14.4750607 ],
+      },
+      {
+        name: 'Yagasu mangrove restoration Indonesia',
+        Image:'images/myanmars.png',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text:'The Restoration of Degraded Mangrove Areas in Kenya project aims to boost natural removal of CO2 through creating a healthy mangrove ecosystem in degraded lands of Kwale county, Kenya',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/2/yagasu-mangrove-restoration-indonesia">Buy Here</a></button>',
+        coordinates: [ 117.8902853, -2.4833826 ],
+      },
+      {
+        name: 'Yagasu mangrove restoration Indonesia',
+        Image:'images/myanmars.png',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text:'The project aims to develop sustainable carbon stocks across the climate vulnerable Indonesian coasts, to reduce greenhouse gas emissions, contribute to local sustainable economic and social development',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/3/yakopi-mangrove-restoration-indonesia">Buy Here</a></button>',
+        coordinates: [ 115.8902853, -2.4833826 ],
+      },
+      {
+        name: 'Energy-saving Stoves for a Clean Environment in Bangladesh',
+        Image:'images/Energy-saving_Stoves_for_a_Clean_Environment_in_Bangladesh.png',
+        asset_type:'<b>Asset Type</b>: Derivative',
+        asset_subtype:'<b>Asset Subtype</b>: Forward Carbon Offset',
+        Text:'Supporting low-income participants, such as refugees in Bangladesh',
+        issuer:'<b>Issuer</b>: SolidWorld',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/7/clean-cooking-project-for-refugees">Buy Here</a></button>',
+        coordinates: [ 92.000319, 21.404222 ],
+      },
+      {
+        name: 'Travis County Floodplain Reforestation Program',
+        Image:'images/Travis_County.png',
+        asset_type:'<b>Asset Type</b>: Environmental Process Token',
+        asset_subtype:'<b>Asset Subtype</b>: Carbon Offset',
+        Text:'TreeFolks, in collaboration with the City of Austin Office of Sustainability, continued the Travis County Floodplain Reforestation Program for a second year. This initiative, led by TreeFolks, aims to replenish forest buffers along rivers and streams in eastern Travis County by planting over 23,000 native trees across 31.47 acres of private land. The trees were strategically placed less than 10 feet apart to ensure effective canopy coverage in riparian zones.',
+        issuer:'<b>Issuer</b>:Regen Network',
+        button:'<button class="back_line"><a href="https://app.solid.world/projects/7/clean-cooking-project-for-refugees">Buy Here</a></button>',
+        coordinates: [ -97.483906, 30.273576 ],
+      },
+    ];
+
+    cities.forEach((city) => {
+      new ClickableMarker()
+        .setLngLat(city.coordinates)
+        .onClick(() => { // onClick() is a thing now!
+          document.getElementById('info-boxs').innerHTML = `<div id="info-box"><span class="close" onclick="myFunction()">&times;</span>
+          <div class="head-popup"><b> ${city.name}</b></div>
+          <img class="image_set" src="${city.Image}"/><div class="pop_text">${city.asset_type}</div>
+          <div class="pop_text">${city.asset_subtype}</div><div class="pop_text">${city.Text}</div>
+          <div class="pop_text">${city.issuer}</div><div class="button">${city.button}</div></div>`;
+        })
+        .addTo(map);
     });
 
-    map.on('style.load', () => {
-        // Custom atmosphere styling
-        map.setFog({
-            'color': 'rgb(220, 159, 159)', // Pink fog / lower atmosphere
-            'high-color': 'rgb(36, 92, 223)', // Blue sky / upper atmosphere
-            'horizon-blend': 0.4 // Exaggerate atmosphere (default is .1)
-        });
-
-        map.addSource('mapbox-dem', {
-            'type': 'raster-dem',
-            'url': 'mapbox://mapbox.terrain-rgb'
-        });
-
-        map.setTerrain({
-            'source': 'mapbox-dem',
-            'exaggeration': 1.5
-        });
-    });
-
-    let isAtStart = true;
-
-    document.getElementById('fly').addEventListener('click', () => {
-        // depending on whether we're currently at point a or b,
-        // aim for point a or b
-        const target = isAtStart ? end : start;
-        isAtStart = !isAtStart;
-
-        map.flyTo({
-            ...target, // Fly to the selected target
-            duration: 12000, // Animate over 12 seconds
-            essential: true // This animation is considered essential with
-            //respect to prefers-reduced-motion
-        });
-    });
+ function myFunction() {
+  document.getElementById("info-boxs").innerHTML = "";
+}       
 </script>
 </body>
 </html>
