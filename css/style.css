@@ -5,20 +5,7 @@
     font-family: Arial;
 }
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-/* #fly {
-    display: block;
-    position: relative;
-    margin: 0px auto;
-    width: 50%;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    font-size: 12px;
-    text-align: center;
-    color: #fff;
-    background: #ee8a65;
-} */
+
 body{
     background: url(bg.jpg);
     background-size: cover;
@@ -110,6 +97,19 @@ h1 {
     background: cadetblue;
     color: #fff;
 }
+.button a{
+    width:40px;
+    height: 40px;
+    border-radius: 30px;
+    border:none;
+    transform: scale(0.9);
+    background: cadetblue;
+    color: #fff;
+    margin: 0px;
+}
+.back_line{
+    display: contents;
+}
 header ul {
     flex:2;
     display: flex;
@@ -135,6 +135,45 @@ header .menu{
 .mapboxgl-control-container{
     display: none;
 }
+.head-popup{
+    font-size: 20px;
+}
+#info-box {
+    position: absolute;
+    z-index: 10;
+    left: 7px;
+    font-family: sans-serif;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 2rem;
+    border: 1px solid #969696;
+    bottom: 34px;
+    width: 35%;
+  }
+  .image_set{
+    width: 100%;
+  }
+  .pop_text{
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
+
+ /* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
 @media(max-width:1000px){
     .search-box button{
         position: absolute;
