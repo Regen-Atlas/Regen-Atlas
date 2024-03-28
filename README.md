@@ -22,14 +22,14 @@ With the Regen Atlas, we propose an alternative to the current state of the dece
 
 The Atlas’ key features include:
 
-**Support for Diverse Green Assets**: The Regen Atlas accommodates a wide array of green crypto-assets, covering various environmental categories that go beyond carbon. Users can explore and engage with projects related to carbon assets, but also non-carbon ecosystem services (e.g. biodiversity, regenerative agriculture, water purification), green and blue bonds, forwards contracts, and more. The interface will have a filtering feature, enabling hassle-free browsing and funding. 
+* **Support for Diverse Green Assets**: The Regen Atlas accommodates a wide array of green crypto-assets, covering various environmental categories that go beyond carbon. Users can explore and engage with projects related to carbon assets, but also non-carbon ecosystem services (e.g. biodiversity, regenerative agriculture, water purification), green and blue bonds, forwards contracts, and more. The interface will have a filtering feature, enabling hassle-free browsing and funding. 
 
 
-**Aggregated Ratings Agencies**: To provide users with valuable insights, the Regen Atlas aggregates scores from ratings agencies specializing in natural capital. This consolidated resource offers a bird's eye view of the highest quality initiatives, helping potential funders make informed decisions while building their green portfolio.
+* **Aggregated Ratings Agencies**: To provide users with valuable insights, the Regen Atlas aggregates scores from ratings agencies specializing in natural capital. This consolidated resource offers a bird's eye view of the highest quality initiatives, helping potential funders make informed decisions while building their green portfolio.
 
 
-**Top-down Territorial Incentives (longer term, outside the scope of this round)**: The Regen Atlas lets users create incentives in relation to extant territories, helping stimulate natural capital projects in areas where they can have the most significant impact. Users eager to incentivize the production of natural capital assets will be able to pin a location on the map and enter specific tender information—such as the incentive offered, e.g. a carbon credit—before publishing their request for proposals.
+* **Top-down Territorial Incentives (longer term, outside the scope of this round)**: The Regen Atlas lets users create incentives in relation to extant territories, helping stimulate natural capital projects in areas where they can have the most significant impact. Users eager to incentivize the production of natural capital assets will be able to pin a location on the map and enter specific tender information—such as the incentive offered, e.g. a carbon credit—before publishing their request for proposals.
 
 
-**Support for Existing Green Assets (longer term, outside the scope of this round)**: Many green assets already exist, but lack the global accessibility afforded by public blockchains. The interface will allow users to request these assets as tokens on Celo, partnering with well-regulated, designated custodians who tokenize already existing green assets.
+* **Support for Existing Green Assets (longer term, outside the scope of this round)**: Many green assets already exist, but lack the global accessibility afforded by public blockchains. The interface will allow users to request these assets as tokens on Celo, partnering with well-regulated, designated custodians who tokenize already existing green assets.
 
