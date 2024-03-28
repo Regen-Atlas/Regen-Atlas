@@ -1,2 +1,1 @@
-# Ecofronties-Website
- Web3
+# The Regen Atlas
