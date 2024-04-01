@@ -4,7 +4,7 @@
 
 The Regen Atlas is an open-source platform designed to facilitate displaying, funding, and incubating of natural capital projects through a user-friendly, interactive map interface. 
 
-[LINK TO PROTOTYPE](https://abbyfeels.com/)
+LINK TO PROTOTYPE
 
 ## Vision 🌍
 
@@ -14,7 +14,7 @@ The Regen Atlas is set to transform this landscape by providing a global, open-s
 
 ## Solution 🗺️
 
-[The Regen Atlas](https://abbyfeels.com/) is a location-based aggregation layer enabling the discovery, trade, and creation of tokenized environmental assets throughout the globe.
+The Regen Atlas is a location-based aggregation layer enabling the discovery, trade, and creation of tokenized environmental assets throughout the globe.
 With the Regen Atlas, we propose an alternative to the current state of the decentralized environmental asset market, where:
 * Projects tokenizing natural capital are in need of a clear and intuitive platform to display the location of their assets.
 * Organizations, governments and individuals willing to buy tokenized natural capital are in need of a unified interface enabling asset discovery beyond carbon.
