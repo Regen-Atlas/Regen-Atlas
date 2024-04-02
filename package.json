@@ -1,0 +1,16 @@
+{
+  "name": "regen-atlas",
+  "version": "1.0.0",
+  "description": "The Regen Atlas is an open-source platform designed to facilitate displaying, funding, and incubating of natural capital projects through a user-friendly, interactive map interface.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
