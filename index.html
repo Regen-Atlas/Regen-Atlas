@@ -15,12 +15,39 @@
     <header>
         <input type ="checkbox" name ="" id ="chk1">
         <div class="logo"><a href="https://twitter.com/theregenatlas"><img src="images/logo.png" alt="logo"></a></div>
-            <ul>
-                <li><a href="#">Assets Type</a></li>
-                <li><a href="#">Issuer</a></li>
-                <li><a href="#">Location</a></li>
-                <li><div class="buttons"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform" class="button1" target="_blank" rel="noopener">Add Assets</a></div></li>
+            <nav>
+              <ul>
+                <li>
+                    <select id="assetTypeFilter" class="drop_menu">
+                      <option value="all">All Asset Types</option>
+                      <option value="Derivative">Derivative</option>
+                      <option value="Environmental Process Token">Environmental Process Token</option>
+                      <option value="Nonpossessory right">Nonpossessory right</option>
+                      <option value="Ownership">Ownership</option>
+                    </select>
+                </li>
+                <li>
+                    <select id="issuerFilter" class="drop_menu">
+                      <option value="all">All Issuers</option>
+                      <option value="SolidWorld">Solidworld</option>
+                      <option value="Regen Network">Regen Network</option>
+                      <option value="Coorest">Coorest</option>
+                      <option value="GreenTrade">GreenTrade</option>
+                      <option value="Moss">Moss</option>
+                      <option value="Creol">Creol</option>
+                      <option value="Frigg.eco">Frigg.eco</option>
+                      <option value="Senken">Senken</option>
+                      <option value="Nat5">Nat5</option>
+                      <option value="Nori">Nori</option>
+                      <option value="Glow">Glow</option>
+                    </select>
+                </li>
+                <!-- <li><a href="#">Location</a></li> -->
+                <li>
+                    <div class="buttons"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform" class="button1" target="_blank" rel="noopener">Add Assets</a></div>
+                </li>
             </ul>
+          </nav>
             <div class="menu">
                 <label for="chk1">
                     <i class="fa fa-bars"></i>
