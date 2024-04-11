@@ -4,7 +4,7 @@
 
 The Regen Atlas is an open-source platform designed to facilitate displaying, funding, and incubating of natural capital projects through a user-friendly, interactive map interface. 
 
-LINK TO PROTOTYPE
+[LINK TO PROTOTYPE](https://www.regenatlas.xyz/)
 
 ## Vision 🌍
 
