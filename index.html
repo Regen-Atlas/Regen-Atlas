@@ -115,23 +115,51 @@
       document.getElementById("info-boxs").innerHTML = "";
     }
 
+    // Filters
+    let markers = [];
+
+    function applyFilters() {
+      const assetType = document.getElementById('assetTypeFilter').value;
+      const issuer = document.getElementById('issuerFilter').value;
+
+      markers.forEach(marker => marker.remove()); // Remove all markers
+      markers = []; // Reset markers array
+
+
+      cities.filter(city => {
+        return (assetType === 'all' || city.asset_type.includes(assetType)) &&
+          (issuer === 'all' || city.issuer.includes(issuer));
+      }).forEach(filteredCity => {
+        const marker = new ClickableMarker()
+          .setLngLat(filteredCity.coordinates)
+          .onClick(() => {
+            document.getElementById('info-boxs').innerHTML = `
+                        <div id="info-box">
+                            <span class="close" onclick="myFunction()">&times;</span>
+                            <div class="head-popup"><b>${filteredCity.name}</b></div>
+                            <img class="image_set" src="${filteredCity.Image}"/>
+                            <div class="pop_text">${filteredCity.asset_type}</div>
+                            <div class="pop_text">${filteredCity.asset_subtype}</div>
+                            <div class="pop_text">${filteredCity.Text}</div>
+                            <div class="pop_text">${filteredCity.issuer}</div>
+                            <div class="button">${filteredCity.button}</div>
+                        </div>`;
+          })
+          .addTo(map);
+        markers.push(marker);
+      });
+    }
+
+    document.getElementById('assetTypeFilter').addEventListener('change', applyFilters);
+    document.getElementById('issuerFilter').addEventListener('change', applyFilters);
+
+    // Load cities from Firestore
     db.collection("cities").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         cities.push(doc.data())
       });
 
-      cities.forEach((city) => {
-        new ClickableMarker()
-          .setLngLat(city.coordinates)
-          .onClick(() => { // onClick() is a thing now!
-            document.getElementById('info-boxs').innerHTML = `<div id="info-box"><span class="close" onclick="closeInfoBox()">&times;</span>
-          <div class="head-popup"><b> ${city.name}</b></div>
-          <img class="image_set" src="${city.Image}"/><div class="pop_text">${city.asset_type}</div>
-          <div class="pop_text">${city.asset_subtype}</div><div class="pop_text">${city.Text}</div>
-          <div class="pop_text">${city.issuer}</div><div class="button">${city.button}</div></div>`;
-          })
-          .addTo(map);
-      });
+      applyFilters(); // Initial apply filters to show all cities
     });
   </script>
 </body>
