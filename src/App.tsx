@@ -1,5 +1,7 @@
 import { ConnectKitButton } from "connectkit";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const account = useAccount();
@@ -8,7 +10,9 @@ function App() {
 
   return (
     <>
-      <div>
+      <Header />
+      <Outlet />
+      {/* <div>
         <h2>Account</h2>
 
         <div>
@@ -31,7 +35,7 @@ function App() {
         <ConnectKitButton />
         <div>{status}</div>
         <div>{error?.message}</div>
-      </div>
+      </div> */}
     </>
   );
 }
