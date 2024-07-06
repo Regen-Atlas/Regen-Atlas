@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Asset } from "../shared/types";
 import { CHAIN_MAPPING } from "../shared/consts/chains";
-import { Dot, MapPin, Share } from "@phosphor-icons/react";
+import { Dot, MapPin } from "@phosphor-icons/react";
 import {
   ASSET_SUBTYPES_MAP,
   ASSET_TYPES_MAP,
