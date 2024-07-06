@@ -1,10 +1,9 @@
-import { useState } from "react";
 import clsx from "clsx";
 import { useFiltersDispatch, useFiltersState } from "../../context/filters";
 import { ASSET_TYPES } from "../../shared/consts";
 import { CheckboxBox } from "../../shared/components";
-import { PROVIDER_LIST, PROVIDER_MAP } from "../../shared/consts/provider";
-import { CHAINS, CHAIN_MAPPING } from "../../shared/consts/chains";
+import { PROVIDER_LIST } from "../../shared/consts/provider";
+import { CHAINS } from "../../shared/consts/chains";
 
 export default ({
   openFilter,

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { FunnelSimple } from "@phosphor-icons/react";
-import { useFiltersDispatch, useFiltersState } from "../context/filters";
+import { useFiltersState } from "../context/filters";
 import { Modal } from "../shared/components/Modal";
 import FiltersModal from "./FiltersModal";
 
 export default (): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { filters, filteredAssets } = useFiltersState();
-  const dispatchFilters = useFiltersDispatch();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
