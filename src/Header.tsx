@@ -4,7 +4,6 @@ import { Modal } from "./shared/components/Modal";
 import { ConnectKitButton } from "connectkit";
 import { router } from "./main";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
 import FiltersDesktop from "./Explore/FiltersDesktop";
 
 const menuItems = [
@@ -13,17 +12,9 @@ const menuItems = [
     link: "/",
   },
   {
-    name: "Analytics",
-    link: "#",
-  },
-  {
     name: "Add Asset",
     link: "#",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform",
-  },
-  {
-    name: "T&C",
-    link: "#",
   },
 ];
 
@@ -52,30 +43,7 @@ export default (): React.ReactElement => {
         >
           <img src="/RA_logo-02.svg" alt="logo" className="h-[40px]" />
         </a>
-        {/* <div className="hidden md:flex">
-          {menuItems.map((item) => {
-            if (item.url) {
-              return (
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  key={item.name}
-                  className="p-4 text-2xl"
-                >
-                  {item.name}
-                </a>
-              );
-            } else {
-              return (
-                <Link to={item.link} key={item.name} className="p-4 text-2xl">
-                  {item.name}
-                </Link>
-              );
-            }
-          })}
-        </div> */}
-        <div className="hidden lg:flex justify-center">
+        <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-320px)]">
           <FiltersDesktop />
         </div>
         <div className="hidden lg:flex">
@@ -90,21 +58,36 @@ export default (): React.ReactElement => {
           <Modal fullScreen={true} onClose={() => setIsModalOpen(false)}>
             <div className="flex flex-col justify-between h-full">
               <div className="flex flex-col items-center mt-[120px]">
-                {menuItems.map((item) => (
-                  <div
-                    key={item.name}
-                    className="p-4 text-2xl mb-2"
-                    onClick={() => {
-                      router
-                        .navigate(item.link)
-                        .then(() => setIsModalOpen(false));
-                    }}
-                  >
-                    {item.name}
-                  </div>
-                ))}
+                {menuItems.map((item) => {
+                  if (item.url) {
+                    return (
+                      <a
+                        className="p-4 text-2xl mb-2"
+                        key={item.name}
+                        href={item.url}
+                        target="_blank"
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={item.name}
+                        className="p-4 text-2xl mb-2"
+                        onClick={() => {
+                          router
+                            .navigate(item.link)
+                            .then(() => setIsModalOpen(false));
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                    );
+                  }
+                })}
               </div>
-              <div className="flex justify-center pb-12">
+              <div className="flex justify-center pb-24">
                 <ConnectKitButton />
               </div>
             </div>

@@ -11,6 +11,7 @@ import { filterAssets } from "./filterAssets";
 interface State {
   filters: Filters;
   filteredAssets: Asset[];
+  selectedAssetId: string;
 }
 
 type SetAllFiltersAction = { type: "SET_FILTERS"; payload: Filters };
@@ -59,6 +60,11 @@ type RemoveChainIdFilter = {
   type: "REMOVE_CHAIN_ID_FILTER";
 };
 
+type SetSelectedAssetAction = {
+  type: "SET_SELECTED_ASSET";
+  payload: string;
+};
+
 type Action =
   | SetAllFiltersAction
   | ResetFiltersAction
@@ -70,7 +76,8 @@ type Action =
   | SetProviderFilter
   | SetChainIdFilter
   | RemoveProviderFilter
-  | RemoveChainIdFilter;
+  | RemoveChainIdFilter
+  | SetSelectedAssetAction;
 
 const initialState: State = {
   filters: {
@@ -79,6 +86,7 @@ const initialState: State = {
     chainId: "",
   },
   filteredAssets: [...ALL_ASSETS],
+  selectedAssetId: "",
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -227,6 +235,25 @@ const reducer = (state: State, action: Action): State => {
         filters,
         filteredAssets: filterAssets(ALL_ASSETS, filters),
       };
+    }
+
+    case "SET_SELECTED_ASSET": {
+      const filteredAssets = [...state.filteredAssets];
+      const selectedAssetIndex = filteredAssets.findIndex(
+        (asset) => asset.id === action.payload
+      );
+
+      if (selectedAssetIndex === -1) {
+        return state;
+      }
+
+      if (selectedAssetIndex > 0) {
+        const selectedAsset = filteredAssets[selectedAssetIndex];
+        filteredAssets.splice(selectedAssetIndex, 1);
+        filteredAssets.unshift(selectedAsset);
+      }
+
+      return { ...state, selectedAssetId: action.payload, filteredAssets };
     }
 
     default:

@@ -30,7 +30,10 @@ export default (): React.ReactElement => {
         )}
       >
         <div
-          className="flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer"
+          className={clsx(
+            "flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer",
+            "hover:bg-gray-300 transition-all"
+          )}
           onClick={() => {
             setSelectedFilter("assetType");
             setIsDropdownOpen(!isDropdownOpen);
@@ -44,7 +47,10 @@ export default (): React.ReactElement => {
         </div>
 
         <div
-          className="flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer"
+          className={clsx(
+            "flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer",
+            "hover:bg-gray-300 transition-all"
+          )}
           onClick={() => {
             setSelectedFilter("issuers");
             setIsDropdownOpen(!isDropdownOpen);
@@ -54,7 +60,10 @@ export default (): React.ReactElement => {
         </div>
 
         <div
-          className="flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer"
+          className={clsx(
+            "flex items-center justify-center rounded-full bg-white text-blue-950 cursor-pointer",
+            "hover:bg-gray-300 transition-all"
+          )}
           onClick={() => {
             setSelectedFilter("chains");
             setIsDropdownOpen(!isDropdownOpen);

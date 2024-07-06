@@ -45,6 +45,29 @@ body {
   @apply bg-gradient-to-r from-primary-200 to-primary-300 text-gray-800;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.button-gradient {
+  background: linear-gradient(to right, rgb(157, 207, 253), rgb(23, 127, 224));
+  background-size: 200% 200%;
+  transition: background-size 0.5s ease;
+}
+
+.button-gradient:hover {
+  animation: gradient 1s ease;
+  background-size: 200% 200%;
+}
+
 .button-gray {
   @apply bg-gray-400;
 }
@@ -69,7 +92,7 @@ body.scrolled-360 .filters-row-mobile {
 }
 
 body.scrolled .filters-row-mobile {
-  @apply md:fixed md:top-[80px] md:left-0 md:w-full md:px-4 md:shadow-md;
+  @apply md:shadow-md;
 }
 
 body.scrolled-360.modal-open .filters-row-mobile {
@@ -78,6 +101,6 @@ body.scrolled-360.modal-open .filters-row-mobile {
 
 .map-wrapper .mapboxgl-map {
   @apply !h-[360px] !w-full;
-  @apply md:!h-[440px];
-  @apply lg:!h-[520px];
+  @apply md:!h-[calc(100vh-190px)];
+  @apply lg:!h-[calc(100vh-150px)];
 }

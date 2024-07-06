@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Asset } from "../shared/types";
 import { CHAIN_MAPPING } from "../shared/consts/chains";
-import { Share } from "@phosphor-icons/react";
+import { Dot, MapPin, Share } from "@phosphor-icons/react";
 import { ASSET_SUBTYPES_MAP, ASSET_TYPES_MAP } from "../shared/consts";
 import { PROVIDER_MAP } from "../shared/consts/provider";
 import { getImageUrl } from "../shared/helpers/getImageUrl";
@@ -9,25 +9,14 @@ import { getImageUrl } from "../shared/helpers/getImageUrl";
 interface AssetCardProps {
   className?: string;
   asset: Asset;
+  onPinClicked: () => void;
 }
 
-export default ({ className, asset }: AssetCardProps): React.ReactElement => {
-  const tableContent = [
-    {
-      label: "Nativity",
-      value: "Native",
-    },
-    {
-      label: "Subtype",
-      value: ASSET_TYPES_MAP[asset.assetTypeId].subtypes.find(
-        (subtype) => subtype.id === asset.assetSubtypeId
-      )?.name,
-    },
-    {
-      label: "Issuer",
-      value: PROVIDER_MAP[asset.providerId].name,
-    },
-  ];
+export default ({
+  className,
+  asset,
+  onPinClicked,
+}: AssetCardProps): React.ReactElement => {
   return (
     <div
       className={clsx(
@@ -63,7 +52,26 @@ export default ({ className, asset }: AssetCardProps): React.ReactElement => {
           backgroundImage: `url(${getImageUrl(asset)})`,
         }}
       ></div>
-      <h3 className="text-2xl font-bold">{asset.name}</h3>
+      <h3 className="text-xl xl:text-2xl font-bold">{asset.name}</h3>
+      <div className="flex items-center pt-1 pb-2 text-sm">
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={onPinClicked}
+        >
+          <MapPin size={16} />
+          {asset.physicalAddress.region
+            ? `${asset.physicalAddress.region}, `
+            : ""}
+          {asset.physicalAddress.country}
+        </div>
+        <Dot size={16} />
+        <div>
+          Issued by{" "}
+          <span className="font-bold">
+            {PROVIDER_MAP[asset.providerId].name}
+          </span>
+        </div>
+      </div>
       <p className="text-sm overflow-hidden text-ellipsis max-h-[80px] line-clamp-4 mb-3">
         {asset.description}
       </p>

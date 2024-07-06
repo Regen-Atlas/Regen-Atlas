@@ -61,7 +61,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   };
 
   return (
-    <div className="flex flex-col h-full pb-20">
+    <div className="flex flex-col h-full pb-24">
       <div className="text-2xl font-semibold mb-6">Filters</div>
       <div className="grid gap-3">
         <FilterSummaryMobile
@@ -79,7 +79,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
         />
         {openFilters.type && (
           <Modal fullScreen onClose={handleToggleTypeFilter}>
-            <div className="flex flex-col h-full pb-20">
+            <div className="flex flex-col h-full pb-24">
               <div className="text-2xl font-semibold mb-6">Asset Types</div>
               <div>
                 {ASSET_TYPES.map((type) => {
