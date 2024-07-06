@@ -36,7 +36,7 @@ export default (): React.ReactElement => {
       </div>
       {isModalOpen && (
         <Modal fullScreen onClose={() => setIsModalOpen(false)}>
-          <FiltersModal />
+          <FiltersModal onClose={() => setIsModalOpen(false)} />
         </Modal>
       )}
     </div>

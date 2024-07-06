@@ -2,8 +2,10 @@ import { ConnectKitButton } from "connectkit";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
+import { useScrollClass } from "./shared/hooks/useScrollClass";
 
 function App() {
+  useScrollClass();
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();

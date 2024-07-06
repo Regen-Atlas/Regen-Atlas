@@ -27,7 +27,7 @@ export default ({
         {value === defaultValue ? (
           <span className="text-slate-400">All</span>
         ) : (
-          <span className="text-slate-600">{value}</span>
+          <span className="text-primary-500">{value}</span>
         )}
       </div>
     </div>

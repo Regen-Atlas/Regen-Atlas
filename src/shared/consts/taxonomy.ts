@@ -12,19 +12,19 @@ export const NATURAL_ASSET_OWNERSHIP: AssetSubtype = {
 
 export const GREEN_DIGITAL_COLLECTIBLES: AssetSubtype = {
   id: "green_digital_collectibles",
-  name: '"Green" Digital Collectibles',
+  name: "Digital Collectibles",
   assetTypeId: "ownership",
 };
 
 export const GREEN_DIGIPHYSICAL_GOODS: AssetSubtype = {
   id: "green_digiphysical_goods",
-  name: '"Green" Digiphysical Goods',
+  name: "Digiphysical Goods",
   assetTypeId: "ownership",
 };
 
 export const RENEWABLE_RWAS: AssetSubtype = {
   id: "renewable_rwas",
-  name: "Renewable Real-world Assets (RWAs)",
+  name: "Green RWAs",
   assetTypeId: "ownership",
 };
 
@@ -38,19 +38,19 @@ export const ECOLOGICAL_DATA_RIGHTS: AssetSubtype = {
 
 export const NATURAL_ASSET_COMPANY_SHARES: AssetSubtype = {
   id: "natural_asset_company_shares",
-  name: "Natural Asset Company shares",
+  name: "Conservation Org Shares",
   assetTypeId: "nonpossessory_rights",
 };
 
 export const OUTPUT_RIGHTS: AssetSubtype = {
   id: "output_rights",
-  name: "Output Rights (Profit-à-prendre)",
+  name: "Output Rights",
   assetTypeId: "nonpossessory_rights",
 };
 
 export const SOCIAL_UTILITY_RIGHTS: AssetSubtype = {
   id: "social_utility_rights",
-  name: "Some other social utility or use right",
+  name: "Other Social Utility or Use Right",
   assetTypeId: "nonpossessory_rights",
 };
 
@@ -76,13 +76,13 @@ export const CARBON_CREDITS: AssetSubtype = {
 
 export const NON_CARBON_CREDITS: AssetSubtype = {
   id: "non_carbon_credits",
-  name: "Biodiversity, Plastic, Energy and Other Non-Carbon Credits",
+  name: "Biodiversity, Plastic and Others",
   assetTypeId: "environmental_process_tokens",
 };
 
 export const RECS: AssetSubtype = {
   id: "recs",
-  name: "Renewable Energy Certificates (RECs)",
+  name: "Renewable Energy Certificates",
   assetTypeId: "environmental_process_tokens",
 };
 
@@ -96,7 +96,7 @@ export const GREEN_BLUE_IMPACT_BONDS: AssetSubtype = {
 
 export const GREEN_RWAS_DEBT_FINANCE: AssetSubtype = {
   id: "green_rwas_debt_finance",
-  name: '"Green" Real-world Asset Debt Finance',
+  name: "Green RWA Debt Finance",
   assetTypeId: "debt",
 };
 
@@ -110,25 +110,25 @@ export const CARBON_FORWARDS_FUTURES: AssetSubtype = {
 
 export const COMMODITY_DERIVATIVES: AssetSubtype = {
   id: "commodity_derivatives",
-  name: "Commodity Derivatives",
+  name: "Commodities",
   assetTypeId: "derivatives",
 };
 
 export const NON_CARBON_ENVIRONMENTAL_PROCESS_DERIVATIVES: AssetSubtype = {
   id: "non_carbon_environmental_process_derivatives",
-  name: "Non-Carbon Environmental Process Derivatives",
+  name: "Non-Carbon Environmental Process",
   assetTypeId: "derivatives",
 };
 
 export const PPAS: AssetSubtype = {
   id: "ppas",
-  name: "Power Purchasing Agreements (PPAs)",
+  name: "Power Purchasing Agreements",
   assetTypeId: "derivatives",
 };
 
 export const GREEN_YIELD_TOKENS: AssetSubtype = {
   id: "green_yield_tokens",
-  name: '"Green" Yield Tokens',
+  name: "Yield Tokens",
   assetTypeId: "derivatives",
 };
 
@@ -140,7 +140,7 @@ export const PARAMETRIC_INSURANCE: AssetSubtype = {
 
 export const GREEN_LP_TOKENS: AssetSubtype = {
   id: "green_lp_tokens",
-  name: '"Green" Liquidity Provider Tokens (LP Tokens)',
+  name: "Liquidity Provider Tokens",
   assetTypeId: "derivatives",
 };
 
@@ -148,19 +148,19 @@ export const GREEN_LP_TOKENS: AssetSubtype = {
 
 export const GREEN_MONEY: AssetSubtype = {
   id: "green_money",
-  name: '"Green" Money or Nature-backed Currencies',
+  name: "Nature-backed Currencies",
   assetTypeId: "currency",
 };
 
 export const GREEN_FLATCOINS: AssetSubtype = {
   id: "green_flatcoins",
-  name: '"Green" Flatcoins',
+  name: "Flatcoins",
   assetTypeId: "currency",
 };
 
 export const GREEN_TRACERCOINS: AssetSubtype = {
   id: "green_tracercoins",
-  name: '"Green" Tracercoins',
+  name: "Tracercoins",
   assetTypeId: "currency",
 };
 
@@ -189,7 +189,7 @@ const NonpossessoryRights: AssetType = {
 
 const EnvironmentalProcessTokens: AssetType = {
   id: "environmental_process_tokens",
-  name: "Environmental Process Tokens",
+  name: "Environmental Process",
   subtypes: [
     CARBON_OFFSETS_NEGATIVE,
     CARBON_OFFSETS_COUNTERFACTUAL,
@@ -235,58 +235,21 @@ export const ASSET_TYPES_MAP: Record<string, AssetType> = {
 };
 
 export const ASSET_TYPES: AssetType[] = [
-  {
-    id: "ownership",
-    name: "Ownership",
-    subtypes: [
-      NATURAL_ASSET_OWNERSHIP,
-      GREEN_DIGITAL_COLLECTIBLES,
-      GREEN_DIGIPHYSICAL_GOODS,
-      RENEWABLE_RWAS,
-      ECOLOGICAL_DATA_RIGHTS,
-    ],
-  },
-  {
-    id: "nonpossessory_rights",
-    name: "Nonpossessory Rights",
-    subtypes: [
-      NATURAL_ASSET_COMPANY_SHARES,
-      OUTPUT_RIGHTS,
-      SOCIAL_UTILITY_RIGHTS,
-    ],
-  },
-  {
-    id: "environmental_process_tokens",
-    name: "Environmental Process Tokens",
-    subtypes: [
-      CARBON_OFFSETS_NEGATIVE,
-      CARBON_OFFSETS_COUNTERFACTUAL,
-      CARBON_CREDITS,
-      NON_CARBON_CREDITS,
-      RECS,
-    ],
-  },
-  {
-    id: "debt",
-    name: "Debt",
-    subtypes: [GREEN_BLUE_IMPACT_BONDS, GREEN_RWAS_DEBT_FINANCE],
-  },
-  {
-    id: "derivatives",
-    name: "Derivatives",
-    subtypes: [
-      CARBON_FORWARDS_FUTURES,
-      COMMODITY_DERIVATIVES,
-      NON_CARBON_ENVIRONMENTAL_PROCESS_DERIVATIVES,
-      PPAS,
-      GREEN_YIELD_TOKENS,
-      PARAMETRIC_INSURANCE,
-      GREEN_LP_TOKENS,
-    ],
-  },
-  {
-    id: "currency",
-    name: "Currency",
-    subtypes: [GREEN_MONEY, GREEN_FLATCOINS, GREEN_TRACERCOINS],
-  },
+  Currency,
+  NonpossessoryRights,
+  Debt,
+  Ownership,
+  EnvironmentalProcessTokens,
+  Derivatives,
 ];
+
+export const ASSET_SUBTYPES_MAP: Record<string, AssetSubtype> =
+  ASSET_TYPES.reduce(
+    (acc, assetType) => {
+      assetType.subtypes.forEach((subtype) => {
+        acc[subtype.id] = subtype;
+      });
+      return acc;
+    },
+    {} as Record<string, AssetSubtype>
+  );

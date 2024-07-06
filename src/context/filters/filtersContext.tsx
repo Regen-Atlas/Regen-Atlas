@@ -166,6 +166,10 @@ const reducer = (state: State, action: Action): State => {
         },
       };
 
+      if (!updatedSubtypes?.length) {
+        delete filters.assetTypes[action.payload.typeId];
+      }
+
       return {
         ...state,
         filters,

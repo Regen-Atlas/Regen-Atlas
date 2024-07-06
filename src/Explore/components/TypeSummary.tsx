@@ -26,13 +26,13 @@ export default ({
         className
       )}
     >
-      <div className="text-blue-950 relative pl-4 py-6">
+      <div className="text-blue-950 relative pl-4 py-4 text-lg">
         {title}
         {selectedCount > 0 && (
           <div
             className={clsx(
               "w-5 h-5 flex items-center justify-center text-sm font-medium rounded-full bg-blue-950 text-white",
-              "absolute top-5 -right-6"
+              "absolute top-3 -right-6"
             )}
           >
             {selectedCount}
@@ -43,7 +43,7 @@ export default ({
         onClick={(e) => {
           onToggleClick(e);
         }}
-        className="flex justify-center items-center py-6 px-4"
+        className="flex justify-center items-center py-4 px-4"
       >
         {isOpen ? <CaretUp size={32} /> : <CaretDown size={32} />}
       </div>

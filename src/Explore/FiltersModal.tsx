@@ -9,7 +9,7 @@ import { CheckboxBox } from "../shared/components";
 import { PROVIDER_LIST, PROVIDER_MAP } from "../shared/consts/provider";
 import { CHAINS, CHAIN_MAPPING } from "../shared/consts/chains";
 
-export default (): JSX.Element => {
+export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   const [openFilters, setOpenFilters] = useState({
     type: false,
     issuers: false,
@@ -61,11 +61,14 @@ export default (): JSX.Element => {
   };
 
   return (
-    <>
+    <div className="flex flex-col h-full pb-20">
       <div className="text-2xl font-semibold mb-6">Filters</div>
       <div className="grid gap-3">
         <FilterSummaryMobile
           onClick={handleToggleTypeFilter}
+          className={clsx(
+            Object.keys(filters.assetTypes).length > 0 && "!border-blue-950"
+          )}
           title="Type"
           value={
             accumulateSubtypes().length > 0
@@ -76,85 +79,91 @@ export default (): JSX.Element => {
         />
         {openFilters.type && (
           <Modal fullScreen onClose={handleToggleTypeFilter}>
-            <div className="text-2xl font-semibold mb-6">Asset Types</div>
-            <div>
-              {ASSET_TYPES.map((type) => {
-                const selected = filters.assetTypes[type.id];
-                return (
-                  <div key={type.id}>
-                    <TypeSummary
-                      className={clsx("mb-3", selected && "border-blue-950")}
-                      onClick={() => {
-                        if (!selected) {
-                          dispatchFilters({
-                            type: "SET_TYPE_FILTER",
-                            payload: {
-                              id: type.id,
-                              name: type.name,
-                              subtypes: type.subtypes.map(
-                                (subtype) => subtype.id
-                              ),
-                            },
-                          });
-                        } else {
-                          dispatchFilters({
-                            type: "REMOVE_TYPE_FILTER",
-                            payload: type.id,
-                          });
-                        }
-                      }}
-                      onToggleClick={(e) => {
-                        e.stopPropagation();
-                        setOpenType((prev) =>
-                          prev === type.id ? "" : type.id
-                        );
-                      }}
-                      isOpen={openType === type.id}
-                      title={type.name}
-                      selectedCount={
-                        filters.assetTypes[type.id]?.subtypes?.length
-                      }
-                    />
-                    {openType === type.id && (
-                      <div className="pl-8">
-                        {type.subtypes.map((subtype) => {
-                          return (
-                            <div
-                              key={subtype.id}
-                              className="flex items-center gap-2 cursor-pointer mb-4"
-                              onClick={() =>
-                                handleSubtypeClick({
-                                  typeId: type.id,
-                                  subtypeId: subtype.id,
-                                })
-                              }
-                            >
-                              <CheckboxBox
-                                className="flex-shrink-0"
-                                checked={filters.assetTypes[
-                                  type.id
-                                ]?.subtypes.includes(subtype.id)}
-                              />
-                              <div>{subtype.name}</div>
-                            </div>
+            <div className="flex flex-col h-full pb-20">
+              <div className="text-2xl font-semibold mb-6">Asset Types</div>
+              <div>
+                {ASSET_TYPES.map((type) => {
+                  const selected = filters.assetTypes[type.id];
+                  return (
+                    <div key={type.id}>
+                      <TypeSummary
+                        className={clsx("mb-3", selected && "!border-blue-950")}
+                        onClick={() => {
+                          if (!selected) {
+                            dispatchFilters({
+                              type: "SET_TYPE_FILTER",
+                              payload: {
+                                id: type.id,
+                                name: type.name,
+                                subtypes: type.subtypes.map(
+                                  (subtype) => subtype.id
+                                ),
+                              },
+                            });
+                          } else {
+                            dispatchFilters({
+                              type: "REMOVE_TYPE_FILTER",
+                              payload: type.id,
+                            });
+                          }
+                        }}
+                        onToggleClick={(e) => {
+                          e.stopPropagation();
+                          setOpenType((prev) =>
+                            prev === type.id ? "" : type.id
                           );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex justify-end mt-8">
-              <button className="button" onClick={handleToggleTypeFilter}>
-                Set Asset types
-              </button>
+                        }}
+                        isOpen={openType === type.id}
+                        title={type.name}
+                        selectedCount={
+                          filters.assetTypes[type.id]?.subtypes?.length
+                        }
+                      />
+                      {openType === type.id && (
+                        <div className="pl-8">
+                          {type.subtypes.map((subtype) => {
+                            return (
+                              <div
+                                key={subtype.id}
+                                className="flex items-center gap-2 cursor-pointer mb-4"
+                                onClick={() =>
+                                  handleSubtypeClick({
+                                    typeId: type.id,
+                                    subtypeId: subtype.id,
+                                  })
+                                }
+                              >
+                                <CheckboxBox
+                                  className="flex-shrink-0"
+                                  checked={filters.assetTypes[
+                                    type.id
+                                  ]?.subtypes.includes(subtype.id)}
+                                />
+                                <div>{subtype.name}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex justify-end mt-auto">
+                <button
+                  className="button button-gradient"
+                  onClick={handleToggleTypeFilter}
+                >
+                  Set Asset types
+                </button>
+              </div>
             </div>
           </Modal>
         )}
 
         <FilterSummaryMobile
           onClick={handleToggleIssuerFilter}
+          className={clsx(filters.provider && "!border-blue-950")}
           title="Issuers"
           value={filters.provider ? PROVIDER_MAP[filters.provider].name : "All"}
           defaultValue="All"
@@ -200,6 +209,7 @@ export default (): JSX.Element => {
         )}
         <FilterSummaryMobile
           onClick={handleToggleChainFilter}
+          className={clsx(filters.chainId && "!border-blue-950")}
           title="Chains"
           value={filters.chainId ? CHAIN_MAPPING[filters.chainId]?.name : "All"}
           defaultValue="All"
@@ -239,6 +249,22 @@ export default (): JSX.Element => {
           </Modal>
         )}
       </div>
-    </>
+      <div className="flex justify-between mt-auto">
+        <button
+          className="button button-gray !px-8"
+          onClick={() => {
+            dispatchFilters({
+              type: "RESET_FILTERS",
+            });
+          }}
+        >
+          Clear
+        </button>
+
+        <button className="button button-gradient !px-8" onClick={onClose}>
+          Filter
+        </button>
+      </div>
+    </div>
   );
 };
