@@ -2,9 +2,14 @@ import clsx from "clsx";
 import { Asset } from "../shared/types";
 import { CHAIN_MAPPING } from "../shared/consts/chains";
 import { Dot, MapPin, Share } from "@phosphor-icons/react";
-import { ASSET_SUBTYPES_MAP, ASSET_TYPES_MAP } from "../shared/consts";
+import {
+  ASSET_SUBTYPES_MAP,
+  ASSET_TYPES_MAP,
+  NATIVITY_MAP,
+} from "../shared/consts";
 import { PROVIDER_MAP } from "../shared/consts/provider";
 import { getImageUrl } from "../shared/helpers/getImageUrl";
+import { useState } from "react";
 
 interface AssetCardProps {
   className?: string;
@@ -17,10 +22,12 @@ export default ({
   asset,
   onPinClicked,
 }: AssetCardProps): React.ReactElement => {
+  const [learnMoreOpen, setLearnMoreOpen] = useState(false);
+
   return (
     <div
       className={clsx(
-        "border-2 border-black p-3 rounded-[20px] bg-cardBackground",
+        "asset-card border-2 border-white p-3 rounded-[20px] bg-cardBackground",
         className
       )}
     >
@@ -43,7 +50,6 @@ export default ({
               </div>
             ))}
           </div>
-          <Share size={24} />
         </div>
       </div>
       <div
@@ -72,7 +78,13 @@ export default ({
           </span>
         </div>
       </div>
-      <p className="text-sm overflow-hidden text-ellipsis max-h-[80px] line-clamp-4 mb-3">
+      <p
+        className={clsx(
+          "text-sm overflow-hidden text-ellipsis max-h-[80px] line-clamp-4 mb-3",
+          learnMoreOpen && "line-clamp-none max-h-[none]",
+          learnMoreOpen && "overflow-visible"
+        )}
+      >
         {asset.description}
       </p>
 
@@ -80,7 +92,7 @@ export default ({
         <div className="flex justify-between py-1">
           <p className="font-bold">Nativity</p>
           <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 text-sm font-bold">
-            Native
+            {asset.nativity ? NATIVITY_MAP[asset.nativity] : ""}
           </div>
         </div>
 
@@ -93,7 +105,10 @@ export default ({
       </div>
 
       <div className="flex justify-between gap-3 mt-3">
-        <button className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1">
+        <button
+          className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1"
+          onClick={() => setLearnMoreOpen(true)}
+        >
           Learn more
         </button>
         <a

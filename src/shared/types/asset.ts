@@ -24,6 +24,7 @@ export interface Asset {
   createdAt: string;
   updatedAt: string;
   imageHash: string;
+  nativity?: "native" | "tokenized";
   imageUrl?: string;
 }
 
@@ -41,7 +42,7 @@ export interface AssetCreateStructure {
 }
 
 export interface AssetProvider {
-  id: string;
+  id: ProviderId;
   name: string;
 }
 
@@ -64,3 +65,22 @@ export interface AssetSubtype {
   name: string;
   assetTypeId: string;
 }
+
+export type ProviderId =
+  | "agroforest_dao"
+  | "carbon_path"
+  | "coorest"
+  | "creol"
+  | "ethic_hub"
+  | "frigg_eco"
+  | "glow"
+  | "green_trade"
+  | "helios"
+  | "moss"
+  | "nat5"
+  | "nori"
+  | "plastiks"
+  | "regen_network"
+  | "senken"
+  | "solidworld"
+  | "toucan";
