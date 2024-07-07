@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 :root {
-  background-color: #181818;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: #f8f8f8;
+  color: #181818;
   color-scheme: light;
   font-family: "DM Sans", Helvetica, Arial, sans-serif;
   font-synthesis: none;
@@ -16,13 +16,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    background-color: #f8f8f8;
-    color: #181818;
-  }
 }
 
 html {
