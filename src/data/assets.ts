@@ -998,7 +998,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fwater%20credit%20nat5.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1029,7 +1030,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fwater%20credit%20nat5.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1060,7 +1062,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsoil%20credit.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1091,7 +1094,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiodiversity%20credits.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1121,7 +1125,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fagriculture-2382176_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1151,7 +1156,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcorn-1690387_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1181,7 +1187,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcow-7200409_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1211,7 +1218,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fwheat-4325808_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1241,7 +1249,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcow-7200409_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1271,7 +1280,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcorn-1690387_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1301,7 +1311,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fhorses-5499465_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1331,7 +1342,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1361,7 +1373,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1391,7 +1404,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1421,7 +1435,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1451,7 +1466,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1481,7 +1497,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1511,7 +1528,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1541,7 +1559,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1571,7 +1590,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1601,7 +1621,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1631,7 +1652,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1661,7 +1683,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1691,7 +1714,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1726,7 +1750,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1761,7 +1786,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1796,7 +1822,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1831,7 +1858,8 @@ export const ALL_ASSETS: Array<Asset> = [
       region: "",
       country: "",
     },
-    imageUrl: "",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
