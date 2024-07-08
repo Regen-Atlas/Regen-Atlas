@@ -1,6 +1,73 @@
 import { Asset } from "../shared/types";
 
-export const ALL_ASSETS: Array<Asset> = [
+const PROMOTED_ASSETS: Array<Asset> = [
+  {
+    cid: "",
+    id: "989f28cf-7fb9-4651-9c7d-41c0f7ae3934",
+    imageHash: "",
+    name: "Oregon Biochar Solutions",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "carbon_offsets_negative",
+    description:
+      "Oregon Biochar produces a high-quality, high-carbon and high surface area biochar (Rogue Biochar) from local forestry biomass available in the NorthWest USA. Their production facility, which has been operational for over 30 years, is a carbon-neutral biomass plant located in Jackson County, Oregon. Their feedstocks include low-value biomasses recovered from farms and orchards, woody biomass and burnt material from forest fires as well as secondary and tertiary wood residues from the region.",
+    providerId: "toucan",
+    providerLink:
+      "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58345",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: 42.436492,
+      longitude: -122.849794,
+    },
+    tokens: [
+      {
+        chainId: 42220,
+        contractAddress: "",
+      },
+      {
+        chainId: 8453,
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar.jpg?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+  {
+    cid: "",
+    id: "474da1de-7512-4412-a2e9-3e2a3e39a28b",
+    imageHash: "",
+    name: "Biodiversity Stewardship Credits, Jaguar Stewardship in the Pantanal Conservation Network",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "non_carbon_credits",
+    description:
+      "Using the Biodiversity Stewardship Methodology,  ERA Brazil and the Instituto Homem Pantaneiro (IHP) have a partnership to develop the first Jaguar biodiversity credits from Private Natural Heritage Reserve (RPPN) areas managed by IHP. Ecological indicators of the jaguar and habitat quality parameters were monitored in 50,600 hectares at Pantanal biome. The new resources from the commercialization of biodiversity credits will be used for improving wellness and monitoring techniques of the Jaguar, estate management, research, environmental education and ecotourism.",
+    providerId: "regen_network",
+    providerLink: "https://app.regen.network/project/ihp-pilot",
+    nativity: "native",
+    geolocation: {
+      latitude: -18.987658,
+      longitude: -57.684508,
+    },
+    tokens: [
+      {
+        chainId: "regen-1",
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fjaguar.jpg?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
   {
     cid: "",
     id: "15cf15db-9bbd-418b-b8aa-73a352817af5",
@@ -32,6 +99,206 @@ export const ALL_ASSETS: Array<Asset> = [
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
+  {
+    cid: "",
+    id: "aac6c93d-39be-46b4-939c-9ab881f32f4e",
+    imageHash: "",
+    name: "Glow Solar Farm 1",
+    assetTypeId: "nonpossessory_rights",
+    assetSubtypeId: "output_rights",
+    description:
+      "Glow is a cryptoeconomic system that produces high additionality carbon credits from cost effective solar farms. Additionality is achieved by requiring participating solar farms to contribute 100% of their gross electricity revenue to the Glow incentive pool. Cost effectiveness is ensured by creating a competition for rewards modeled after Bitcoin’s proof-of-work incentives.",
+    providerId: "glow",
+    providerLink: "https://glowlabs.org/waitlist",
+    nativity: "native",
+    geolocation: {
+      latitude: 40.77898,
+      longitude: -111.9221,
+    },
+    tokens: [
+      {
+        chainId: 1,
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+];
+
+const RANDOMIZED_ASSETS: Array<Asset> = [
+  {
+    cid: "",
+    id: "9a8a4cce-1579-40d7-bfd8-1767b2bc7b57",
+    imageHash: "",
+    name: "Travis County Floodplain Reforestation Program",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "carbon_offsets_negative",
+    description:
+      "TreeFolks, in collaboration with the City of Austin Office of Sustainability, continued the Travis County Floodplain Reforestation Program for a second year. This initiative, led by TreeFolks, aims to replenish forest buffers along rivers and streams in eastern Travis County by planting over 23,000 native trees across 31.47 acres of private land. The trees were strategically placed less than 10 feet apart to ensure effective canopy coverage in riparian zones.",
+    providerId: "regen_network",
+    providerLink: "https://app.regen.network/project/C02-009",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: 30.273576,
+      longitude: -97.483906,
+    },
+    tokens: [
+      {
+        chainId: "regen-1",
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ftravos.PNG?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+  {
+    cid: "",
+    id: "35895876-14f9-4994-bd1d-e7c791abb451",
+    imageHash: "",
+    name: "Exomad Green",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "carbon_offsets_negative",
+    description:
+      "In March 2023, Exomad Green launched the first of three biochar facilities in Concepción, Bolivia, with the goal of sequestering up to 200,000 tons of CO2 annually by March 2024. This initiative not only focuses on reducing carbon emissions but also aims to enhance the quality of life for over 250,000 people in the region by generating green jobs and fostering economic growth. The biochar produced through a meticulous pyrolysis process improves soil fertility and aids in soil remediation, while also being donated to local communities to support sustainable agriculture and reduce deforestation. Exomad Green is committed to maintaining high environmental standards, efficiently recycling resources within the plant, and significantly reducing air pollution, embodying a comprehensive approach to sustainable development.",
+    providerId: "toucan",
+    providerLink:
+      "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58346",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: -16.147369,
+      longitude: -62.065327,
+    },
+    tokens: [
+      {
+        chainId: 42220,
+        contractAddress: "",
+      },
+      {
+        chainId: 8453,
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+  {
+    cid: "",
+    id: "d5604545-a7ee-427e-ac17-db10e18d310e",
+    imageHash: "",
+    name: "Treaure Valley Municipal Parks Project",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "carbon_offsets_negative",
+    description:
+      "The  Treasure  Valley  Municipal Parks  Planting  Project  is  a partnership  between  the  City  of  Boise  and the Treasure Valley  Canopy  Network  (Network).  This  project  planted  approximately  504  trees  in  9 municipal parks  throughout  the  Treasure  Valley.  The  City  of  Boise  is  at  the  heart  of Idaho’s  Treasure Valley,  one  of  the  fastest  growing  metropolitan  areas  in  the  United  States.",
+    providerId: "regen_network",
+    providerLink: "https://app.regen.network/project/C02-008",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: 43.656952,
+      longitude: -116.222475,
+    },
+    tokens: [
+      {
+        chainId: "regen-1",
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fidaho.PNG?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+  {
+    cid: "",
+    id: "235049f5-d2df-4f01-a982-f2e30704514f",
+    imageHash: "",
+    name: "Evergreen & East Preservation Project",
+    assetTypeId: "environmental_process_tokens",
+    assetSubtypeId: "carbon_offsets_counterfactual",
+    description:
+      "The project spans 65 acres across two historic African American cemeteries established in the 1890s in Richmond, VA's East End. Housing over 25,000 burials, these sites commemorate individuals significant to both the city’s and nation's cultural heritage. Following years of neglect, volunteers initiated efforts to reclaim and preserve this forested area, developing a restoration and protection plan.",
+    providerId: "regen_network",
+    providerLink: "https://app.regen.network/project/C02-005",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: 37.532868,
+      longitude: -77.388361,
+    },
+    tokens: [
+      {
+        chainId: "regen-1",
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fevergreen.PNG?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+  {
+    cid: "",
+    id: "2c01c6e8-9085-42eb-b1e9-f1fac26510c9",
+    imageHash: "",
+    name: "El Gato Forest Conservation",
+    assetTypeId: "derivatives",
+    assetSubtypeId: "carbon_forwards_futures",
+    description:
+      "Our mission is to safeguard wilderness areas globally for future generations. We purchase untouched forests and secure their protection permanently through land registry entries. Our approach offers everyone the chance to preserve a significant piece of nature indefinitely. We also provide opportunities for individuals to experience these wild areas firsthand and support educational and research initiatives. Furthermore, we engage in environmental education and restoration projects, including tree planting, allowing people to actively participate in conservation efforts locally.",
+    providerId: "green_trade",
+    providerLink:
+      "https://app.greentrade.tech/project/0x7e9071a00de5c69a2924e258333141a4edc6bf24f72327462ea018bfb689792a/description",
+    nativity: "tokenized",
+    geolocation: {
+      latitude: -6.8699697,
+      longitude: -75.0458515,
+    },
+    tokens: [
+      {
+        chainId: 42,
+        contractAddress: "",
+      },
+    ],
+    physicalAddress: {
+      region: "",
+      country: "",
+    },
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fgreentrade%202.PNG?alt=media",
+    createdAt: "2024-07-06T22:12:13.428Z",
+    updatedAt: "2024-07-06T22:12:13.428Z",
+  },
+];
+
+export const ALL_ASSETS: Array<Asset> = [
+  ...PROMOTED_ASSETS,
+  ...RANDOMIZED_ASSETS,
   {
     cid: "",
     id: "fd4354fe-4415-411e-a57d-843a50ad9202",
@@ -224,68 +491,6 @@ export const ALL_ASSETS: Array<Asset> = [
   },
   {
     cid: "",
-    id: "9a8a4cce-1579-40d7-bfd8-1767b2bc7b57",
-    imageHash: "",
-    name: "Travis County Floodplain Reforestation Program",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "carbon_offsets_negative",
-    description:
-      "TreeFolks, in collaboration with the City of Austin Office of Sustainability, continued the Travis County Floodplain Reforestation Program for a second year. This initiative, led by TreeFolks, aims to replenish forest buffers along rivers and streams in eastern Travis County by planting over 23,000 native trees across 31.47 acres of private land. The trees were strategically placed less than 10 feet apart to ensure effective canopy coverage in riparian zones.",
-    providerId: "regen_network",
-    providerLink: "https://app.regen.network/project/C02-009",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: 30.273576,
-      longitude: -97.483906,
-    },
-    tokens: [
-      {
-        chainId: "regen-1",
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ftravos.PNG?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "d5604545-a7ee-427e-ac17-db10e18d310e",
-    imageHash: "",
-    name: "Treaure Valley Municipal Parks Project",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "carbon_offsets_negative",
-    description:
-      "The  Treasure  Valley  Municipal Parks  Planting  Project  is  a partnership  between  the  City  of  Boise  and the Treasure Valley  Canopy  Network  (Network).  This  project  planted  approximately  504  trees  in  9 municipal parks  throughout  the  Treasure  Valley.  The  City  of  Boise  is  at  the  heart  of Idaho’s  Treasure Valley,  one  of  the  fastest  growing  metropolitan  areas  in  the  United  States.",
-    providerId: "regen_network",
-    providerLink: "https://app.regen.network/project/C02-008",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: 43.656952,
-      longitude: -116.222475,
-    },
-    tokens: [
-      {
-        chainId: "regen-1",
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fidaho.PNG?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
     id: "efb37435-3068-4b52-a044-680b0df43228",
     imageHash: "",
     name: "Reforesting Des Moines",
@@ -405,37 +610,6 @@ export const ALL_ASSETS: Array<Asset> = [
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2FSandy%20cross%20forest.PNG?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "235049f5-d2df-4f01-a982-f2e30704514f",
-    imageHash: "",
-    name: "Evergreen & East Preservation Project",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "carbon_offsets_counterfactual",
-    description:
-      "The project spans 65 acres across two historic African American cemeteries established in the 1890s in Richmond, VA's East End. Housing over 25,000 burials, these sites commemorate individuals significant to both the city’s and nation's cultural heritage. Following years of neglect, volunteers initiated efforts to reclaim and preserve this forested area, developing a restoration and protection plan.",
-    providerId: "regen_network",
-    providerLink: "https://app.regen.network/project/C02-005",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: 37.532868,
-      longitude: -77.388361,
-    },
-    tokens: [
-      {
-        chainId: "regen-1",
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fevergreen.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -778,38 +952,6 @@ export const ALL_ASSETS: Array<Asset> = [
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fgreentrade%201.PNG?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "2c01c6e8-9085-42eb-b1e9-f1fac26510c9",
-    imageHash: "",
-    name: "El Gato Forest Conservation",
-    assetTypeId: "derivatives",
-    assetSubtypeId: "carbon_forwards_futures",
-    description:
-      "Our mission is to safeguard wilderness areas globally for future generations. We purchase untouched forests and secure their protection permanently through land registry entries. Our approach offers everyone the chance to preserve a significant piece of nature indefinitely. We also provide opportunities for individuals to experience these wild areas firsthand and support educational and research initiatives. Furthermore, we engage in environmental education and restoration projects, including tree planting, allowing people to actively participate in conservation efforts locally.",
-    providerId: "green_trade",
-    providerLink:
-      "https://app.greentrade.tech/project/0x7e9071a00de5c69a2924e258333141a4edc6bf24f72327462ea018bfb689792a/description",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: -6.8699697,
-      longitude: -75.0458515,
-    },
-    tokens: [
-      {
-        chainId: 42,
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fgreentrade%202.PNG?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -1318,37 +1460,6 @@ export const ALL_ASSETS: Array<Asset> = [
   },
   {
     cid: "",
-    id: "aac6c93d-39be-46b4-939c-9ab881f32f4e",
-    imageHash: "",
-    name: "Glow Solar Farm 1",
-    assetTypeId: "nonpossessory_rights",
-    assetSubtypeId: "output_rights",
-    description:
-      "Glow is a cryptoeconomic system that produces high additionality carbon credits from cost effective solar farms. Additionality is achieved by requiring participating solar farms to contribute 100% of their gross electricity revenue to the Glow incentive pool. Cost effectiveness is ensured by creating a competition for rewards modeled after Bitcoin’s proof-of-work incentives.",
-    providerId: "glow",
-    providerLink: "https://glowlabs.org/waitlist",
-    nativity: "native",
-    geolocation: {
-      latitude: 40.77898,
-      longitude: -111.9221,
-    },
-    tokens: [
-      {
-        chainId: 1,
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
     id: "21b8d1b7-8df8-45e8-8b4c-423cbdacad26",
     imageHash: "",
     name: "Glow Solar Farm 10",
@@ -1716,78 +1827,6 @@ export const ALL_ASSETS: Array<Asset> = [
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "989f28cf-7fb9-4651-9c7d-41c0f7ae3934",
-    imageHash: "",
-    name: "Oregon Biochar Solutions",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "carbon_offsets_negative",
-    description:
-      "Oregon Biochar produces a high-quality, high-carbon and high surface area biochar (Rogue Biochar) from local forestry biomass available in the NorthWest USA. Their production facility, which has been operational for over 30 years, is a carbon-neutral biomass plant located in Jackson County, Oregon. Their feedstocks include low-value biomasses recovered from farms and orchards, woody biomass and burnt material from forest fires as well as secondary and tertiary wood residues from the region.",
-    providerId: "toucan",
-    providerLink:
-      "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58345",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: 42.436492,
-      longitude: -122.849794,
-    },
-    tokens: [
-      {
-        chainId: 42220,
-        contractAddress: "",
-      },
-      {
-        chainId: 8453,
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar.jpg?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "35895876-14f9-4994-bd1d-e7c791abb451",
-    imageHash: "",
-    name: "Exomad Green",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "carbon_offsets_negative",
-    description:
-      "In March 2023, Exomad Green launched the first of three biochar facilities in Concepción, Bolivia, with the goal of sequestering up to 200,000 tons of CO2 annually by March 2024. This initiative not only focuses on reducing carbon emissions but also aims to enhance the quality of life for over 250,000 people in the region by generating green jobs and fostering economic growth. The biochar produced through a meticulous pyrolysis process improves soil fertility and aids in soil remediation, while also being donated to local communities to support sustainable agriculture and reduce deforestation. Exomad Green is committed to maintaining high environmental standards, efficiently recycling resources within the plant, and significantly reducing air pollution, embodying a comprehensive approach to sustainable development.",
-    providerId: "toucan",
-    providerLink:
-      "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58346",
-    nativity: "tokenized",
-    geolocation: {
-      latitude: -16.147369,
-      longitude: -62.065327,
-    },
-    tokens: [
-      {
-        chainId: 42220,
-        contractAddress: "",
-      },
-      {
-        chainId: 8453,
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",
     createdAt: "2024-07-06T22:12:13.428Z",
     updatedAt: "2024-07-06T22:12:13.428Z",
   },
@@ -2261,37 +2300,6 @@ export const ALL_ASSETS: Array<Asset> = [
     geolocation: {
       latitude: -1.412682,
       longitude: -76.501879,
-    },
-    tokens: [
-      {
-        chainId: "regen-1",
-        contractAddress: "",
-      },
-    ],
-    physicalAddress: {
-      region: "",
-      country: "",
-    },
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fjaguar.jpg?alt=media",
-    createdAt: "2024-07-06T22:12:13.428Z",
-    updatedAt: "2024-07-06T22:12:13.428Z",
-  },
-  {
-    cid: "",
-    id: "474da1de-7512-4412-a2e9-3e2a3e39a28b",
-    imageHash: "",
-    name: "Biodiversity Stewardship Credits, Jaguar Stewardship in the Pantanal Conservation Network",
-    assetTypeId: "environmental_process_tokens",
-    assetSubtypeId: "non_carbon_credits",
-    description:
-      "Using the Biodiversity Stewardship Methodology,  ERA Brazil and the Instituto Homem Pantaneiro (IHP) have a partnership to develop the first Jaguar biodiversity credits from Private Natural Heritage Reserve (RPPN) areas managed by IHP. Ecological indicators of the jaguar and habitat quality parameters were monitored in 50,600 hectares at Pantanal biome. The new resources from the commercialization of biodiversity credits will be used for improving wellness and monitoring techniques of the Jaguar, estate management, research, environmental education and ecotourism.",
-    providerId: "regen_network",
-    providerLink: "https://app.regen.network/project/ihp-pilot",
-    nativity: "native",
-    geolocation: {
-      latitude: -18.987658,
-      longitude: -57.684508,
     },
     tokens: [
       {
