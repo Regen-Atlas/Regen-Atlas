@@ -69,6 +69,10 @@ export const PROVIDER_LIST: Array<AssetProvider> = [
     id: "toucan",
     name: "Toucan",
   },
+  {
+    id: "landx",
+    name: "LandX",
+  },
 ];
 
 export const PROVIDER_MAP: Record<string, AssetProvider> = PROVIDER_LIST.reduce(

@@ -83,4 +83,5 @@ export type ProviderId =
   | "regen_network"
   | "senken"
   | "solidworld"
-  | "toucan";
+  | "toucan"
+  | "landx";
