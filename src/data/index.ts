@@ -95,10 +95,12 @@ import { MYERS_TINDLE_UNIT_12C } from "./assets/MYERS_TINDLE_UNIT_12C.ts";
 import { CLYDE___ALMA_24_1H } from "./assets/CLYDE___ALMA_24_1H.ts";
 import { BERT_4_1H } from "./assets/BERT_4_1H.ts";
 import { Asset } from "../shared/types/asset.ts";
+import { LandX } from "./assets/LandX.ts";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
   Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network,
+  LandX,
   Myanmar_1764,
   Glow_Solar_Farm_1,
   Travis_County_Floodplain_Reforestation_Program,
