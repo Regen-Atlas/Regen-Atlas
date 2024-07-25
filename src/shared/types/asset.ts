@@ -7,7 +7,7 @@ export interface Asset {
   description: string;
   assetTypeId: AssetTypeId;
   assetSubtypeId: string;
-  providerId: string;
+  providerId: ProviderId;
   providerLink: string;
   tokens?: Array<{
     chainId: ChainId;
@@ -24,7 +24,7 @@ export interface Asset {
   createdAt: string;
   updatedAt: string;
   imageHash: string;
-  nativity?: "native" | "tokenized";
+  nativity?: "native" | "tokenized" | "onchain_enforcement";
   imageUrl?: string;
 }
 
@@ -83,4 +83,5 @@ export type ProviderId =
   | "regen_network"
   | "senken"
   | "solidworld"
-  | "toucan";
+  | "toucan"
+  | "landx";

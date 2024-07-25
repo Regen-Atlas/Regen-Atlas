@@ -38,6 +38,10 @@ export const PROVIDER_LIST: Array<AssetProvider> = [
     name: "Helios",
   },
   {
+    id: "landx",
+    name: "LandX",
+  },
+  {
     id: "moss",
     name: "Moss",
   },
