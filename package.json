@@ -1,8 +1,16 @@
 {
-  "name": "regenatlas3",
-  "private": true,
-  "version": "0.0.0",
+  "name": "RegenAtlas",
+  "version": "0.0.1",
   "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Pawel Janicki"
+  },
+  "contributors": [
+    {
+      "name": "Louise Borreani"
+    }
+  ],
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
