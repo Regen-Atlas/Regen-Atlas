@@ -10,28 +10,12 @@ export const PROVIDER_LIST: Array<AssetProvider> = [
     name: "CarbonPath",
   },
   {
-    id: "coorest",
-    name: "Coorest",
-  },
-  {
-    id: "creol",
-    name: "Creol",
-  },
-  {
     id: "ethic_hub",
     name: "EthicHub",
   },
   {
-    id: "frigg_eco",
-    name: "Frigg.eco",
-  },
-  {
     id: "glow",
     name: "Glow",
-  },
-  {
-    id: "green_trade",
-    name: "GreenTrade",
   },
   {
     id: "helios",
@@ -60,10 +44,6 @@ export const PROVIDER_LIST: Array<AssetProvider> = [
   {
     id: "regen_network",
     name: "Regen Network",
-  },
-  {
-    id: "senken",
-    name: "Senken",
   },
   {
     id: "solidworld",

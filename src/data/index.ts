@@ -6,7 +6,6 @@ import { Travis_County_Floodplain_Reforestation_Program } from "./assets/Travis_
 import { Exomad_Green } from "./assets/Exomad_Green.ts";
 import { Treaure_Valley_Municipal_Parks_Project } from "./assets/Treaure_Valley_Municipal_Parks_Project.ts";
 import { Evergreen___East_Preservation_Project } from "./assets/Evergreen___East_Preservation_Project.ts";
-import { El_Gato_Forest_Conservation } from "./assets/El_Gato_Forest_Conservation.ts";
 import { Myanmar_2088 } from "./assets/Myanmar_2088.ts";
 import { Vlinder_Papariko } from "./assets/Vlinder_Papariko.ts";
 import { ALLCOT_Blue_Carbon_Mangrove_Senegal } from "./assets/ALLCOT_Blue_Carbon_Mangrove_Senegal.ts";
@@ -25,25 +24,15 @@ import { Fox_River_Bluffs_Planting_Project } from "./assets/Fox_River_Bluffs_Pla
 import { Lake_County_Forest_Preserve } from "./assets/Lake_County_Forest_Preserve.ts";
 import { REDD__Project_Resguardo_Indigena_Unificado_Selva_de_Mataven__RIU_SM } from "./assets/REDD__Project_Resguardo_Indigena_Unificado_Selva_de_Mataven__RIU_SM.ts";
 import { Grgich_Hills_Estate_Regenerative_Sheep_Grazing } from "./assets/Grgich_Hills_Estate_Regenerative_Sheep_Grazing.ts";
-import { NFTrees___Batch_1 } from "./assets/NFTrees___Batch_1.ts";
-import { NFTrees___Batch_2 } from "./assets/NFTrees___Batch_2.ts";
-import { Pian_Upe_Wildlife_Reserve } from "./assets/Pian_Upe_Wildlife_Reserve.ts";
-import { Regenerative_agriculture_in_the_Indo_Gangetic_plains } from "./assets/Regenerative_agriculture_in_the_Indo_Gangetic_plains.ts";
 import { Amazon_Green_Wall_NFT_Series_3 } from "./assets/Amazon_Green_Wall_NFT_Series_3.ts";
 import { Amazon_Green_Wall_NFT_Series_2 } from "./assets/Amazon_Green_Wall_NFT_Series_2.ts";
-import { Preserving_the_Amazon } from "./assets/Preserving_the_Amazon.ts";
-import { Agatobwe } from "./assets/Agatobwe.ts";
 import { Verified_Water_Credit_LTVP001_B2 } from "./assets/Verified_Water_Credit_LTVP001_B2.ts";
 import { Verified_Water_Credit_LTVP001_B3 } from "./assets/Verified_Water_Credit_LTVP001_B3.ts";
 import { Verified_Soil_Credit } from "./assets/Verified_Soil_Credit.ts";
 import { Verified_Biodiversity_Based_Credit } from "./assets/Verified_Biodiversity_Based_Credit.ts";
 import { Bayer_Carbon_Program } from "./assets/Bayer_Carbon_Program.ts";
-import { Wausa_Farm } from "./assets/Wausa_Farm.ts";
 import { Miltrim_Farms_Inc } from "./assets/Miltrim_Farms_Inc.ts";
-import { Knuth_Farms } from "./assets/Knuth_Farms.ts";
 import { Willis_Farms__Inc } from "./assets/Willis_Farms__Inc.ts";
-import { Harborview_Farms } from "./assets/Harborview_Farms.ts";
-import { PT_Ranch_LLC } from "./assets/PT_Ranch_LLC.ts";
 import { Glow_Solar_Farm_10 } from "./assets/Glow_Solar_Farm_10.ts";
 import { Glow_Solar_Farm_11 } from "./assets/Glow_Solar_Farm_11.ts";
 import { Glow_Solar_Farm_12 } from "./assets/Glow_Solar_Farm_12.ts";
@@ -60,8 +49,6 @@ import { American_BioCarbon_CT } from "./assets/American_BioCarbon_CT.ts";
 import { BC_Biocarbon___McBride } from "./assets/BC_Biocarbon___McBride.ts";
 import { Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile } from "./assets/Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile.ts";
 import { Rooftop_Solar_in_India } from "./assets/Rooftop_Solar_in_India.ts";
-import { Rooftop_Solar_in_India_2 } from "./assets/Rooftop_Solar_in_India_2.ts";
-import { Rooftop_Solar_in_India_3 } from "./assets/Rooftop_Solar_in_India_3.ts";
 import { Inaugural_Batch_of_Amigo_Beans } from "./assets/Inaugural_Batch_of_Amigo_Beans.ts";
 import { Batch_Cocria_ao_of_Amigo_Beans } from "./assets/Batch_Cocria_ao_of_Amigo_Beans.ts";
 import { Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate } from "./assets/Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate.ts";
@@ -75,8 +62,6 @@ import { Rancho_Bonito__M_xico } from "./assets/Rancho_Bonito__M_xico.ts";
 import { Capit_n_Luis_A__Vidal__M_xico } from "./assets/Capit_n_Luis_A__Vidal__M_xico.ts";
 import { Pavencul__M_xico } from "./assets/Pavencul__M_xico.ts";
 import { La_Soledad__M_xico } from "./assets/La_Soledad__M_xico.ts";
-import { San_Jos__Ixtepec__M_xico } from "./assets/San_Jos__Ixtepec__M_xico.ts";
-import { Montebello_Altamira__M_xico } from "./assets/Montebello_Altamira__M_xico.ts";
 import { Green_Mining } from "./assets/Green_Mining.ts";
 import { Recyplast } from "./assets/Recyplast.ts";
 import { Thalassains } from "./assets/Thalassains.ts";
@@ -107,7 +92,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Exomad_Green,
   Treaure_Valley_Municipal_Parks_Project,
   Evergreen___East_Preservation_Project,
-  El_Gato_Forest_Conservation,
   Myanmar_2088,
   Vlinder_Papariko,
   ALLCOT_Blue_Carbon_Mangrove_Senegal,
@@ -126,25 +110,15 @@ export const ALL_ASSETS: Array<Asset> = [
   Lake_County_Forest_Preserve,
   REDD__Project_Resguardo_Indigena_Unificado_Selva_de_Mataven__RIU_SM,
   Grgich_Hills_Estate_Regenerative_Sheep_Grazing,
-  NFTrees___Batch_1,
-  NFTrees___Batch_2,
-  Pian_Upe_Wildlife_Reserve,
-  Regenerative_agriculture_in_the_Indo_Gangetic_plains,
   Amazon_Green_Wall_NFT_Series_3,
   Amazon_Green_Wall_NFT_Series_2,
-  Preserving_the_Amazon,
-  Agatobwe,
   Verified_Water_Credit_LTVP001_B2,
   Verified_Water_Credit_LTVP001_B3,
   Verified_Soil_Credit,
   Verified_Biodiversity_Based_Credit,
   Bayer_Carbon_Program,
-  Wausa_Farm,
   Miltrim_Farms_Inc,
-  Knuth_Farms,
   Willis_Farms__Inc,
-  Harborview_Farms,
-  PT_Ranch_LLC,
   Glow_Solar_Farm_10,
   Glow_Solar_Farm_11,
   Glow_Solar_Farm_12,
@@ -160,8 +134,6 @@ export const ALL_ASSETS: Array<Asset> = [
   American_BioCarbon_CT,
   BC_Biocarbon___McBride,
   Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile,
-  Rooftop_Solar_in_India_3,
-  Rooftop_Solar_in_India_2,
   Rooftop_Solar_in_India,
   Inaugural_Batch_of_Amigo_Beans,
   Batch_Cocria_ao_of_Amigo_Beans,
@@ -176,8 +148,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Capit_n_Luis_A__Vidal__M_xico,
   Pavencul__M_xico,
   La_Soledad__M_xico,
-  San_Jos__Ixtepec__M_xico,
-  Montebello_Altamira__M_xico,
   Green_Mining,
   Recyplast,
   Thalassains,
