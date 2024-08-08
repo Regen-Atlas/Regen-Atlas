@@ -79,8 +79,56 @@ import { Urbaser } from "./assets/Urbaser.ts";
 import { MYERS_TINDLE_UNIT_12C } from "./assets/MYERS_TINDLE_UNIT_12C.ts";
 import { CLYDE___ALMA_24_1H } from "./assets/CLYDE___ALMA_24_1H.ts";
 import { BERT_4_1H } from "./assets/BERT_4_1H.ts";
-import { Asset } from "../shared/types/asset.ts";
 import { LandX } from "./assets/LandX.ts";
+
+import { Agrocortex_REDD_Project } from "./assets/Agrocortex_REDD_Project.ts";
+import { Amazon_Rio_REDD__IFM } from "./assets/Amazon_Rio_REDD__IFM.ts";
+import { Chespal__M_xico_ } from "./assets/Chespal__M_xico_.ts";
+import { Dori_Alimentos_Ltda___Biomass_Based_Project } from "./assets/Dori_Alimentos_Ltda___Biomass_Based_Project.ts";
+import { Double_J_Farm } from "./assets/Double_J_Farm.ts";
+import { Esperanza_Global } from "./assets/Esperanza_Global.ts";
+import { Floresta_Santa_Maria_Project } from "./assets/Floresta_Santa_Maria_Project.ts";
+import { Fortaleza_Ituxi_REDD_Project } from "./assets/Fortaleza_Ituxi_REDD_Project.ts";
+import { Glow_Solar_Farm_14 } from "./assets/Glow_Solar_Farm_14.ts";
+import { Glow_Solar_Farm_15 } from "./assets/Glow_Solar_Farm_15.ts";
+import { Glow_Solar_Farm_16 } from "./assets/Glow_Solar_Farm_16.ts";
+import { Glow_Solar_Farm_17 } from "./assets/Glow_Solar_Farm_17.ts";
+import { Glow_Solar_Farm_18 } from "./assets/Glow_Solar_Farm_18.ts";
+import { Glow_Solar_Farm_19 } from "./assets/Glow_Solar_Farm_19.ts";
+import { Glow_Solar_Farm_20 } from "./assets/Glow_Solar_Farm_20.ts";
+import { Glow_Solar_Farm_21 } from "./assets/Glow_Solar_Farm_21.ts";
+import { Glow_Solar_Farm_22 } from "./assets/Glow_Solar_Farm_22.ts";
+import { Glow_Solar_Farm_23 } from "./assets/Glow_Solar_Farm_23.ts";
+import { Glow_Solar_Farm_24 } from "./assets/Glow_Solar_Farm_24.ts";
+import { Glow_Solar_Farm_25 } from "./assets/Glow_Solar_Farm_25.ts";
+import { Glow_Solar_Farm_26 } from "./assets/Glow_Solar_Farm_26.ts";
+import { Glow_Solar_Farm_27 } from "./assets/Glow_Solar_Farm_27.ts";
+import { Glow_Solar_Farm_28 } from "./assets/Glow_Solar_Farm_28.ts";
+import { Glow_Solar_Farm_29 } from "./assets/Glow_Solar_Farm_29.ts";
+import { Glow_Solar_Farm_30 } from "./assets/Glow_Solar_Farm_30.ts";
+import { Glow_Solar_Farm_31 } from "./assets/Glow_Solar_Farm_31.ts";
+import { Glow_Solar_Farm_32 } from "./assets/Glow_Solar_Farm_32.ts";
+import { Glow_Solar_Farm_33 } from "./assets/Glow_Solar_Farm_33.ts";
+import { Glow_Solar_Farm_34 } from "./assets/Glow_Solar_Farm_34.ts";
+import { Glow_Solar_Farm_35 } from "./assets/Glow_Solar_Farm_35.ts";
+import { Glow_Solar_Farm_36 } from "./assets/Glow_Solar_Farm_36.ts";
+import { Glow_Solar_Farm_37 } from "./assets/Glow_Solar_Farm_37.ts";
+import { Glow_Solar_Farm_38 } from "./assets/Glow_Solar_Farm_38.ts";
+import { High_impact_solar_project_in_Brazil } from "./assets/High_impact_solar_project_in_Brazil.ts";
+import { High_impact_solar_projects_in_Burkina_Faso } from "./assets/High_impact_solar_projects_in_Burkina_Faso.ts";
+import { La_Soledad__M_xico_ } from "./assets/La_Soledad__M_xico_.ts";
+import { Madre_de_Dios_Amazon_REDD__Project } from "./assets/Madre_de_Dios_Amazon_REDD__Project.ts";
+import { R_A__Pete_Farms_ } from "./assets/R_A__Pete_Farms_.ts";
+import { Reciclador_Chile } from "./assets/Reciclador_Chile.ts";
+import { Rintz_Industries } from "./assets/Rintz_Industries.ts";
+import { Salchiji__M_xico_ } from "./assets/Salchiji__M_xico_.ts";
+import { San_Jos__Ixtepec__M_xico_ } from "./assets/San_Jos__Ixtepec__M_xico_.ts";
+import { Santa_Isabel_Water_Credit } from "./assets/Santa_Isabel_Water_Credit.ts";
+import { Verified_Carbon_Removal } from "./assets/Verified_Carbon_Removal.ts";
+import { Verified_Carbon_Removal2 } from "./assets/Verified_Carbon_Removal_2.ts";
+import { Vintz_Plastics_Ltd_ } from "./assets/Vintz_Plastics_Ltd_.ts";
+
+import { Asset } from "../shared/types/asset.ts";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
@@ -165,4 +213,50 @@ export const ALL_ASSETS: Array<Asset> = [
   MYERS_TINDLE_UNIT_12C,
   CLYDE___ALMA_24_1H,
   BERT_4_1H,
+  Agrocortex_REDD_Project,
+  Amazon_Rio_REDD__IFM,
+  Chespal__M_xico_,
+  Dori_Alimentos_Ltda___Biomass_Based_Project,
+  Double_J_Farm,
+  Esperanza_Global,
+  Floresta_Santa_Maria_Project,
+  Fortaleza_Ituxi_REDD_Project,
+  Glow_Solar_Farm_14,
+  Glow_Solar_Farm_15,
+  Glow_Solar_Farm_16,
+  Glow_Solar_Farm_17,
+  Glow_Solar_Farm_18,
+  Glow_Solar_Farm_19,
+  Glow_Solar_Farm_20,
+  Glow_Solar_Farm_21,
+  Glow_Solar_Farm_22,
+  Glow_Solar_Farm_23,
+  Glow_Solar_Farm_24,
+  Glow_Solar_Farm_25,
+  Glow_Solar_Farm_26,
+  Glow_Solar_Farm_27,
+  Glow_Solar_Farm_28,
+  Glow_Solar_Farm_29,
+  Glow_Solar_Farm_30,
+  Glow_Solar_Farm_31,
+  Glow_Solar_Farm_32,
+  Glow_Solar_Farm_33,
+  Glow_Solar_Farm_34,
+  Glow_Solar_Farm_35,
+  Glow_Solar_Farm_36,
+  Glow_Solar_Farm_37,
+  Glow_Solar_Farm_38,
+  High_impact_solar_project_in_Brazil,
+  High_impact_solar_projects_in_Burkina_Faso,
+  La_Soledad__M_xico_,
+  Madre_de_Dios_Amazon_REDD__Project,
+  R_A__Pete_Farms_,
+  Reciclador_Chile,
+  Rintz_Industries,
+  Salchiji__M_xico_,
+  San_Jos__Ixtepec__M_xico_,
+  Santa_Isabel_Water_Credit,
+  Verified_Carbon_Removal,
+  Verified_Carbon_Removal2,
+  Vintz_Plastics_Ltd_,
 ];

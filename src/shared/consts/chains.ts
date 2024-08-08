@@ -36,6 +36,16 @@ export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
     color: "#4FB573",
     textColor: "#fff",
   },
+  56: {
+    name: "BNB",
+    color: "#F0B90B",
+    textColor: "#fff",
+  },
+  1300: {
+    name: "Algorand",
+    color: "#2D2DF1",
+    textColor: "#fff",
+  },
 };
 
 export const CHAINS = [
@@ -66,5 +76,13 @@ export const CHAINS = [
   {
     id: "regen-1",
     name: "Regen Ledger",
+  },
+  {
+    id: 56,
+    name: "BNB",
+  },
+  {
+    id: 1300,
+    name: "Algorand",
   },
 ];
