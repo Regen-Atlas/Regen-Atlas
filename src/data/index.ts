@@ -113,7 +113,6 @@ import { Glow_Solar_Farm_34 } from "./assets/Glow_Solar_Farm_34.ts";
 import { Glow_Solar_Farm_35 } from "./assets/Glow_Solar_Farm_35.ts";
 import { Glow_Solar_Farm_36 } from "./assets/Glow_Solar_Farm_36.ts";
 import { Glow_Solar_Farm_37 } from "./assets/Glow_Solar_Farm_37.ts";
-import { Glow_Solar_Farm_38 } from "./assets/Glow_Solar_Farm_38.ts";
 import { High_impact_solar_project_in_Brazil } from "./assets/High_impact_solar_project_in_Brazil.ts";
 import { High_impact_solar_projects_in_Burkina_Faso } from "./assets/High_impact_solar_projects_in_Burkina_Faso.ts";
 import { La_Soledad__M_xico_ } from "./assets/La_Soledad__M_xico_.ts";
@@ -167,10 +166,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Bayer_Carbon_Program,
   Miltrim_Farms_Inc,
   Willis_Farms__Inc,
-  Glow_Solar_Farm_10,
-  Glow_Solar_Farm_11,
-  Glow_Solar_Farm_12,
-  Glow_Solar_Farm_13,
   Glow_Solar_Farm_2,
   Glow_Solar_Farm_3,
   Glow_Solar_Farm_4,
@@ -179,6 +174,10 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_7,
   Glow_Solar_Farm_8,
   Glow_Solar_Farm_9,
+  Glow_Solar_Farm_10,
+  Glow_Solar_Farm_11,
+  Glow_Solar_Farm_12,
+  Glow_Solar_Farm_13,
   American_BioCarbon_CT,
   BC_Biocarbon___McBride,
   Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile,
@@ -245,7 +244,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_35,
   Glow_Solar_Farm_36,
   Glow_Solar_Farm_37,
-  Glow_Solar_Farm_38,
   High_impact_solar_project_in_Brazil,
   High_impact_solar_projects_in_Burkina_Faso,
   La_Soledad__M_xico_,
