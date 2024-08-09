@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const High_impact_solar_project_in_Brazil: Asset = {
   cid: "",

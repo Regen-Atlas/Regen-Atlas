@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const San_Jos__Ixtepec__M_xico_: Asset = {
   cid: "",

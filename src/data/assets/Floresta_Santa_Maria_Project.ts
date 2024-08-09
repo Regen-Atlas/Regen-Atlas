@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Floresta_Santa_Maria_Project: Asset = {
   cid: "",

@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Agrocortex_REDD_Project: Asset = {
   cid: "",

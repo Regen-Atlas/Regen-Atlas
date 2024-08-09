@@ -1,4 +1,5 @@
-import { ChainId } from "./chains";
+import { ChainId } from "../chains";
+import { IssuerId } from "../issuers";
 
 export interface Asset {
   cid: string;
@@ -7,7 +8,7 @@ export interface Asset {
   description: string;
   assetTypeId: AssetTypeId;
   assetSubtypeId: string;
-  providerId: ProviderId;
+  providerId: IssuerId;
   providerLink: string;
   tokens?: Array<{
     chainId: ChainId;
@@ -41,11 +42,6 @@ export interface AssetCreateStructure {
   };
 }
 
-export interface AssetProvider {
-  id: ProviderId;
-  name: string;
-}
-
 export type AssetTypeId =
   | "ownership"
   | "nonpossessory_rights"
@@ -65,18 +61,3 @@ export interface AssetSubtype {
   name: string;
   assetTypeId: string;
 }
-
-export type ProviderId =
-  | "agroforest_dao"
-  | "carbon_path"
-  | "ethic_hub"
-  | "glow"
-  | "helios"
-  | "moss"
-  | "nat5"
-  | "nori"
-  | "plastiks"
-  | "regen_network"
-  | "solidworld"
-  | "toucan"
-  | "landx";

@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const R_A__Pete_Farms_: Asset = {
   cid: "",

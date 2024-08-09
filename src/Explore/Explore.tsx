@@ -6,7 +6,7 @@ import { useFiltersDispatch, useFiltersState } from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
-import { Asset } from "../shared/types";
+import { Asset } from "../modules/assets";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useFiltersState();

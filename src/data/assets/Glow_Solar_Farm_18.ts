@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Glow_Solar_Farm_18: Asset = {
   cid: "",

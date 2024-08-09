@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Madre_de_Dios_Amazon_REDD__Project: Asset = {
   cid: "",

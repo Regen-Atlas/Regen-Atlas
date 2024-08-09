@@ -1,15 +1,12 @@
 import clsx from "clsx";
-import { Asset } from "../shared/types";
-import { CHAIN_MAPPING } from "../shared/consts/chains";
+import { Asset } from "../modules/assets";
 import { Dot, MapPin } from "@phosphor-icons/react";
-import {
-  ASSET_SUBTYPES_MAP,
-  ASSET_TYPES_MAP,
-  NATIVITY_MAP,
-} from "../shared/consts";
-import { PROVIDER_MAP } from "../shared/consts/provider";
 import { getImageUrl } from "../shared/helpers/getImageUrl";
 import { useState } from "react";
+import { CHAIN_MAPPING } from "../modules/chains";
+import { ASSET_SUBTYPES_MAP, ASSET_TYPES_MAP } from "../modules/taxonomy";
+import { PROVIDER_MAP } from "../modules/issuers";
+import { NATIVITY_MAP } from "../shared/consts";
 
 interface AssetCardProps {
   className?: string;

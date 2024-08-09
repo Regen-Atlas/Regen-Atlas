@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Verified_Carbon_Removal: Asset = {
   cid: "",

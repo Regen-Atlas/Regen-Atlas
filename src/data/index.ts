@@ -128,7 +128,7 @@ import { Verified_Carbon_Removal } from "./assets/Verified_Carbon_Removal.ts";
 import { Verified_Carbon_Removal2 } from "./assets/Verified_Carbon_Removal_2.ts";
 import { Vintz_Plastics_Ltd_ } from "./assets/Vintz_Plastics_Ltd_.ts";
 
-import { Asset } from "../shared/types/asset.ts";
+import { Asset } from "../modules/assets";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,

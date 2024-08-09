@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Amazon_Rio_REDD__IFM: Asset = {
   cid: "",

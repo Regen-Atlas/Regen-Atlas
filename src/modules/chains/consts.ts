@@ -1,4 +1,4 @@
-import { ChainBranding } from "../types/chains";
+import { ChainBranding } from ".";
 
 export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
   1: {

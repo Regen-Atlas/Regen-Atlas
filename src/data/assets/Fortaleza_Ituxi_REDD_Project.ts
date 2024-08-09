@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Fortaleza_Ituxi_REDD_Project: Asset = {
   cid: "",

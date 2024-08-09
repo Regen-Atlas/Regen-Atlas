@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Santa_Isabel_Water_Credit: Asset = {
   cid: "",

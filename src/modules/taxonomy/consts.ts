@@ -1,4 +1,4 @@
-import { AssetSubtype, AssetType } from "../types";
+import { AssetSubtype, AssetType } from "../assets";
 
 // Asset subtypes
 

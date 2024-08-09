@@ -1,6 +1,6 @@
-import { AssetProvider } from "../types/asset";
+import { IAssetProvider } from ".";
 
-export const PROVIDER_LIST: Array<AssetProvider> = [
+export const PROVIDER_LIST: Array<IAssetProvider> = [
   {
     id: "agroforest_dao",
     name: "AgroforestDAO",
@@ -55,10 +55,11 @@ export const PROVIDER_LIST: Array<AssetProvider> = [
   },
 ];
 
-export const PROVIDER_MAP: Record<string, AssetProvider> = PROVIDER_LIST.reduce(
-  (acc, provider) => {
-    acc[provider.id] = provider;
-    return acc;
-  },
-  {} as Record<string, AssetProvider>
-);
+export const PROVIDER_MAP: Record<string, IAssetProvider> =
+  PROVIDER_LIST.reduce(
+    (acc, provider) => {
+      acc[provider.id] = provider;
+      return acc;
+    },
+    {} as Record<string, IAssetProvider>
+  );

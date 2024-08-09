@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Dori_Alimentos_Ltda___Biomass_Based_Project: Asset = {
   cid: "",

@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { useFiltersDispatch, useFiltersState } from "../../context/filters";
-import { ASSET_TYPES } from "../../shared/consts";
 import { CheckboxBox } from "../../shared/components";
-import { PROVIDER_LIST } from "../../shared/consts/provider";
-import { CHAINS } from "../../shared/consts/chains";
+import { ASSET_TYPES } from "../../modules/taxonomy";
+import { PROVIDER_LIST } from "../../modules/issuers";
+import { CHAINS } from "../../modules/chains";
 
 export default ({
   openFilter,
