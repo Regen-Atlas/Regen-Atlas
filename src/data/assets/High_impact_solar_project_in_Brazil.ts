@@ -28,7 +28,7 @@ export const High_impact_solar_project_in_Brazil: Asset = {
     country: "",
   },
   imageUrl:
-    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsmoke-258786_1280.jpeg?alt=media",
+    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar.jpg?alt=media",
   createdAt: "2024-08-08T15:48:55.858Z",
   updatedAt: "2024-08-08T15:48:55.858Z",
 };

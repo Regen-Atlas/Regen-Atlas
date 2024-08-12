@@ -2,7 +2,7 @@ import { Asset } from "../../modules/assets";
 
 export const Glow_Solar_Farm_36: Asset = {
   cid: "",
-  id: "9fdc4342-d68b-4776-ad6c-b8d334fdf950",
+  id: "60bc652d-fcbc-495e-9a48-71b9eb1e427e",
   imageHash: "",
   name: "Glow Solar Farm 36",
   assetTypeId: "nonpossessory_rights",
@@ -13,8 +13,8 @@ export const Glow_Solar_Farm_36: Asset = {
   providerLink: "https://glowlabs.org/waitlist",
   nativity: "onchain_enforcement",
   geolocation: {
-    latitude: 33.559565,
-    longitude: -112.064262,
+    latitude: 47.66524,
+    longitude: -117.09844,
   },
   tokens: [
     {
