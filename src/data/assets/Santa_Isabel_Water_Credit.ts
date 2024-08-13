@@ -27,7 +27,7 @@ export const Santa_Isabel_Water_Credit: Asset = {
       contractAddress: "",
     },
     {
-      chainId: 1300,
+      chainId: "algorand-mainnet",
       contractAddress: "",
     },
   ],

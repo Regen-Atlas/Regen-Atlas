@@ -27,7 +27,7 @@ export const Verified_Carbon_Removal: Asset = {
       contractAddress: "",
     },
     {
-      chainId: 1300,
+      chainId: "algorand-mainnet",
       contractAddress: "",
     },
   ],

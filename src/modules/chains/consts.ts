@@ -5,6 +5,7 @@ export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
     name: "Ethereum",
     color: "#444971",
     textColor: "#FFFFFF",
+    backgroundColor: "#fff",
   },
   42220: {
     name: "Celo",
@@ -18,16 +19,16 @@ export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
   },
   42161: {
     name: "Arbitrum",
-    color: "#2D374B",
+    color: "#213147",
     textColor: "#fff",
   },
   137: {
     name: "Polygon",
-    color: "#8247E5",
+    color: "#6C00F6",
     textColor: "#fff",
   },
   42: {
-    name: "Lukso",
+    name: "LUKSO",
     color: "#FE005B",
     textColor: "#fff",
   },
@@ -37,11 +38,12 @@ export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
     textColor: "#fff",
   },
   56: {
-    name: "BNB",
+    name: "BNB Chain",
     color: "#F0B90B",
     textColor: "#fff",
+    backgroundColor: "#0B0E11",
   },
-  1300: {
+  "algorand-mainnet": {
     name: "Algorand",
     color: "#2D2DF1",
     textColor: "#fff",
@@ -69,20 +71,20 @@ export const CHAINS = [
     id: 137,
     name: "Polygon",
   },
-  {
-    id: 42,
-    name: "Lukso",
-  },
+  // {
+  //   id: 42,
+  //   name: "LUKSO",
+  // },
   {
     id: "regen-1",
     name: "Regen Ledger",
   },
   {
     id: 56,
-    name: "BNB",
+    name: "BNB Chain",
   },
   {
-    id: 1300,
+    id: "algorand-mainnet",
     name: "Algorand",
   },
 ];

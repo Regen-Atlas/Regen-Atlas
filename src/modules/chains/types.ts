@@ -7,10 +7,11 @@ export type ChainId =
   | 42
   | "regen-1"
   | 56
-  | 1300;
+  | "algorand-mainnet";
 
 export interface ChainBranding {
   name: string;
   color: string;
+  backgroundColor?: string;
   textColor: string;
 }

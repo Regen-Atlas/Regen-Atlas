@@ -3,10 +3,10 @@ import { Asset } from "../modules/assets";
 import { Dot, MapPin } from "@phosphor-icons/react";
 import { getImageUrl } from "../shared/helpers/getImageUrl";
 import { useState } from "react";
-import { CHAIN_MAPPING } from "../modules/chains";
 import { ASSET_SUBTYPES_MAP, ASSET_TYPES_MAP } from "../modules/taxonomy";
 import { PROVIDER_MAP } from "../modules/issuers";
 import { NATIVITY_MAP } from "../shared/consts";
+import { ChainTag } from "../modules/chains/components/ChainTag";
 
 interface AssetCardProps {
   className?: string;
@@ -35,16 +35,7 @@ export default ({
         <div className="flex gap-3 justify-between items-center">
           <div className="flex gap-3">
             {asset?.tokens?.map((token) => (
-              <div
-                key={token.chainId}
-                className="flex items-center text-xs font-semibold py-1 px-3 rounded-full"
-                style={{
-                  backgroundColor: CHAIN_MAPPING[token.chainId].color,
-                  color: CHAIN_MAPPING[token.chainId].textColor,
-                }}
-              >
-                {CHAIN_MAPPING[token.chainId].name || ""}
-              </div>
+              <ChainTag key={token.chainId} chainId={token.chainId} />
             ))}
           </div>
         </div>
