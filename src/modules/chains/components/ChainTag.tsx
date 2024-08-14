@@ -25,7 +25,7 @@ export const ChainTag = ({ chainId }: { chainId: number | string }) => {
         return <Logo137 />;
       case 56:
         return <Logo56 />;
-      case 1:
+      case 42:
         return <Logo42 />;
       case 1:
         return <Logo1 />;

@@ -7,12 +7,16 @@ import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
 import { Asset } from "../modules/assets";
+import { MAP_STYLES } from "../shared/consts";
+import { useMapState } from "../context/map";
+import { MapStyleSwitch } from "../shared/components/MapStyleSwitch";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useFiltersState();
   const dispatch = useFiltersDispatch();
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
   const mapRef = useRef<MapRef>();
+  const { mapStyle } = useMapState();
 
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -42,7 +46,7 @@ export default (): React.ReactElement => {
   };
 
   return (
-    <div className="bg-background max-w-[1224px] mx-auto px-3 md:px-4 pb-2 md:pb-0">
+    <div className="main-container">
       <div
         className={clsx(
           "pt-[60px] md:pt-[140px] lg:pt-[100px]",
@@ -71,6 +75,11 @@ export default (): React.ReactElement => {
                 "map-wrapper"
               )}
             >
+              {selectedAssetId && (
+                <div className="absolute top-2 left-2 z-50">
+                  <MapStyleSwitch />
+                </div>
+              )}
               <Map
                 ref={mapRef as React.RefObject<MapRef>}
                 mapboxAccessToken={
@@ -81,7 +90,8 @@ export default (): React.ReactElement => {
                   latitude: 30,
                   zoom: 1,
                 }}
-                mapStyle="mapbox://styles/mapbox/light-v11"
+                mapStyle={MAP_STYLES[mapStyle]}
+                // projection={"globe" as unknown as Projection}
               >
                 {filteredAssets.map((asset) => (
                   <div key={asset.id}>
@@ -109,6 +119,7 @@ export default (): React.ReactElement => {
             </div>
             <div className="hidden md:block">
               <Footer />
+              Map{mapStyle}
             </div>
           </div>
         </div>

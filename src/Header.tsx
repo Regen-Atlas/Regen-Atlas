@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { List } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 import { Modal } from "./shared/components/Modal";
 import { ConnectKitButton } from "connectkit";
 import { router } from "./main";
@@ -29,20 +30,12 @@ export default (): React.ReactElement => {
       )}
     >
       <div className="flex justify-between items-center h-[60px] md:h-[80px]">
-        <a
-          className="hidden md:block"
-          href="https://x.com/theregenatlas"
-          target="_blank"
-        >
+        <Link className="hidden md:block" to="/">
           <img src="/RA_logo-01.svg" alt="logo" className="h-[44px]" />
-        </a>
-        <a
-          className="block md:hidden h-[40px]"
-          href="https://x.com/theregenatlas"
-          target="_blank"
-        >
+        </Link>
+        <Link className="block md:hidden h-[40px]" to="/">
           <img src="/RA_logo-02.svg" alt="logo" className="h-[40px]" />
-        </a>
+        </Link>
         <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-320px)]">
           <FiltersDesktop />
         </div>
