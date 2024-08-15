@@ -28,8 +28,8 @@ export const Exomad_Green: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Santa Cruz",
+    country: "BO",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",

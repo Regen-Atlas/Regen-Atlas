@@ -27,8 +27,8 @@ export const LandX: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Casanare",
+    country: "CO",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Flandx.jpeg?alt=media",

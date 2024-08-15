@@ -24,8 +24,8 @@ export const High_impact_solar_project_in_Brazil: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Minas Gerais",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar.jpg?alt=media",

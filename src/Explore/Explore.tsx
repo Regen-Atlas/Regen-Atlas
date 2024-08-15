@@ -76,6 +76,7 @@ export default (): React.ReactElement => {
                 zoom: 1,
               }}
               showMapStyleSwitch={!!selectedAssetId}
+              mapRef={mapRef as React.RefObject<MapRef>}
             >
               {filteredAssets.map((asset) => (
                 <div key={asset.id}>

@@ -23,8 +23,8 @@ export const Sandy_Cross_Forest_Preservation_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Ohio",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2FSandy%20cross%20forest.PNG?alt=media",

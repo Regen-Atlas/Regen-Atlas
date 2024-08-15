@@ -33,7 +33,7 @@ export const Verified_Carbon_Removal: Asset = {
   ],
   physicalAddress: {
     region: "",
-    country: "",
+    country: "PT",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ftree-6476331_1280.jpeg?alt=media",

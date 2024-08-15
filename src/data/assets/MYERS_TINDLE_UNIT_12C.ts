@@ -24,8 +24,8 @@ export const MYERS_TINDLE_UNIT_12C: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Texas",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Foil.jpg?alt=media",

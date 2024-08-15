@@ -23,8 +23,8 @@ export const Ballinger_Open_Space_Restoration: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Washington",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fballinger%20open%20space.PNG?alt=media",

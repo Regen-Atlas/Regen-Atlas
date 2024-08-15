@@ -23,8 +23,8 @@ export const Rimba_Raya_Biodiversity_Reserve_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Central Kalimantan",
+    country: "ID",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Frimba%20raya.PNG?alt=media",

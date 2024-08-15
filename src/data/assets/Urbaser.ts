@@ -24,8 +24,8 @@ export const Urbaser: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Madrid",
+    country: "ES",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fplastic.jpg?alt=media",

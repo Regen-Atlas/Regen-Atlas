@@ -24,8 +24,8 @@ export const Verified_Biodiversity_Based_Credit: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Auvergne-Rhône-Alpes",
+    country: "FR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiodiversity%20credits.PNG?alt=media",

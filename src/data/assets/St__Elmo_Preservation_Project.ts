@@ -23,8 +23,8 @@ export const St__Elmo_Preservation_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Tennessee",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsaint%20elmo.PNG?alt=media",

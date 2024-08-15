@@ -24,8 +24,8 @@ export const Biocultural_Jaguar_Credits__Ancestral_Stewardship_in_the_Sharaments
       },
     ],
     physicalAddress: {
-      region: "",
-      country: "",
+      region: "Pastaza",
+      country: "EC",
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fjaguar.jpg?alt=media",

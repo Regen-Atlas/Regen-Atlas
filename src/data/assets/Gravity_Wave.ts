@@ -24,8 +24,8 @@ export const Gravity_Wave: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Valencian Community",
+    country: "ES",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fplastic.jpg?alt=media",

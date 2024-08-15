@@ -23,8 +23,8 @@ export const King_County_Urban_Forest_Carbon_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Washington",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fking%20county.PNG?alt=media",

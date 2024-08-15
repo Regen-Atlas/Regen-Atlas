@@ -8,6 +8,7 @@ import { PROVIDER_MAP } from "../modules/issuers";
 import { NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
+import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 
 interface AssetCardProps {
   className?: string;
@@ -71,7 +72,7 @@ export default ({
             {asset.physicalAddress.region
               ? `${asset.physicalAddress.region}, `
               : ""}
-            {asset.physicalAddress.country}
+            {COUNTRY_CODE_TO_NAME[asset.physicalAddress.country]}
           </div>
           <Dot size={16} />
           <div>

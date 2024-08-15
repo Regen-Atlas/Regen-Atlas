@@ -23,8 +23,8 @@ export const Harvey_Manning_Park_Expansion: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Washington",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fharvey%20manning%20park.PNG?alt=media",

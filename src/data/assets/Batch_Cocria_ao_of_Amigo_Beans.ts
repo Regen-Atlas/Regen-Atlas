@@ -24,8 +24,8 @@ export const Batch_Cocria_ao_of_Amigo_Beans: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Minas Gerais",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbeans2.PNG?alt=media",

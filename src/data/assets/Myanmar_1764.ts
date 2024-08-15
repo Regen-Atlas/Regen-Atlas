@@ -23,8 +23,8 @@ export const Myanmar_1764: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Mandalay",
+    country: "MM",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fmyanmar.PNG?alt=media",

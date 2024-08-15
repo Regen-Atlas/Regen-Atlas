@@ -23,8 +23,8 @@ export const Vlinder_Papariko: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Isiolo",
+    country: "KE",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fvlinder.PNG?alt=media",

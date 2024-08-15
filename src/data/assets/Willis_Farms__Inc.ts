@@ -23,8 +23,8 @@ export const Willis_Farms__Inc: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Tennessee",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcow-7200409_1280.jpg?alt=media",

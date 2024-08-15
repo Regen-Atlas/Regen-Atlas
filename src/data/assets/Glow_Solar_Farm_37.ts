@@ -23,8 +23,8 @@ export const Glow_Solar_Farm_37: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Arizona",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",

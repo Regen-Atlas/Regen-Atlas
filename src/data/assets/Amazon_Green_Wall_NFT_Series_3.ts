@@ -24,8 +24,8 @@ export const Amazon_Green_Wall_NFT_Series_3: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Demerara-Mahaica",
+    country: "GY",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsuspension-bridge-959853_1280.jpg?alt=media",

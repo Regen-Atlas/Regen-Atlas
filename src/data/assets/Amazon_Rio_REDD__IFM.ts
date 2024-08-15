@@ -31,8 +31,8 @@ export const Amazon_Rio_REDD__IFM: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Amazonas",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Famazonia-5406522_1280.jpeg?alt=media",

@@ -28,8 +28,8 @@ export const American_BioCarbon_CT: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Louisiana",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",

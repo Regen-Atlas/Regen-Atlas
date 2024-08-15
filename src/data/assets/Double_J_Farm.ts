@@ -23,8 +23,8 @@ export const Double_J_Farm: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Iowa",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcorn-3705687_1280.jpeg?alt=media",

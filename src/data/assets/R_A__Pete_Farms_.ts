@@ -23,8 +23,8 @@ export const R_A__Pete_Farms_: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Nebraska",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Flandscape-8592826_1280.jpeg?alt=media",

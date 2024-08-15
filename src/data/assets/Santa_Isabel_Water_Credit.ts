@@ -32,8 +32,8 @@ export const Santa_Isabel_Water_Credit: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Chihuahua",
+    country: "MX",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fdrop-of-water-578897_1280.jpeg?alt=media",

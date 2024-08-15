@@ -24,8 +24,8 @@ export const Inaugural_Batch_of_Amigo_Beans: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Minas Gerais",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbeans.PNG?alt=media",

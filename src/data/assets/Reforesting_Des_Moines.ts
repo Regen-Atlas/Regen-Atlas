@@ -23,8 +23,8 @@ export const Reforesting_Des_Moines: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Iowa",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fforest-1072828_1280.jpg?alt=media",

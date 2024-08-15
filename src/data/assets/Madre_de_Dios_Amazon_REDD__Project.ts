@@ -31,8 +31,8 @@ export const Madre_de_Dios_Amazon_REDD__Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Madre de Dios",
+    country: "PE",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fvitoria-regia-2599388_1280.jpeg?alt=media",

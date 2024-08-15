@@ -24,8 +24,8 @@ export const High_impact_solar_projects_in_Burkina_Faso: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Bazèga",
+    country: "BF",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar.jpg?alt=media",

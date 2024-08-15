@@ -25,8 +25,8 @@ export const Energy_saving_Stoves_for_a_Clean_Environment_in_Bangladesh: Asset =
       },
     ],
     physicalAddress: {
-      region: "",
-      country: "",
+      region: "Chattogram Division",
+      country: "BD",
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcookstoves.PNG?alt=media",

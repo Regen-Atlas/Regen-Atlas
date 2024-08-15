@@ -31,8 +31,8 @@ export const Dori_Alimentos_Ltda___Biomass_Based_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Mato Grosso",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsmoke-258786_1280.jpeg?alt=media",

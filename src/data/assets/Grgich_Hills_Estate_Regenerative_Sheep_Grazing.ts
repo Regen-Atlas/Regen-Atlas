@@ -23,8 +23,8 @@ export const Grgich_Hills_Estate_Regenerative_Sheep_Grazing: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "California",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fgrgich%20hills%20estate.PNG?alt=media",

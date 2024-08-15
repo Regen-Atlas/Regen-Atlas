@@ -23,8 +23,8 @@ export const Buena_Vista_Heights_Conservation_Area: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Pennsylvania",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2FBuena%20Vista%20Highs.PNG?alt=media",

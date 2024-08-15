@@ -29,7 +29,7 @@ export const BC_Biocarbon___McBride: Asset = {
   ],
   physicalAddress: {
     region: "",
-    country: "",
+    country: "CA",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fbiochar2.jpg?alt=media",

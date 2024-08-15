@@ -24,8 +24,8 @@ export const Rintz_Industries: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Mombasa County",
+    country: "KE",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fplastic.jpg?alt=media",

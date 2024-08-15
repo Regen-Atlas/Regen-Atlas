@@ -23,8 +23,8 @@ export const Fox_River_Bluffs_Planting_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Illinois",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ffox%20river%20bluffs.PNG?alt=media",

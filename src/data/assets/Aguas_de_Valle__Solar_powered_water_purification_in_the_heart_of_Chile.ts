@@ -25,8 +25,8 @@ export const Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Ch
       },
     ],
     physicalAddress: {
-      region: "",
-      country: "",
+      region: "Coquimbo Region",
+      country: "CL",
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar.jpg?alt=media",

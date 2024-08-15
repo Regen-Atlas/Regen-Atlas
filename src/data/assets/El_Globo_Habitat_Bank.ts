@@ -23,8 +23,8 @@ export const El_Globo_Habitat_Bank: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Risaralda",
+    country: "CO",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcolumbiabird.jpg?alt=media",

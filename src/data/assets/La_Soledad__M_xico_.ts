@@ -23,8 +23,8 @@ export const La_Soledad__M_xico_: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Chiapas",
+    country: "MX",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcoffee.jpg?alt=media",

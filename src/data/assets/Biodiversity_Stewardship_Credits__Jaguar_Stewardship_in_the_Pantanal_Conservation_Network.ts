@@ -24,8 +24,8 @@ export const Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantana
       },
     ],
     physicalAddress: {
-      region: "",
-      country: "",
+      region: "Mato Grosso do Sul",
+      country: "BR",
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fjaguar.jpg?alt=media",

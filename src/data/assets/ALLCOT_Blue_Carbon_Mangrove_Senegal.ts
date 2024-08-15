@@ -25,7 +25,7 @@ export const ALLCOT_Blue_Carbon_Mangrove_Senegal: Asset = {
   ],
   physicalAddress: {
     region: "",
-    country: "",
+    country: "SN",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fallcot%20blue.PNG?alt=media",

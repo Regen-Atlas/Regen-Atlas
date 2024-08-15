@@ -23,8 +23,8 @@ export const San_Jos__Ixtepec__M_xico_: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "San Marcos",
+    country: "GT",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcoffee.jpg?alt=media",

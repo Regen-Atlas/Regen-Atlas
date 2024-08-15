@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Ref, useRef } from "react";
 import Map from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import clsx from "clsx";
@@ -15,6 +15,7 @@ interface MapBoxProps {
     latitude: number;
     zoom: number;
   };
+  mapRef?: Ref<MapRef>;
 }
 
 export const MapBox = ({
@@ -22,8 +23,11 @@ export const MapBox = ({
   mapStyle,
   showMapStyleSwitch = true,
   initialViewState,
+  mapRef,
 }: MapBoxProps): React.ReactElement => {
-  const mapRef = useRef<MapRef>();
+  if (!mapRef) {
+    mapRef = useRef<MapRef>() as Ref<MapRef>;
+  }
 
   return (
     <div

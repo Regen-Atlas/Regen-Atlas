@@ -23,8 +23,8 @@ export const Lake_County_Forest_Preserve: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Illinois",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2FLake%20Country%20Forest%20Preserve.PNG?alt=media",

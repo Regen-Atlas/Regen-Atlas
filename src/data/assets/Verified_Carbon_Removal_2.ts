@@ -32,8 +32,8 @@ export const Verified_Carbon_Removal2: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Extremadura",
+    country: "ES",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ftree-6476331_1280.jpeg?alt=media",

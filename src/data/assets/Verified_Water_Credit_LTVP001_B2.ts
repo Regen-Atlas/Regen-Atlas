@@ -24,8 +24,8 @@ export const Verified_Water_Credit_LTVP001_B2: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Auvergne-Rhône-Alpes",
+    country: "FR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fwater%20credit%20nat5.PNG?alt=media",

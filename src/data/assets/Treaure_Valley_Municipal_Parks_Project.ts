@@ -23,8 +23,8 @@ export const Treaure_Valley_Municipal_Parks_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Idaho",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fidaho.PNG?alt=media",

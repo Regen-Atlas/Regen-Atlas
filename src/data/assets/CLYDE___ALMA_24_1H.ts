@@ -24,8 +24,8 @@ export const CLYDE___ALMA_24_1H: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Montana",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Foil.jpg?alt=media",

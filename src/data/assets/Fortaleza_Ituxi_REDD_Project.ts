@@ -31,8 +31,8 @@ export const Fortaleza_Ituxi_REDD_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Amazonas",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fexotic-flower-917025_1280.jpeg?alt=media",

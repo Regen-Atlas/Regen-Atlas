@@ -24,8 +24,8 @@ export const Waste_less_Arugam_Bay: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Eastern Province",
+    country: "LK",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fplastic.jpg?alt=media",

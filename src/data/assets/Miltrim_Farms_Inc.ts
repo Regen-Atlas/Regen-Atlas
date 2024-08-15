@@ -23,8 +23,8 @@ export const Miltrim_Farms_Inc: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Wisconsin",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcow-7200409_1280.jpg?alt=media",

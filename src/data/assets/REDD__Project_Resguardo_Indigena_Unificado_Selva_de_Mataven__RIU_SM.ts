@@ -24,8 +24,8 @@ export const REDD__Project_Resguardo_Indigena_Unificado_Selva_de_Mataven__RIU_SM
       },
     ],
     physicalAddress: {
-      region: "",
-      country: "",
+      region: "Vichada",
+      country: "CO",
     },
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Flily-4271708_1280.jpg?alt=media",

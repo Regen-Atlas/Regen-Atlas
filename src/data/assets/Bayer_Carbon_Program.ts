@@ -23,8 +23,8 @@ export const Bayer_Carbon_Program: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "South Dakota",
+    country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fagriculture-2382176_1280.jpg?alt=media",
