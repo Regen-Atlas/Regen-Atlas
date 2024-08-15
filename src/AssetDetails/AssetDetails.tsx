@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
+import { Marker } from "react-map-gl";
 import { useFiltersState } from "../context/filters";
 import AssetCard from "../Explore/AssetCard";
+import { MapBox } from "../shared/components/MapBox";
+import { useMapState } from "../context/map";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
   const { filteredAssets } = useFiltersState();
+  const { mapStyle } = useMapState();
   const asset = filteredAssets.find((a) => a.id === assetId);
 
   return (
@@ -20,7 +24,22 @@ export default (): React.ReactElement => {
               onPinClicked={() => {}}
               displayLearnMore={false}
             />
-            <div></div>
+            <div>
+              <MapBox
+                mapStyle={mapStyle}
+                initialViewState={{
+                  longitude: asset.geolocation.longitude,
+                  latitude: asset.geolocation.latitude,
+                  zoom: 5,
+                }}
+              >
+                <Marker
+                  key={asset.id}
+                  latitude={asset.geolocation.latitude}
+                  longitude={asset.geolocation.longitude}
+                />
+              </MapBox>
+            </div>
           </div>
         )}
       </div>

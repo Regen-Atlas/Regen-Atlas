@@ -1,4 +1,4 @@
-import Map, { Marker, Popup } from "react-map-gl";
+import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import AssetCard from "./AssetCard";
 import FiltersMobile from "./FiltersMobile";
@@ -7,9 +7,8 @@ import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
 import { Asset } from "../modules/assets";
-import { MAP_STYLES } from "../shared/consts";
 import { useMapState } from "../context/map";
-import { MapStyleSwitch } from "../shared/components/MapStyleSwitch";
+import { MapBox } from "../shared/components/MapBox";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useFiltersState();
@@ -69,57 +68,40 @@ export default (): React.ReactElement => {
               showCards() && "lg:top-[100px] lg:w-[600px] xl:w-[740px]"
             )}
           >
-            <div
-              className={clsx(
-                "w-full rounded-xl overflow-hidden",
-                "map-wrapper"
-              )}
+            <MapBox
+              mapStyle={mapStyle}
+              initialViewState={{
+                longitude: 15,
+                latitude: 30,
+                zoom: 1,
+              }}
+              showMapStyleSwitch={!!selectedAssetId}
             >
-              {selectedAssetId && (
-                <div className="absolute top-2 left-2 z-50">
-                  <MapStyleSwitch />
-                </div>
-              )}
-              <Map
-                ref={mapRef as React.RefObject<MapRef>}
-                mapboxAccessToken={
-                  import.meta.env.VITE_MAPBOX_ACCESS_TOKEN as string
-                }
-                initialViewState={{
-                  longitude: 15,
-                  latitude: 30,
-                  zoom: 1,
-                }}
-                mapStyle={MAP_STYLES[mapStyle]}
-                // projection={"globe" as unknown as Projection}
-              >
-                {filteredAssets.map((asset) => (
-                  <div key={asset.id}>
-                    <Marker
-                      key={asset.id}
+              {filteredAssets.map((asset) => (
+                <div key={asset.id}>
+                  <Marker
+                    key={asset.id}
+                    latitude={asset.geolocation.latitude}
+                    longitude={asset.geolocation.longitude}
+                    onClick={(e) => {
+                      e.originalEvent.stopPropagation();
+                      handleMarkerClick(asset.id);
+                    }}
+                  />
+                  {openPopupAssetId === asset.id && (
+                    <Popup
                       latitude={asset.geolocation.latitude}
                       longitude={asset.geolocation.longitude}
-                      onClick={(e) => {
-                        e.originalEvent.stopPropagation();
-                        handleMarkerClick(asset.id);
-                      }}
-                    />
-                    {openPopupAssetId === asset.id && (
-                      <Popup
-                        latitude={asset.geolocation.latitude}
-                        longitude={asset.geolocation.longitude}
-                        closeButton={false}
-                      >
-                        <div className="font-bold">{asset.name}</div>
-                      </Popup>
-                    )}
-                  </div>
-                ))}
-              </Map>
-            </div>
+                      closeButton={false}
+                    >
+                      <div className="font-bold">{asset.name}</div>
+                    </Popup>
+                  )}
+                </div>
+              ))}
+            </MapBox>
             <div className="hidden md:block">
               <Footer />
-              Map{mapStyle}
             </div>
           </div>
         </div>
