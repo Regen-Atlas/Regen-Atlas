@@ -27,7 +27,7 @@ body {
 }
 
 .button {
-  @apply bg-blue-700 text-white font-medium py-1 px-6 rounded-full text-lg;
+  @apply bg-blue-700 text-white font-medium py-1 px-6 rounded-full lg:text-lg;
 }
 
 .button:hover {

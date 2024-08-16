@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Asset } from "../modules/assets";
-import { Dot, Export, MapPin } from "@phosphor-icons/react";
+import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
 import { getImageUrl } from "../shared/helpers/getImageUrl";
 import { useState } from "react";
 import { ASSET_SUBTYPES_MAP, ASSET_TYPES_MAP } from "../modules/taxonomy";
@@ -9,21 +9,19 @@ import { NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
+import { ExpandableText } from "../shared/components/ExpandableText";
 
 interface AssetCardProps {
   className?: string;
   asset: Asset;
   onPinClicked: () => void;
-  displayLearnMore?: boolean;
 }
 
 export default ({
   className,
   asset,
   onPinClicked,
-  displayLearnMore = true,
 }: AssetCardProps): React.ReactElement => {
-  const [learnMoreOpen, setLearnMoreOpen] = useState(false);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const shareUrl = `${window.location.origin}/assets/${asset.id}`;
 
@@ -82,16 +80,20 @@ export default ({
             </span>
           </div>
         </div>
-        <p
-          className={clsx(
-            "text-sm overflow-hidden text-ellipsis max-h-[80px] line-clamp-4 mb-3",
-            (learnMoreOpen || !displayLearnMore) &&
-              "line-clamp-none max-h-[none]",
-            (learnMoreOpen || !displayLearnMore) && "overflow-visible"
-          )}
-        >
-          {asset.description}
-        </p>
+        <div className="lg:hidden">
+          <ExpandableText
+            text={asset.description}
+            maxChars={125}
+            className="text-sm mb-3"
+          />
+        </div>
+        <div className="hidden lg:block">
+          <ExpandableText
+            text={asset.description}
+            maxChars={150}
+            className="text-sm mb-3"
+          />
+        </div>
 
         <div>
           <div className="flex justify-between py-1">
@@ -109,20 +111,15 @@ export default ({
           </div>
         </div>
 
-        <div
-          className={clsx(
-            "flex gap-3 mt-3",
-            displayLearnMore ? "justify-between" : "justify-end"
-          )}
-        >
-          {displayLearnMore && (
-            <button
-              className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1"
-              onClick={() => setLearnMoreOpen(true)}
-            >
-              Learn more
-            </button>
-          )}
+        <div className={clsx("flex gap-3 mt-3 justify-between")}>
+          <a
+            href={asset.providerLink}
+            target="_blank"
+            className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
+          >
+            <span className="mr-1">Learn more</span>
+            <ArrowUpRight size={16} />
+          </a>
           <a
             className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
             href={asset.providerLink}

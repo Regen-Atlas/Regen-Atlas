@@ -37,7 +37,7 @@ export const MapBox = ({
       )}
     >
       {showMapStyleSwitch && (
-        <div className="absolute top-2 left-2 z-50">
+        <div className="absolute top-2 left-2 z-10">
           <MapStyleSwitch />
         </div>
       )}

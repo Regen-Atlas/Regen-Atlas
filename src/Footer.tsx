@@ -1,11 +1,12 @@
 import { XLogo } from "@phosphor-icons/react";
 import clsx from "clsx";
-import { useFiltersState } from "./context/filters";
 import { MapStyleSwitch } from "./shared/components/MapStyleSwitch";
 
-export default (): React.ReactElement => {
-  const { selectedAssetId } = useFiltersState();
-  const showMapStyleSwitch = !selectedAssetId;
+export default ({
+  showMapStyleSwitch = false,
+}: {
+  showMapStyleSwitch?: boolean;
+}): React.ReactElement => {
   return (
     <footer className={clsx("flex justify-between items-center h-[50px]")}>
       <p>© Regen Atlas 2024</p>

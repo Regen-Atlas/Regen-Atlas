@@ -19,7 +19,11 @@ const menuItems = [
   },
 ];
 
-export default (): React.ReactElement => {
+export default ({
+  showFilters = false,
+}: {
+  showFilters?: boolean;
+}): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -36,9 +40,11 @@ export default (): React.ReactElement => {
         <Link className="block md:hidden h-[40px]" to="/">
           <img src="/RA_logo-02.svg" alt="logo" className="h-[40px]" />
         </Link>
-        <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-320px)]">
-          <FiltersDesktop />
-        </div>
+        {showFilters && (
+          <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-320px)]">
+            <FiltersDesktop />
+          </div>
+        )}
         <div className="hidden lg:flex">
           <ConnectKitButton />
         </div>
