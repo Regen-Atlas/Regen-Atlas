@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 interface ExpandableTextProps {
   text: string;
