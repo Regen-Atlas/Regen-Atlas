@@ -1,14 +1,15 @@
 import { Token } from "@uniswap/sdk-core";
 import { simulateContract, getChainId } from "@wagmi/core";
-import { config } from "../../wagmi";
-import { parseNumber } from "./decimals";
+import { config } from "../../../wagmi";
 import {
   CELO_QUOTER_CONTRACT_ADDRESS,
   MAINNET_QUOTER_CONTRACT_ADDRESS,
-} from "../../modules/uniswap";
+  ABI_CELO_QUOTER,
+  ABI_EVM_QUOTER,
+} from "../.";
 import { FeeAmount } from "@uniswap/v3-sdk";
 import { Address } from "viem";
-import { ABI_CELO_QUOTER, ABI_EVM_QUOTER } from "../../modules/uniswap/abi";
+import { parseNumber } from "../../../shared/helpers";
 
 export const getQuoteSimulation = async ({
   amountIn,

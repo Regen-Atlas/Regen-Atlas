@@ -1,9 +1,9 @@
 import { Pool } from "@uniswap/v3-sdk";
 import { readContracts } from "@wagmi/core";
-import { config } from "../../wagmi";
+import { config } from "../../../wagmi";
 import { Address } from "viem";
 import { Token } from "@uniswap/sdk-core";
-import { ABI_UNISWAP_V3_POOL } from "../../modules/uniswap/abi";
+import { ABI_UNISWAP_V3_POOL } from "../.";
 
 export const getPool = async (
   poolAddress: Address,

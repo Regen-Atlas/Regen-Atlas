@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { UniswapTokenInput } from "./UniswapTokenInput";
 import { Percent, Token } from "@uniswap/sdk-core";
-import { getQuoteSimulation } from "../../../shared/helpers/getQuoteSimulation";
-import { FeeAmount, Route, SwapOptions } from "@uniswap/v3-sdk";
+import { Route, SwapOptions } from "@uniswap/v3-sdk";
 import { formatNumber, parseNumber } from "../../../shared/helpers";
-import { UNISWAP_POOLS_MAP } from "../pools";
-import { getPool } from "../../../shared/helpers/getPool";
-import { getQuoteFromQuoter } from "../../../shared/helpers/getQuoteFromQuoter";
-import { getTokenApproval } from "../../../shared/helpers/getTokenApproval";
 import { useAccount } from "wagmi";
-import { executeTrade } from "../../../shared/helpers/executeTrade";
+import {
+  getQuoteSimulation,
+  executeTrade,
+  getPool,
+  getQuoteFromQuoter,
+  getTokenApproval,
+  UNISWAP_POOLS_MAP,
+} from "../.";
 
 interface UniswapTradingProps {
   tokenIn: Token;
@@ -25,13 +27,16 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   const [transactionHash, setTransactionHash] = useState("");
   const { address } = useAccount();
 
+  const { address: poolAddress, fee: poolFee } =
+    UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
+
   const handleInputChange = async (value: string) => {
     setAmountIn(value);
     const quote = await getQuoteSimulation({
       amountIn: parseFloat(value),
       tokenIn,
       tokenOut,
-      fee: FeeAmount.MEDIUM,
+      fee: poolFee,
     });
     setQuoteAmount(formatNumber(quote, tokenOut.decimals));
   };
@@ -40,10 +45,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     if (!amountIn || !address) {
       return;
     }
-    console.log("Buy");
-
-    const poolAddress =
-      UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
 
     let pool;
     try {
@@ -67,12 +68,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       return;
     }
 
-    console.log(
-      "quote",
-      quoteAmount,
-      formatNumber(quoteAmount, tokenOut.decimals)
-    );
-
     try {
       await getTokenApproval(tokenIn, amountIn);
     } catch (e) {
@@ -86,8 +81,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       recipient: address,
       sqrtPriceLimitX96: 0,
     };
-
-    console.log("options", options);
 
     const res = await executeTrade({
       options,

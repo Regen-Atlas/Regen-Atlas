@@ -4,13 +4,10 @@ import {
   getChainId,
   waitForTransactionReceipt,
 } from "@wagmi/core";
-import { config } from "../../wagmi";
+import { config } from "../../../wagmi";
 import { Address, parseUnits } from "viem";
-import {
-  CELO_SWAP_ROUTER_ADDRESS,
-  MAINNET_SWAP_ROUTER_ADDRESS,
-} from "../../modules/uniswap";
-import { ABI_ERC20_TOKEN, ABI_CELO_ERC_20_TOKEN } from "../abi";
+import { CELO_SWAP_ROUTER_ADDRESS, MAINNET_SWAP_ROUTER_ADDRESS } from "..";
+import { ABI_ERC20_TOKEN, ABI_CELO_ERC_20_TOKEN } from "../../../shared/abi";
 
 export const getTokenApproval = async (
   token: Token,

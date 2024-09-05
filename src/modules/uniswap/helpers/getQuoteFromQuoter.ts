@@ -7,8 +7,8 @@ import {
 import { Route, SwapQuoter } from "@uniswap/v3-sdk";
 import { Address, decodeAbiParameters, parseAbiParameters } from "viem";
 import { call, getChainId } from "@wagmi/core";
-import { config } from "../../wagmi";
-import { parseNumber } from "./decimals";
+import { config } from "../../../wagmi";
+import { parseNumber } from "../../../shared/helpers/decimals";
 
 export async function getQuoteFromQuoter({
   swapRoute,

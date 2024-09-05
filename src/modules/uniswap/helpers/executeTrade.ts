@@ -6,14 +6,14 @@ import {
   writeContract,
   getChainId,
 } from "@wagmi/core";
-import { config } from "../../wagmi";
+import { config } from "../../../wagmi";
 import {
   CELO_SWAP_ROUTER_ADDRESS,
   MAINNET_SWAP_ROUTER_ADDRESS,
-} from "../../modules/uniswap";
+  ABI_CELO_ROUTER,
+} from "../.";
 import { Address } from "viem";
 import { getUncheckedTrade } from "./getUncheckedTrade";
-import { ABI_CELO_ROUTER } from "../../modules/uniswap/abi";
 
 export async function executeTrade({
   options,

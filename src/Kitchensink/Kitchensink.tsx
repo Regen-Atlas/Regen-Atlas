@@ -1,24 +1,28 @@
 import { useState } from "react";
 import { FeeAmount, Route, SwapOptions, SwapRouter } from "@uniswap/v3-sdk";
 import {
+  ABI_CELO_ROUTER,
   CELO_CHAR_TOKEN,
+  CELO_CHAR_TOKEN_ADDRESS,
+  CELO_CHAR_USDC_POOL_ADDRESS,
   CELO_SWAP_ROUTER_ADDRESS,
   CELO_USDC_TOKEN,
+  CELO_USDC_TOKEN_ADDRESS,
+  ETHEREUM_USDC_UNI_POOL_ADDRESS,
+  getPool,
+  getQuoteFromQuoter,
+  getQuoteSimulation,
+  getTokenApproval,
+  getUncheckedTrade,
   MAINNET_SWAP_ROUTER_ADDRESS,
   MAINNET_UNI_TOKEN,
+  MAINNET_UNI_TOKEN_ADDRESS,
   MAINNET_USDC_TOKEN,
+  MAINNET_USDC_TOKEN_ADDRESS,
+  UniswapTrading,
 } from "../modules/uniswap";
-import { getQuoteSimulation } from "../shared/helpers/getQuoteSimulation";
-import { getTokenApproval } from "../shared/helpers/getTokenApproval";
 import { useAccount, useChainId } from "wagmi";
 import Header from "../Header";
-import { getPool } from "../shared/helpers/getPool";
-import {
-  CELO_CHAR_USDC_POOL_ADDRESS,
-  ETHEREUM_USDC_UNI_POOL_ADDRESS,
-} from "../modules/uniswap/pools";
-import { getQuoteFromQuoter } from "../shared/helpers/getQuoteFromQuoter";
-import { getUncheckedTrade } from "../shared/helpers/getUncheckedTrade";
 import { Percent } from "@uniswap/sdk-core";
 import { config } from "../wagmi";
 import { Address } from "viem";
@@ -28,14 +32,6 @@ import {
   writeContract,
   getBalance,
 } from "@wagmi/core";
-import { UniswapTrading } from "../modules/uniswap/components/UniswapTrading";
-import {
-  CELO_CHAR_TOKEN_ADDRESS,
-  CELO_USDC_TOKEN_ADDRESS,
-  MAINNET_UNI_TOKEN_ADDRESS,
-  MAINNET_USDC_TOKEN_ADDRESS,
-} from "../modules/uniswap/tokens";
-import { ABI_CELO_ROUTER } from "../modules/uniswap/abi";
 import { parseNumber } from "../shared/helpers";
 
 export const Kitchensink = (): React.ReactElement => {

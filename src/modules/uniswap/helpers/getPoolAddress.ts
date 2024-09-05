@@ -1,5 +1,5 @@
 import { computePoolAddress } from "@uniswap/v3-sdk";
-import { POOL_FACTORY_CONTRACTS_MAP } from "./consts";
+import { POOL_FACTORY_CONTRACTS_MAP } from "../.";
 import { Token } from "@uniswap/sdk-core";
 
 export const getPoolAddress = ({
