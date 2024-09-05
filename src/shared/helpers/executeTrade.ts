@@ -1,5 +1,5 @@
-import { ChainId, Token, TradeType } from "@uniswap/sdk-core";
-import { Route, SwapOptions, SwapRouter, Trade } from "@uniswap/v3-sdk";
+import { ChainId, Token } from "@uniswap/sdk-core";
+import { Route, SwapOptions, SwapRouter } from "@uniswap/v3-sdk";
 import {
   sendTransaction,
   simulateContract,
@@ -12,8 +12,8 @@ import {
   MAINNET_SWAP_ROUTER_ADDRESS,
 } from "../../modules/uniswap";
 import { Address } from "viem";
-import { ABI_CELO_router } from "../../modules/uniswap/ABI_CELO_router";
 import { getUncheckedTrade } from "./getUncheckedTrade";
+import { ABI_CELO_ROUTER } from "../../modules/uniswap/abi";
 
 export async function executeTrade({
   options,
@@ -37,7 +37,7 @@ export async function executeTrade({
   if (chainId === ChainId.CELO) {
     try {
       const result = await simulateContract(config, {
-        abi: ABI_CELO_router,
+        abi: ABI_CELO_ROUTER,
         address: CELO_SWAP_ROUTER_ADDRESS,
         functionName: "exactInputSingle",
         args: [

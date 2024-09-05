@@ -2,14 +2,12 @@ import { useState } from "react";
 import { UniswapTokenInput } from "./UniswapTokenInput";
 import { Percent, Token } from "@uniswap/sdk-core";
 import { getQuoteSimulation } from "../../../shared/helpers/getQuoteSimulation";
-import { FeeAmount, Route, SwapOptions, SwapRouter } from "@uniswap/v3-sdk";
+import { FeeAmount, Route, SwapOptions } from "@uniswap/v3-sdk";
 import { formatNumber, parseNumber } from "../../../shared/helpers";
 import { UNISWAP_POOLS_MAP } from "../pools";
 import { getPool } from "../../../shared/helpers/getPool";
 import { getQuoteFromQuoter } from "../../../shared/helpers/getQuoteFromQuoter";
-import { MAINNET_UNI_TOKEN, MAINNET_USDC_TOKEN } from "../consts";
 import { getTokenApproval } from "../../../shared/helpers/getTokenApproval";
-import { getUncheckedTrade } from "../../../shared/helpers/getUncheckedTrade";
 import { useAccount } from "wagmi";
 import { executeTrade } from "../../../shared/helpers/executeTrade";
 

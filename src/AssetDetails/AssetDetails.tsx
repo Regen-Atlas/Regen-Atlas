@@ -6,7 +6,6 @@ import { MapBox } from "../shared/components/MapBox";
 import { useMapState } from "../context/map";
 import Footer from "../Footer";
 import Header from "../Header";
-import { Trading } from "../shared/components/Trading";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();

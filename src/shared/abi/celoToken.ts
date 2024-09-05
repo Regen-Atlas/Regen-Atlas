@@ -1,4 +1,4 @@
-export const ABI_CELO_token = [
+export const ABI_CELO_ERC_20_TOKEN = [
   {
     constant: true,
     inputs: [],

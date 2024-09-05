@@ -1,21 +1,4 @@
-import { ChainId } from "@uniswap/sdk-core";
-import { ABI_CELO_token } from "./ABI_CELO_token";
-
-export const ERC20_ABI = [
-  // Read-Only Functions
-  "function balanceOf(address owner) view returns (uint256)",
-  "function decimals() view returns (uint8)",
-  "function symbol() view returns (string)",
-
-  // Authenticated Functions
-  "function transfer(address to, uint amount) returns (bool)",
-  "function approve(address _spender, uint256 _value) returns (bool)",
-
-  // Events
-  "event Transfer(address indexed from, address indexed to, uint amount)",
-] as const;
-
-export const ERC20_Test = [
+export const ABI_ERC20_TOKEN = [
   {
     constant: true,
     inputs: [],
@@ -237,8 +220,3 @@ export const ERC20_Test = [
     type: "event",
   },
 ] as const;
-
-export const ERC20_Abis_map: { [key: number]: any } = {
-  [ChainId.MAINNET]: ERC20_ABI,
-  [ChainId.CELO]: ABI_CELO_token,
-};

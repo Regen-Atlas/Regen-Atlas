@@ -1,4 +1,4 @@
-export const ABI_CELO_router = [
+export const ABI_CELO_ROUTER = [
   {
     type: "constructor",
     stateMutability: "nonpayable",

@@ -28,7 +28,6 @@ import {
   writeContract,
   getBalance,
 } from "@wagmi/core";
-import { ABI_CELO_router } from "../modules/uniswap/ABI_CELO_router";
 import { UniswapTrading } from "../modules/uniswap/components/UniswapTrading";
 import {
   CELO_CHAR_TOKEN_ADDRESS,
@@ -36,6 +35,8 @@ import {
   MAINNET_UNI_TOKEN_ADDRESS,
   MAINNET_USDC_TOKEN_ADDRESS,
 } from "../modules/uniswap/tokens";
+import { ABI_CELO_ROUTER } from "../modules/uniswap/abi";
+import { parseNumber } from "../shared/helpers";
 
 export const Kitchensink = (): React.ReactElement => {
   const chainId = useChainId();
@@ -179,7 +180,7 @@ export const Kitchensink = (): React.ReactElement => {
       swapRoute: swapRoute,
       tokenIn: MAINNET_USDC_TOKEN,
       tokenOut: MAINNET_UNI_TOKEN,
-      amountIn: "40",
+      amountIn: parseNumber("40", MAINNET_USDC_TOKEN.decimals).toString(),
       quoteAmount,
     });
 
@@ -217,7 +218,7 @@ export const Kitchensink = (): React.ReactElement => {
       swapRoute: swapRoute,
       tokenIn: CELO_USDC_TOKEN,
       tokenOut: CELO_CHAR_TOKEN,
-      amountIn: "0.01",
+      amountIn: parseNumber("0.01", CELO_USDC_TOKEN.decimals).toString(),
       quoteAmount,
     });
 
@@ -294,7 +295,7 @@ export const Kitchensink = (): React.ReactElement => {
 
     try {
       const result = await simulateContract(config, {
-        abi: ABI_CELO_router,
+        abi: ABI_CELO_ROUTER,
         address: CELO_SWAP_ROUTER_ADDRESS,
         functionName: "exactInputSingle",
         args: [

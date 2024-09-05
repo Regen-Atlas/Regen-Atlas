@@ -3,15 +3,12 @@ import { simulateContract, getChainId } from "@wagmi/core";
 import { config } from "../../wagmi";
 import { parseNumber } from "./decimals";
 import {
-  ABI_CELO_Quoter,
-  ABI_EVM_Quoter,
-} from "../../modules/uniswap/ABI_Quoter";
-import {
   CELO_QUOTER_CONTRACT_ADDRESS,
   MAINNET_QUOTER_CONTRACT_ADDRESS,
 } from "../../modules/uniswap";
 import { FeeAmount } from "@uniswap/v3-sdk";
 import { Address } from "viem";
+import { ABI_CELO_QUOTER, ABI_EVM_QUOTER } from "../../modules/uniswap/abi";
 
 export const getQuoteSimulation = async ({
   amountIn,
@@ -29,7 +26,7 @@ export const getQuoteSimulation = async ({
 
   if (chainId === 42220) {
     const response = await simulateContract(config, {
-      abi: ABI_CELO_Quoter,
+      abi: ABI_CELO_QUOTER,
       address: CELO_QUOTER_CONTRACT_ADDRESS,
       functionName: "quoteExactInputSingle",
       args: [
@@ -53,7 +50,7 @@ export const getQuoteSimulation = async ({
   }
 
   const response = await simulateContract(config, {
-    abi: ABI_EVM_Quoter,
+    abi: ABI_EVM_QUOTER,
     address: MAINNET_QUOTER_CONTRACT_ADDRESS,
     functionName: "quoteExactInputSingle",
     args: [

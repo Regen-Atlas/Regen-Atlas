@@ -6,12 +6,11 @@ import {
 } from "@wagmi/core";
 import { config } from "../../wagmi";
 import { Address, parseUnits } from "viem";
-import { ERC20_Abis_map, ERC20_Test } from "../../modules/uniswap/abis";
 import {
   CELO_SWAP_ROUTER_ADDRESS,
   MAINNET_SWAP_ROUTER_ADDRESS,
 } from "../../modules/uniswap";
-import { ABI_CELO_token } from "../../modules/uniswap/ABI_CELO_token";
+import { ABI_ERC20_TOKEN, ABI_CELO_ERC_20_TOKEN } from "../abi";
 
 export const getTokenApproval = async (
   token: Token,
@@ -29,7 +28,7 @@ export const getTokenApproval = async (
     console.log("Approving CELO token");
     try {
       const hash = await writeContract(config, {
-        abi: ABI_CELO_token,
+        abi: ABI_CELO_ERC_20_TOKEN,
         address: token.address as Address,
         functionName: "approve",
         args: [CELO_SWAP_ROUTER_ADDRESS, parseUnits(amount, token.decimals)],
@@ -46,7 +45,7 @@ export const getTokenApproval = async (
 
   try {
     const hash = await writeContract(config, {
-      abi: ERC20_Test,
+      abi: ABI_ERC20_TOKEN,
       address: token.address as Address,
       functionName: "approve",
       args: [MAINNET_SWAP_ROUTER_ADDRESS, parseUnits(amount, token.decimals)],
