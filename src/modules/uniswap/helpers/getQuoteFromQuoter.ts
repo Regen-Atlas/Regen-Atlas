@@ -37,16 +37,10 @@ export async function getQuoteFromQuoter({
     }
   );
 
-  console.log("calldata", calldata);
-
-  console.log("QUOTER_ADDRESSES[chainId]", QUOTER_ADDRESSES[chainId]);
-
   const quoteCallReturnData = await call(config, {
     to: QUOTER_ADDRESSES[chainId] as Address,
     data: calldata as Address,
   });
-
-  console.log("quoteCallReturnData", quoteCallReturnData.data);
 
   if (!quoteCallReturnData.data) {
     throw new Error("No data returned from quote call");

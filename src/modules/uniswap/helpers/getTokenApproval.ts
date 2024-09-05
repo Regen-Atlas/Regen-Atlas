@@ -22,7 +22,6 @@ export const getTokenApproval = async (
   // send transaction to token contract to approve the swap router to spend the token
 
   if (chainId === 42220) {
-    console.log("Approving CELO token");
     try {
       const hash = await writeContract(config, {
         abi: ABI_CELO_ERC_20_TOKEN,
@@ -37,8 +36,6 @@ export const getTokenApproval = async (
     }
     return;
   }
-
-  console.log("Approving ERC20 token");
 
   try {
     const hash = await writeContract(config, {

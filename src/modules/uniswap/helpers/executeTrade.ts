@@ -53,9 +53,7 @@ export async function executeTrade({
           },
         ],
       });
-      console.log("result", result);
       const hash = await writeContract(config, result.request);
-      console.log("hash", hash);
 
       return hash;
     } catch (e) {
@@ -79,14 +77,10 @@ export async function executeTrade({
 
   const methodParameters = SwapRouter.swapCallParameters([trade], options);
 
-  console.log("methodParameters", methodParameters);
-
   const res = await sendTransaction(config, {
     to: MAINNET_SWAP_ROUTER_ADDRESS,
     data: methodParameters.calldata as Address,
   });
-
-  console.log("res", res);
 
   return res;
 }

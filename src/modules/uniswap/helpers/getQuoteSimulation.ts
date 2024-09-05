@@ -41,8 +41,6 @@ export const getQuoteSimulation = async ({
       ],
     });
 
-    console.log("response", response);
-
     if (!response.result || !response.result[0]) {
       throw new Error("Failed to get quote amount");
     }
@@ -62,8 +60,6 @@ export const getQuoteSimulation = async ({
       BigInt(0),
     ],
   });
-
-  console.log("response evm", response);
 
   if (!response.result) {
     throw new Error("Failed to get quote amount");
