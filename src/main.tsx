@@ -16,6 +16,7 @@ import AddAsset from "./AddAsset.tsx";
 import { FiltersStateProvider } from "./context/filters/filtersContext.tsx";
 import AssetDetails from "./AssetDetails/AssetDetails.tsx";
 import { MapStateProvider } from "./context/map/mapContext.tsx";
+import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
         element: <AssetDetails />,
       },
     ],
+  },
+  {
+    path: "/kitchensink",
+    element: <Kitchensink />,
   },
 ]);
 

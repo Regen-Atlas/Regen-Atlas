@@ -11,7 +11,7 @@ export const BC_Biocarbon___McBride: Asset = {
     "BC Biocarbon, established in 2011 and based in British Columbia, Canada, leverages proprietary biorefinery technology to produce biochar and various biogenic carbon products, aiming to significantly boost atmospheric decarbonization. Their McBride facility focuses on transforming biomass affected by wildfires and other degraded forestry materials into long-lasting biochar and other valuable co-products. The company's 'Black Bear Biochar' is notable for being made entirely from forestry residues, featuring a high carbon content of over 90%, low ash content, natural pH levels around 9.4, and varying densities based on particle size.",
   providerId: "toucan",
   providerLink:
-    "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58348",
+    "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58345",
   nativity: "tokenized",
   geolocation: {
     latitude: 53.364714,

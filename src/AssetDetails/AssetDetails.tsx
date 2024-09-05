@@ -6,6 +6,7 @@ import { MapBox } from "../shared/components/MapBox";
 import { useMapState } from "../context/map";
 import Footer from "../Footer";
 import Header from "../Header";
+import { Trading } from "../shared/components/Trading";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
@@ -25,7 +26,9 @@ export default (): React.ReactElement => {
           )}
           {asset && (
             <div className="grid grid-cols-[500px_1fr] gap-4">
-              <AssetCard asset={asset} onPinClicked={() => {}} />
+              <div>
+                <AssetCard asset={asset} onPinClicked={() => {}} />
+              </div>
               <div>
                 <MapBox
                   mapStyle={mapStyle}
