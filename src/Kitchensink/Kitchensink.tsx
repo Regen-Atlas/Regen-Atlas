@@ -56,7 +56,7 @@ export const Kitchensink = (): React.ReactElement => {
     console.log("handleGetQuoteSimulationCelo");
     const quoteAmount = await getQuoteSimulation({
       type: "exactIn",
-      amount: 10,
+      amount: BigInt("1000000"),
       tokenIn: CELO_USDC_TOKEN,
       tokenOut: CELO_CHAR_TOKEN,
       fee: FeeAmount.MEDIUM,
@@ -69,7 +69,7 @@ export const Kitchensink = (): React.ReactElement => {
     console.log("handleGetQuoteSimulationEthereum");
     const quoteAmount = await getQuoteSimulation({
       type: "exactIn",
-      amount: 10,
+      amount: BigInt("10000000"),
       tokenIn: MAINNET_USDC_TOKEN,
       tokenOut: MAINNET_UNI_TOKEN,
       fee: FeeAmount.MEDIUM,

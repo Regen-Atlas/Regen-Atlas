@@ -27,11 +27,6 @@ export async function getQuoteFromQuoter({
   }
   const useQuoterV2 = chainId === 42220;
 
-  console.log("swapRoute", swapRoute);
-  console.log("amount", amount);
-  console.log("token", token);
-  console.log("tradeType", tradeType);
-
   const { calldata } = SwapQuoter.quoteCallParameters(
     swapRoute,
     CurrencyAmount.fromRawAmount(token, amount.toString()),

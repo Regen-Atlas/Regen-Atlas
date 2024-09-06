@@ -43,9 +43,11 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       return;
     }
 
+    const formattedAmount = parseNumber(value, tokenIn.decimals);
+
     const quote = await getQuoteSimulation({
       type: "exactIn",
-      amount,
+      amount: formattedAmount,
       tokenIn,
       tokenOut,
       fee: poolFee,
@@ -64,9 +66,10 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       return;
     }
 
+    const formattedAmount = parseNumber(value, tokenOut.decimals);
     const quote = await getQuoteSimulation({
       type: "exactOut",
-      amount: amount,
+      amount: formattedAmount,
       tokenIn,
       tokenOut,
       fee: poolFee,
@@ -97,28 +100,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     }
 
     const swapRoute = new Route([pool], tokenIn, tokenOut);
-
-    // let quoteAmount;
-    // try {
-    //   if (tradeType === "exactInput") {
-    //     quoteAmount = await getQuoteFromQuoter({
-    //       swapRoute,
-    //       amount: amountIn,
-    //       token: tokenIn,
-    //       tradeType: TradeType.EXACT_INPUT,
-    //     });
-    //   } else {
-    //     quoteAmount = await getQuoteFromQuoter({
-    //       swapRoute,
-    //       amount: amountOut,
-    //       token: tokenOut,
-    //       tradeType: TradeType.EXACT_OUTPUT,
-    //     });
-    //   }
-    // } catch (e) {
-    //   console.error(e);
-    //   return;
-    // }
 
     const amountInWithDecimals = parseUnits(
       amountIn.toString(),

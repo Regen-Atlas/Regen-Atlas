@@ -9,7 +9,6 @@ import {
 } from "../.";
 import { FeeAmount } from "@uniswap/v3-sdk";
 import { Address } from "viem";
-import { parseNumber } from "../../../shared/helpers";
 
 export const getQuoteSimulation = async ({
   type,
@@ -19,16 +18,12 @@ export const getQuoteSimulation = async ({
   fee,
 }: {
   type: "exactIn" | "exactOut";
-  amount: number;
+  amount: bigint;
   tokenIn: Token;
   tokenOut: Token;
   fee: FeeAmount;
 }): Promise<bigint> => {
   const chainId = getChainId(config);
-  const decimals = type === "exactIn" ? tokenIn.decimals : tokenOut.decimals;
-  const formattedAmount = parseNumber(amount.toString(), decimals);
-
-  console.log("formattedAmount", formattedAmount);
 
   if (chainId === 42220) {
     let response;
@@ -41,7 +36,7 @@ export const getQuoteSimulation = async ({
           {
             tokenIn: tokenIn.address as Address,
             tokenOut: tokenOut.address as Address,
-            amount: formattedAmount,
+            amount,
             fee,
             sqrtPriceLimitX96: BigInt("0"),
           },
@@ -56,7 +51,7 @@ export const getQuoteSimulation = async ({
           {
             tokenIn: tokenIn.address as Address,
             tokenOut: tokenOut.address as Address,
-            amountIn: formattedAmount,
+            amountIn: amount,
             fee,
             sqrtPriceLimitX96: BigInt("0"),
           },
@@ -83,7 +78,7 @@ export const getQuoteSimulation = async ({
       tokenIn.address as Address,
       tokenOut.address as Address,
       fee,
-      formattedAmount,
+      amount,
       BigInt(0),
     ],
   });
