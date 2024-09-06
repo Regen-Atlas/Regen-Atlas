@@ -10,6 +10,7 @@ import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 import { ExpandableText } from "../shared/components/ExpandableText";
+import { Link } from "react-router-dom";
 
 interface AssetCardProps {
   className?: string;
@@ -28,6 +29,9 @@ export default ({
   const handleShareClick = async () => {
     setShowShareOptions(true);
   };
+
+  const celoContractAddress: string =
+    asset?.tokens?.find((t) => t.chainId === 42220)?.contractAddress || "";
 
   return (
     <>
@@ -120,13 +124,22 @@ export default ({
             <span className="mr-1">Learn more</span>
             <ArrowUpRight size={16} />
           </a>
-          <a
-            className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
-            href={asset.providerLink}
-            target="_blank"
-          >
-            Buy
-          </a>
+          {!!celoContractAddress ? (
+            <Link
+              className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+              to={`/assets/${asset.id}`}
+            >
+              Buy
+            </Link>
+          ) : (
+            <a
+              className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+              href={asset.providerLink}
+              target="_blank"
+            >
+              Buy
+            </a>
+          )}
         </div>
       </div>
       {showShareOptions && (
