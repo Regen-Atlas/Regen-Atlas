@@ -20,7 +20,7 @@ export const American_BioCarbon_CT: Asset = {
   tokens: [
     {
       chainId: 42220,
-      contractAddress: "",
+      contractAddress: "0x50E85c754929840B58614F48e29C64BC78C58345",
     },
     {
       chainId: 8453,

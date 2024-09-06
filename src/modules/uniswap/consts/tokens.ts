@@ -42,3 +42,8 @@ export const CELO_CHAR_TOKEN = new Token(
   "CHAR",
   "Biochar"
 );
+
+export const CELO_TOKENS_MAP: Record<string, Token> = {
+  [CELO_USDC_TOKEN_ADDRESS]: CELO_USDC_TOKEN,
+  [CELO_CHAR_TOKEN_ADDRESS]: CELO_CHAR_TOKEN,
+};

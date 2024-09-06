@@ -12,6 +12,7 @@ export const MapStyleSwitch = (): React.ReactElement => {
     <div className="h-8 lg:h-[38px] border-[1px] border-white rounded-full bg-cardBackground grid grid-cols-2 p-[2px] lg:text-lg">
       {mapStyles.map((style) => (
         <div
+          key={style}
           onClick={() =>
             dispatch({
               type: "SET_MAP_STYLE",

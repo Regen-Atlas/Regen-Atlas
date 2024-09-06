@@ -6,12 +6,23 @@ import { MapBox } from "../shared/components/MapBox";
 import { useMapState } from "../context/map";
 import Footer from "../Footer";
 import Header from "../Header";
+import {
+  CELO_TOKENS_MAP,
+  CELO_USDC_TOKEN,
+  UniswapTrading,
+} from "../modules/uniswap";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
   const { filteredAssets } = useFiltersState();
   const { mapStyle } = useMapState();
   const asset = filteredAssets.find((a) => a.id === assetId);
+
+  const celoContractAddress: string =
+    asset?.tokens?.find((t) => t.chainId === 42220)?.contractAddress || "";
+
+  const tokenIn = CELO_USDC_TOKEN;
+  const tokenOut = CELO_TOKENS_MAP[celoContractAddress];
 
   return (
     <>
@@ -27,6 +38,13 @@ export default (): React.ReactElement => {
             <div className="grid grid-cols-[500px_1fr] gap-4">
               <div>
                 <AssetCard asset={asset} onPinClicked={() => {}} />
+                {celoContractAddress && tokenOut && (
+                  <div className="p-4 flex justify-center">
+                    <div className="max-w-[340px]">
+                      <UniswapTrading tokenIn={tokenIn} tokenOut={tokenOut} />
+                    </div>
+                  </div>
+                )}
               </div>
               <div>
                 <MapBox
