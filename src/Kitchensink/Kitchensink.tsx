@@ -23,7 +23,7 @@ import {
 } from "../modules/uniswap";
 import { useAccount, useChainId } from "wagmi";
 import Header from "../Header";
-import { Percent } from "@uniswap/sdk-core";
+import { Percent, TradeType } from "@uniswap/sdk-core";
 import { config } from "../wagmi";
 import { Address } from "viem";
 import {
@@ -44,18 +44,19 @@ export const Kitchensink = (): React.ReactElement => {
 
   const handleTokenApprovalOnCelo = async () => {
     console.log("handleTokenApprovalOnCelo");
-    await getTokenApproval(CELO_USDC_TOKEN, "0.2");
+    await getTokenApproval(CELO_USDC_TOKEN, BigInt("20000"));
   };
 
   const handleTokenApprovalOnEthereum = async () => {
     console.log("handleTokenApprovalOnEthereum");
-    await getTokenApproval(MAINNET_USDC_TOKEN, "1000");
+    await getTokenApproval(MAINNET_USDC_TOKEN, BigInt("1000000"));
   };
 
   const handleGetQuoteSimulationCelo = async () => {
     console.log("handleGetQuoteSimulationCelo");
     const quoteAmount = await getQuoteSimulation({
-      amountIn: 10,
+      type: "exactIn",
+      amount: 10,
       tokenIn: CELO_USDC_TOKEN,
       tokenOut: CELO_CHAR_TOKEN,
       fee: FeeAmount.MEDIUM,
@@ -67,7 +68,8 @@ export const Kitchensink = (): React.ReactElement => {
   const handleGetQuoteSimulationEthereum = async () => {
     console.log("handleGetQuoteSimulationEthereum");
     const quoteAmount = await getQuoteSimulation({
-      amountIn: 10,
+      type: "exactIn",
+      amount: 10,
       tokenIn: MAINNET_USDC_TOKEN,
       tokenOut: MAINNET_UNI_TOKEN,
       fee: FeeAmount.MEDIUM,
@@ -116,8 +118,9 @@ export const Kitchensink = (): React.ReactElement => {
     const swapRoute = new Route([pool], CELO_USDC_TOKEN, CELO_CHAR_TOKEN);
     const quote = await getQuoteFromQuoter({
       swapRoute,
-      amountIn: 10,
-      tokenIn: CELO_USDC_TOKEN,
+      amount: BigInt("100000"),
+      token: CELO_USDC_TOKEN,
+      tradeType: TradeType.EXACT_INPUT,
     });
 
     console.log("Quote from Quoter on CELO: ", quote);
@@ -139,8 +142,9 @@ export const Kitchensink = (): React.ReactElement => {
     const swapRoute = new Route([pool], MAINNET_USDC_TOKEN, MAINNET_UNI_TOKEN);
     const quote = await getQuoteFromQuoter({
       swapRoute,
-      amountIn: 10,
-      tokenIn: MAINNET_USDC_TOKEN,
+      amount: BigInt("1000000"),
+      token: MAINNET_USDC_TOKEN,
+      tradeType: TradeType.EXACT_INPUT,
     });
 
     console.log("Quote from Quoter on Ethereum: ", quote);
@@ -163,8 +167,9 @@ export const Kitchensink = (): React.ReactElement => {
 
     const quoteAmount = await getQuoteFromQuoter({
       swapRoute,
-      amountIn: 40,
-      tokenIn: MAINNET_USDC_TOKEN,
+      amount: BigInt("40000000"),
+      token: MAINNET_USDC_TOKEN,
+      tradeType: TradeType.EXACT_INPUT,
     });
 
     if (!quoteAmount) {
@@ -176,7 +181,7 @@ export const Kitchensink = (): React.ReactElement => {
       swapRoute: swapRoute,
       tokenIn: MAINNET_USDC_TOKEN,
       tokenOut: MAINNET_UNI_TOKEN,
-      amountIn: parseNumber("40", MAINNET_USDC_TOKEN.decimals).toString(),
+      amountIn: parseNumber("40", MAINNET_USDC_TOKEN.decimals),
       quoteAmount,
     });
 
@@ -201,8 +206,9 @@ export const Kitchensink = (): React.ReactElement => {
 
     const quoteAmount = await getQuoteFromQuoter({
       swapRoute,
-      amountIn: 0.01,
-      tokenIn: CELO_USDC_TOKEN,
+      amount: BigInt("10000"),
+      token: CELO_USDC_TOKEN,
+      tradeType: TradeType.EXACT_INPUT,
     });
 
     if (!quoteAmount) {
@@ -214,7 +220,7 @@ export const Kitchensink = (): React.ReactElement => {
       swapRoute: swapRoute,
       tokenIn: CELO_USDC_TOKEN,
       tokenOut: CELO_CHAR_TOKEN,
-      amountIn: parseNumber("0.01", CELO_USDC_TOKEN.decimals).toString(),
+      amountIn: parseNumber("0.01", CELO_USDC_TOKEN.decimals),
       quoteAmount,
     });
 

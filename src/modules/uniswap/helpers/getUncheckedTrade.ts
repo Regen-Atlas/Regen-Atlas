@@ -11,12 +11,12 @@ export const getUncheckedTrade = ({
   swapRoute: Route<Token, Token>;
   tokenIn: Token;
   tokenOut: Token;
-  amountIn: string;
+  amountIn: bigint;
   quoteAmount: bigint;
 }) => {
   const uncheckedTrade = Trade.createUncheckedTrade({
     route: swapRoute,
-    inputAmount: CurrencyAmount.fromRawAmount(tokenIn, amountIn),
+    inputAmount: CurrencyAmount.fromRawAmount(tokenIn, amountIn.toString()),
     outputAmount: CurrencyAmount.fromRawAmount(
       tokenOut,
       quoteAmount.toString()

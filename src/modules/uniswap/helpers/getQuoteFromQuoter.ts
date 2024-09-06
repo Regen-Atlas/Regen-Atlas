@@ -8,16 +8,17 @@ import { Route, SwapQuoter } from "@uniswap/v3-sdk";
 import { Address, decodeAbiParameters, parseAbiParameters } from "viem";
 import { call, getChainId } from "@wagmi/core";
 import { config } from "../../../wagmi";
-import { parseNumber } from "../../../shared/helpers/decimals";
 
 export async function getQuoteFromQuoter({
   swapRoute,
-  amountIn,
-  tokenIn,
+  amount,
+  token,
+  tradeType,
 }: {
   swapRoute: Route<Token, Token>;
-  amountIn: number;
-  tokenIn: Token;
+  amount: bigint;
+  token: Token;
+  tradeType: TradeType;
 }): Promise<bigint> {
   let chainId = getChainId(config);
   // @TODO: Remove this when we have a proper chainId for localhost
@@ -25,13 +26,16 @@ export async function getQuoteFromQuoter({
     chainId = 1;
   }
   const useQuoterV2 = chainId === 42220;
+
+  console.log("swapRoute", swapRoute);
+  console.log("amount", amount);
+  console.log("token", token);
+  console.log("tradeType", tradeType);
+
   const { calldata } = SwapQuoter.quoteCallParameters(
     swapRoute,
-    CurrencyAmount.fromRawAmount(
-      tokenIn,
-      parseNumber(amountIn.toString(), tokenIn.decimals).toString()
-    ),
-    TradeType.EXACT_INPUT,
+    CurrencyAmount.fromRawAmount(token, amount.toString()),
+    tradeType,
     {
       useQuoterV2,
     }
@@ -46,10 +50,12 @@ export async function getQuoteFromQuoter({
     throw new Error("No data returned from quote call");
   }
 
-  const amount = decodeAbiParameters(
+  const quoteAmount = decodeAbiParameters(
     parseAbiParameters("uint256"),
     quoteCallReturnData.data
   )[0];
 
-  return amount;
+  console.log("quoteAmount", quoteAmount);
+
+  return quoteAmount;
 }

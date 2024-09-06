@@ -1,4 +1,4 @@
-import { ChainId, Token } from "@uniswap/sdk-core";
+import { ChainId, Token, TradeType } from "@uniswap/sdk-core";
 import { Route, SwapOptions, SwapRouter } from "@uniswap/v3-sdk";
 import {
   sendTransaction,
@@ -6,53 +6,131 @@ import {
   writeContract,
   getChainId,
 } from "@wagmi/core";
+import { Address } from "viem";
 import { config } from "../../../wagmi";
 import {
   CELO_SWAP_ROUTER_ADDRESS,
   MAINNET_SWAP_ROUTER_ADDRESS,
   ABI_CELO_ROUTER,
+  getQuoteFromQuoter,
 } from "../.";
-import { Address } from "viem";
 import { getUncheckedTrade } from "./getUncheckedTrade";
+import {
+  decreaseByPercent,
+  increaseByPercent,
+} from "../../../shared/helpers/percent";
 
 export async function executeTrade({
   options,
   tokenIn,
   tokenOut,
   amountIn,
+  amountOut,
   recipient,
-  quoteAmount,
   swapRoute,
+  type,
 }: {
   options: SwapOptions;
   tokenIn: Token;
   tokenOut: Token;
-  amountIn: string;
+  amountIn: bigint;
+  amountOut: bigint;
   recipient: Address;
-  quoteAmount: bigint;
   swapRoute: Route<Token, Token>;
+  type: "exactInput" | "exactOutput";
 }): Promise<Address> {
   const chainId = getChainId(config);
 
+  let quotedAmountIn;
+  let quotedAmountOut;
+  try {
+    if (type === "exactInput") {
+      // This quote represent the amount of tokenOut that will be received
+      quotedAmountOut = await getQuoteFromQuoter({
+        swapRoute,
+        amount: amountIn,
+        token: tokenIn,
+        tradeType: TradeType.EXACT_INPUT,
+      });
+    } else {
+      // This quote represent the amount of tokenIn that will be spent
+      quotedAmountIn = await getQuoteFromQuoter({
+        swapRoute,
+        amount: amountOut,
+        token: tokenOut,
+        tradeType: TradeType.EXACT_OUTPUT,
+      });
+    }
+  } catch (e) {
+    throw new Error(`Failed to get quote from quoter: ${e}`);
+  }
+
   if (chainId === ChainId.CELO) {
     try {
-      const result = await simulateContract(config, {
-        abi: ABI_CELO_ROUTER,
-        address: CELO_SWAP_ROUTER_ADDRESS,
-        functionName: "exactInputSingle",
-        args: [
-          {
-            tokenIn: tokenIn.address as Address,
-            tokenOut: tokenOut.address as Address,
-            fee: 3000,
-            recipient,
-            deadline: Math.floor(Date.now() / 1000) + 60 * 20,
-            amountIn: BigInt(amountIn),
-            amountOutMinimum: BigInt(0),
-            sqrtPriceLimitX96: BigInt(0),
-          },
-        ],
-      });
+      let result: any;
+      if (type === "exactInput") {
+        if (!quotedAmountOut) {
+          throw new Error("No quoted amount out");
+        }
+
+        console.log("exactInputSingle");
+        const amountOutMinimum = decreaseByPercent(
+          BigInt(quotedAmountOut),
+          options.slippageTolerance
+        );
+        console.log("amountOutMinimum", amountOutMinimum);
+        result = await simulateContract(config, {
+          abi: ABI_CELO_ROUTER,
+          address: CELO_SWAP_ROUTER_ADDRESS,
+          functionName: "exactInputSingle",
+          args: [
+            {
+              tokenIn: tokenIn.address as Address,
+              tokenOut: tokenOut.address as Address,
+              fee: 3000, // @TODO: get fee from pool
+              recipient,
+              deadline: Math.floor(Date.now() / 1000) + 60 * 20,
+              amountIn: BigInt(amountIn),
+              amountOutMinimum,
+              sqrtPriceLimitX96: BigInt(0),
+            },
+          ],
+        });
+      } else {
+        if (!quotedAmountIn) {
+          throw new Error("No quoted amount in");
+        }
+        const amountInMaximum = increaseByPercent(
+          BigInt(quotedAmountIn),
+          options.slippageTolerance
+        );
+
+        console.log("amountInMaximum", amountInMaximum);
+
+        result = await simulateContract(config, {
+          abi: ABI_CELO_ROUTER,
+          address: CELO_SWAP_ROUTER_ADDRESS,
+          functionName: "exactOutputSingle",
+          args: [
+            {
+              tokenIn: tokenIn.address as Address,
+              tokenOut: tokenOut.address as Address,
+              fee: 3000,
+              recipient,
+              amountOut: BigInt(amountOut),
+              amountInMaximum,
+              sqrtPriceLimitX96: BigInt(0),
+            },
+          ],
+        });
+      }
+
+      console.log("result", result);
+
+      if (!result) {
+        throw new Error("No data returned from quote call");
+      }
+
       const hash = await writeContract(config, result.request);
 
       return hash;
@@ -61,14 +139,18 @@ export async function executeTrade({
     }
   }
 
+  // @TODO: Implement properly for other chains
   let trade;
   try {
+    if (!quotedAmountOut) {
+      throw new Error("No quoted amount in or out");
+    }
     trade = getUncheckedTrade({
       swapRoute,
       tokenIn,
       tokenOut,
       amountIn,
-      quoteAmount,
+      quoteAmount: quotedAmountOut,
     });
   } catch (e) {
     console.error(e);

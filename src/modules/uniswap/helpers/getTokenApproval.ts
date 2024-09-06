@@ -5,13 +5,13 @@ import {
   waitForTransactionReceipt,
 } from "@wagmi/core";
 import { config } from "../../../wagmi";
-import { Address, parseUnits } from "viem";
+import { Address } from "viem";
 import { CELO_SWAP_ROUTER_ADDRESS, MAINNET_SWAP_ROUTER_ADDRESS } from "..";
 import { ABI_ERC20_TOKEN, ABI_CELO_ERC_20_TOKEN } from "../../../shared/abi";
 
 export const getTokenApproval = async (
   token: Token,
-  amount: string
+  amountWithDecimals: bigint // This is amount with decimals
 ): Promise<void> => {
   let chainId = getChainId(config);
   // @TODO: Remove this when we have a proper chainId for localhost
@@ -27,7 +27,7 @@ export const getTokenApproval = async (
         abi: ABI_CELO_ERC_20_TOKEN,
         address: token.address as Address,
         functionName: "approve",
-        args: [CELO_SWAP_ROUTER_ADDRESS, parseUnits(amount, token.decimals)],
+        args: [CELO_SWAP_ROUTER_ADDRESS, amountWithDecimals],
       });
 
       await waitForTransactionReceipt(config, { hash });
@@ -42,7 +42,7 @@ export const getTokenApproval = async (
       abi: ABI_ERC20_TOKEN,
       address: token.address as Address,
       functionName: "approve",
-      args: [MAINNET_SWAP_ROUTER_ADDRESS, parseUnits(amount, token.decimals)],
+      args: [MAINNET_SWAP_ROUTER_ADDRESS, amountWithDecimals],
     });
     await waitForTransactionReceipt(config, { hash });
   } catch (e) {

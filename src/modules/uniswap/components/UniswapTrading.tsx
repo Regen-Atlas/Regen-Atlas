@@ -8,10 +8,11 @@ import {
   getQuoteSimulation,
   executeTrade,
   getPool,
-  getQuoteFromQuoter,
   getTokenApproval,
   UNISWAP_POOLS_MAP,
 } from "../.";
+import { increaseByPercent } from "../../../shared/helpers/percent";
+import { parseUnits } from "viem";
 
 interface UniswapTradingProps {
   tokenIn: Token;
@@ -23,28 +24,69 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   tokenOut,
 }) => {
   const [amountIn, setAmountIn] = useState("");
-  const [quoteAmount, setQuoteAmount] = useState("");
+  const [amountOut, setAmountOut] = useState("");
   const [transactionHash, setTransactionHash] = useState("");
+  const [tradeType, setTradeType] = useState<"exactInput" | "exactOutput">(
+    "exactInput"
+  );
   const { address } = useAccount();
 
   const { address: poolAddress, fee: poolFee } =
     UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
 
-  const handleInputChange = async (value: string) => {
+  const handleAmountInChange = async (value: string) => {
     setAmountIn(value);
+    const amount = parseFloat(value);
+
+    if (isNaN(amount) || amount === 0) {
+      setAmountOut("");
+      return;
+    }
+
     const quote = await getQuoteSimulation({
-      amountIn: parseFloat(value),
+      type: "exactIn",
+      amount,
       tokenIn,
       tokenOut,
       fee: poolFee,
     });
-    setQuoteAmount(formatNumber(quote, tokenOut.decimals));
+
+    setTradeType("exactInput");
+    setAmountOut(formatNumber(quote, tokenOut.decimals));
+  };
+
+  const handleAmountOutChange = async (value: string) => {
+    setAmountOut(value);
+    const amount = parseFloat(value);
+
+    if (isNaN(amount) || amount === 0) {
+      setAmountIn("");
+      return;
+    }
+
+    const quote = await getQuoteSimulation({
+      type: "exactOut",
+      amount: amount,
+      tokenIn,
+      tokenOut,
+      fee: poolFee,
+    });
+
+    setTradeType("exactOutput");
+    setAmountIn(formatNumber(quote, tokenIn.decimals));
   };
 
   const handleBuy = async () => {
     if (!amountIn || !address) {
       return;
     }
+
+    const options: SwapOptions = {
+      slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
+      deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
+      recipient: address,
+      sqrtPriceLimitX96: 0,
+    };
 
     let pool;
     try {
@@ -56,40 +98,53 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
 
     const swapRoute = new Route([pool], tokenIn, tokenOut);
 
-    let quoteAmount;
+    // let quoteAmount;
+    // try {
+    //   if (tradeType === "exactInput") {
+    //     quoteAmount = await getQuoteFromQuoter({
+    //       swapRoute,
+    //       amount: amountIn,
+    //       token: tokenIn,
+    //       tradeType: TradeType.EXACT_INPUT,
+    //     });
+    //   } else {
+    //     quoteAmount = await getQuoteFromQuoter({
+    //       swapRoute,
+    //       amount: amountOut,
+    //       token: tokenOut,
+    //       tradeType: TradeType.EXACT_OUTPUT,
+    //     });
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    //   return;
+    // }
+
+    const amountInWithDecimals = parseUnits(
+      amountIn.toString(),
+      tokenIn.decimals
+    );
     try {
-      quoteAmount = await getQuoteFromQuoter({
-        swapRoute,
-        amountIn: parseFloat(amountIn),
-        tokenIn,
-      });
+      const approvalAmount: bigint =
+        tradeType === "exactInput"
+          ? amountInWithDecimals
+          : increaseByPercent(amountInWithDecimals, options.slippageTolerance);
+
+      await getTokenApproval(tokenIn, approvalAmount);
     } catch (e) {
       console.error(e);
       return;
     }
-
-    try {
-      await getTokenApproval(tokenIn, amountIn);
-    } catch (e) {
-      console.error(e);
-      return;
-    }
-
-    const options: SwapOptions = {
-      slippageTolerance: new Percent(100, 10000), // 50 bips, or 0.50%
-      deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
-      recipient: address,
-      sqrtPriceLimitX96: 0,
-    };
 
     const res = await executeTrade({
       options,
       tokenIn,
       tokenOut,
-      amountIn: parseNumber(amountIn, tokenIn.decimals).toString(),
+      amountIn: amountInWithDecimals,
+      amountOut: parseNumber(amountOut, tokenOut.decimals),
       recipient: address,
-      quoteAmount,
       swapRoute,
+      type: tradeType,
     });
 
     if (res) {
@@ -104,14 +159,14 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
         placeholder="0"
         token={tokenIn}
         value={amountIn}
-        onChange={(value) => handleInputChange(value)}
+        onChange={(value) => handleAmountInChange(value)}
       />
       <UniswapTokenInput
         type="buy"
         placeholder="0"
         token={tokenOut}
-        value={quoteAmount}
-        onChange={() => {}}
+        value={amountOut}
+        onChange={(value) => handleAmountOutChange(value)}
       />
       <button className="button" onClick={handleBuy}>
         BUY
