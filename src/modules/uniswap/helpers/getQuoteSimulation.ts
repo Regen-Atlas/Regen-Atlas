@@ -1,5 +1,5 @@
 import { Token } from "@uniswap/sdk-core";
-import { simulateContract, getChainId } from "@wagmi/core";
+import { getPublicClient, simulateContract, getChainId } from "@wagmi/core";
 import { config } from "../../../wagmi";
 import {
   CELO_QUOTER_CONTRACT_ADDRESS,
@@ -24,11 +24,17 @@ export const getQuoteSimulation = async ({
   fee: FeeAmount;
 }): Promise<bigint> => {
   const chainId = getChainId(config);
+  // @TODO this might not be the best way to get the client. Check when we hve multiple chains and wallet is not connected
+  const publicClient = getPublicClient(config);
+
+  if (!publicClient) {
+    throw new Error("Failed to get client");
+  }
 
   if (chainId === 42220) {
     let response;
     if (type === "exactOut") {
-      response = await simulateContract(config, {
+      response = await publicClient.simulateContract({
         abi: ABI_CELO_QUOTER,
         address: CELO_QUOTER_CONTRACT_ADDRESS,
         functionName: "quoteExactOutputSingle",
@@ -43,7 +49,7 @@ export const getQuoteSimulation = async ({
         ],
       });
     } else {
-      response = await simulateContract(config, {
+      response = await publicClient.simulateContract({
         abi: ABI_CELO_QUOTER,
         address: CELO_QUOTER_CONTRACT_ADDRESS,
         functionName: "quoteExactInputSingle",

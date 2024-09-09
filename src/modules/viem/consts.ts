@@ -1,6 +1,5 @@
-import { celo, mainnet } from "viem/chains";
+import { celo } from "viem/chains";
 import { IChainRpcUrls } from "./types";
 export const CHAIN_RPC_URLS: IChainRpcUrls = {
-  [mainnet.id]: "https://rpc-mainnet.maticvigil.com",
-  [celo.id]: "https://forno.celo.org",
+  [celo.id]: `https://celo-mainnet.infura.io/v3/${import.meta.env.VITE_INFURA_API_KEY}`,
 };

@@ -5,6 +5,8 @@ interface UniswapTokenInputProps {
   value: string;
   placeholder: string;
   token: Token;
+  formattedBalance: string;
+  displayBalance: boolean;
   onChange: (value: string) => void;
 }
 
@@ -13,6 +15,8 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
   value,
   placeholder,
   token,
+  formattedBalance,
+  displayBalance,
   onChange,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +42,18 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
           value={value}
         />
 
-        <div className="uppercase flex gap-2 items-center flex-shrink-0">
-          <img
-            src={`/tokens/${token.symbol?.toUpperCase()}.svg`}
-            alt={token.symbol}
-            className="w-8 h-8"
-          />
-          <span className="text-xl font-bold">{token.symbol}</span>
+        <div className="flex-shrink-0">
+          <div className="flex gap-2 items-center">
+            <img
+              src={`/tokens/${token.symbol?.toUpperCase()}.svg`}
+              alt={token.symbol}
+              className="w-8 h-8"
+            />
+            <span className="text-xl font-bold uppercase">{token.symbol}</span>
+          </div>
+          {displayBalance && (
+            <div className="text-xs">Balance: {formattedBalance}</div>
+          )}
         </div>
       </div>
     </div>

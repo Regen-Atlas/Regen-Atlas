@@ -68,9 +68,10 @@ body {
 .button-gray:hover {
   @apply bg-gray-600;
 }
-
+.button-gradient:disabled,
 .button:disabled {
-  @apply bg-gray-400;
+  @apply !bg-gray-400 text-gray-100;
+  background: none;
 }
 
 body.scrolled .site-header {

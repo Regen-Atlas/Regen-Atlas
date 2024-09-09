@@ -1,18 +1,14 @@
 import { Token } from "@uniswap/sdk-core";
-import {
-  writeContract,
-  getChainId,
-  waitForTransactionReceipt,
-} from "@wagmi/core";
+import { writeContract, getChainId } from "@wagmi/core";
 import { config } from "../../../wagmi";
-import { Address } from "viem";
+import { Address, Hash } from "viem";
 import { CELO_SWAP_ROUTER_ADDRESS, MAINNET_SWAP_ROUTER_ADDRESS } from "..";
 import { ABI_ERC20_TOKEN, ABI_CELO_ERC_20_TOKEN } from "../../../shared/abi";
 
 export const getTokenApproval = async (
   token: Token,
   amountWithDecimals: bigint // This is amount with decimals
-): Promise<void> => {
+): Promise<Hash> => {
   let chainId = getChainId(config);
   // @TODO: Remove this when we have a proper chainId for localhost
   if (chainId === 31337) {
@@ -30,11 +26,10 @@ export const getTokenApproval = async (
         args: [CELO_SWAP_ROUTER_ADDRESS, amountWithDecimals],
       });
 
-      await waitForTransactionReceipt(config, { hash });
+      return hash;
     } catch (e) {
       throw new Error(`Error approving token spending on CELO: ${e}`);
     }
-    return;
   }
 
   try {
@@ -44,7 +39,7 @@ export const getTokenApproval = async (
       functionName: "approve",
       args: [MAINNET_SWAP_ROUTER_ADDRESS, amountWithDecimals],
     });
-    await waitForTransactionReceipt(config, { hash });
+    return hash;
   } catch (e) {
     throw new Error(`Error approving ERC20 token spending: ${e}`);
   }

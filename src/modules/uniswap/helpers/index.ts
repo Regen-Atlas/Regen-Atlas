@@ -5,3 +5,4 @@ export * from "./getQuoteFromQuoter";
 export * from "./getPool";
 export * from "./getTokenApproval";
 export * from "./getPoolAddress";
+export * from "./getTokenBalance";

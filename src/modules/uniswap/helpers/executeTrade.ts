@@ -29,6 +29,7 @@ export async function executeTrade({
   recipient,
   swapRoute,
   type,
+  poolFee,
 }: {
   options: SwapOptions;
   tokenIn: Token;
@@ -38,6 +39,7 @@ export async function executeTrade({
   recipient: Address;
   swapRoute: Route<Token, Token>;
   type: "exactInput" | "exactOutput";
+  poolFee: number;
 }): Promise<Address> {
   const chainId = getChainId(config);
 
@@ -73,12 +75,10 @@ export async function executeTrade({
           throw new Error("No quoted amount out");
         }
 
-        console.log("exactInputSingle");
         const amountOutMinimum = decreaseByPercent(
           BigInt(quotedAmountOut),
           options.slippageTolerance
         );
-        console.log("amountOutMinimum", amountOutMinimum);
         result = await simulateContract(config, {
           abi: ABI_CELO_ROUTER,
           address: CELO_SWAP_ROUTER_ADDRESS,
@@ -87,7 +87,7 @@ export async function executeTrade({
             {
               tokenIn: tokenIn.address as Address,
               tokenOut: tokenOut.address as Address,
-              fee: 3000, // @TODO: get fee from pool
+              fee: poolFee,
               recipient,
               deadline: Math.floor(Date.now() / 1000) + 60 * 20,
               amountIn: BigInt(amountIn),
@@ -105,8 +105,6 @@ export async function executeTrade({
           options.slippageTolerance
         );
 
-        console.log("amountInMaximum", amountInMaximum);
-
         result = await simulateContract(config, {
           abi: ABI_CELO_ROUTER,
           address: CELO_SWAP_ROUTER_ADDRESS,
@@ -115,7 +113,7 @@ export async function executeTrade({
             {
               tokenIn: tokenIn.address as Address,
               tokenOut: tokenOut.address as Address,
-              fee: 3000,
+              fee: poolFee,
               recipient,
               amountOut: BigInt(amountOut),
               amountInMaximum,
@@ -124,8 +122,6 @@ export async function executeTrade({
           ],
         });
       }
-
-      console.log("result", result);
 
       if (!result) {
         throw new Error("No data returned from quote call");
