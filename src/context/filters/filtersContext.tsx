@@ -1,8 +1,8 @@
 import React, { createContext, useReducer, ReactNode, Dispatch } from "react";
-import { AssetTypeFilters, Filters } from "../../shared/types/filters";
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 import { filterAssets } from "./filterAssets";
 import { ALL_ASSETS } from "../../data";
+import { AssetTypeFilters, Filters } from "../../modules/filters";
 
 interface State {
   filters: Filters;

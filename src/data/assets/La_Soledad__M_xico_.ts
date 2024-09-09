@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const La_Soledad__M_xico_: Asset = {
   cid: "",
@@ -19,12 +19,12 @@ export const La_Soledad__M_xico_: Asset = {
   tokens: [
     {
       chainId: 42220,
-      contractAddress: "",
+      contractAddress: "0x9995cc8F20Db5896943Afc8eE0ba463259c931ed",
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Chiapas",
+    country: "MX",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fcoffee.jpg?alt=media",

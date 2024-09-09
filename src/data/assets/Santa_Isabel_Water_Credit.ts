@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Santa_Isabel_Water_Credit: Asset = {
   cid: "",
@@ -27,13 +27,13 @@ export const Santa_Isabel_Water_Credit: Asset = {
       contractAddress: "",
     },
     {
-      chainId: 1300,
+      chainId: "algorand-mainnet",
       contractAddress: "",
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Chihuahua",
+    country: "MX",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fdrop-of-water-578897_1280.jpeg?alt=media",

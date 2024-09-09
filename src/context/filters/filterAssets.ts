@@ -1,5 +1,5 @@
-import { Asset } from "../../shared/types";
-import { Filters } from "../../shared/types/filters";
+import { Asset } from "../../modules/assets";
+import { Filters } from "../../modules/filters";
 
 export const filterAssets = (assets: Asset[], filters: Filters): Asset[] => {
   const {

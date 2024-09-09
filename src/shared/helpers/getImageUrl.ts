@@ -1,4 +1,4 @@
-import { Asset } from "../types";
+import { Asset } from "../../modules/assets";
 import { getIpfsLink } from "./getIpfsLink";
 
 export const getImageUrl = (asset: Asset): string => {
