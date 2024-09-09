@@ -8,7 +8,6 @@ import Footer from "../Footer";
 import Header from "../Header";
 import {
   CELO_TOKENS_MAP,
-  CELO_USDC_TOKEN,
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
