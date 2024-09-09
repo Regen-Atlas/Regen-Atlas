@@ -43,15 +43,20 @@ export function useTokenBalance({
     throw new Error("Token balance data not found");
   }
 
-  if (result.data.value < parseUnits("0.001", result.data.decimals)) {
-    return {
-      value: result.data.value,
-      formattedBalance: "<0.001",
-    };
+  let formattedBalance = formatNumber(
+    result.data.value,
+    result.data.decimals,
+    3
+  );
+
+  if (result.data.value === BigInt(0)) {
+    formattedBalance = "0";
+  } else if (result.data.value < parseUnits("0.001", result.data.decimals)) {
+    formattedBalance = "<0.001";
   }
 
   return {
     value: result.data.value,
-    formattedBalance: formatNumber(result.data.value, result.data.decimals, 3),
+    formattedBalance,
   };
 }
