@@ -1,4 +1,5 @@
 import { ChainId, Token } from "@uniswap/sdk-core";
+import { Address } from "viem";
 
 // Token Addresses
 export const CELO_USDC_TOKEN_ADDRESS =
@@ -9,6 +10,13 @@ export const MAINNET_USDC_TOKEN_ADDRESS =
   "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 export const MAINNET_UNI_TOKEN_ADDRESS =
   "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+
+export const CELO_ETHIX_TOKEN_ADDRESS =
+  "0x9995cc8F20Db5896943Afc8eE0ba463259c931ed";
+export const CELO_CUSD_TOKEN_ADDRESS =
+  "0x765DE816845861e75A25fCA122bb6898B8B1282a";
+export const CELO_PLASTIK_TOKEN_ADDRESS =
+  "0x27cd006548dF7C8c8e9fdc4A67fa05C2E3CA5CF9";
 
 // Token Instances
 export const MAINNET_USDC_TOKEN = new Token(
@@ -43,7 +51,40 @@ export const CELO_CHAR_TOKEN = new Token(
   "Biochar"
 );
 
+export const CELO_ETHIX_TOKEN = new Token(
+  ChainId.CELO,
+  CELO_ETHIX_TOKEN_ADDRESS,
+  18,
+  "ETHIX",
+  "Ethix"
+);
+
+export const CELO_CUSD_TOKEN = new Token(
+  ChainId.CELO,
+  CELO_CUSD_TOKEN_ADDRESS,
+  18,
+  "cUSD",
+  "Celo Dollar"
+);
+
+export const CELO_PLASTIK_TOKEN = new Token(
+  ChainId.CELO,
+  CELO_PLASTIK_TOKEN_ADDRESS,
+  9,
+  "PLASTIK",
+  "Plastik"
+);
+
 export const CELO_TOKENS_MAP: Record<string, Token> = {
   [CELO_USDC_TOKEN_ADDRESS]: CELO_USDC_TOKEN,
   [CELO_CHAR_TOKEN_ADDRESS]: CELO_CHAR_TOKEN,
+  [CELO_ETHIX_TOKEN_ADDRESS]: CELO_ETHIX_TOKEN,
+  [CELO_CUSD_TOKEN_ADDRESS]: CELO_CUSD_TOKEN,
+  [CELO_PLASTIK_TOKEN_ADDRESS]: CELO_PLASTIK_TOKEN,
+};
+
+export const TOKEN_POOL_TOKEN_MAP: Record<Address, Token> = {
+  [CELO_ETHIX_TOKEN_ADDRESS]: CELO_CUSD_TOKEN,
+  [CELO_PLASTIK_TOKEN_ADDRESS]: CELO_CUSD_TOKEN,
+  [CELO_CHAR_TOKEN_ADDRESS]: CELO_USDC_TOKEN,
 };

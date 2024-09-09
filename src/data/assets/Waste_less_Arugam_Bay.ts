@@ -20,7 +20,7 @@ export const Waste_less_Arugam_Bay: Asset = {
   tokens: [
     {
       chainId: 42220,
-      contractAddress: "",
+      contractAddress: "0x27cd006548dF7C8c8e9fdc4A67fa05C2E3CA5CF9",
     },
   ],
   physicalAddress: {

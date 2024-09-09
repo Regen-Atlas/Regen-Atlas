@@ -9,8 +9,10 @@ import Header from "../Header";
 import {
   CELO_TOKENS_MAP,
   CELO_USDC_TOKEN,
+  TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
+import { Address } from "viem";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
@@ -18,11 +20,16 @@ export default (): React.ReactElement => {
   const { mapStyle } = useMapState();
   const asset = filteredAssets.find((a) => a.id === assetId);
 
-  const celoContractAddress: string =
-    asset?.tokens?.find((t) => t.chainId === 42220)?.contractAddress || "";
+  const celoContractAddress: Address | undefined = asset?.tokens?.find(
+    (t) => t.chainId === 42220
+  )?.contractAddress as Address;
 
-  const tokenIn = CELO_USDC_TOKEN;
-  const tokenOut = CELO_TOKENS_MAP[celoContractAddress];
+  const tokenIn = celoContractAddress
+    ? TOKEN_POOL_TOKEN_MAP[celoContractAddress]
+    : "";
+  const tokenOut = celoContractAddress
+    ? CELO_TOKENS_MAP[celoContractAddress]
+    : "";
 
   return (
     <>
@@ -35,12 +42,16 @@ export default (): React.ReactElement => {
             </div>
           )}
           {asset && (
-            <div className="grid grid-cols-[500px_1fr] gap-4">
+            <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
               <div>
-                <AssetCard asset={asset} onPinClicked={() => {}} />
-                {celoContractAddress && tokenOut && (
-                  <div className="p-4 flex justify-center">
-                    <div className="max-w-[340px]">
+                <AssetCard
+                  asset={asset}
+                  onPinClicked={() => {}}
+                  showBuyButton={!celoContractAddress}
+                />
+                {celoContractAddress && tokenIn && tokenOut && (
+                  <div className="flex justify-center mt-4">
+                    <div className="w-full">
                       <UniswapTrading tokenIn={tokenIn} tokenOut={tokenOut} />
                     </div>
                   </div>

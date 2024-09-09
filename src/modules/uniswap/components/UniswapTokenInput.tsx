@@ -33,6 +33,14 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
     }
   };
 
+  const symbol = token.symbol?.toUpperCase();
+
+  if (!symbol) {
+    return <div>Invalid token</div>;
+  }
+
+  const tokenLogo = `${symbol}.${["PLASTIK", "CUSD"].includes(symbol) ? "png" : "svg"}`;
+
   return (
     <div className="grid p-4 rounded-lg border-2 border-white bg-cardBackground">
       <span className="text-sm capitalize">{type}</span>
@@ -49,7 +57,7 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
           <div className="flex gap-2 items-center">
             <div className="relative">
               <img
-                src={`/tokens/${token.symbol?.toUpperCase()}.svg`}
+                src={`/tokens/${tokenLogo}`}
                 alt={token.symbol}
                 className="w-8 h-8"
               />
@@ -69,7 +77,9 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
             <span className="text-xl font-bold uppercase">{token.symbol}</span>
           </div>
           {displayBalance && (
-            <div className="text-xs">Balance: {formattedBalance}</div>
+            <div className="text-xs text-right mt-1">
+              Balance: {formattedBalance}
+            </div>
           )}
         </div>
       </div>

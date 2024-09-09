@@ -32,16 +32,29 @@ export function divideBigInts(
   b: bigint,
   precision: number = 2
 ): string {
+  // Handle case where b is zero to avoid division by zero errors
+  if (b === 0n) {
+    throw new Error("Division by zero is not allowed");
+  }
+
+  // Calculate the multiplier based on the precision needed
   const multiplier = BigInt(10 ** precision);
+
+  // Perform multiplication of a with the multiplier before division
   const result = (a * multiplier) / b;
 
-  // Convert the result to string and insert the decimal point
+  // Convert the result to string and handle decimal placement
   const resultStr = result.toString();
+
+  // Calculate where to insert the decimal point
   const decimalIndex = resultStr.length - precision;
 
-  // Handle cases where the result might be shorter than expected
-  const integerPart = resultStr.slice(0, decimalIndex) || "0";
-  const decimalPart = resultStr.slice(decimalIndex).padStart(precision, "0");
+  // Handle the case where the result might be shorter than expected
+  const integerPart = decimalIndex > 0 ? resultStr.slice(0, decimalIndex) : "0";
+  const decimalPart =
+    decimalIndex > 0
+      ? resultStr.slice(decimalIndex)
+      : resultStr.padStart(precision, "0");
 
   return `${integerPart}.${decimalPart}`;
 }

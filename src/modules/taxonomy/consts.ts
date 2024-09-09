@@ -116,7 +116,7 @@ export const COMMODITY_DERIVATIVES: AssetSubtype = {
 
 export const NON_CARBON_ENVIRONMENTAL_PROCESS_DERIVATIVES: AssetSubtype = {
   id: "non_carbon_environmental_process_derivatives",
-  name: "Non-Carbon Environmental Process",
+  name: "Non-Carbon Env. Process",
   assetTypeId: "derivatives",
 };
 

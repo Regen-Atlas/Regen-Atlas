@@ -119,7 +119,8 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
 
     const pricePerToken = divideBigInts(
       parseNumber(value, tokenOut.decimals),
-      quote
+      quote,
+      5
     );
     setSwapExchangeRate(pricePerToken);
 
@@ -156,7 +157,8 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
 
     const pricePerToken = divideBigInts(
       quote,
-      parseNumber(value, tokenIn.decimals)
+      parseNumber(value, tokenIn.decimals),
+      5
     );
     setSwapExchangeRate(pricePerToken);
 

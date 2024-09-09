@@ -15,12 +15,14 @@ import { Link } from "react-router-dom";
 interface AssetCardProps {
   className?: string;
   asset: Asset;
+  showBuyButton?: boolean;
   onPinClicked: () => void;
 }
 
 export default ({
   className,
   asset,
+  showBuyButton = true,
   onPinClicked,
 }: AssetCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
@@ -124,14 +126,15 @@ export default ({
             <span className="mr-1">Learn more</span>
             <ArrowUpRight size={16} />
           </a>
-          {!!celoContractAddress ? (
+          {!!celoContractAddress && showBuyButton && (
             <Link
               className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
               to={`/assets/${asset.id}`}
             >
               Buy
             </Link>
-          ) : (
+          )}
+          {!celoContractAddress && showBuyButton && (
             <a
               className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
               href={asset.providerLink}

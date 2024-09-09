@@ -19,7 +19,7 @@ export const Capit_n_Luis_A__Vidal__M_xico: Asset = {
   tokens: [
     {
       chainId: 42220,
-      contractAddress: "",
+      contractAddress: "0x9995cc8F20Db5896943Afc8eE0ba463259c931ed",
     },
   ],
   physicalAddress: {
