@@ -27,7 +27,7 @@ body {
 }
 
 .button {
-  @apply bg-blue-700 text-white font-medium py-1 px-6 rounded-full text-lg;
+  @apply bg-blue-700 text-white font-medium py-1 px-6 rounded-full lg:text-lg;
 }
 
 .button:hover {
@@ -68,6 +68,11 @@ body {
 .button-gray:hover {
   @apply bg-gray-600;
 }
+.button-gradient:disabled,
+.button:disabled {
+  @apply !bg-gray-400 text-gray-100;
+  background: none;
+}
 
 body.scrolled .site-header {
   box-shadow: 0 3px 2px 0 rgb(0 0 0 / 0.08);
@@ -101,4 +106,8 @@ body.scrolled-360.modal-open .filters-row-mobile {
 .asset-card {
   /* box-shadow: 0 4px 4px 0 rgb(0 0 0 / 0.25); */
   box-shadow: 0 4px 6px 0 rgb(46 95 169 / 0.08);
+}
+
+.main-container {
+  @apply bg-background max-w-[1232px] mx-auto px-3 md:px-4 pb-2 md:pb-0;
 }

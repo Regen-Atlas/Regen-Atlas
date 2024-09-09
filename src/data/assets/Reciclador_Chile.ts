@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Reciclador_Chile: Asset = {
   cid: "",
@@ -20,12 +20,12 @@ export const Reciclador_Chile: Asset = {
   tokens: [
     {
       chainId: 42220,
-      contractAddress: "",
+      contractAddress: "0x27cd006548dF7C8c8e9fdc4A67fa05C2E3CA5CF9",
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Valparaiso Region",
+    country: "CL",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fplastic.jpg?alt=media",

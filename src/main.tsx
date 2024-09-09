@@ -14,6 +14,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Explore from "./Explore/Explore.tsx";
 import AddAsset from "./AddAsset.tsx";
 import { FiltersStateProvider } from "./context/filters/filtersContext.tsx";
+import AssetDetails from "./AssetDetails/AssetDetails.tsx";
+import { MapStateProvider } from "./context/map/mapContext.tsx";
+import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -32,7 +35,15 @@ export const router = createBrowserRouter([
         path: "/add-asset",
         element: <AddAsset />,
       },
+      {
+        path: "/assets/:assetId",
+        element: <AssetDetails />,
+      },
     ],
+  },
+  {
+    path: "/kitchensink",
+    element: <Kitchensink />,
   },
 ]);
 
@@ -42,7 +53,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider theme="soft">
           <FiltersStateProvider>
-            <RouterProvider router={router} />
+            <MapStateProvider>
+              <RouterProvider router={router} />
+            </MapStateProvider>
           </FiltersStateProvider>
         </ConnectKitProvider>
       </QueryClientProvider>

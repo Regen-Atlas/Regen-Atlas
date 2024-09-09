@@ -1,4 +1,4 @@
-import { Asset } from "../../shared/types";
+import { Asset } from "../../modules/assets";
 
 export const Floresta_Santa_Maria_Project: Asset = {
   cid: "",
@@ -31,8 +31,8 @@ export const Floresta_Santa_Maria_Project: Asset = {
     },
   ],
   physicalAddress: {
-    region: "",
-    country: "",
+    region: "Mato Grosso",
+    country: "BR",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fparrot-50202_1280.jpeg?alt=media",

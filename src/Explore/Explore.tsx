@@ -1,4 +1,4 @@
-import Map, { Marker, Popup } from "react-map-gl";
+import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import AssetCard from "./AssetCard";
 import FiltersMobile from "./FiltersMobile";
@@ -6,13 +6,17 @@ import { useFiltersDispatch, useFiltersState } from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
-import { Asset } from "../shared/types";
+import { Asset } from "../modules/assets";
+import { useMapState } from "../context/map";
+import { MapBox } from "../shared/components/MapBox";
+import Header from "../Header";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useFiltersState();
   const dispatch = useFiltersDispatch();
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
   const mapRef = useRef<MapRef>();
+  const { mapStyle } = useMapState();
 
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
@@ -42,46 +46,40 @@ export default (): React.ReactElement => {
   };
 
   return (
-    <div className="bg-background max-w-[1224px] mx-auto px-3 md:px-4 pb-2 md:pb-0">
-      <div
-        className={clsx(
-          "pt-[60px] md:pt-[140px] lg:pt-[100px]",
-          "md:grid md:grid-cols-2 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_740px] md:gap-4"
-        )}
-      >
+    <>
+      <Header showFilters={true} />
+      <div className="main-container">
         <div
           className={clsx(
-            "md:order-3 md:self-start md:row-start-2 md:row-end-3 lg:row-start-1 lg:row-end-2",
-            !showCards() && "md:!col-span-2"
+            "pt-[60px] md:pt-[140px] lg:pt-[100px]",
+            "md:grid md:grid-cols-2 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_740px] md:gap-4"
           )}
         >
           <div
             className={clsx(
-              "w-full rounded-xl overflow-hidden",
-              "map-wrapper",
-              showCards() &&
-                "md:fixed md:top-[156px] md:w-[calc(50vw-32px)] md:h-[calc(100vh-140px)]",
-              showCards() && "lg:h-[calc(100vh-100px)]",
-              showCards() && "lg:top-[100px] lg:w-[600px] xl:w-[740px]"
+              "md:order-3 md:self-start md:row-start-2 md:row-end-3 lg:row-start-1 lg:row-end-2",
+              !showCards() && "md:!col-span-2"
             )}
           >
             <div
               className={clsx(
                 "w-full rounded-xl overflow-hidden",
-                "map-wrapper"
+                "map-wrapper",
+                showCards() &&
+                  "md:fixed md:top-[156px] md:w-[calc(50vw-32px)] md:h-[calc(100vh-140px)]",
+                showCards() && "lg:h-[calc(100vh-100px)]",
+                showCards() && "lg:top-[100px] lg:w-[600px] xl:w-[740px]"
               )}
             >
-              <Map
-                ref={mapRef as React.RefObject<MapRef>}
-                mapboxAccessToken={
-                  import.meta.env.VITE_MAPBOX_ACCESS_TOKEN as string
-                }
+              <MapBox
+                mapStyle={mapStyle}
                 initialViewState={{
                   longitude: 15,
                   latitude: 30,
                   zoom: 1,
                 }}
-                mapStyle="mapbox://styles/mapbox/light-v11"
+                showMapStyleSwitch={!!selectedAssetId}
+                mapRef={mapRef as React.RefObject<MapRef>}
               >
                 {filteredAssets.map((asset) => (
                   <div key={asset.id}>
@@ -105,46 +103,46 @@ export default (): React.ReactElement => {
                     )}
                   </div>
                 ))}
-              </Map>
-            </div>
-            <div className="hidden md:block">
-              <Footer />
+              </MapBox>
+              <div className="hidden md:block">
+                <Footer showMapStyleSwitch={!selectedAssetId} />
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          className={clsx(
-            "h-[60px] z-10 md:row-start-1 md:row-end-2 md:order-1 md:col-span-2 lg:hidden",
-            "md:h-0"
-          )}
-        >
           <div
             className={clsx(
-              "filters-row-mobile bg-background",
-              "md:fixed md:!top-[80px] md:left-0 md:w-full md:!px-4"
+              "h-[60px] z-10 md:row-start-1 md:row-end-2 md:order-1 md:col-span-2 lg:hidden",
+              "md:h-0"
             )}
           >
-            <FiltersMobile />
+            <div
+              className={clsx(
+                "filters-row-mobile bg-background",
+                "md:fixed md:!top-[80px] md:left-0 md:w-full md:!px-4"
+              )}
+            >
+              <FiltersMobile />
+            </div>
+          </div>
+          <div
+            className={clsx(
+              "md:order-2 md:row-start-2 lg:row-start-1 lg:row-end-2 md:row-end-3",
+              !showCards() && "md:hidden"
+            )}
+          >
+            {filteredAssets.map((asset) => (
+              <AssetCard
+                key={asset.id}
+                className="mb-4"
+                asset={asset}
+                onPinClicked={() => {
+                  handleAssetCardPinClick(asset);
+                }}
+              />
+            ))}
           </div>
         </div>
-        <div
-          className={clsx(
-            "md:order-2 md:row-start-2 lg:row-start-1 lg:row-end-2 md:row-end-3",
-            !showCards() && "md:hidden"
-          )}
-        >
-          {filteredAssets.map((asset) => (
-            <AssetCard
-              key={asset.id}
-              className="mb-4"
-              asset={asset}
-              onPinClicked={() => {
-                handleAssetCardPinClick(asset);
-              }}
-            />
-          ))}
-        </div>
       </div>
-    </div>
+    </>
   );
 };
