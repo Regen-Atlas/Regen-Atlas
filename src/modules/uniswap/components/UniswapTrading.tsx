@@ -14,6 +14,7 @@ import {
   getPool,
   getTokenApproval,
   UNISWAP_POOLS_MAP,
+  ITradeSettings,
 } from "../.";
 import { increaseByPercent } from "../../../shared/helpers/percent";
 import { parseUnits } from "viem";
@@ -23,6 +24,7 @@ import { Modal } from "../../../shared/components";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "../../../wagmi";
 import { CircleNotch, Cube, WarningDiamond } from "@phosphor-icons/react";
+import { UniswapTradeSettings } from "./UniswapTradeSettings";
 
 interface UniswapTradingProps {
   tokenIn: Token;
@@ -86,8 +88,20 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     account: address,
   });
 
+  const [tradeSettings, setTradeSettings] = useState<ITradeSettings>({
+    slippageTolerancePercentage: "0.5",
+    deadlineInMinutes: 10,
+  });
+
   const { address: poolAddress, fee: poolFee } =
     UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
+
+  const options: SwapOptions = {
+    slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
+    deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
+    recipient: address || "", // That's hackish, but because later we check if address is defined, it's fine
+    sqrtPriceLimitX96: 0,
+  };
 
   const handleAmountInChange = async (value: string) => {
     setAmountIn(value);
@@ -166,13 +180,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     setAmountIn(formatNumber(quote, tokenIn.decimals));
   };
 
-  const options: SwapOptions = {
-    slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
-    deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
-    recipient: address || "", // That's hackish, but because later we check if address is defined, it's fine
-    sqrtPriceLimitX96: 0,
-  };
-
   const handleBuy = async () => {
     if (!amountIn || !address) {
       return;
@@ -194,8 +201,17 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     );
 
     try {
+      const tradeOptions: SwapOptions = {
+        ...options,
+        slippageTolerance: new Percent(
+          parseNumber(tradeSettings.slippageTolerancePercentage, 2).toString(),
+          10000
+        ),
+      };
+
+      console.log("tradeOptions", tradeOptions);
       const res = await executeTrade({
-        options,
+        options: tradeOptions,
         tokenIn,
         tokenOut,
         amountIn: amountInWithDecimals,
@@ -235,11 +251,24 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       amountIn.toString(),
       tokenIn.decimals
     );
+    const tradeOptions: SwapOptions = {
+      ...options,
+      slippageTolerance: new Percent(
+        parseNumber(tradeSettings.slippageTolerancePercentage, 2).toString(),
+        10000
+      ),
+    };
+
+    console.log("tradeOptions", tradeOptions);
+
     try {
       const approvalAmount: bigint =
         tradeType === "exactInput"
           ? amountInWithDecimals
-          : increaseByPercent(amountInWithDecimals, options.slippageTolerance);
+          : increaseByPercent(
+              amountInWithDecimals,
+              tradeOptions.slippageTolerance
+            );
 
       const hash = await getTokenApproval(tokenIn, approvalAmount);
       setStatus("awaiting_approval_confirmation");
@@ -256,6 +285,14 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   return (
     <>
       <div>
+        <div className="flex justify-end mb-2">
+          <UniswapTradeSettings
+            settings={tradeSettings}
+            onUpdate={(settings) => {
+              setTradeSettings(settings);
+            }}
+          />
+        </div>
         <div className="mb-1">
           <UniswapTokenInput
             type="sell"

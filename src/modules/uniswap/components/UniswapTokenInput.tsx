@@ -2,6 +2,7 @@ import { Token } from "@uniswap/sdk-core";
 import { Logo42220 } from "../../chains/logos/Logo42220";
 import { CHAIN_MAPPING } from "../../chains";
 import clsx from "clsx";
+import { NumberInput } from "../../../shared/components/NumberInput";
 
 interface UniswapTokenInputProps {
   type: "buy" | "sell";
@@ -22,17 +23,6 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
   displayBalance,
   onChange,
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value;
-    val = val.replace(/,/g, ".");
-
-    const isValidInput = /^-?\d*\.?\d*$/.test(val);
-
-    if (isValidInput) {
-      onChange(val);
-    }
-  };
-
   const symbol = token.symbol?.toUpperCase();
 
   if (!symbol) {
@@ -45,12 +35,11 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
     <div className="grid p-4 rounded-lg border-2 border-white bg-cardBackground">
       <span className="text-sm capitalize">{type}</span>
       <div className="flex justify-between">
-        <input
-          type="text"
-          placeholder={placeholder}
+        <NumberInput
           className="py-2 border-none outline-none bg-transparent text-3xl w-full"
-          onChange={handleChange}
           value={value}
+          placeholder={placeholder}
+          onChange={onChange}
         />
 
         <div className="flex-shrink-0">
