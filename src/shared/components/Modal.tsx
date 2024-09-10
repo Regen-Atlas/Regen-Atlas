@@ -43,7 +43,8 @@ export const Modal = ({
           className="absolute right-4 top-0 cursor-pointer h-[60px] flex items-center"
           onClick={onClose}
         >
-          <X size={40} />
+          <X className="lg:hidden" size={40} />
+          <X className="hidden lg:block" size={24} />
         </div>
         <div className="overflow-y-auto h-full">{children}</div>
       </div>
