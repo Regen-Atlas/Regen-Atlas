@@ -9,3 +9,9 @@ export type IUniswapPoolsMap = Record<
 export interface IPoolFactoryMap {
   [key: number]: string;
 }
+
+export interface ITradeSettings {
+  slippageTolerancePercentage: string;
+  deadlineInMinutes: number;
+  recipient?: Address;
+}
