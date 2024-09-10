@@ -2,8 +2,8 @@ import { useState } from "react";
 import clsx from "clsx";
 import FiltersDropdown from "./components/FiltersDropdown";
 import { useFiltersState } from "../context/filters";
-import { PROVIDER_MAP } from "../shared/consts/provider";
-import { CHAIN_MAPPING } from "../shared/consts/chains";
+import { PROVIDER_MAP } from "../modules/issuers";
+import { CHAIN_MAPPING } from "../modules/chains";
 
 export default (): React.ReactElement => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useFiltersDispatch, useFiltersState } from "../context/filters";
 import FilterSummaryMobile from "./components/FilterSummaryMobile";
-import { ASSET_TYPES } from "../shared/consts";
 import { Modal } from "../shared/components/Modal";
 import TypeSummary from "./components/TypeSummary";
 import clsx from "clsx";
 import { CheckboxBox } from "../shared/components";
-import { PROVIDER_LIST, PROVIDER_MAP } from "../shared/consts/provider";
-import { CHAINS, CHAIN_MAPPING } from "../shared/consts/chains";
+import { ASSET_TYPES } from "../modules/taxonomy";
+import { PROVIDER_LIST, PROVIDER_MAP } from "../modules/issuers";
+import { CHAIN_MAPPING, CHAINS } from "../modules/chains";
 
 export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   const [openFilters, setOpenFilters] = useState({

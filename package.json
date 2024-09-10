@@ -1,6 +1,6 @@
 {
-  "name": "RegenAtlas",
-  "version": "0.0.1",
+  "name": "regenatlas",
+  "version": "0.3.0",
   "type": "module",
   "license": "MIT",
   "author": {
@@ -21,13 +21,18 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
     "@tanstack/react-query": "5.0.5",
+    "@uniswap/sdk-core": "^5.3.1",
+    "@uniswap/smart-order-router": "^3.44.0",
+    "@uniswap/v3-sdk": "^3.13.1",
     "clsx": "^2.1.1",
     "connectkit": "^1.8.2",
+    "jsbi": "^3.2.5",
     "mapbox-gl": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.1.7",
     "react-router-dom": "^6.24.1",
+    "react-share": "^5.1.0",
     "viem": "latest",
     "wagmi": "latest"
   },
