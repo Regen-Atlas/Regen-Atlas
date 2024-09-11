@@ -466,8 +466,7 @@ export const Kitchensink = (): React.ReactElement => {
               <div>SWAP on CELO</div>
               {chainId === 42220 && (
                 <UniswapTrading
-                  tokenIn={CELO_USDC_TOKEN}
-                  tokenOut={CELO_CHAR_TOKEN}
+                  tokenPair={[CELO_USDC_TOKEN, CELO_CHAR_TOKEN]}
                 />
               )}
             </div>
@@ -475,8 +474,7 @@ export const Kitchensink = (): React.ReactElement => {
               <div>SWAP on Ethereum</div>
               {(chainId === 1 || chainId === 31337) && (
                 <UniswapTrading
-                  tokenIn={MAINNET_USDC_TOKEN}
-                  tokenOut={MAINNET_UNI_TOKEN}
+                  tokenPair={[MAINNET_USDC_TOKEN, MAINNET_UNI_TOKEN]}
                 />
               )}
             </div>

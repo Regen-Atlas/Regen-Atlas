@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Marker } from "react-map-gl";
+import { Address } from "viem";
 import { useFiltersState } from "../context/filters";
 import AssetCard from "../Explore/AssetCard";
 import { MapBox } from "../shared/components/MapBox";
@@ -11,12 +12,12 @@ import {
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
-import { Address } from "viem";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
   const { filteredAssets } = useFiltersState();
   const { mapStyle } = useMapState();
+
   const asset = filteredAssets.find((a) => a.id === assetId);
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
@@ -51,7 +52,7 @@ export default (): React.ReactElement => {
                 {celoContractAddress && tokenIn && tokenOut && (
                   <div className="flex justify-center mt-4">
                     <div className="w-full">
-                      <UniswapTrading tokenIn={tokenIn} tokenOut={tokenOut} />
+                      <UniswapTrading tokenPair={[tokenIn, tokenOut]} />
                     </div>
                   </div>
                 )}

@@ -23,12 +23,17 @@ import { useModal } from "connectkit";
 import { Modal } from "../../../shared/components";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "../../../wagmi";
-import { CircleNotch, Cube, WarningDiamond } from "@phosphor-icons/react";
+import {
+  ArrowsDownUp,
+  CircleNotch,
+  Cube,
+  WarningDiamond,
+} from "@phosphor-icons/react";
 import { UniswapTradeSettings } from "./UniswapTradeSettings";
+import clsx from "clsx";
 
 interface UniswapTradingProps {
-  tokenIn: Token;
-  tokenOut: Token;
+  tokenPair: [Token, Token];
 }
 
 type SwappingState =
@@ -57,9 +62,10 @@ const buttonText: Record<SwappingState, string> = {
 };
 
 export const UniswapTrading: React.FC<UniswapTradingProps> = ({
-  tokenIn,
-  tokenOut,
+  tokenPair,
 }) => {
+  const [tokenIn, setTokenIn] = useState(tokenPair[0]);
+  const [tokenOut, setTokenOut] = useState(tokenPair[1]);
   const [showModal, setShowModal] = useState(false);
   const [amountIn, setAmountIn] = useState("");
   const [amountOut, setAmountOut] = useState("");
@@ -94,7 +100,8 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   });
 
   const { address: poolAddress, fee: poolFee } =
-    UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
+    UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`] ||
+    UNISWAP_POOLS_MAP[`${tokenOut.address}${tokenIn.address}`];
 
   const options: SwapOptions = {
     slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
@@ -282,6 +289,15 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     }
   };
 
+  const handleSwitchTokens = () => {
+    const temp = tokenIn;
+    setTokenIn(tokenOut);
+    setTokenOut(temp);
+    setAmountIn("");
+    setAmountOut("");
+    setSwapExchangeRate("");
+  };
+
   return (
     <>
       <div>
@@ -293,26 +309,38 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
             }}
           />
         </div>
-        <div className="mb-1">
+        <div className="relative">
+          <div className="mb-1">
+            <UniswapTokenInput
+              type="sell"
+              placeholder="0"
+              token={tokenIn}
+              value={amountIn}
+              formattedBalance={tokenInBalance.formattedBalance}
+              displayBalance={!!address}
+              onChange={(value) => handleAmountInChange(value)}
+            />
+          </div>
           <UniswapTokenInput
-            type="sell"
+            type="buy"
             placeholder="0"
-            token={tokenIn}
-            value={amountIn}
-            formattedBalance={tokenInBalance.formattedBalance}
+            token={tokenOut}
+            value={amountOut}
+            formattedBalance={tokenOutBalance.formattedBalance}
             displayBalance={!!address}
-            onChange={(value) => handleAmountInChange(value)}
+            onChange={(value) => handleAmountOutChange(value)}
           />
+          <button
+            onClick={handleSwitchTokens}
+            className={clsx(
+              "bg-cardBackground border-2 border-white w-12 h-8 absolute top-[calc(50%-16px)] left-[calc(50%-24px)]",
+              "rounded-full flex justify-center items-center shadow-sm",
+              "hover:bg-white"
+            )}
+          >
+            <ArrowsDownUp size={24} weight="fill" />
+          </button>
         </div>
-        <UniswapTokenInput
-          type="buy"
-          placeholder="0"
-          token={tokenOut}
-          value={amountOut}
-          formattedBalance={tokenOutBalance.formattedBalance}
-          displayBalance={!!address}
-          onChange={(value) => handleAmountOutChange(value)}
-        />
         <button
           className="button button-gradient w-full my-2"
           onClick={handleButtonClick}
