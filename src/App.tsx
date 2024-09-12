@@ -1,14 +1,12 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useScrollClass } from "./shared/hooks/useScrollClass";
-import ReactGA from "react-ga4";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useAnalytics, usePageTracking } from "./modules/analytics";
 
 function App() {
   useScrollClass();
-  const isProduction = window.location.hostname.includes("regenatlas.xyz");
-  if (isProduction) {
-    ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID);
-  }
+  useAnalytics();
+  usePageTracking();
 
   return (
     <HelmetProvider>

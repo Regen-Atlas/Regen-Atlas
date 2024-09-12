@@ -13,7 +13,6 @@ import {
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
-import { analytics } from "../modules/analytics";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
@@ -25,8 +24,6 @@ export default (): React.ReactElement => {
   if (!asset) {
     return <div>Asset not found</div>;
   }
-
-  analytics.sendPageView(asset.name);
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
     (t) => t.chainId === 42220
