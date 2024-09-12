@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Marker } from "react-map-gl";
 import { Address } from "viem";
+import { Helmet } from "react-helmet-async";
 import { useFiltersState } from "../context/filters";
 import AssetCard from "../Explore/AssetCard";
 import { MapBox } from "../shared/components/MapBox";
@@ -12,6 +13,7 @@ import {
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
+import { analytics } from "../modules/analytics";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
@@ -19,6 +21,12 @@ export default (): React.ReactElement => {
   const { mapStyle } = useMapState();
 
   const asset = filteredAssets.find((a) => a.id === assetId);
+
+  if (!asset) {
+    return <div>Asset not found</div>;
+  }
+
+  analytics.sendPageView(asset.name);
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
     (t) => t.chainId === 42220
@@ -33,6 +41,13 @@ export default (): React.ReactElement => {
 
   return (
     <>
+      <Helmet>
+        <title>{asset.name}</title>
+        <meta
+          name="description"
+          content={`${asset.description.substring(0, 160)}...`}
+        />
+      </Helmet>
       <Header />
       <div className="main-container">
         <div className="pt-[60px] md:pt-[100px]">
