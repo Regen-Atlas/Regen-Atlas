@@ -42,7 +42,7 @@ export default (): React.ReactElement => {
   return (
     <>
       <Helmet>
-        <title>${asset.name}</title>
+        <title>{asset.name}</title>
         <meta
           name="description"
           content={`${asset.description.substring(0, 160)}...`}
