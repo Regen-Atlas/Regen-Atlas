@@ -31,6 +31,7 @@ import {
 } from "@phosphor-icons/react";
 import { UniswapTradeSettings } from "./UniswapTradeSettings";
 import clsx from "clsx";
+import { analytics } from "../../analytics";
 
 interface UniswapTradingProps {
   tokenPair: [Token, Token];
@@ -216,7 +217,10 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
         ),
       };
 
-      console.log("tradeOptions", tradeOptions);
+      analytics.sendTradingEvent(
+        `Request Token Swap Confirmation, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
+
       const res = await executeTrade({
         options: tradeOptions,
         tokenIn,
@@ -233,7 +237,13 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       setAmountIn("");
       setAmountOut("");
       setStatus("done");
+      analytics.sendTradingEvent(
+        `Token Swap Completed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
     } catch (e) {
+      analytics.sendTradingEvent(
+        `Token Swap Failed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
       setStatus("error");
     }
   };
@@ -254,6 +264,9 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   };
 
   const requestTokenSpendingApproval = async () => {
+    analytics.sendTradingEvent(
+      `Request Token Spending Approval for ${tokenIn.symbol}`
+    );
     const amountInWithDecimals = parseUnits(
       amountIn.toString(),
       tokenIn.decimals
@@ -265,8 +278,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
         10000
       ),
     };
-
-    console.log("tradeOptions", tradeOptions);
 
     try {
       const approvalAmount: bigint =
