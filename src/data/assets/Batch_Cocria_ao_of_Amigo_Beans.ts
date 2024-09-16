@@ -12,7 +12,7 @@ export const Batch_Cocria_ao_of_Amigo_Beans: Asset = {
   providerId: "agroforest_dao",
   providerLink:
     "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/16035713671248468345278117419798488907003509257501192821112201413680064102440",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -21.605063,
     longitude: -43.764045,

@@ -11,7 +11,7 @@ export const Evergreen___East_Preservation_Project: Asset = {
     "The project spans 65 acres across two historic African American cemeteries established in the 1890s in Richmond, VA's East End. Housing over 25,000 burials, these sites commemorate individuals significant to both the city’s and nation's cultural heritage. Following years of neglect, volunteers initiated efforts to reclaim and preserve this forested area, developing a restoration and protection plan.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-005",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 37.532868,
     longitude: -77.388361,

@@ -12,7 +12,7 @@ export const MundoRep: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/mundorep/recovery_entity_profile?action=show&controller=users&id=mundorep",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 10.365872,
     longitude: -83.931713,

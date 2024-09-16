@@ -4,6 +4,7 @@ export const NATIVITY_MAP = {
   native: "Onchain native",
   tokenized: "Tokenized",
   onchain_enforcement: "Onchain enforcement",
+  onchain_integration: "Onchain Integration",
 };
 
 export const MAP_STYLES: { [key in MapStyles]: string } = {

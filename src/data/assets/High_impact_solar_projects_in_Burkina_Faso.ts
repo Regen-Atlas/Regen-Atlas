@@ -12,7 +12,7 @@ export const High_impact_solar_projects_in_Burkina_Faso: Asset = {
   providerId: "helios",
   providerLink:
     "https://invest.helios.eco/pools/4a232788-6933-43dc-9566-1e8f69252eda",
-  nativity: "onchain_enforcement",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 12.157944,
     longitude: -1.921155,

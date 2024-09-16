@@ -11,7 +11,7 @@ export const Capit_n_Luis_A__Vidal__M_xico: Asset = {
     "Through EthicHub’s protocol, anyone can lend capital to the farmers and/or stake collateral on their behalf in the form of Ethix to secure the farmers’ loans. EthicHub also provides farmers with access to added value markets so they are no longer the weakest link in the supply chain.\n\nThe small producers who are part of the Cooperative, work their plots following strict organic production standards and maintain coffee plantations under diversified shade. Their production processes are subjected to rigorous audits twice a year, one internal through their Internal Control System and another external carried out by the Certification Agency www.mayacert.com. With the aim of continuing their growth and supporting more local producers, they're are looking for financing. The funds raised will be used for export and to obtain a better price for their harvest. This project is not only a financial investment, but also an investment in environmental sustainability and the well-being of peasant families. Your support will help them preserve the biodiversity of the El Triunfo Biosphere Reserve and promote economic development in the region.",
   providerId: "ethic_hub",
   providerLink: "https://app.ethichub.com/projects/636",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 15.601947,
     longitude: -92.628371,

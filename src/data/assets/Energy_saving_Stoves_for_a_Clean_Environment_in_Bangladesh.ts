@@ -13,7 +13,7 @@ export const Energy_saving_Stoves_for_a_Clean_Environment_in_Bangladesh: Asset =
     providerId: "solidworld",
     providerLink:
       "https://app.solid.world/projects/7/clean-cooking-project-for-refugees",
-    nativity: "tokenized",
+    nativity: "onchain_enforcement",
     geolocation: {
       latitude: 21.404222,
       longitude: 92.000319,

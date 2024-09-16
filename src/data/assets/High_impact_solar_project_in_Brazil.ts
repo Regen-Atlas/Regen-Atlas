@@ -12,7 +12,7 @@ export const High_impact_solar_project_in_Brazil: Asset = {
   providerId: "helios",
   providerLink:
     "https://invest.helios.eco/pools/ae7a665d-b2e9-4edd-b965-cbce9afffee3",
-  nativity: "onchain_enforcement",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: -19.065646,
     longitude: -44.003519,

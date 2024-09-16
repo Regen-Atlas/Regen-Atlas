@@ -11,7 +11,7 @@ export const Vlinder_Papariko: Asset = {
     "The Restoration of Degraded Mangrove Areas in Kenya project aims to boost natural removal of CO2 through creating a healthy mangrove ecosystem in degraded lands of Kwale county, Kenya.",
   providerId: "solidworld",
   providerLink: "https://app.solid.world/projects/4/vlinder-papariko",
-  nativity: "tokenized",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 1.4419683,
     longitude: 38.4313975,

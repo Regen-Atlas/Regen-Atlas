@@ -10,9 +10,9 @@ export const Ebikes_Refurbishment: Asset = {
   description:
     "Loewi is an end-to-end e-bike refurbishment platform company aiming at democratizing the use of electric bikes. Keenest enhances this mission by transforming shares of Loewi into NFTs, enabling anyone to invest in Loewi through NFTs and to be exposed to Loewi's both financial and environmental performance (Climate Dividends).",
   providerId: "keenest",
-  providerLink:
-    "https://invest.keenest.co/collection/0xBFd4dB7D5222F60f93057C85906415F49E539386/project-info",
-  nativity: "tokenized",
+  learnMoreLink: "https://www.keenest.co",
+  providerLink: "https://invest.keenest.co",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 48.8533786,
     longitude: 2.3581805,
@@ -25,10 +25,10 @@ export const Ebikes_Refurbishment: Asset = {
   ],
   physicalAddress: {
     region: "Paris",
-    country: "France",
+    country: "FR",
   },
   imageUrl:
-    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Ffox%20river%20bluffs.PNG?alt=media",
+    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Floewi.jpeg?alt=media",
   createdAt: "2024-09-16T08:52:06.371Z",
   updatedAt: "2024-09-16T08:52:06.371Z",
 };

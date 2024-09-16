@@ -11,7 +11,7 @@ export const Myanmar_2088: Asset = {
     "The Mangrove Restoration and Sustainable Development in Myanmar project aims to plant mangroves on degraded lands in Ayeyarwady Division of Myanmar.",
   providerId: "solidworld",
   providerLink: "https://app.solid.world/projects/1/myanmar-2088",
-  nativity: "tokenized",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 21.9621047,
     longitude: 96.1103153,

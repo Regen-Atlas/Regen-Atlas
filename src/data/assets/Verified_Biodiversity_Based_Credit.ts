@@ -12,7 +12,7 @@ export const Verified_Biodiversity_Based_Credit: Asset = {
   providerId: "nat5",
   providerLink:
     "https://www.nat5.bio/index.php/token/verified-biodiversity-based-credit-lt-002-f4flen-022023-b1-d/",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 44.615536,
     longitude: 4.293656,

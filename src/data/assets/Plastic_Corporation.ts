@@ -12,7 +12,7 @@ export const Plastic_Corporation: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/plastic-corporation/recovery_entity_profile?tab=sustainability",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -4.898117,
     longitude: -80.689868,

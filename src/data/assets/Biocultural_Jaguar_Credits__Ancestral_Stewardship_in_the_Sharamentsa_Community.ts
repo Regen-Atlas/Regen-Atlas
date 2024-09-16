@@ -12,7 +12,7 @@ export const Biocultural_Jaguar_Credits__Ancestral_Stewardship_in_the_Sharaments
       "In the Amazon headwaters, Indigenous stewards face increasing pressure from activities like illegal logging and mining, which endanger both their forest ecosystem and cultural heritage. The Sharamentsa community, belonging to the Achuar Nation, is pivotal in this biodiversity project that focuses on safeguarding a critical 10,000-hectare jaguar habitat. This effort seeks to create a sustainable model that integrates ecological conservation with economic development, drawing on the community's extensive knowledge of the forest.",
     providerId: "regen_network",
     providerLink: "https://app.regen.network/project/sharamentsa-pilot",
-    nativity: "native",
+    nativity: "onchain_enforcement",
     geolocation: {
       latitude: -1.412682,
       longitude: -76.501879,

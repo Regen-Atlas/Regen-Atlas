@@ -11,7 +11,7 @@ export const Rimba_Raya_Biodiversity_Reserve_Project: Asset = {
     "This initiative safeguards 47,237 hectares of untouched peat swamp forest along Central Kalimantan's southern coast in Borneo. Peatlands, covering just 3% of Earth's land, contain double the carbon of all global forests. At risk from palm oil industry activities like logging, draining, and burning, this project preserves a crucial habitat for an orangutan sanctuary and 50 other endangered species.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C03-001",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: -2.2072919,
     longitude: 113.9164372,

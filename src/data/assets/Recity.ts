@@ -12,7 +12,7 @@ export const Recity: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/recity/recovery_entity_profile?action=show&controller=users&id=recity",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 19.142262,
     longitude: 72.827907,

@@ -11,7 +11,7 @@ export const St__Elmo_Preservation_Project: Asset = {
     "Lookout Mountain, spanning over 90 miles across Tennessee, Alabama, and Georgia, is a globally significant ecoregion for its biodiversity. The 58-acre oak-pine forest, nestled between the Chickamauga & Chattanooga National Military Park and the St. Elmo neighborhood, is crucial for connecting habitat corridors. Its protection by the Conservancy supports vital habitats for species like eastern box turtles, red-tailed hawks, black bears, and spotted salamanders.",
   providerId: "regen_network",
   providerLink: "http://app.regen.network/project/C02-006",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 35.045722,
     longitude: -85.309488,

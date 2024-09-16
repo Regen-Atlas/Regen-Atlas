@@ -43,8 +43,6 @@ import { Glow_Solar_Farm_8 } from "./assets/Glow_Solar_Farm_8.ts";
 import { Glow_Solar_Farm_9 } from "./assets/Glow_Solar_Farm_9.ts";
 import { American_BioCarbon_CT } from "./assets/American_BioCarbon_CT.ts";
 import { BC_Biocarbon___McBride } from "./assets/BC_Biocarbon___McBride.ts";
-import { Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile } from "./assets/Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile.ts";
-import { Rooftop_Solar_in_India } from "./assets/Rooftop_Solar_in_India.ts";
 import { Inaugural_Batch_of_Amigo_Beans } from "./assets/Inaugural_Batch_of_Amigo_Beans.ts";
 import { Batch_Cocria_ao_of_Amigo_Beans } from "./assets/Batch_Cocria_ao_of_Amigo_Beans.ts";
 import { Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate } from "./assets/Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate.ts";
@@ -115,7 +113,6 @@ import { Madre_de_Dios_Amazon_REDD__Project } from "./assets/Madre_de_Dios_Amazo
 import { Reciclador_Chile } from "./assets/Reciclador_Chile.ts";
 import { Rintz_Industries } from "./assets/Rintz_Industries.ts";
 import { Salchiji__M_xico_ } from "./assets/Salchiji__M_xico_.ts";
-import { San_Jos__Ixtepec__M_xico_ } from "./assets/San_Jos__Ixtepec__M_xico_.ts";
 import { Santa_Isabel_Water_Credit } from "./assets/Santa_Isabel_Water_Credit.ts";
 import { Verified_Carbon_Removal } from "./assets/Verified_Carbon_Removal.ts";
 import { Verified_Carbon_Removal2 } from "./assets/Verified_Carbon_Removal_2.ts";
@@ -180,8 +177,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_13,
   American_BioCarbon_CT,
   BC_Biocarbon___McBride,
-  Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile,
-  Rooftop_Solar_in_India,
   Inaugural_Batch_of_Amigo_Beans,
   Batch_Cocria_ao_of_Amigo_Beans,
   Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate,
@@ -256,7 +251,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Reciclador_Chile,
   Rintz_Industries,
   Salchiji__M_xico_,
-  San_Jos__Ixtepec__M_xico_,
   Santa_Isabel_Water_Credit,
   Verified_Carbon_Removal,
   Verified_Carbon_Removal2,

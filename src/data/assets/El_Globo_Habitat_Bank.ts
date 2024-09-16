@@ -11,7 +11,7 @@ export const El_Globo_Habitat_Bank: Asset = {
     "El Globo is located in the “Cuchilla Jardín-Támesis” Integrated Management District (DMI). Here ecosystem preservation, forest enhancement and restoration activities are implemented to generate positive and permanent impacts on biodiversity.\n\nThe project has a 30-year financial, technical and legal structure for operation, securing biodiversity gains in time. The area has one of the few remnants of Native High Andean Forest still preserved in the region and it is a registered Habitat Bank at the Ministry of Environment and Sustainable Development of Colombia.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/BT01-001",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 5.187997,
     longitude: -75.979094,

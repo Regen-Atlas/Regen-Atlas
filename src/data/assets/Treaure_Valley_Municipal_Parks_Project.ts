@@ -11,7 +11,7 @@ export const Treaure_Valley_Municipal_Parks_Project: Asset = {
     "The  Treasure  Valley  Municipal Parks  Planting  Project  is  a partnership  between  the  City  of  Boise  and the Treasure Valley  Canopy  Network  (Network).  This  project  planted  approximately  504  trees  in  9 municipal parks  throughout  the  Treasure  Valley.  The  City  of  Boise  is  at  the  heart  of Idaho’s  Treasure Valley,  one  of  the  fastest  growing  metropolitan  areas  in  the  United  States.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-008",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 43.656952,
     longitude: -116.222475,

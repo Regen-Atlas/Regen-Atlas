@@ -119,7 +119,7 @@ export default ({
 
         <div className={clsx("flex gap-3 mt-3 justify-between")}>
           <a
-            href={asset.providerLink}
+            href={asset.learnMoreLink || asset.providerLink}
             target="_blank"
             className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
           >

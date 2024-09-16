@@ -11,7 +11,7 @@ export const Sandy_Cross_Forest_Preservation_Project: Asset = {
     "The Sandy Cross Forest Preservation Project safeguards a 132-acre forest within a 214-acre site, featuring an 85-year-old diverse forest with species like yellow poplar, sugar maple, oak, black cherry, and pine. Managed by Western Reserve Land Conservancy, this initiative enhances carbon capture, wildlife habitats, and open space protection. Its preservation counters the loss of such large, diverse forests in Richland County, threatened by agricultural development and urban expansion from the nearby Village of Lexington.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-002",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 40.68348,
     longitude: -82.614459,
