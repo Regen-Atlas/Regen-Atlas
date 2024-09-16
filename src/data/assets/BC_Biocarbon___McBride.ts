@@ -12,7 +12,7 @@ export const BC_Biocarbon___McBride: Asset = {
   providerId: "toucan",
   providerLink:
     "https://app.uniswap.org/swap?chain=celo&inputCurrency=0xcebA9300f2b948710d2653dD7B07f33A8B32118C&outputCurrency=0x50E85c754929840B58614F48e29C64BC78C58345",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 53.364714,
     longitude: -120.227704,

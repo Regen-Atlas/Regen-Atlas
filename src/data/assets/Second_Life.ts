@@ -12,7 +12,7 @@ export const Second_Life: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/second-life/recovery_entity_profile?action=show&controller=users&id=second-life",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 8.210816,
     longitude: 99.082855,

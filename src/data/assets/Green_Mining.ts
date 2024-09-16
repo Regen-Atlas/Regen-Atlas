@@ -12,7 +12,7 @@ export const Green_Mining: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/green-mining/recovery_entity_profile?tab=legal_info",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -23.614784,
     longitude: -46.670626,

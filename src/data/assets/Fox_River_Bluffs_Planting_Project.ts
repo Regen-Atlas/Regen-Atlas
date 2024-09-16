@@ -11,7 +11,7 @@ export const Fox_River_Bluffs_Planting_Project: Asset = {
     "Kendall County Forest Preserve District (District) planted trees as part of this carbon project on 40-acres of the Fox River Bluffs Forest Preserve (Preserve) in Yorkville, IL. The District acquired the 166-acre Preserve in 2015 with a goal to restore the former farmland to prairie and a reforested natural area.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-012",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 41.953327,
     longitude: -88.315989,

@@ -12,7 +12,7 @@ export const Verified_Water_Credit_LTVP001_B2: Asset = {
   providerId: "nat5",
   providerLink:
     "https://www.nat5.bio/index.php/token/verified-water-credit-ltvp001-b2/",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 44.613428,
     longitude: 4.295974,

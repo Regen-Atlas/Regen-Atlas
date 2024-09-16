@@ -12,7 +12,7 @@ export const CLYDE___ALMA_24_1H: Asset = {
   providerId: "carbon_path",
   providerLink:
     "https://21d48d-2.myshopify.com/products/carbonpath-carbon-credit-token-buy-retire",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 48.021547,
     longitude: -105.060528,

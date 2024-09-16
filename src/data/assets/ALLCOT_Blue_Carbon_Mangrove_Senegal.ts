@@ -12,7 +12,7 @@ export const ALLCOT_Blue_Carbon_Mangrove_Senegal: Asset = {
   providerId: "solidworld",
   providerLink:
     "https://app.solid.world/projects/6/allcot-blue-carbon-mangrove-senegal",
-  nativity: "tokenized",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 14.4750607,
     longitude: -14.4529612,

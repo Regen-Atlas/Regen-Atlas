@@ -22,6 +22,10 @@ export const PROVIDER_LIST: Array<IAssetProvider> = [
     name: "Helios",
   },
   {
+    id: "keenest",
+    name: "Keenest",
+  },
+  {
     id: "landx",
     name: "LandX",
   },
@@ -32,10 +36,6 @@ export const PROVIDER_LIST: Array<IAssetProvider> = [
   {
     id: "nat5",
     name: "Nat5",
-  },
-  {
-    id: "nori",
-    name: "Nori",
   },
   {
     id: "plastiks",

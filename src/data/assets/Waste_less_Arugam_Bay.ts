@@ -12,7 +12,7 @@ export const Waste_less_Arugam_Bay: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/waste-less-arugam-bay/recovery_entity_profile?action=show&controller=users&id=waste-less-arugam-bay",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 7.140464,
     longitude: 81.816205,

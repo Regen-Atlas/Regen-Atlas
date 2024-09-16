@@ -11,7 +11,7 @@ export const Grgich_Hills_Estate_Regenerative_Sheep_Grazing: Asset = {
     "This project uses high-density, short-duration rotational sheep grazing in vineyard systems to improve ecosystem functioning through active management of the soil and herbaceous cover in the vineyard understory. The practice  improves soil health, reduces use of herbicides or mowing, and enhances carbon storage. Targeted grazing also supports biodiversity, mitigates wildfires, and improves on-farm nutrient cycling.  The Grgich Hills Estate vineyard and Kaos Sheep Grazing Outfit partnership exemplifies the benefits of managed grazing, especially in enhancing soil health and carbon content.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/projects/1",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 38.4082,
     longitude: -122.3754,

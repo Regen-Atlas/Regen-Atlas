@@ -11,7 +11,7 @@ export const King_County_Urban_Forest_Carbon_Project: Asset = {
     "King County's Forest Carbon Project, part of a 30-year Land Conservation Initiative, aims to protect 65,000 acres of critical urban forest in the rapidly expanding Seattle metro area. This effort includes preserving 1,500 acres of natural lands and urban green spaces, with a notable 15-acre expansion to Soaring Eagle Regional Park in Sammamish, WA, in 2019. The project addresses climate change by maintaining regional forests for public enjoyment and exploration.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-001",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 47.610332,
     longitude: -121.992165,

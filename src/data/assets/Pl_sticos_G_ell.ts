@@ -12,7 +12,7 @@ export const Pl_sticos_G_ell: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/plasticos-guell/recovery_entity_profile?action=show&controller=users&id=plasticos-guell",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 41.447578,
     longitude: 2.22556,

@@ -12,7 +12,7 @@ export const Leonardo_GR: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/leonardo-gr/recovery_entity_profile?action=show&controller=users&id=leonardo-gr",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 39.375982,
     longitude: -0.417329,

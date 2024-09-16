@@ -11,7 +11,7 @@ export const Rancho_Bonito__M_xico: Asset = {
     "Through EthicHub’s protocol, anyone can lend capital to the farmers and/or stake collateral on their behalf in the form of Ethix to secure the farmers’ loans. EthicHub also provides farmers with access to added value markets so they are no longer the weakest link in the supply chain.\n\nThe Rancho Bonito community is eager to send their excellent coffee nano-lots to Europe. By investing in this project you collaborate so that this wonderful coffee is enjoyed in new horizons, some with a view to fair trade and constant improvement. Not only does the Rancho Bonito community benefit, EthicHub benefits not just from receiving economic interests, but also you'll bring this product to Europe's daily places.",
   providerId: "ethic_hub",
   providerLink: "https://app.ethichub.com/projects/635",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 16.513205,
     longitude: -93.957192,

@@ -12,7 +12,7 @@ export const Verified_Soil_Credit: Asset = {
   providerId: "nat5",
   providerLink:
     "https://www.nat5.bio/index.php/token/verified-soil-credit-ltvp001-b1/",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 44.61242,
     longitude: 4.291253,

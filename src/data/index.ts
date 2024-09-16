@@ -1,7 +1,6 @@
 import { Oregon_Biochar_Solutions } from "./assets/Oregon_Biochar_Solutions.ts";
 import { Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network } from "./assets/Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network.ts";
 import { Myanmar_1764 } from "./assets/Myanmar_1764.ts";
-import { Glow_Solar_Farm_1 } from "./assets/Glow_Solar_Farm_1.ts";
 import { Travis_County_Floodplain_Reforestation_Program } from "./assets/Travis_County_Floodplain_Reforestation_Program.ts";
 import { Exomad_Green } from "./assets/Exomad_Green.ts";
 import { Treaure_Valley_Municipal_Parks_Project } from "./assets/Treaure_Valley_Municipal_Parks_Project.ts";
@@ -30,9 +29,6 @@ import { Verified_Water_Credit_LTVP001_B2 } from "./assets/Verified_Water_Credit
 import { Verified_Water_Credit_LTVP001_B3 } from "./assets/Verified_Water_Credit_LTVP001_B3.ts";
 import { Verified_Soil_Credit } from "./assets/Verified_Soil_Credit.ts";
 import { Verified_Biodiversity_Based_Credit } from "./assets/Verified_Biodiversity_Based_Credit.ts";
-import { Bayer_Carbon_Program } from "./assets/Bayer_Carbon_Program.ts";
-import { Miltrim_Farms_Inc } from "./assets/Miltrim_Farms_Inc.ts";
-import { Willis_Farms__Inc } from "./assets/Willis_Farms__Inc.ts";
 import { Glow_Solar_Farm_10 } from "./assets/Glow_Solar_Farm_10.ts";
 import { Glow_Solar_Farm_11 } from "./assets/Glow_Solar_Farm_11.ts";
 import { Glow_Solar_Farm_12 } from "./assets/Glow_Solar_Farm_12.ts";
@@ -47,8 +43,6 @@ import { Glow_Solar_Farm_8 } from "./assets/Glow_Solar_Farm_8.ts";
 import { Glow_Solar_Farm_9 } from "./assets/Glow_Solar_Farm_9.ts";
 import { American_BioCarbon_CT } from "./assets/American_BioCarbon_CT.ts";
 import { BC_Biocarbon___McBride } from "./assets/BC_Biocarbon___McBride.ts";
-import { Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile } from "./assets/Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile.ts";
-import { Rooftop_Solar_in_India } from "./assets/Rooftop_Solar_in_India.ts";
 import { Inaugural_Batch_of_Amigo_Beans } from "./assets/Inaugural_Batch_of_Amigo_Beans.ts";
 import { Batch_Cocria_ao_of_Amigo_Beans } from "./assets/Batch_Cocria_ao_of_Amigo_Beans.ts";
 import { Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate } from "./assets/Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate.ts";
@@ -85,7 +79,6 @@ import { Agrocortex_REDD_Project } from "./assets/Agrocortex_REDD_Project.ts";
 import { Amazon_Rio_REDD__IFM } from "./assets/Amazon_Rio_REDD__IFM.ts";
 import { Chespal__M_xico_ } from "./assets/Chespal__M_xico_.ts";
 import { Dori_Alimentos_Ltda___Biomass_Based_Project } from "./assets/Dori_Alimentos_Ltda___Biomass_Based_Project.ts";
-import { Double_J_Farm } from "./assets/Double_J_Farm.ts";
 import { Esperanza_Global } from "./assets/Esperanza_Global.ts";
 import { Floresta_Santa_Maria_Project } from "./assets/Floresta_Santa_Maria_Project.ts";
 import { Fortaleza_Ituxi_REDD_Project } from "./assets/Fortaleza_Ituxi_REDD_Project.ts";
@@ -117,22 +110,29 @@ import { High_impact_solar_project_in_Brazil } from "./assets/High_impact_solar_
 import { High_impact_solar_projects_in_Burkina_Faso } from "./assets/High_impact_solar_projects_in_Burkina_Faso.ts";
 import { La_Soledad__M_xico_ } from "./assets/La_Soledad__M_xico_.ts";
 import { Madre_de_Dios_Amazon_REDD__Project } from "./assets/Madre_de_Dios_Amazon_REDD__Project.ts";
-import { R_A__Pete_Farms_ } from "./assets/R_A__Pete_Farms_.ts";
 import { Reciclador_Chile } from "./assets/Reciclador_Chile.ts";
 import { Rintz_Industries } from "./assets/Rintz_Industries.ts";
 import { Salchiji__M_xico_ } from "./assets/Salchiji__M_xico_.ts";
-import { San_Jos__Ixtepec__M_xico_ } from "./assets/San_Jos__Ixtepec__M_xico_.ts";
 import { Santa_Isabel_Water_Credit } from "./assets/Santa_Isabel_Water_Credit.ts";
 import { Verified_Carbon_Removal } from "./assets/Verified_Carbon_Removal.ts";
 import { Verified_Carbon_Removal2 } from "./assets/Verified_Carbon_Removal_2.ts";
 import { Vintz_Plastics_Ltd_ } from "./assets/Vintz_Plastics_Ltd_.ts";
+import { Ebikes_Refurbishment } from "./assets/Ebikes_Refurbishment.ts";
 
 import { Asset } from "../modules/assets";
+import { Glow_Solar_Farm_1 } from "./assets/Glow_Solar_Farm_1.ts";
+import { Glow_Solar_Farm_38 } from "./assets/Glow_Solar_Farm_38.ts";
+import { Glow_Solar_Farm_39 } from "./assets/Glow_Solar_Farm_39.ts";
+import { Glow_Solar_Farm_40 } from "./assets/Glow_Solar_Farm_40.ts";
+import { Glow_Solar_Farm_41 } from "./assets/Glow_Solar_Farm_41.ts";
+import { Glow_Solar_Farm_42 } from "./assets/Glow_Solar_Farm_42.ts";
+import { Glow_Solar_Farm_43 } from "./assets/Glow_Solar_Farm_43.ts";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
   Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network,
   LandX,
+  Ebikes_Refurbishment,
   Myanmar_1764,
   Glow_Solar_Farm_1,
   Travis_County_Floodplain_Reforestation_Program,
@@ -163,9 +163,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Verified_Water_Credit_LTVP001_B3,
   Verified_Soil_Credit,
   Verified_Biodiversity_Based_Credit,
-  Bayer_Carbon_Program,
-  Miltrim_Farms_Inc,
-  Willis_Farms__Inc,
   Glow_Solar_Farm_2,
   Glow_Solar_Farm_3,
   Glow_Solar_Farm_4,
@@ -180,8 +177,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_13,
   American_BioCarbon_CT,
   BC_Biocarbon___McBride,
-  Aguas_de_Valle__Solar_powered_water_purification_in_the_heart_of_Chile,
-  Rooftop_Solar_in_India,
   Inaugural_Batch_of_Amigo_Beans,
   Batch_Cocria_ao_of_Amigo_Beans,
   Ninhos_da_Reden_ao___Banana_Jucara_Jaca_Abacate,
@@ -216,7 +211,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Amazon_Rio_REDD__IFM,
   Chespal__M_xico_,
   Dori_Alimentos_Ltda___Biomass_Based_Project,
-  Double_J_Farm,
   Esperanza_Global,
   Floresta_Santa_Maria_Project,
   Fortaleza_Ituxi_REDD_Project,
@@ -244,15 +238,19 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_35,
   Glow_Solar_Farm_36,
   Glow_Solar_Farm_37,
+  Glow_Solar_Farm_38,
+  Glow_Solar_Farm_39,
+  Glow_Solar_Farm_40,
+  Glow_Solar_Farm_41,
+  Glow_Solar_Farm_42,
+  Glow_Solar_Farm_43,
   High_impact_solar_project_in_Brazil,
   High_impact_solar_projects_in_Burkina_Faso,
   La_Soledad__M_xico_,
   Madre_de_Dios_Amazon_REDD__Project,
-  R_A__Pete_Farms_,
   Reciclador_Chile,
   Rintz_Industries,
   Salchiji__M_xico_,
-  San_Jos__Ixtepec__M_xico_,
   Santa_Isabel_Water_Credit,
   Verified_Carbon_Removal,
   Verified_Carbon_Removal2,

@@ -12,7 +12,7 @@ export const Amazon_Green_Wall_NFT_Series_2: Asset = {
   providerId: "moss",
   providerLink:
     "https://opensea.io/assets/matic/0x3a68b7f8baef34b28839dd8365551c51b8bbcb43/2",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -4.799042,
     longitude: -57.27713,

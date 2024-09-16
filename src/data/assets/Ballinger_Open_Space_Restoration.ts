@@ -11,7 +11,7 @@ export const Ballinger_Open_Space_Restoration: Asset = {
     "The Mountains to Sound Greenway Trust (Greenway Trust) is partnering with the City of Shoreline to restore a site known as Ballinger Open Space. The Greenway Trust will work with the City of Shoreline and community members to remove invasive plants, plant trees, and restore public access to this degraded open space. To date, over 1,900 trees have been planted and invasive weeds have been controlled across the 2.7 acre open space.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-010",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 47.788244,
     longitude: -122.329169,

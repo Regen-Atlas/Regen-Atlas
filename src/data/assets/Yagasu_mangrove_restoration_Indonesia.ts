@@ -12,7 +12,7 @@ export const Yagasu_mangrove_restoration_Indonesia: Asset = {
   providerId: "solidworld",
   providerLink:
     "https://app.solid.world/projects/2/yagasu-mangrove-restoration-indonesia",
-  nativity: "tokenized",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -2.4833826,
     longitude: 117.8902853,

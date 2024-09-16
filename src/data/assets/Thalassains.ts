@@ -12,7 +12,7 @@ export const Thalassains: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/thalassains/recovery_entity_profile?tab=sustainability",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 28.576037,
     longitude: 33.964298,
