@@ -30,9 +30,6 @@ import { Verified_Water_Credit_LTVP001_B2 } from "./assets/Verified_Water_Credit
 import { Verified_Water_Credit_LTVP001_B3 } from "./assets/Verified_Water_Credit_LTVP001_B3.ts";
 import { Verified_Soil_Credit } from "./assets/Verified_Soil_Credit.ts";
 import { Verified_Biodiversity_Based_Credit } from "./assets/Verified_Biodiversity_Based_Credit.ts";
-import { Bayer_Carbon_Program } from "./assets/Bayer_Carbon_Program.ts";
-import { Miltrim_Farms_Inc } from "./assets/Miltrim_Farms_Inc.ts";
-import { Willis_Farms__Inc } from "./assets/Willis_Farms__Inc.ts";
 import { Glow_Solar_Farm_10 } from "./assets/Glow_Solar_Farm_10.ts";
 import { Glow_Solar_Farm_11 } from "./assets/Glow_Solar_Farm_11.ts";
 import { Glow_Solar_Farm_12 } from "./assets/Glow_Solar_Farm_12.ts";
@@ -85,7 +82,6 @@ import { Agrocortex_REDD_Project } from "./assets/Agrocortex_REDD_Project.ts";
 import { Amazon_Rio_REDD__IFM } from "./assets/Amazon_Rio_REDD__IFM.ts";
 import { Chespal__M_xico_ } from "./assets/Chespal__M_xico_.ts";
 import { Dori_Alimentos_Ltda___Biomass_Based_Project } from "./assets/Dori_Alimentos_Ltda___Biomass_Based_Project.ts";
-import { Double_J_Farm } from "./assets/Double_J_Farm.ts";
 import { Esperanza_Global } from "./assets/Esperanza_Global.ts";
 import { Floresta_Santa_Maria_Project } from "./assets/Floresta_Santa_Maria_Project.ts";
 import { Fortaleza_Ituxi_REDD_Project } from "./assets/Fortaleza_Ituxi_REDD_Project.ts";
@@ -117,7 +113,6 @@ import { High_impact_solar_project_in_Brazil } from "./assets/High_impact_solar_
 import { High_impact_solar_projects_in_Burkina_Faso } from "./assets/High_impact_solar_projects_in_Burkina_Faso.ts";
 import { La_Soledad__M_xico_ } from "./assets/La_Soledad__M_xico_.ts";
 import { Madre_de_Dios_Amazon_REDD__Project } from "./assets/Madre_de_Dios_Amazon_REDD__Project.ts";
-import { R_A__Pete_Farms_ } from "./assets/R_A__Pete_Farms_.ts";
 import { Reciclador_Chile } from "./assets/Reciclador_Chile.ts";
 import { Rintz_Industries } from "./assets/Rintz_Industries.ts";
 import { Salchiji__M_xico_ } from "./assets/Salchiji__M_xico_.ts";
@@ -126,6 +121,7 @@ import { Santa_Isabel_Water_Credit } from "./assets/Santa_Isabel_Water_Credit.ts
 import { Verified_Carbon_Removal } from "./assets/Verified_Carbon_Removal.ts";
 import { Verified_Carbon_Removal2 } from "./assets/Verified_Carbon_Removal_2.ts";
 import { Vintz_Plastics_Ltd_ } from "./assets/Vintz_Plastics_Ltd_.ts";
+import { Ebikes_Refurbishment } from "./assets/Ebikes_Refurbishment.ts";
 
 import { Asset } from "../modules/assets";
 
@@ -133,6 +129,7 @@ export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
   Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network,
   LandX,
+  Ebikes_Refurbishment,
   Myanmar_1764,
   Glow_Solar_Farm_1,
   Travis_County_Floodplain_Reforestation_Program,
@@ -163,9 +160,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Verified_Water_Credit_LTVP001_B3,
   Verified_Soil_Credit,
   Verified_Biodiversity_Based_Credit,
-  Bayer_Carbon_Program,
-  Miltrim_Farms_Inc,
-  Willis_Farms__Inc,
   Glow_Solar_Farm_2,
   Glow_Solar_Farm_3,
   Glow_Solar_Farm_4,
@@ -216,7 +210,6 @@ export const ALL_ASSETS: Array<Asset> = [
   Amazon_Rio_REDD__IFM,
   Chespal__M_xico_,
   Dori_Alimentos_Ltda___Biomass_Based_Project,
-  Double_J_Farm,
   Esperanza_Global,
   Floresta_Santa_Maria_Project,
   Fortaleza_Ituxi_REDD_Project,
@@ -248,7 +241,6 @@ export const ALL_ASSETS: Array<Asset> = [
   High_impact_solar_projects_in_Burkina_Faso,
   La_Soledad__M_xico_,
   Madre_de_Dios_Amazon_REDD__Project,
-  R_A__Pete_Farms_,
   Reciclador_Chile,
   Rintz_Industries,
   Salchiji__M_xico_,

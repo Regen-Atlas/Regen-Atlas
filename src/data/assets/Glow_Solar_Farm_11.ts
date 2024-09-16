@@ -2,7 +2,7 @@ import { Asset } from "../../modules/assets";
 
 export const Glow_Solar_Farm_11: Asset = {
   cid: "",
-  id: "a78a738a-8d8e-4418-9393-40d65715631f",
+  id: "6700c3c2-1fa4-4df0-a739-1a38032ea56d",
   imageHash: "",
   name: "Glow Solar Farm 11",
   assetTypeId: "nonpossessory_rights",
@@ -11,10 +11,10 @@ export const Glow_Solar_Farm_11: Asset = {
     "Glow is a cryptoeconomic system that produces high additionality carbon credits from cost effective solar farms. Additionality is achieved by requiring participating solar farms to contribute 100% of their gross electricity revenue to the Glow incentive pool. Cost effectiveness is ensured by creating a competition for rewards modeled after Bitcoin’s proof-of-work incentives.",
   providerId: "glow",
   providerLink: "https://glowlabs.org/waitlist",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
-    latitude: 40.50824,
-    longitude: -111.8707,
+    latitude: 28.32285371,
+    longitude: -81.48279018,
   },
   tokens: [
     {
@@ -23,11 +23,11 @@ export const Glow_Solar_Farm_11: Asset = {
     },
   ],
   physicalAddress: {
-    region: "Utah",
+    region: "Florida",
     country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
-  createdAt: "2024-07-06T22:12:13.428Z",
-  updatedAt: "2024-07-06T22:12:13.428Z",
+  createdAt: "2024-09-16T08:27:49.223Z",
+  updatedAt: "2024-09-16T08:27:49.223Z",
 };

@@ -2,7 +2,7 @@ import { Asset } from "../../modules/assets";
 
 export const Glow_Solar_Farm_21: Asset = {
   cid: "",
-  id: "d98b9372-2c28-402c-a296-45746e251d2a",
+  id: "05c62545-1a67-4564-b491-ace83fff53f2",
   imageHash: "",
   name: "Glow Solar Farm 21",
   assetTypeId: "nonpossessory_rights",
@@ -13,8 +13,8 @@ export const Glow_Solar_Farm_21: Asset = {
   providerLink: "https://glowlabs.org/waitlist",
   nativity: "onchain_enforcement",
   geolocation: {
-    latitude: 40.66015229,
-    longitude: -112.00772743,
+    latitude: 39.07125062,
+    longitude: -108.47140903,
   },
   tokens: [
     {
@@ -23,11 +23,11 @@ export const Glow_Solar_Farm_21: Asset = {
     },
   ],
   physicalAddress: {
-    region: "Utah",
+    region: "Colorado",
     country: "US",
   },
   imageUrl:
     "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fsolar-farm-6619505_1280.jpg?alt=media",
-  createdAt: "2024-08-08T15:48:55.855Z",
-  updatedAt: "2024-08-08T15:48:55.855Z",
+  createdAt: "2024-09-16T08:27:49.230Z",
+  updatedAt: "2024-09-16T08:27:49.230Z",
 };

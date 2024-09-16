@@ -9,11 +9,11 @@ export type IssuerId =
   | "ethic_hub"
   | "glow"
   | "helios"
+  | "keenest"
+  | "landx"
   | "moss"
   | "nat5"
-  | "nori"
   | "plastiks"
   | "regen_network"
   | "solidworld"
-  | "toucan"
-  | "landx";
+  | "toucan";
