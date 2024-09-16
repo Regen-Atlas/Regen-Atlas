@@ -1,7 +1,6 @@
 import { Oregon_Biochar_Solutions } from "./assets/Oregon_Biochar_Solutions.ts";
 import { Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network } from "./assets/Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network.ts";
 import { Myanmar_1764 } from "./assets/Myanmar_1764.ts";
-import { Glow_Solar_Farm_1 } from "./assets/Glow_Solar_Farm_1.ts";
 import { Travis_County_Floodplain_Reforestation_Program } from "./assets/Travis_County_Floodplain_Reforestation_Program.ts";
 import { Exomad_Green } from "./assets/Exomad_Green.ts";
 import { Treaure_Valley_Municipal_Parks_Project } from "./assets/Treaure_Valley_Municipal_Parks_Project.ts";
@@ -124,6 +123,13 @@ import { Vintz_Plastics_Ltd_ } from "./assets/Vintz_Plastics_Ltd_.ts";
 import { Ebikes_Refurbishment } from "./assets/Ebikes_Refurbishment.ts";
 
 import { Asset } from "../modules/assets";
+import { Glow_Solar_Farm_1 } from "./assets/Glow_Solar_Farm_1.ts";
+import { Glow_Solar_Farm_38 } from "./assets/Glow_Solar_Farm_38.ts";
+import { Glow_Solar_Farm_39 } from "./assets/Glow_Solar_Farm_39.ts";
+import { Glow_Solar_Farm_40 } from "./assets/Glow_Solar_Farm_40.ts";
+import { Glow_Solar_Farm_41 } from "./assets/Glow_Solar_Farm_41.ts";
+import { Glow_Solar_Farm_42 } from "./assets/Glow_Solar_Farm_42.ts";
+import { Glow_Solar_Farm_43 } from "./assets/Glow_Solar_Farm_43.ts";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
@@ -237,6 +243,12 @@ export const ALL_ASSETS: Array<Asset> = [
   Glow_Solar_Farm_35,
   Glow_Solar_Farm_36,
   Glow_Solar_Farm_37,
+  Glow_Solar_Farm_38,
+  Glow_Solar_Farm_39,
+  Glow_Solar_Farm_40,
+  Glow_Solar_Farm_41,
+  Glow_Solar_Farm_42,
+  Glow_Solar_Farm_43,
   High_impact_solar_project_in_Brazil,
   High_impact_solar_projects_in_Burkina_Faso,
   La_Soledad__M_xico_,
