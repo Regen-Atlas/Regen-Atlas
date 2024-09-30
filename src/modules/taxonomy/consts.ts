@@ -10,6 +10,12 @@ export const NATURAL_ASSET_OWNERSHIP: AssetSubtype = {
   assetTypeId: "ownership",
 };
 
+export const COMMODITY_OWNERSHIP: AssetSubtype = {
+  id: "commodity_ownership",
+  name: "Commodity",
+  assetTypeId: "ownership",
+};
+
 export const GREEN_DIGITAL_COLLECTIBLES: AssetSubtype = {
   id: "green_digital_collectibles",
   name: "Digital Collectibles",
@@ -170,6 +176,7 @@ const Ownership: AssetType = {
   name: "Ownership",
   subtypes: [
     NATURAL_ASSET_OWNERSHIP,
+    COMMODITY_OWNERSHIP,
     GREEN_DIGITAL_COLLECTIBLES,
     GREEN_DIGIPHYSICAL_GOODS,
     RENEWABLE_RWAS,

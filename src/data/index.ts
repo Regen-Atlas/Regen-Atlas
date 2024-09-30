@@ -127,10 +127,12 @@ import { Glow_Solar_Farm_40 } from "./assets/Glow_Solar_Farm_40.ts";
 import { Glow_Solar_Farm_41 } from "./assets/Glow_Solar_Farm_41.ts";
 import { Glow_Solar_Farm_42 } from "./assets/Glow_Solar_Farm_42.ts";
 import { Glow_Solar_Farm_43 } from "./assets/Glow_Solar_Farm_43.ts";
+import { Tokenized_Organic_Wine } from "./assets/Tokenized_Organic_Wine.ts";
 
 export const ALL_ASSETS: Array<Asset> = [
   Oregon_Biochar_Solutions,
   Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantanal_Conservation_Network,
+  Tokenized_Organic_Wine,
   LandX,
   Ebikes_Refurbishment,
   Myanmar_1764,
