@@ -14,8 +14,8 @@ export const Tokenized_Organic_Wine: Asset = {
   learnMoreLink: "https://costaflores.com",
   nativity: "onchain_integration",
   geolocation: {
-    latitude: -33.00544,
-    longitude: -68.82616,
+    latitude: -33.087147,
+    longitude: -68.925696,
   },
   tokens: [
     {
@@ -28,7 +28,7 @@ export const Tokenized_Organic_Wine: Asset = {
     country: "AR",
   },
   imageUrl:
-    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2Fopen_vino.jpeg?alt=media",
+    "https://firebasestorage.googleapis.com/v0/b/regen-atlas-mvp.appspot.com/o/v2%2FOpenVino.jpeg?alt=media",
   createdAt: "2024-09-30T13:01:33.792Z",
   updatedAt: "2024-09-30T13:01:33.792Z",
 };
