@@ -38,6 +38,10 @@ export const PROVIDER_LIST: Array<IAssetProvider> = [
     name: "Nat5",
   },
   {
+    id: "open_vino",
+    name: "OpenVino",
+  },
+  {
     id: "plastiks",
     name: "Plastiks",
   },

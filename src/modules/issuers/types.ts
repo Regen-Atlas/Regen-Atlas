@@ -13,6 +13,7 @@ export type IssuerId =
   | "landx"
   | "moss"
   | "nat5"
+  | "open_vino"
   | "plastiks"
   | "regen_network"
   | "solidworld"

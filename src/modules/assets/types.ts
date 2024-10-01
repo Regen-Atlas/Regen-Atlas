@@ -31,6 +31,11 @@ export interface Asset {
     | "tokenized"
     | "onchain_enforcement"
     | "onchain_integration";
+  // | "STATUS_QUO"
+  // | "ONCHAIN_REPRESENTATION"
+  // | "ONCHAIN_INTEGRATION"
+  // | "ONCHAIN_ENFORCEMENT"
+  // | "FULLY_ONCHAIN";
   imageUrl?: string;
 }
 
