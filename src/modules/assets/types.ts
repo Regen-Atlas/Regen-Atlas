@@ -9,6 +9,7 @@ export interface Asset {
   assetTypeId: AssetTypeId;
   assetSubtypeId: string;
   providerId: IssuerId;
+  learnMoreLink?: string;
   providerLink: string;
   tokens?: Array<{
     chainId: ChainId;
@@ -25,7 +26,16 @@ export interface Asset {
   createdAt: string;
   updatedAt: string;
   imageHash: string;
-  nativity?: "native" | "tokenized" | "onchain_enforcement";
+  nativity?:
+    | "native"
+    | "tokenized"
+    | "onchain_enforcement"
+    | "onchain_integration";
+  // | "STATUS_QUO"
+  // | "ONCHAIN_REPRESENTATION"
+  // | "ONCHAIN_INTEGRATION"
+  // | "ONCHAIN_ENFORCEMENT"
+  // | "FULLY_ONCHAIN";
   imageUrl?: string;
 }
 

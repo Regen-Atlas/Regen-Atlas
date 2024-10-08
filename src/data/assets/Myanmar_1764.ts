@@ -11,7 +11,7 @@ export const Myanmar_1764: Asset = {
     "The Reforestation and Restoration of Degraded Mangrove Lands, Sustainable Livelihood and Community Development in Myanmar project will be implemented on degraded lands of the Northern part of Ayeyarwady Division of Myanmar.",
   providerId: "solidworld",
   providerLink: "https://app.solid.world/projects/5/myanmar-1764",
-  nativity: "tokenized",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 21.9621047,
     longitude: 96.1103153,

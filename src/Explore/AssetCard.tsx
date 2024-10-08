@@ -101,25 +101,27 @@ export default ({
           />
         </div>
 
-        <div>
+        <div className="xxs:text-[13px]">
           <div className="flex justify-between py-1">
             <p className="font-bold">Nativity</p>
-            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 text-sm font-bold">
+            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {asset.nativity ? NATIVITY_MAP[asset.nativity] : ""}
             </div>
           </div>
 
           <div className="flex justify-between py-1">
             <p className="font-bold">Subtype</p>
-            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 text-sm font-bold">
+            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {ASSET_SUBTYPES_MAP[asset.assetSubtypeId].name}
             </div>
           </div>
         </div>
 
-        <div className={clsx("flex gap-3 mt-3 justify-between")}>
+        <div
+          className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}
+        >
           <a
-            href={asset.providerLink}
+            href={asset.learnMoreLink || asset.providerLink}
             target="_blank"
             className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
           >
@@ -128,7 +130,7 @@ export default ({
           </a>
           {!!celoContractAddress && showBuyButton && (
             <Link
-              className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
               to={`/assets/${asset.id}`}
             >
               Buy
@@ -136,7 +138,7 @@ export default ({
           )}
           {!celoContractAddress && showBuyButton && (
             <a
-              className="block max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
               href={asset.providerLink}
               target="_blank"
             >

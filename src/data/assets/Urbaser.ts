@@ -12,7 +12,7 @@ export const Urbaser: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/urbaser/recovery_entity_profile?action=show&controller=users&id=urbaser",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 40.377194,
     longitude: -3.633076,

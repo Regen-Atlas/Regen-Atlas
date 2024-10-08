@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Marker } from "react-map-gl";
+import { Address } from "viem";
+import { Helmet } from "react-helmet-async";
 import { useFiltersState } from "../context/filters";
 import AssetCard from "../Explore/AssetCard";
 import { MapBox } from "../shared/components/MapBox";
@@ -11,13 +13,17 @@ import {
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
-import { Address } from "viem";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
   const { filteredAssets } = useFiltersState();
   const { mapStyle } = useMapState();
+
   const asset = filteredAssets.find((a) => a.id === assetId);
+
+  if (!asset) {
+    return <div>Asset not found</div>;
+  }
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
     (t) => t.chainId === 42220
@@ -32,6 +38,13 @@ export default (): React.ReactElement => {
 
   return (
     <>
+      <Helmet>
+        <title>{asset.name}</title>
+        <meta
+          name="description"
+          content={`${asset.description.substring(0, 160)}...`}
+        />
+      </Helmet>
       <Header />
       <div className="main-container">
         <div className="pt-[60px] md:pt-[100px]">
@@ -51,7 +64,7 @@ export default (): React.ReactElement => {
                 {celoContractAddress && tokenIn && tokenOut && (
                   <div className="flex justify-center mt-4">
                     <div className="w-full">
-                      <UniswapTrading tokenIn={tokenIn} tokenOut={tokenOut} />
+                      <UniswapTrading tokenPair={[tokenIn, tokenOut]} />
                     </div>
                   </div>
                 )}

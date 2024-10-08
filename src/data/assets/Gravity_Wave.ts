@@ -12,7 +12,7 @@ export const Gravity_Wave: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/gravity-wave/recovery_entity_profile?action=show&controller=users&id=gravity-wave",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 38.647232,
     longitude: 0.071285,

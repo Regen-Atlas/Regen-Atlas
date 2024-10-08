@@ -12,7 +12,7 @@ export const Ninhos_da_Reden_ao___Banana_Jucara_Abacate: Asset = {
   providerId: "agroforest_dao",
   providerLink:
     "https://opensea.io/assets/optimism/0x52847d4f2ac8cba14ad10c836425689d72f30b6d/13",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -21.608489,
     longitude: -43.764012,

@@ -14,6 +14,7 @@ import {
   getPool,
   getTokenApproval,
   UNISWAP_POOLS_MAP,
+  ITradeSettings,
 } from "../.";
 import { increaseByPercent } from "../../../shared/helpers/percent";
 import { parseUnits } from "viem";
@@ -22,11 +23,18 @@ import { useModal } from "connectkit";
 import { Modal } from "../../../shared/components";
 import { waitForTransactionReceipt } from "@wagmi/core";
 import { config } from "../../../wagmi";
-import { CircleNotch, Cube, WarningDiamond } from "@phosphor-icons/react";
+import {
+  ArrowsDownUp,
+  CircleNotch,
+  Cube,
+  WarningDiamond,
+} from "@phosphor-icons/react";
+import { UniswapTradeSettings } from "./UniswapTradeSettings";
+import clsx from "clsx";
+import { analytics } from "../../analytics";
 
 interface UniswapTradingProps {
-  tokenIn: Token;
-  tokenOut: Token;
+  tokenPair: [Token, Token];
 }
 
 type SwappingState =
@@ -55,9 +63,10 @@ const buttonText: Record<SwappingState, string> = {
 };
 
 export const UniswapTrading: React.FC<UniswapTradingProps> = ({
-  tokenIn,
-  tokenOut,
+  tokenPair,
 }) => {
+  const [tokenIn, setTokenIn] = useState(tokenPair[0]);
+  const [tokenOut, setTokenOut] = useState(tokenPair[1]);
   const [showModal, setShowModal] = useState(false);
   const [amountIn, setAmountIn] = useState("");
   const [amountOut, setAmountOut] = useState("");
@@ -86,8 +95,21 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     account: address,
   });
 
+  const [tradeSettings, setTradeSettings] = useState<ITradeSettings>({
+    slippageTolerancePercentage: "0.5",
+    deadlineInMinutes: 10,
+  });
+
   const { address: poolAddress, fee: poolFee } =
-    UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`];
+    UNISWAP_POOLS_MAP[`${tokenIn.address}${tokenOut.address}`] ||
+    UNISWAP_POOLS_MAP[`${tokenOut.address}${tokenIn.address}`];
+
+  const options: SwapOptions = {
+    slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
+    deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
+    recipient: address || "", // That's hackish, but because later we check if address is defined, it's fine
+    sqrtPriceLimitX96: 0,
+  };
 
   const handleAmountInChange = async (value: string) => {
     setAmountIn(value);
@@ -166,13 +188,6 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     setAmountIn(formatNumber(quote, tokenIn.decimals));
   };
 
-  const options: SwapOptions = {
-    slippageTolerance: new Percent(50, 10000), // 50 bips, or 0.50%
-    deadline: Math.floor(Date.now() / 1000) + 60 * 20, // 20 minutes from the current Unix time
-    recipient: address || "", // That's hackish, but because later we check if address is defined, it's fine
-    sqrtPriceLimitX96: 0,
-  };
-
   const handleBuy = async () => {
     if (!amountIn || !address) {
       return;
@@ -194,8 +209,20 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     );
 
     try {
+      const tradeOptions: SwapOptions = {
+        ...options,
+        slippageTolerance: new Percent(
+          parseNumber(tradeSettings.slippageTolerancePercentage, 2).toString(),
+          10000
+        ),
+      };
+
+      analytics.sendTradingEvent(
+        `Request Token Swap Confirmation, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
+
       const res = await executeTrade({
-        options,
+        options: tradeOptions,
         tokenIn,
         tokenOut,
         amountIn: amountInWithDecimals,
@@ -210,7 +237,13 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       setAmountIn("");
       setAmountOut("");
       setStatus("done");
+      analytics.sendTradingEvent(
+        `Token Swap Completed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
     } catch (e) {
+      analytics.sendTradingEvent(
+        `Token Swap Failed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
+      );
       setStatus("error");
     }
   };
@@ -231,15 +264,29 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   };
 
   const requestTokenSpendingApproval = async () => {
+    analytics.sendTradingEvent(
+      `Request Token Spending Approval for ${tokenIn.symbol}`
+    );
     const amountInWithDecimals = parseUnits(
       amountIn.toString(),
       tokenIn.decimals
     );
+    const tradeOptions: SwapOptions = {
+      ...options,
+      slippageTolerance: new Percent(
+        parseNumber(tradeSettings.slippageTolerancePercentage, 2).toString(),
+        10000
+      ),
+    };
+
     try {
       const approvalAmount: bigint =
         tradeType === "exactInput"
           ? amountInWithDecimals
-          : increaseByPercent(amountInWithDecimals, options.slippageTolerance);
+          : increaseByPercent(
+              amountInWithDecimals,
+              tradeOptions.slippageTolerance
+            );
 
       const hash = await getTokenApproval(tokenIn, approvalAmount);
       setStatus("awaiting_approval_confirmation");
@@ -253,29 +300,58 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
     }
   };
 
+  const handleSwitchTokens = () => {
+    const temp = tokenIn;
+    setTokenIn(tokenOut);
+    setTokenOut(temp);
+    setAmountIn("");
+    setAmountOut("");
+    setSwapExchangeRate("");
+  };
+
   return (
     <>
       <div>
-        <div className="mb-1">
-          <UniswapTokenInput
-            type="sell"
-            placeholder="0"
-            token={tokenIn}
-            value={amountIn}
-            formattedBalance={tokenInBalance.formattedBalance}
-            displayBalance={!!address}
-            onChange={(value) => handleAmountInChange(value)}
+        <div className="flex justify-end mb-2">
+          <UniswapTradeSettings
+            settings={tradeSettings}
+            onUpdate={(settings) => {
+              setTradeSettings(settings);
+            }}
           />
         </div>
-        <UniswapTokenInput
-          type="buy"
-          placeholder="0"
-          token={tokenOut}
-          value={amountOut}
-          formattedBalance={tokenOutBalance.formattedBalance}
-          displayBalance={!!address}
-          onChange={(value) => handleAmountOutChange(value)}
-        />
+        <div className="relative">
+          <div className="mb-1">
+            <UniswapTokenInput
+              type="sell"
+              placeholder="0"
+              token={tokenIn}
+              value={amountIn}
+              formattedBalance={tokenInBalance.formattedBalance}
+              displayBalance={!!address}
+              onChange={(value) => handleAmountInChange(value)}
+            />
+          </div>
+          <UniswapTokenInput
+            type="buy"
+            placeholder="0"
+            token={tokenOut}
+            value={amountOut}
+            formattedBalance={tokenOutBalance.formattedBalance}
+            displayBalance={!!address}
+            onChange={(value) => handleAmountOutChange(value)}
+          />
+          <button
+            onClick={handleSwitchTokens}
+            className={clsx(
+              "bg-cardBackground border-2 border-white w-12 h-8 absolute top-[calc(50%-16px)] left-[calc(50%-24px)]",
+              "rounded-full flex justify-center items-center shadow-sm",
+              "hover:bg-white"
+            )}
+          >
+            <ArrowsDownUp size={24} weight="fill" />
+          </button>
+        </div>
         <button
           className="button button-gradient w-full my-2"
           onClick={handleButtonClick}

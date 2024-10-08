@@ -12,7 +12,7 @@ export const Green_Worms: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/green-worms/recovery_entity_profile?action=show&controller=users&id=green-worms",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 11.290251,
     longitude: 75.767092,

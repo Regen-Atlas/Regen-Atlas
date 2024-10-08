@@ -12,7 +12,7 @@ export const Biodiversity_Stewardship_Credits__Jaguar_Stewardship_in_the_Pantana
       "Using the Biodiversity Stewardship Methodology,  ERA Brazil and the Instituto Homem Pantaneiro (IHP) have a partnership to develop the first Jaguar biodiversity credits from Private Natural Heritage Reserve (RPPN) areas managed by IHP. Ecological indicators of the jaguar and habitat quality parameters were monitored in 50,600 hectares at Pantanal biome. The new resources from the commercialization of biodiversity credits will be used for improving wellness and monitoring techniques of the Jaguar, estate management, research, environmental education and ecotourism.",
     providerId: "regen_network",
     providerLink: "https://app.regen.network/project/ihp-pilot",
-    nativity: "native",
+    nativity: "onchain_enforcement",
     geolocation: {
       latitude: -18.987658,
       longitude: -57.684508,

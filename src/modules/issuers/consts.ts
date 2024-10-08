@@ -22,6 +22,10 @@ export const PROVIDER_LIST: Array<IAssetProvider> = [
     name: "Helios",
   },
   {
+    id: "keenest",
+    name: "Keenest",
+  },
+  {
     id: "landx",
     name: "LandX",
   },
@@ -34,8 +38,8 @@ export const PROVIDER_LIST: Array<IAssetProvider> = [
     name: "Nat5",
   },
   {
-    id: "nori",
-    name: "Nori",
+    id: "open_vino",
+    name: "OpenVino",
   },
   {
     id: "plastiks",

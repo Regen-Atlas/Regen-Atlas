@@ -12,7 +12,7 @@ export const MYERS_TINDLE_UNIT_12C: Asset = {
   providerId: "carbon_path",
   providerLink:
     "https://21d48d-2.myshopify.com/products/carbonpath-carbon-credit-token-buy-retire",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 33.290837,
     longitude: -97.147873,

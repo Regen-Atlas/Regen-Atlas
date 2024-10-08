@@ -11,7 +11,7 @@ export const Reforesting_Des_Moines: Asset = {
     "Tree planting projects for this project occurred throughout the City of Des Moines, Iowa. Tree planting locations were a mix of street tree and park plantings, with the major focus on street tree plantings. Trees were planted throughout 2020 and 2021 in the spring and fall. Growing Futures teen employees (ages 14-18) along with community volunteers completed the plantings and ongoing watering for each tree planted.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-007",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 41.581481,
     longitude: -93.641948,

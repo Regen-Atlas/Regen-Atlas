@@ -12,7 +12,7 @@ export const BERT_4_1H: Asset = {
   providerId: "carbon_path",
   providerLink:
     "https://21d48d-2.myshopify.com/products/carbonpath-carbon-credit-token-buy-retire",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 48.038128,
     longitude: -105.01388,

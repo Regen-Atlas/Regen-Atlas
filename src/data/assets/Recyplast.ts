@@ -12,7 +12,7 @@ export const Recyplast: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/recyplast/recovery_entity_profile?tab=who_we_are",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: 5.401141,
     longitude: -4.086478,

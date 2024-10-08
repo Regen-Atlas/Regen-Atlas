@@ -11,7 +11,7 @@ export const Travis_County_Floodplain_Reforestation_Program: Asset = {
     "TreeFolks, in collaboration with the City of Austin Office of Sustainability, continued the Travis County Floodplain Reforestation Program for a second year. This initiative, led by TreeFolks, aims to replenish forest buffers along rivers and streams in eastern Travis County by planting over 23,000 native trees across 31.47 acres of private land. The trees were strategically placed less than 10 feet apart to ensure effective canopy coverage in riparian zones.",
   providerId: "regen_network",
   providerLink: "https://app.regen.network/project/C02-009",
-  nativity: "tokenized",
+  nativity: "onchain_integration",
   geolocation: {
     latitude: 30.273576,
     longitude: -97.483906,

@@ -12,7 +12,7 @@ export const Njombe_Beyond: Asset = {
   providerId: "plastiks",
   providerLink:
     "https://app.plastiks.io/users/njombe-beyond/recovery_entity_profile?action=show&controller=users&id=njombe-beyond",
-  nativity: "native",
+  nativity: "onchain_enforcement",
   geolocation: {
     latitude: -9.374393,
     longitude: 34.802607,
