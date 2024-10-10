@@ -17,7 +17,7 @@ export default ({
         </a>
         <a
           className="ml-6 block button button-gradient text-center button-gradient !text-base"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
           target="_blank"
         >
           Register Asset
