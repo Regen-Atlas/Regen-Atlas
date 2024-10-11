@@ -15,7 +15,7 @@ const menuItems = [
   {
     name: "Add Asset",
     link: "#",
-    url: "https://docs.google.com/forms/d/e/1FAIpQLSeuQ0rvSOMiV5r3lfQuj2D436PMnJuDpqYZ-k1CVOT1OlYQbA/viewform",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform",
   },
 ];
 
