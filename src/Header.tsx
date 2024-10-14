@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { List } from "@phosphor-icons/react";
+import { List, XLogo } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { Modal } from "./shared/components/Modal";
 import { ConnectKitButton } from "connectkit";
 import { router } from "./main";
 import clsx from "clsx";
 import FiltersDesktop from "./Explore/FiltersDesktop";
+import { ParagraphIcon } from "./shared/components/ParagraphIcon";
 
 const menuItems = [
   {
@@ -16,6 +17,16 @@ const menuItems = [
     name: "Add Asset",
     link: "#",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform",
+  },
+  {
+    name: "Docs",
+    link: "#",
+    url: "https://regen-atlas.gitbook.io/regen-atlas-docs",
+  },
+  {
+    name: "Blog",
+    link: "#",
+    url: "https://paragraph.xyz/@regenatlas",
   },
 ];
 
@@ -86,8 +97,23 @@ export default ({
                   }
                 })}
               </div>
-              <div className="flex justify-center pb-24">
+              <div className="flex flex-col justify-center items-center pb-20">
                 <ConnectKitButton />
+                <div className="flex pt-6 gap-6 justify-center">
+                  <a href="https://x.com/theregenatlas" target="_blank">
+                    <XLogo size={32} />
+                  </a>
+                  <a
+                    className="w-8 h-8"
+                    href="https://warpcast.com/theregenatlas"
+                    target="_blank"
+                  >
+                    <img src="/farcaster.svg" alt="farcaster" />
+                  </a>
+                  <a href="https://paragraph.xyz/@regenatlas" target="_blank">
+                    <ParagraphIcon className="w-7 h-7" />
+                  </a>
+                </div>
               </div>
             </div>
           </Modal>
