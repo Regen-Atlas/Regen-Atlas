@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import { useFiltersDispatch, useFiltersState } from "../../context/filters";
+import {
+  useNewFiltersDispatch,
+  useNewFiltersState,
+} from "../../context/filters";
 import { CheckboxBox } from "../../shared/components";
-import { ASSET_TYPES } from "../../modules/taxonomy";
-import { PROVIDER_LIST } from "../../modules/issuers";
-import { CHAINS } from "../../modules/chains";
+import { useBaseState } from "../../context/base";
 
 export default ({
   openFilter,
@@ -12,15 +13,22 @@ export default ({
   openFilter: "assetType" | "issuers" | "chains";
   onClose: () => void;
 }): React.ReactElement => {
-  const { filters } = useFiltersState();
-  const dispatchFilters = useFiltersDispatch();
+  const { filters } = useNewFiltersState();
+  const dispatchFilters = useNewFiltersDispatch();
+  const base = useBaseState();
+
+  console.log("BAAASE", base);
+
+  if (!base.chains.length || !base.types.length || !base.issuers.length) {
+    return <div>Loading...</div>;
+  }
 
   const handleSubtypeClick = ({
     typeId,
     subtypeId,
   }: {
-    typeId: string;
-    subtypeId: string;
+    typeId: number;
+    subtypeId: number;
   }) => {
     const selected = filters.assetTypes[typeId]?.subtypes.includes(subtypeId);
     if (!selected) {
@@ -51,7 +59,7 @@ export default ({
       >
         {openFilter === "assetType" && (
           <div className="grid grid-cols-3 gap-4">
-            {ASSET_TYPES.map((assetType) => {
+            {base.types.map((assetType) => {
               const selected = filters.assetTypes[assetType.id];
               return (
                 <div key={assetType.id}>
@@ -68,7 +76,7 @@ export default ({
                           payload: {
                             id: assetType.id,
                             name: assetType.name,
-                            subtypes: assetType.subtypes.map(
+                            subtypes: assetType.asset_subtypes.map(
                               (subtype) => subtype.id
                             ),
                           },
@@ -88,7 +96,7 @@ export default ({
                     />
                     <div className="font-bold text-lg">{assetType.name}</div>
                   </div>
-                  {assetType.subtypes.map((subtype) => (
+                  {assetType.asset_subtypes.map((subtype) => (
                     <div
                       key={subtype.id}
                       className={clsx(
@@ -121,7 +129,7 @@ export default ({
 
         {openFilter === "issuers" && (
           <div className="grid grid-cols-3 gap-4">
-            {PROVIDER_LIST.map((provider) => {
+            {base.issuers.map((provider) => {
               const selected = filters.provider === provider.id;
               return (
                 <div key={provider.id}>
@@ -158,7 +166,7 @@ export default ({
 
         {openFilter === "chains" && (
           <div className="grid grid-cols-3 gap-4">
-            {CHAINS.map((chain) => {
+            {base.chains.map((chain) => {
               const selected = filters.chainId === chain.id;
               return (
                 <div key={chain.id}>

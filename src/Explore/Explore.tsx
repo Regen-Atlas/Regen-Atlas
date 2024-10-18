@@ -1,19 +1,24 @@
 import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
-import AssetCard from "./AssetCard";
 import FiltersMobile from "./FiltersMobile";
-import { useFiltersDispatch, useFiltersState } from "../context/filters";
+import {
+  useFiltersDispatch,
+  useNewFiltersDispatch,
+  useNewFiltersState,
+} from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
-import { Asset } from "../modules/assets";
 import { useMapState } from "../context/map";
 import { MapBox } from "../shared/components/MapBox";
 import Header from "../Header";
+import { NewAsset } from "../shared/types";
+import NewAssetCard from "./NewAssetCard";
 
 export default (): React.ReactElement => {
-  const { filteredAssets, filters, selectedAssetId } = useFiltersState();
-  const dispatch = useFiltersDispatch();
+  // const { filteredAssets, filters, selectedAssetId } = useFiltersState();
+  const { filteredAssets, filters, selectedAssetId } = useNewFiltersState();
+  const dispatch = useNewFiltersDispatch();
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
   const mapRef = useRef<MapRef>();
   const { mapStyle } = useMapState();
@@ -28,10 +33,10 @@ export default (): React.ReactElement => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleAssetCardPinClick = (asset: Asset) => {
+  const handleAssetCardPinClick = (asset: NewAsset) => {
     setOpenPopupAssetId(asset.id);
     mapRef?.current?.flyTo({
-      center: [asset.geolocation.longitude, asset.geolocation.latitude],
+      center: [asset.coordinates.longitude, asset?.coordinates?.latitude],
       zoom: 10,
     });
   };
@@ -85,8 +90,8 @@ export default (): React.ReactElement => {
                   <div key={asset.id}>
                     <Marker
                       key={asset.id}
-                      latitude={asset.geolocation.latitude}
-                      longitude={asset.geolocation.longitude}
+                      latitude={asset?.coordinates?.latitude}
+                      longitude={asset?.coordinates?.longitude}
                       onClick={(e) => {
                         e.originalEvent.stopPropagation();
                         handleMarkerClick(asset.id);
@@ -94,11 +99,11 @@ export default (): React.ReactElement => {
                     />
                     {openPopupAssetId === asset.id && (
                       <Popup
-                        latitude={asset.geolocation.latitude}
-                        longitude={asset.geolocation.longitude}
+                        latitude={asset?.coordinates?.latitude}
+                        longitude={asset?.coordinates?.longitude}
                         closeButton={false}
                       >
-                        <div className="font-bold">{asset.name}</div>
+                        <div className="font-bold">{asset?.name}</div>
                       </Popup>
                     )}
                   </div>
@@ -131,7 +136,7 @@ export default (): React.ReactElement => {
             )}
           >
             {filteredAssets.map((asset) => (
-              <AssetCard
+              <NewAssetCard
                 key={asset.id}
                 className="mb-4"
                 asset={asset}
