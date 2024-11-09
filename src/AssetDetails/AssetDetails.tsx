@@ -108,9 +108,10 @@ export default (): React.ReactElement => {
                         closeButton={false}
                       >
                         <div>
-                          {asset.parent_assets.length === 0 && (
-                            <div className="font-bold">Primary asset</div>
-                          )}
+                          {asset.parent_assets.length === 0 &&
+                            asset.child_assets.length > 0 && (
+                              <div className="font-bold">Primary asset</div>
+                            )}
                           <div className="font-medium text-base">
                             {asset?.name}
                           </div>
