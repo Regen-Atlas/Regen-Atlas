@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, ReactNode, Dispatch } from "react";
 import { Asset } from "../../modules/assets";
 import { filterAssets, filterNewAssets } from "./filterAssets";
-import { ALL_ASSETS, NEW_ASSETS } from "../../data";
+import { ALL_ASSETS } from "../../data";
 import {
   AssetTypeFilters,
   Filters,

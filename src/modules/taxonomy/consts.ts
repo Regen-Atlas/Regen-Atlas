@@ -4,6 +4,35 @@ import { AssetSubtype, AssetType } from "../assets";
 
 // Ownership Types:
 
+const mapping = {
+  natural_asset_ownership: 1,
+  commodity_ownership: 26,
+  green_blue_impact_bonds: 28,
+  green_rwas_debt_finance: 29,
+  green_digital_collectibles: 31,
+  green_digiphysical_goods: 32,
+  renewable_rwas: 33,
+  ecological_data_rights: 34,
+  natural_asset_company_shares: 35,
+  output_rights: 36,
+  social_utility_rights: 37,
+  carbon_offsets_negative: 38,
+  carbon_offsets_counterfactual: 39,
+  carbon_credits: 40,
+  non_carbon_credits: 41,
+  recs: 42,
+  carbon_forwards_futures: 43,
+  commodity_derivatives: 44,
+  non_carbon_environmental_process_derivatives: 45,
+  ppas: 46,
+  green_yield_tokens: 47,
+  parametric_insurance: 48,
+  green_lp_tokens: 49,
+  green_money: 50,
+  green_flatcoins: 51,
+  green_tracercoins: 52,
+};
+
 export const NATURAL_ASSET_OWNERSHIP: AssetSubtype = {
   id: "natural_asset_ownership",
   name: "Natural Asset Ownership",

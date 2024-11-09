@@ -35,6 +35,7 @@ export interface NewAsset {
     address: string;
     name: string;
     symbol: string;
+    chain_id: string;
   }[];
   chains: {
     id: string;
@@ -48,6 +49,8 @@ export interface NewAsset {
     id: number;
     name: string;
   }[];
+  country_code: string;
+  region: string;
 }
 
 export interface AssetTypeWithSubtypes {

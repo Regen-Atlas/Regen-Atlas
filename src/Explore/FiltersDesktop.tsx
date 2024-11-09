@@ -1,19 +1,19 @@
 import { useState } from "react";
 import clsx from "clsx";
 import FiltersDropdown from "./components/FiltersDropdown";
-import { useFiltersState } from "../context/filters";
-import { PROVIDER_MAP } from "../modules/issuers";
-import { CHAIN_MAPPING } from "../modules/chains";
+import { useNewFiltersState } from "../context/filters";
+import { useBaseState } from "../context/base";
 
 export default (): React.ReactElement => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<
     "assetType" | "issuers" | "chains"
   >("assetType");
-  const { filters } = useFiltersState();
+  const { filters } = useNewFiltersState();
+  const base = useBaseState();
 
   const accumulateSubtypes = () => {
-    const subtypes: string[] = [];
+    const subtypes: number[] = [];
     for (const assetType of Object.values(filters.assetTypes)) {
       subtypes.push(...assetType.subtypes);
     }
@@ -56,7 +56,10 @@ export default (): React.ReactElement => {
             setIsDropdownOpen(!isDropdownOpen);
           }}
         >
-          {filters.provider ? PROVIDER_MAP[filters.provider].name : "Issuer"}
+          {filters.provider
+            ? base.issuers.find((issuer) => issuer.id === filters.provider)
+                ?.name || "Unknown Issuer"
+            : "Issuer"}
         </div>
 
         <div
@@ -69,7 +72,10 @@ export default (): React.ReactElement => {
             setIsDropdownOpen(!isDropdownOpen);
           }}
         >
-          {filters.chainId ? CHAIN_MAPPING[filters.chainId].name : "Chain"}
+          {filters.chainId
+            ? base.chains.find((chain) => chain.id === filters.chainId)?.name ||
+              "Unknown chain"
+            : "Chain"}
         </div>
 
         {isDropdownOpen && (

@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useFiltersDispatch, useFiltersState } from "../context/filters";
+import { useNewFiltersDispatch, useNewFiltersState } from "../context/filters";
 import FilterSummaryMobile from "./components/FilterSummaryMobile";
 import { Modal } from "../shared/components/Modal";
 import TypeSummary from "./components/TypeSummary";
 import clsx from "clsx";
 import { CheckboxBox } from "../shared/components";
-import { ASSET_TYPES } from "../modules/taxonomy";
-import { PROVIDER_LIST, PROVIDER_MAP } from "../modules/issuers";
-import { CHAIN_MAPPING, CHAINS } from "../modules/chains";
+import { useBaseState } from "../context/base";
 
 export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   const [openFilters, setOpenFilters] = useState({
@@ -15,9 +13,17 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
     issuers: false,
     chains: false,
   });
-  const [openType, setOpenType] = useState<string>("");
-  const { filters } = useFiltersState();
-  const dispatchFilters = useFiltersDispatch();
+  const [openType, setOpenType] = useState<number>();
+  const { filters } = useNewFiltersState();
+  const base = useBaseState();
+
+  console.log("BAAASE", base);
+
+  if (!base.chains.length || !base.types.length || !base.issuers.length) {
+    return <div>Loading...</div>;
+  }
+
+  const dispatchFilters = useNewFiltersDispatch();
 
   const handleToggleTypeFilter = () => {
     setOpenFilters((prev) => ({ ...prev, type: !prev.type }));
@@ -35,8 +41,8 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
     typeId,
     subtypeId,
   }: {
-    typeId: string;
-    subtypeId: string;
+    typeId: number;
+    subtypeId: number;
   }) => {
     const selected = filters.assetTypes[typeId]?.subtypes.includes(subtypeId);
     if (!selected) {
@@ -53,7 +59,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   };
 
   const accumulateSubtypes = () => {
-    const subtypes: string[] = [];
+    const subtypes: number[] = [];
     for (const assetType of Object.values(filters.assetTypes)) {
       subtypes.push(...assetType.subtypes);
     }
@@ -82,7 +88,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
             <div className="flex flex-col h-full pb-24">
               <div className="text-2xl font-semibold mb-6">Asset Types</div>
               <div>
-                {ASSET_TYPES.map((type) => {
+                {base.types.map((type) => {
                   const selected = filters.assetTypes[type.id];
                   return (
                     <div key={type.id}>
@@ -95,7 +101,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
                               payload: {
                                 id: type.id,
                                 name: type.name,
-                                subtypes: type.subtypes.map(
+                                subtypes: type.asset_subtypes.map(
                                   (subtype) => subtype.id
                                 ),
                               },
@@ -110,7 +116,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
                         onToggleClick={(e) => {
                           e.stopPropagation();
                           setOpenType((prev) =>
-                            prev === type.id ? "" : type.id
+                            prev === type.id ? undefined : type.id
                           );
                         }}
                         isOpen={openType === type.id}
@@ -121,7 +127,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
                       />
                       {openType === type.id && (
                         <div className="pl-8">
-                          {type.subtypes.map((subtype) => {
+                          {type.asset_subtypes.map((subtype) => {
                             return (
                               <div
                                 key={subtype.id}
@@ -165,7 +171,12 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
           onClick={handleToggleIssuerFilter}
           className={clsx(filters.provider && "!border-blue-950")}
           title="Issuers"
-          value={filters.provider ? PROVIDER_MAP[filters.provider].name : "All"}
+          value={
+            filters.provider
+              ? base.issuers.find((issuer) => issuer.id === filters.provider)
+                  ?.name || "Unknown issuer"
+              : "All"
+          }
           defaultValue="All"
         />
         {openFilters.issuers && (
@@ -177,7 +188,7 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
           >
             <div className="text-2xl font-semibold mb-6">Issuers</div>
             <div className="grid gap-4 pl-8">
-              {PROVIDER_LIST.map((provider) => {
+              {base.issuers.map((provider) => {
                 return (
                   <div
                     key={provider.id}
@@ -211,14 +222,19 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
           onClick={handleToggleChainFilter}
           className={clsx(filters.chainId && "!border-blue-950")}
           title="Chains"
-          value={filters.chainId ? CHAIN_MAPPING[filters.chainId]?.name : "All"}
+          value={
+            filters.chainId
+              ? base.chains.find((chain) => chain.id === filters.chainId)
+                  ?.name || "Unknown chain"
+              : "All"
+          }
           defaultValue="All"
         />
         {openFilters.chains && (
           <Modal fullScreen onClose={handleToggleChainFilter}>
             <div className="text-2xl font-semibold mb-6">Chains</div>
             <div className="grid gap-4 pl-8">
-              {CHAINS.map((chain) => {
+              {base.chains.map((chain) => {
                 return (
                   <div
                     key={chain.id}

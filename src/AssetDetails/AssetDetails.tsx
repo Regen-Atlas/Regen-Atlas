@@ -2,8 +2,6 @@ import { useParams } from "react-router-dom";
 import { Marker } from "react-map-gl";
 import { Address } from "viem";
 import { Helmet } from "react-helmet-async";
-import { useFiltersState } from "../context/filters";
-import AssetCard from "../Explore/AssetCard";
 import { MapBox } from "../shared/components/MapBox";
 import { useMapState } from "../context/map";
 import Footer from "../Footer";
@@ -13,21 +11,26 @@ import {
   TOKEN_POOL_TOKEN_MAP,
   UniswapTrading,
 } from "../modules/uniswap";
+import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
+import { NewAsset } from "../shared/types";
+import NewAssetCard from "../Explore/NewAssetCard";
 
 export default (): React.ReactElement => {
   const { assetId } = useParams<{ assetId: string }>();
-  const { filteredAssets } = useFiltersState();
   const { mapStyle } = useMapState();
-
-  const asset = filteredAssets.find((a) => a.id === assetId);
+  // Fetch the asset
+  const { item: asset } = useSupabaseItemById<NewAsset>(
+    "assets_published",
+    assetId
+  );
 
   if (!asset) {
     return <div>Asset not found</div>;
   }
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
-    (t) => t.chainId === 42220
-  )?.contractAddress as Address;
+    (t) => t.chain_id === "42220"
+  )?.address as Address;
 
   const tokenIn = celoContractAddress
     ? TOKEN_POOL_TOKEN_MAP[celoContractAddress]
@@ -56,7 +59,7 @@ export default (): React.ReactElement => {
           {asset && (
             <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
               <div>
-                <AssetCard
+                <NewAssetCard
                   asset={asset}
                   onPinClicked={() => {}}
                   showBuyButton={!celoContractAddress}
@@ -73,15 +76,15 @@ export default (): React.ReactElement => {
                 <MapBox
                   mapStyle={mapStyle}
                   initialViewState={{
-                    longitude: asset.geolocation.longitude,
-                    latitude: asset.geolocation.latitude,
+                    longitude: asset.coordinates.longitude,
+                    latitude: asset.coordinates.latitude,
                     zoom: 5,
                   }}
                 >
                   <Marker
                     key={asset.id}
-                    latitude={asset.geolocation.latitude}
-                    longitude={asset.geolocation.longitude}
+                    latitude={asset.coordinates.latitude}
+                    longitude={asset.coordinates.longitude}
                   />
                 </MapBox>
               </div>

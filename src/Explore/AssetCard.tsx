@@ -80,7 +80,7 @@ export default ({
           </div>
           <Dot size={16} />
           <div>
-            Issued by{" "}
+            Issued by HELLO
             <span className="font-bold">
               {PROVIDER_MAP[asset.providerId].name}
             </span>

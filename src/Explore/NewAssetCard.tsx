@@ -7,7 +7,8 @@ import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Link } from "react-router-dom";
 import { NewAsset } from "../shared/types";
-import { useBaseState } from "../context/base";
+import { SUPPORTED_TOKENS } from "../modules/uniswap";
+import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 
 interface AssetCardProps {
   className?: string;
@@ -28,8 +29,6 @@ export default ({
   const handleShareClick = async () => {
     setShowShareOptions(true);
   };
-
-  const SUPPORTED_TOKENS = ["0x50E85c754929840B58614F48e29C64BC78C58345"];
 
   const celoContractAddress: string =
     asset?.tokens?.find((t) => SUPPORTED_TOKENS.includes(t.address))?.address ||
@@ -73,10 +72,8 @@ export default ({
             onClick={onPinClicked}
           >
             <MapPin size={16} />
-            {/* {asset.physicalAddress.region
-              ? `${asset.physicalAddress.region}, `
-              : ""}
-            {COUNTRY_CODE_TO_NAME[asset.physicalAddress.country]} */}
+            {asset.region ? `${asset.region}, ` : ""}
+            {COUNTRY_CODE_TO_NAME[asset.country_code]}
           </div>
           <Dot size={16} />
           <div>
