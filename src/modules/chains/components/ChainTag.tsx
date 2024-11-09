@@ -15,19 +15,19 @@ export const ChainTag = ({ chainId }: { chainId: number | string }) => {
 
   const renderLogo = () => {
     switch (chainId) {
-      case 42220:
+      case "42220":
         return <Logo42220 />;
-      case 42161:
+      case "42161":
         return <Logo42161 />;
-      case 8453:
+      case "8453":
         return <Logo8453 />;
-      case 137:
+      case "137":
         return <Logo137 />;
-      case 56:
+      case "56":
         return <Logo56 />;
-      case 42:
+      case "42":
         return <Logo42 />;
-      case 1:
+      case "1":
         return <Logo1 />;
       case "regen-1":
         return <LogoRegen1 />;

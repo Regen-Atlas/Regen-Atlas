@@ -1,11 +1,7 @@
 import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import FiltersMobile from "./FiltersMobile";
-import {
-  useFiltersDispatch,
-  useNewFiltersDispatch,
-  useNewFiltersState,
-} from "../context/filters";
+import { useNewFiltersDispatch, useNewFiltersState } from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
@@ -16,7 +12,6 @@ import { NewAsset } from "../shared/types";
 import NewAssetCard from "./NewAssetCard";
 
 export default (): React.ReactElement => {
-  // const { filteredAssets, filters, selectedAssetId } = useFiltersState();
   const { filteredAssets, filters, selectedAssetId } = useNewFiltersState();
   const dispatch = useNewFiltersDispatch();
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
