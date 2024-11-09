@@ -6,7 +6,6 @@ import FiltersModal from "./FiltersModal";
 
 export default (): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const { filters, filteredAssets } = useFiltersState();
   const { filteredAssets, filters } = useNewFiltersState();
 
   const handleOpenModal = () => {

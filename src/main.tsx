@@ -13,10 +13,7 @@ import "./index.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Explore from "./Explore/Explore.tsx";
 import AddAsset from "./AddAsset.tsx";
-import {
-  FiltersStateProvider,
-  NewFiltersStateProvider,
-} from "./context/filters/filtersContext.tsx";
+import { NewFiltersStateProvider } from "./context/filters/filtersContext.tsx";
 import AssetDetails from "./AssetDetails/AssetDetails.tsx";
 import { MapStateProvider } from "./context/map/mapContext.tsx";
 import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
@@ -58,11 +55,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ConnectKitProvider theme="soft">
           <BaseStateProvider>
             <NewFiltersStateProvider>
-              <FiltersStateProvider>
-                <MapStateProvider>
-                  <RouterProvider router={router} />
-                </MapStateProvider>
-              </FiltersStateProvider>
+              <MapStateProvider>
+                <RouterProvider router={router} />
+              </MapStateProvider>
             </NewFiltersStateProvider>
           </BaseStateProvider>
         </ConnectKitProvider>
