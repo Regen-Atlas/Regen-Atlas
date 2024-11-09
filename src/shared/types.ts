@@ -51,6 +51,31 @@ export interface NewAsset {
   }[];
   country_code: string;
   region: string;
+  child_assets: Array<{
+    id: string;
+    name: string;
+    coordinates: {
+      latitude: number;
+      longitude: number;
+    };
+  }>;
+  parent_assets: Array<{
+    id: string;
+    name: string;
+    coordinates: {
+      latitude: number;
+      longitude: number;
+    };
+  }>;
+  certifications: Array<{
+    id: 4;
+    value: 80;
+    description: "80/100";
+    certifier: {
+      id: 1;
+      name: "Particula";
+    };
+  }>;
 }
 
 export interface AssetTypeWithSubtypes {

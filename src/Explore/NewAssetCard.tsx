@@ -13,14 +13,14 @@ import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 interface AssetCardProps {
   className?: string;
   asset: NewAsset;
-  showBuyButton?: boolean;
+  showExternalLink?: boolean;
   onPinClicked: () => void;
 }
 
 export default ({
   className,
   asset,
-  showBuyButton = true,
+  showExternalLink = false,
   onPinClicked,
 }: AssetCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
@@ -95,50 +95,124 @@ export default ({
           />
         </div>
 
-        <div className="xxs:text-[13px]">
-          <div className="flex justify-between py-1">
+        <div className="xxs:text-[13px] text-sm">
+          <div className="flex justify-between items-center py-1">
             <p className="font-bold">Nativity</p>
             <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {asset.nativity ? NEW_NATIVITY_MAP[asset.nativity] : ""}
             </div>
           </div>
 
-          <div className="flex justify-between py-1">
+          <div className="flex justify-between items-center py-1">
             <p className="font-bold">Subtype</p>
             <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {asset.asset_subtypes[0].name}
             </div>
           </div>
+
+          {asset.child_assets.length > 0 && (
+            <div className="flex justify-between items-center py-1">
+              <p className="font-bold">
+                {asset.child_assets.length} Second Order Asset
+                {asset.child_assets.length > 1 ? "s" : ""}
+              </p>
+              <div className="flex gap-2">
+                <Link to={`/assets/${asset.child_assets[0].id}`}>
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+                    {asset.child_assets[0].name.length > 20
+                      ? `${asset.child_assets[0].name.substring(0, 17)}...`
+                      : asset.child_assets[0].name}
+                  </div>
+                </Link>
+                {asset.child_assets.length > 1 && (
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+                    +{asset.child_assets.length - 1}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {asset.parent_assets.length > 0 && (
+            <div className="flex justify-between items-center py-1">
+              <p className="font-bold">
+                {asset.parent_assets.length} Primary Asset
+                {asset.parent_assets.length > 1 ? "s" : ""}
+              </p>
+              <div className="flex gap-2">
+                <Link to={`/assets/${asset.parent_assets[0].id}`}>
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+                    {asset.parent_assets[0].name.length > 20
+                      ? `${asset.parent_assets[0].name.substring(0, 17)}...`
+                      : asset.parent_assets[0].name}
+                  </div>
+                </Link>
+                {asset.parent_assets.length > 1 && (
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+                    +{asset.parent_assets.length - 1}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {asset.certifications.length > 0 && (
+            <div className="bg-grayButton rounded-lg p-3 flex justify-between mt-2">
+              <div>
+                <p className="font-bold">Ratings</p>
+                <p>
+                  {asset.certifications.length} rating
+                  {asset.certifications.length > 1 ? "s" : ""}
+                </p>
+              </div>
+              <div className="flex gap-4">
+                {asset.certifications.map((certification) => (
+                  <div key={certification.id}>
+                    <p className="font-bold">{certification.certifier.name}</p>
+                    <p>
+                      {certification.description
+                        ? certification.description
+                        : certification.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div
           className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}
         >
-          <a
-            href={asset.issuer_link || asset.exchange_link}
-            target="_blank"
-            className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
-          >
-            <span className="mr-1">Learn more</span>
-            <ArrowUpRight size={16} />
-          </a>
-          {!!celoContractAddress && showBuyButton && (
+          {showExternalLink && (asset.issuer_link || asset.exchange_link) && (
+            <a
+              href={asset.issuer_link || asset.exchange_link}
+              target="_blank"
+              className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
+            >
+              <span className="mr-1">Learn more</span>
+              <ArrowUpRight size={16} />
+            </a>
+          )}
+          {!showExternalLink && (
             <Link
-              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center ml-auto"
               to={`/assets/${asset.id}`}
             >
               Buy
             </Link>
           )}
-          {!celoContractAddress && showBuyButton && (
-            <a
-              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
-              href={asset.exchange_link || asset.issuer_link}
-              target="_blank"
-            >
-              Buy
-            </a>
-          )}
+          {showExternalLink &&
+            !celoContractAddress &&
+            (asset.issuer_link || asset.exchange_link) && (
+              <a
+                className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+                href={asset.exchange_link || asset.issuer_link}
+                target="_blank"
+              >
+                Buy
+              </a>
+            )}
         </div>
       </div>
       {showShareOptions && (
