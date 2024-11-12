@@ -51,22 +51,8 @@ export interface NewAsset {
   }[];
   country_code: string;
   region: string;
-  child_assets: Array<{
-    id: string;
-    name: string;
-    coordinates: {
-      latitude: number;
-      longitude: number;
-    };
-  }>;
-  parent_assets: Array<{
-    id: string;
-    name: string;
-    coordinates: {
-      latitude: number;
-      longitude: number;
-    };
-  }>;
+  child_assets: Array<RelatedAsset>;
+  parent_assets: Array<RelatedAsset>;
   certifications: Array<{
     id: 4;
     value: 80;
@@ -76,6 +62,16 @@ export interface NewAsset {
       name: "Particula";
     };
   }>;
+  second_order: boolean;
+}
+
+export interface RelatedAsset {
+  id: string;
+  name: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface AssetTypeWithSubtypes {

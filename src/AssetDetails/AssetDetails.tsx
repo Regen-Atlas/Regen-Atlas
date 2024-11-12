@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Marker, Popup } from "react-map-gl";
 import { Address } from "viem";
 import { Helmet } from "react-helmet-async";
@@ -12,14 +12,17 @@ import {
   UniswapTrading,
 } from "../modules/uniswap";
 import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
-import { NewAsset } from "../shared/types";
+import { NewAsset, RelatedAsset } from "../shared/types";
 import NewAssetCard from "../Explore/NewAssetCard";
 import React, { useState } from "react";
-import { ArrowsSplit, Coins } from "@phosphor-icons/react";
+import { AssetsOrbit } from "./AssetsOrbit";
 
 export default (): React.ReactElement => {
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
+  const [openedSecondOrderAsset, setOpenedSecondOrderAsset] =
+    useState<RelatedAsset | null>(null);
   const { assetId } = useParams<{ assetId: string }>();
+  const navigate = useNavigate();
   const { mapStyle } = useMapState();
   // Fetch the asset
   const { item: asset } = useSupabaseItemById<NewAsset>("assets_all", assetId);
@@ -38,6 +41,11 @@ export default (): React.ReactElement => {
   const tokenOut = celoContractAddress
     ? CELO_TOKENS_MAP[celoContractAddress]
     : "";
+
+  const handleAssetOpenClick = (id: string) => {
+    navigate(`/assets/${id}`);
+    setOpenedSecondOrderAsset(null);
+  };
 
   return (
     <>
@@ -84,81 +92,127 @@ export default (): React.ReactElement => {
                 <MapBox
                   mapStyle={mapStyle}
                   initialViewState={{
-                    longitude: asset.coordinates.longitude,
-                    latitude: asset.coordinates.latitude,
-                    zoom: 5,
+                    longitude: asset.second_order
+                      ? 15
+                      : asset.coordinates.longitude,
+                    latitude: asset.second_order
+                      ? 30
+                      : asset.coordinates.latitude,
+                    zoom: asset.second_order ? 1 : 5,
                   }}
                 >
-                  <Marker
-                    key={asset.id}
-                    latitude={asset.coordinates.latitude}
-                    longitude={asset.coordinates.longitude}
-                    onClick={(e) => {
-                      e.originalEvent.stopPropagation();
-                      setOpenPopupAssetId(asset.id);
-                    }}
-                  >
-                    <div className="w-14 h-14 rounded-full bg-primary-300 border-primary-500 border-2 flex justify-center items-center shadow-md text-white">
-                      <Coins size={40} />
-                    </div>
-                    {openPopupAssetId === asset.id && (
-                      <Popup
-                        latitude={asset?.coordinates?.latitude}
-                        longitude={asset?.coordinates?.longitude}
-                        closeButton={false}
-                      >
-                        <div>
-                          {asset.parent_assets.length === 0 &&
-                            asset.child_assets.length > 0 && (
-                              <div className="font-bold">Primary asset</div>
-                            )}
-                          <div className="font-medium text-base">
-                            {asset?.name}
+                  {!asset.second_order && (
+                    <Marker
+                      key={asset.id}
+                      latitude={asset.coordinates.latitude}
+                      longitude={asset.coordinates.longitude}
+                    >
+                      {asset.child_assets.length > 0 && (
+                        <AssetsOrbit
+                          primaryAsset={asset}
+                          secondOrderAssets={asset.child_assets}
+                          onPrimaryAssetClick={(assetId) => {
+                            console.log("Primary asset clicked", assetId);
+                            setOpenedSecondOrderAsset(null);
+                            setOpenPopupAssetId(assetId);
+                          }}
+                          onSecondOrderAssetClick={(selectedAsset) => {
+                            setOpenPopupAssetId(null);
+                            setOpenedSecondOrderAsset(selectedAsset);
+                          }}
+                        />
+                      )}
+                      {openPopupAssetId === asset.id && (
+                        <Popup
+                          latitude={asset?.coordinates?.latitude}
+                          longitude={asset?.coordinates?.longitude}
+                          closeButton={false}
+                          onClose={() => setOpenPopupAssetId(null)}
+                        >
+                          <div>
+                            {asset.parent_assets.length === 0 &&
+                              asset.child_assets.length > 0 && (
+                                <div className="font-bold">Primary asset</div>
+                              )}
+                            <div className="font-medium text-base">
+                              {asset?.name}
+                            </div>
                           </div>
-                        </div>
-                      </Popup>
-                    )}
-                  </Marker>
-                  {asset.child_assets?.map((childAsset) => (
-                    <div key={childAsset.id}>
-                      <Marker
-                        key={childAsset.id}
-                        latitude={childAsset.coordinates.latitude}
-                        longitude={childAsset.coordinates.longitude}
-                        onClick={(e) => {
-                          e.originalEvent.stopPropagation();
-                          setOpenPopupAssetId(childAsset.id);
-                        }}
-                      >
-                        <div className="w-8 h-8 rounded-full bg-primary-100 border-primary-300 border-2 flex justify-center items-center shadow-md">
-                          <ArrowsSplit size={24} className="-rotate-90" />
-                        </div>
-                        {openPopupAssetId === childAsset.id && (
-                          <Popup
-                            latitude={childAsset?.coordinates?.latitude}
-                            longitude={childAsset?.coordinates?.longitude}
-                            closeButton={false}
-                          >
-                            <div>
-                              <div className="font-bold">
-                                Second order asset
-                              </div>
-                              <div className="font-medium text-base">
-                                {childAsset?.name}
-                              </div>
-                              <div className="flex justify-end mt-3">
-                                <Link to={`/assets/${childAsset.id}`}>
-                                  <button className="button button-gradient h-7 !text-sm !px-4">
+                        </Popup>
+                      )}
+                      {openedSecondOrderAsset && (
+                        <Popup
+                          latitude={asset?.coordinates?.latitude}
+                          longitude={asset?.coordinates?.longitude}
+                          onClose={() => {
+                            setOpenPopupAssetId(null);
+                            setOpenedSecondOrderAsset(null);
+                          }}
+                          className="second-order-asset-popup"
+                          anchor="center"
+                        >
+                          <div>
+                            <div className="font-bold">Second order asset</div>
+                            <div className="font-medium text-base">
+                              {openedSecondOrderAsset?.name}
+                            </div>
+                            <div className="flex justify-end mt-3">
+                              <button
+                                className="button button-gradient h-7 !text-sm !px-4"
+                                onClick={() =>
+                                  handleAssetOpenClick(
+                                    openedSecondOrderAsset.id
+                                  )
+                                }
+                              >
+                                Open
+                              </button>
+                            </div>
+                          </div>
+                        </Popup>
+                      )}
+                    </Marker>
+                  )}
+                  {asset.second_order &&
+                    asset.parent_assets.map((parentAsset) => {
+                      return (
+                        <Marker
+                          key={parentAsset.id}
+                          latitude={parentAsset.coordinates.latitude}
+                          longitude={parentAsset.coordinates.longitude}
+                          onClick={(e) => {
+                            e.originalEvent.stopPropagation();
+                            setOpenPopupAssetId(parentAsset.id);
+                          }}
+                        >
+                          {openPopupAssetId === parentAsset.id && (
+                            <Popup
+                              latitude={parentAsset?.coordinates?.latitude}
+                              longitude={parentAsset?.coordinates?.longitude}
+                              closeButton={false}
+                              onClose={() => setOpenPopupAssetId(null)}
+                            >
+                              <div>
+                                <div className="font-bold">Primary asset</div>
+                                <div className="font-medium text-base">
+                                  {parentAsset?.name}
+                                </div>
+                                <div className="flex justify-end mt-3">
+                                  <button
+                                    className="button button-gradient h-7 !text-sm !px-4"
+                                    onClick={() =>
+                                      handleAssetOpenClick(parentAsset.id)
+                                    }
+                                  >
                                     Open
                                   </button>
-                                </Link>
+                                </div>
                               </div>
-                            </div>
-                          </Popup>
-                        )}
-                      </Marker>
-                    </div>
-                  ))}
+                            </Popup>
+                          )}
+                        </Marker>
+                      );
+                    })}
                 </MapBox>
               </div>
             </div>
