@@ -1,5 +1,6 @@
 import { Logo1 } from "../logos/Logo1";
 import { Logo137 } from "../logos/Logo137";
+import { Logo397 } from "../logos/Logo397";
 import { Logo42 } from "../logos/Logo42";
 import { Logo42161 } from "../logos/Logo42161";
 import { Logo42220 } from "../logos/Logo42220";
@@ -19,6 +20,8 @@ export const ChainTag = ({ chain }: { chain: ChainBranding }) => {
         return <Logo42161 />;
       case "8453":
         return <Logo8453 />;
+      case "397":
+        return <Logo397 />;
       case "137":
         return <Logo137 />;
       case "56":
