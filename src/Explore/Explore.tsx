@@ -78,34 +78,36 @@ export default (): React.ReactElement => {
                   latitude: 30,
                   zoom: 1,
                 }}
-                showMapStyleSwitch={!!selectedAssetId}
+                showMapStyleSwitch={true}
                 mapRef={mapRef as React.RefObject<MapRef>}
               >
-                {filteredAssets.map((asset) => (
-                  <div key={asset.id}>
-                    <Marker
-                      key={asset.id}
-                      latitude={asset?.coordinates?.latitude}
-                      longitude={asset?.coordinates?.longitude}
-                      onClick={(e) => {
-                        e.originalEvent.stopPropagation();
-                        handleMarkerClick(asset.id);
-                      }}
-                    />
-                    {openPopupAssetId === asset.id && (
-                      <Popup
+                {filteredAssets
+                  .filter((asset) => !asset.second_order)
+                  .map((asset) => (
+                    <div key={asset.id}>
+                      <Marker
+                        key={asset.id}
                         latitude={asset?.coordinates?.latitude}
                         longitude={asset?.coordinates?.longitude}
-                        closeButton={false}
-                      >
-                        <div className="font-bold">{asset?.name}</div>
-                      </Popup>
-                    )}
-                  </div>
-                ))}
+                        onClick={(e) => {
+                          e.originalEvent.stopPropagation();
+                          handleMarkerClick(asset.id);
+                        }}
+                      />
+                      {openPopupAssetId === asset.id && (
+                        <Popup
+                          latitude={asset?.coordinates?.latitude}
+                          longitude={asset?.coordinates?.longitude}
+                          closeButton={false}
+                        >
+                          <div className="font-bold">{asset?.name}</div>
+                        </Popup>
+                      )}
+                    </div>
+                  ))}
               </MapBox>
               <div className="hidden md:block">
-                <Footer showMapStyleSwitch={!selectedAssetId} />
+                <Footer />
               </div>
             </div>
           </div>

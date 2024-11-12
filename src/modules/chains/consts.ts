@@ -48,4 +48,9 @@ export const CHAIN_MAPPING: { [key: number | string]: ChainBranding } = {
     color: "#2D2DF1",
     textColor: "#fff",
   },
+  397: {
+    name: "Near",
+    color: "#24272A",
+    textColor: "#fff",
+  },
 };

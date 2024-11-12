@@ -210,10 +210,10 @@ export default ({
           )}
           {!showExternalLink && (
             <Link
-              className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center ml-auto"
+              className="flex items-center justify-center w-full flex-1 button button-gradient text-center"
               to={`/assets/${asset.id}`}
             >
-              Buy
+              Details
             </Link>
           )}
           {showExternalLink &&
