@@ -169,11 +169,25 @@ export default ({
                 {asset.certifications.map((certification) => (
                   <div key={certification.id}>
                     <p className="font-bold">{certification.certifier.name}</p>
-                    <p>
-                      {certification.description
-                        ? certification.description
-                        : certification.value}
-                    </p>
+                    {certification.certification_source ? (
+                      <a
+                        href={certification.certification_source}
+                        className="hover:underline hover:text-primary-300"
+                        target="_blank"
+                      >
+                        <p>
+                          {certification.description
+                            ? certification.description
+                            : certification.value}
+                        </p>
+                      </a>
+                    ) : (
+                      <p>
+                        {certification.description
+                          ? certification.description
+                          : certification.value}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

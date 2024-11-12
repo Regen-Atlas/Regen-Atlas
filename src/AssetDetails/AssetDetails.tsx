@@ -45,6 +45,7 @@ export default (): React.ReactElement => {
   const handleAssetOpenClick = (id: string) => {
     navigate(`/assets/${id}`);
     setOpenedSecondOrderAsset(null);
+    setOpenPopupAssetId(null);
   };
 
   return (

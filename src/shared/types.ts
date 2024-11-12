@@ -54,12 +54,13 @@ export interface NewAsset {
   child_assets: Array<RelatedAsset>;
   parent_assets: Array<RelatedAsset>;
   certifications: Array<{
-    id: 4;
-    value: 80;
-    description: "80/100";
+    id: number;
+    value: number;
+    description: string;
+    certification_source: string;
     certifier: {
-      id: 1;
-      name: "Particula";
+      id: number;
+      name: string;
     };
   }>;
   second_order: boolean;
