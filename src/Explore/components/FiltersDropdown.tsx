@@ -51,9 +51,9 @@ export default ({
           "bg-cardBackground rounded-xl p-4",
           "absolute top-[72px]",
           openFilter === "assetType" &&
-            "left-[calc((100vw-960px)/2)] w-[1000px]",
+            "left-[calc((100vw-1000px)/2)] w-[1000px]",
           (openFilter === "issuers" || openFilter === "chains") &&
-            "left-[calc((100vw-600px)/2)] w-[640px]"
+            "left-[calc((100vw-720px)/2)] w-[720px]"
         )}
         onClick={(e) => e.stopPropagation()}
       >

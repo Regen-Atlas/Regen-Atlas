@@ -1,3 +1,5 @@
+import { ChainBranding } from "../modules/chains";
+
 export type MapStyles = "map" | "satellite";
 
 export type NewStatus = "DRAFT" | "PUBLISHED" | "DELETED";
@@ -37,10 +39,7 @@ export interface NewAsset {
     symbol: string;
     chain_id: string;
   }[];
-  chains: {
-    id: string;
-    name: string;
-  }[];
+  chains: ChainBranding[];
   asset_subtypes: {
     id: number;
     name: string;

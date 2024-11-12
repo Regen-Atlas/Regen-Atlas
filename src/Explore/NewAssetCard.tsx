@@ -49,7 +49,7 @@ export default ({
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
               {asset?.chains?.map((chain) => (
-                <ChainTag key={chain.id} chainId={chain.id} />
+                <ChainTag key={chain.id} chain={chain} />
               ))}
               <Export
                 className="cursor-pointer"
