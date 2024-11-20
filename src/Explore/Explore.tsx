@@ -52,7 +52,7 @@ export default (): React.ReactElement => {
         <div
           className={clsx(
             "pt-[60px] md:pt-[140px] lg:pt-[100px]",
-            "md:grid md:grid-cols-2 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_740px] md:gap-4"
+            "md:grid md:grid-cols-2 lg:grid-cols-[444px_1fr] xl:grid-cols-[444px_1fr] md:gap-4"
           )}
         >
           <div
@@ -68,7 +68,7 @@ export default (): React.ReactElement => {
                 showCards() &&
                   "md:fixed md:top-[156px] md:w-[calc(50vw-32px)] md:h-[calc(100vh-140px)]",
                 showCards() && "lg:h-[calc(100vh-100px)]",
-                showCards() && "lg:top-[100px] lg:w-[600px] xl:w-[740px]"
+                showCards() && "lg:top-[100px] lg:w-[calc(100vw-507px)]"
               )}
             >
               <MapBox
@@ -81,6 +81,9 @@ export default (): React.ReactElement => {
                 showMapStyleSwitch={true}
                 mapRef={mapRef as React.RefObject<MapRef>}
               >
+                <div className="hidden lg:flex absolute top-2 right-2 rounded-full h-7 px-3 items-center bg-blue-950 text-white font-semibold">
+                  {filteredAssets.length} assets listed
+                </div>
                 {filteredAssets
                   .filter((asset) => !asset.second_order)
                   .map((asset) => (

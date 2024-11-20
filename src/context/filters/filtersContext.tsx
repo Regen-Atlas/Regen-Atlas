@@ -26,6 +26,18 @@ type NewRemoveTypeFilterAction = {
   payload: number;
 };
 
+type ResetTypeFiltersAction = {
+  type: "RESET_TYPE_FILTERS";
+};
+
+type ResetProviderFilterAction = {
+  type: "RESET_PROVIDER_FILTER";
+};
+
+type ResetChainFilterAction = {
+  type: "RESET_CHAIN_FILTER";
+};
+
 type NewSetSubtypeFilterAction = {
   type: "SET_SUBTYPE_FILTER";
   payload: {
@@ -79,7 +91,10 @@ type NewAction =
   | RemoveProviderFilter
   | RemoveChainIdFilter
   | SetSelectedAssetAction
-  | SetAllAssetsAction;
+  | SetAllAssetsAction
+  | ResetTypeFiltersAction
+  | ResetProviderFilterAction
+  | ResetChainFilterAction;
 
 const newInitialState: NewState = {
   filters: {
@@ -258,6 +273,45 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
       }
 
       return { ...state, selectedAssetId: action.payload, filteredAssets };
+    }
+
+    case "RESET_TYPE_FILTERS": {
+      const filters = {
+        ...state.filters,
+        assetTypes: {},
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "RESET_PROVIDER_FILTER": {
+      const filters = {
+        ...state.filters,
+        provider: null,
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "RESET_CHAIN_FILTER": {
+      const filters = {
+        ...state.filters,
+        chainId: "",
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
     }
 
     default:

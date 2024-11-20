@@ -17,8 +17,6 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   const { filters } = useNewFiltersState();
   const base = useBaseState();
 
-  console.log("BAAASE", base);
-
   if (!base.chains.length || !base.types.length || !base.issuers.length) {
     return <div>Loading...</div>;
   }

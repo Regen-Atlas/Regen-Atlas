@@ -109,7 +109,7 @@ body.scrolled-360.modal-open .filters-row-mobile {
 }
 
 .main-container {
-  @apply bg-background max-w-[1232px] mx-auto px-3 md:px-4 pb-2 md:pb-0;
+  @apply bg-background max-w-full mx-auto px-3 md:px-4 pb-2 md:pb-0;
 }
 
 .second-order-asset-popup .mapboxgl-popup-tip {
