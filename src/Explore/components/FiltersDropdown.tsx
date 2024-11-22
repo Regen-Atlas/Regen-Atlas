@@ -68,6 +68,29 @@ export default ({
                       "cursor-pointer hover:text-gray-600"
                     )}
                     onClick={() => {
+                      // if no provider is selected and the type has no assets, do nothing
+                      if (
+                        !filters.provider &&
+                        !assetType.asset_subtypes.find(
+                          (item) =>
+                            item?.total_asset_count &&
+                            item?.total_asset_count > 0
+                        )
+                      ) {
+                        return;
+                      }
+
+                      if (
+                        filters.provider &&
+                        !assetType.asset_subtypes.find((subtype) =>
+                          subtype.issuer_counts?.find(
+                            (issuer) => issuer.issuer_id === filters.provider
+                          )
+                        )
+                      ) {
+                        return;
+                      }
+
                       if (!selected) {
                         dispatchFilters({
                           type: "SET_TYPE_FILTER",
@@ -102,12 +125,27 @@ export default ({
                         "ml-4 mb-4",
                         "cursor-pointer hover:text-gray-600"
                       )}
-                      onClick={() =>
+                      onClick={() => {
+                        if (
+                          !filters.provider &&
+                          subtype.total_asset_count === 0
+                        ) {
+                          return;
+                        }
+                        if (
+                          filters.provider &&
+                          !subtype.issuer_counts?.find(
+                            (issuer) => issuer.issuer_id === filters.provider
+                          )
+                        ) {
+                          return;
+                        }
+
                         handleSubtypeClick({
                           typeId: assetType.id,
                           subtypeId: subtype.id,
-                        })
-                      }
+                        });
+                      }}
                     >
                       <CheckboxBox
                         variant="small"
@@ -116,7 +154,34 @@ export default ({
                           assetType.id
                         ]?.subtypes.includes(subtype.id)}
                       />
-                      <div className="leading-none">{subtype.name}</div>
+                      <div
+                        className={clsx(
+                          "leading-none",
+                          !filters.provider &&
+                            subtype.total_asset_count === 0 &&
+                            "text-gray-400",
+                          filters.provider &&
+                            !subtype.issuer_counts?.find(
+                              (issuer) => issuer.issuer_id === filters.provider
+                            ) &&
+                            "text-gray-400"
+                        )}
+                      >
+                        {subtype.name}
+
+                        {filters.provider ? (
+                          <span>
+                            {" "}
+                            (
+                            {subtype.issuer_counts?.find(
+                              (issuer) => issuer.issuer_id === filters.provider
+                            )?.asset_count || 0}
+                            )
+                          </span>
+                        ) : (
+                          <span> ({subtype.total_asset_count})</span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

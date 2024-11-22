@@ -80,5 +80,10 @@ export interface AssetTypeWithSubtypes {
   asset_subtypes: {
     id: number;
     name: string;
+    total_asset_count?: number;
+    issuer_counts?: Array<{
+      issuer_id: number;
+      asset_count: number;
+    }>;
   }[];
 }

@@ -17,7 +17,7 @@ function App() {
   const baseState = useBaseState();
   const { data: allAssets } = useSupabaseTable<NewAsset>("assets_published");
   const { data: assetTypes } = useSupabaseTable<AssetTypeWithSubtypes>(
-    "asset_types_with_subtypes_with_assets"
+    "asset_types_with_subtypes_and_issuers"
   );
   const { data: chains } = useSupabaseTable<{ id: string; name: string }>(
     "chains_with_assets"

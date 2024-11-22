@@ -4,10 +4,12 @@ export const CheckboxBox = ({
   checked,
   className,
   variant,
+  disabled,
 }: {
   checked: boolean;
   variant?: "small" | "medium";
   className?: string;
+  disabled?: boolean;
 }): JSX.Element => {
   return (
     <div
