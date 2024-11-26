@@ -51,7 +51,7 @@ export default (): React.ReactElement => {
       <div className="main-container">
         <div
           className={clsx(
-            "pt-[60px] md:pt-[140px] lg:pt-[100px]",
+            "pt-[60px] md:pt-[140px] lg:pt-[80px]",
             "md:grid md:grid-cols-2 lg:grid-cols-[444px_1fr] xl:grid-cols-[444px_1fr] md:gap-4"
           )}
         >
@@ -67,8 +67,8 @@ export default (): React.ReactElement => {
                 "map-wrapper",
                 showCards() &&
                   "md:fixed md:top-[156px] md:w-[calc(50vw-32px)] md:h-[calc(100vh-140px)]",
-                showCards() && "lg:h-[calc(100vh-100px)]",
-                showCards() && "lg:top-[100px] lg:w-[calc(100vw-507px)]"
+                showCards() && "lg:h-[calc(100vh-80px)]",
+                showCards() && "lg:top-[80px] lg:w-[calc(100vw-507px)]"
               )}
             >
               <MapBox

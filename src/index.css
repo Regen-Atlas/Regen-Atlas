@@ -100,7 +100,7 @@ body.scrolled-360.modal-open .filters-row-mobile {
 .map-wrapper .mapboxgl-map {
   @apply !h-[360px] !w-full;
   @apply md:!h-[calc(100vh-190px)];
-  @apply lg:!h-[calc(100vh-150px)];
+  @apply lg:!h-[calc(100vh-130px)];
 }
 
 .asset-card {

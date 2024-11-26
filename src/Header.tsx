@@ -40,7 +40,7 @@ export default ({
   return (
     <header
       className={clsx(
-        "px-3 md:px-4 z-20 fixed top-0 left-0 h-[60px] md:h-[80px] w-full",
+        "px-3 md:px-4 z-20 fixed top-0 left-0 h-[60px] md:h-[70px] w-full",
         "bg-background site-header"
       )}
     >

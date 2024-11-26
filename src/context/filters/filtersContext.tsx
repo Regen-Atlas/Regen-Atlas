@@ -108,7 +108,6 @@ const newInitialState: NewState = {
 };
 
 const newReducer = (state: NewState, action: NewAction): NewState => {
-  console.log("New reducer", action);
   switch (action.type) {
     case "SET_ALL_ASSETS": {
       return {

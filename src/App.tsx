@@ -26,14 +26,6 @@ function App() {
     "issuers_with_published_assets"
   );
 
-  // Log the data once it's loaded
-  useEffect(() => {
-    if (allAssets?.length && assetTypes?.length && chains?.length) {
-      console.log(allAssets, assetTypes, chains);
-      console.log("Data loaded");
-    }
-  }, [allAssets, assetTypes, chains]);
-
   // Dispatch the chains only when they are loaded and not yet in the baseState
   useEffect(() => {
     if (chains?.length && !baseState.chains.length) {

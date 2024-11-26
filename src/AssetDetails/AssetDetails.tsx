@@ -25,10 +25,13 @@ export default (): React.ReactElement => {
   const navigate = useNavigate();
   const { mapStyle } = useMapState();
   // Fetch the asset
-  const { item: asset } = useSupabaseItemById<NewAsset>("assets_all", assetId);
+  const { item: asset } = useSupabaseItemById<NewAsset>(
+    "assets_published",
+    assetId
+  );
 
   if (!asset) {
-    return <div>Asset not found</div>;
+    return <div>Loading...</div>;
   }
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
@@ -59,7 +62,7 @@ export default (): React.ReactElement => {
       </Helmet>
       <Header />
       <div className="main-container">
-        <div className="pt-[60px] md:pt-[100px]">
+        <div className="pt-[60px] md:pt-[80px]">
           {!asset && (
             <div className="text-center text-white text-2xl">
               Asset not found
