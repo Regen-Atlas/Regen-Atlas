@@ -76,7 +76,7 @@ export default (): React.ReactElement => {
                 initialViewState={{
                   longitude: 15,
                   latitude: 30,
-                  zoom: 1,
+                  zoom: 1.6,
                 }}
                 showMapStyleSwitch={true}
                 mapRef={mapRef as React.RefObject<MapRef>}
