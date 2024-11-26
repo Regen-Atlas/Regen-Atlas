@@ -1,6 +1,5 @@
 import { Token } from "@uniswap/sdk-core";
 import { Logo42220 } from "../../chains/logos/Logo42220";
-import { CHAIN_MAPPING } from "../../chains";
 import clsx from "clsx";
 import { NumberInput } from "../../../shared/components/NumberInput";
 
@@ -57,7 +56,7 @@ export const UniswapTokenInput: React.FC<UniswapTokenInputProps> = ({
                   "w-[14px] h-[14px] flex items-center justify-center rounded-sm"
                 )}
                 style={{
-                  backgroundColor: CHAIN_MAPPING[42220].color,
+                  backgroundColor: "#FCFF52",
                 }}
               >
                 <Logo42220 size={8} />

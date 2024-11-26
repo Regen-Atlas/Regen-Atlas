@@ -14,4 +14,6 @@ export interface ChainBranding {
   color: string;
   backgroundColor?: string;
   textColor: string;
+  explorer_link?: string;
+  id?: string;
 }

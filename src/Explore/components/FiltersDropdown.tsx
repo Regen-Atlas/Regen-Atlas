@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import { useFiltersDispatch, useFiltersState } from "../../context/filters";
+import {
+  useNewFiltersDispatch,
+  useNewFiltersState,
+} from "../../context/filters";
 import { CheckboxBox } from "../../shared/components";
-import { ASSET_TYPES } from "../../modules/taxonomy";
-import { PROVIDER_LIST } from "../../modules/issuers";
-import { CHAINS } from "../../modules/chains";
+import { useBaseState } from "../../context/base";
 
 export default ({
   openFilter,
@@ -12,15 +13,20 @@ export default ({
   openFilter: "assetType" | "issuers" | "chains";
   onClose: () => void;
 }): React.ReactElement => {
-  const { filters } = useFiltersState();
-  const dispatchFilters = useFiltersDispatch();
+  const { filters } = useNewFiltersState();
+  const dispatchFilters = useNewFiltersDispatch();
+  const base = useBaseState();
+
+  if (!base.chains.length || !base.types.length || !base.issuers.length) {
+    return <div>Loading...</div>;
+  }
 
   const handleSubtypeClick = ({
     typeId,
     subtypeId,
   }: {
-    typeId: string;
-    subtypeId: string;
+    typeId: number;
+    subtypeId: number;
   }) => {
     const selected = filters.assetTypes[typeId]?.subtypes.includes(subtypeId);
     if (!selected) {
@@ -43,15 +49,15 @@ export default ({
           "bg-cardBackground rounded-xl p-4",
           "absolute top-[72px]",
           openFilter === "assetType" &&
-            "left-[calc((100vw-960px)/2)] w-[1000px]",
+            "left-[calc((100vw-1000px)/2)] w-[1000px]",
           (openFilter === "issuers" || openFilter === "chains") &&
-            "left-[calc((100vw-600px)/2)] w-[640px]"
+            "left-[calc((100vw-720px)/2)] w-[720px]"
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {openFilter === "assetType" && (
           <div className="grid grid-cols-3 gap-4">
-            {ASSET_TYPES.map((assetType) => {
+            {base.types.map((assetType) => {
               const selected = filters.assetTypes[assetType.id];
               return (
                 <div key={assetType.id}>
@@ -62,13 +68,36 @@ export default ({
                       "cursor-pointer hover:text-gray-600"
                     )}
                     onClick={() => {
+                      // if no provider is selected and the type has no assets, do nothing
+                      if (
+                        !filters.provider &&
+                        !assetType.asset_subtypes.find(
+                          (item) =>
+                            item?.total_asset_count &&
+                            item?.total_asset_count > 0
+                        )
+                      ) {
+                        return;
+                      }
+
+                      if (
+                        filters.provider &&
+                        !assetType.asset_subtypes.find((subtype) =>
+                          subtype.issuer_counts?.find(
+                            (issuer) => issuer.issuer_id === filters.provider
+                          )
+                        )
+                      ) {
+                        return;
+                      }
+
                       if (!selected) {
                         dispatchFilters({
                           type: "SET_TYPE_FILTER",
                           payload: {
                             id: assetType.id,
                             name: assetType.name,
-                            subtypes: assetType.subtypes.map(
+                            subtypes: assetType.asset_subtypes.map(
                               (subtype) => subtype.id
                             ),
                           },
@@ -88,7 +117,7 @@ export default ({
                     />
                     <div className="font-bold text-lg">{assetType.name}</div>
                   </div>
-                  {assetType.subtypes.map((subtype) => (
+                  {assetType.asset_subtypes.map((subtype) => (
                     <div
                       key={subtype.id}
                       className={clsx(
@@ -96,12 +125,27 @@ export default ({
                         "ml-4 mb-4",
                         "cursor-pointer hover:text-gray-600"
                       )}
-                      onClick={() =>
+                      onClick={() => {
+                        if (
+                          !filters.provider &&
+                          subtype.total_asset_count === 0
+                        ) {
+                          return;
+                        }
+                        if (
+                          filters.provider &&
+                          !subtype.issuer_counts?.find(
+                            (issuer) => issuer.issuer_id === filters.provider
+                          )
+                        ) {
+                          return;
+                        }
+
                         handleSubtypeClick({
                           typeId: assetType.id,
                           subtypeId: subtype.id,
-                        })
-                      }
+                        });
+                      }}
                     >
                       <CheckboxBox
                         variant="small"
@@ -110,7 +154,34 @@ export default ({
                           assetType.id
                         ]?.subtypes.includes(subtype.id)}
                       />
-                      <div className="leading-none">{subtype.name}</div>
+                      <div
+                        className={clsx(
+                          "leading-none",
+                          !filters.provider &&
+                            subtype.total_asset_count === 0 &&
+                            "text-gray-400",
+                          filters.provider &&
+                            !subtype.issuer_counts?.find(
+                              (issuer) => issuer.issuer_id === filters.provider
+                            ) &&
+                            "text-gray-400"
+                        )}
+                      >
+                        {subtype.name}
+
+                        {filters.provider ? (
+                          <span>
+                            {" "}
+                            (
+                            {subtype.issuer_counts?.find(
+                              (issuer) => issuer.issuer_id === filters.provider
+                            )?.asset_count || 0}
+                            )
+                          </span>
+                        ) : (
+                          <span> ({subtype.total_asset_count})</span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -121,7 +192,7 @@ export default ({
 
         {openFilter === "issuers" && (
           <div className="grid grid-cols-3 gap-4">
-            {PROVIDER_LIST.map((provider) => {
+            {base.issuers.map((provider) => {
               const selected = filters.provider === provider.id;
               return (
                 <div key={provider.id}>
@@ -158,7 +229,7 @@ export default ({
 
         {openFilter === "chains" && (
           <div className="grid grid-cols-3 gap-4">
-            {CHAINS.map((chain) => {
+            {base.chains.map((chain) => {
               const selected = filters.chainId === chain.id;
               return (
                 <div key={chain.id}>

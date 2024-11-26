@@ -14,7 +14,7 @@ const menuItems = [
     link: "/",
   },
   {
-    name: "Add Asset",
+    name: "List Project",
     link: "#",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform",
   },
@@ -40,7 +40,7 @@ export default ({
   return (
     <header
       className={clsx(
-        "px-3 md:px-4 z-20 fixed top-0 left-0 h-[60px] md:h-[80px] w-full",
+        "px-3 md:px-4 z-20 fixed top-0 left-0 h-[60px] md:h-[70px] w-full",
         "bg-background site-header"
       )}
     >
@@ -52,11 +52,18 @@ export default ({
           <img src="/RA_logo-02.svg" alt="logo" className="h-[40px]" />
         </Link>
         {showFilters && (
-          <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-320px)]">
+          <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-270px)]">
             <FiltersDesktop />
           </div>
         )}
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex items-center gap-4">
+          <a
+            className="ml-6 hidden button button-gradient text-center button-gradient !text-base xl:block"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
+            target="_blank"
+          >
+            List Project
+          </a>
           <ConnectKitButton />
         </div>
         <List

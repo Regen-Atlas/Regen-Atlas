@@ -15,7 +15,6 @@ export const analytics = {
     });
   },
   sendTradingEvent: (action: string) => {
-    console.log("sendTradingEvent", action);
     ReactGA.send({
       category: "Trading",
       action,

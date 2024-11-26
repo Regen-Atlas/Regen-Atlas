@@ -13,10 +13,11 @@ import "./index.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Explore from "./Explore/Explore.tsx";
 import AddAsset from "./AddAsset.tsx";
-import { FiltersStateProvider } from "./context/filters/filtersContext.tsx";
+import { NewFiltersStateProvider } from "./context/filters/filtersContext.tsx";
 import AssetDetails from "./AssetDetails/AssetDetails.tsx";
 import { MapStateProvider } from "./context/map/mapContext.tsx";
 import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
+import { BaseStateProvider } from "./context/base/baseContext.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -52,11 +53,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider theme="soft">
-          <FiltersStateProvider>
-            <MapStateProvider>
-              <RouterProvider router={router} />
-            </MapStateProvider>
-          </FiltersStateProvider>
+          <BaseStateProvider>
+            <NewFiltersStateProvider>
+              <MapStateProvider>
+                <RouterProvider router={router} />
+              </MapStateProvider>
+            </NewFiltersStateProvider>
+          </BaseStateProvider>
         </ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

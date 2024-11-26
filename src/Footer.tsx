@@ -13,6 +13,20 @@ export default ({
       <p>© Regen Atlas 2024</p>
       {showMapStyleSwitch && <MapStyleSwitch />}
       <div className="flex items-center gap-4">
+        <a
+          className="hover:text-primary-400"
+          href="https://regen-atlas.gitbook.io/regen-atlas-docs"
+          target="_blank"
+        >
+          Docs
+        </a>
+        <a
+          className="ml-6 block button button-gradient text-center button-gradient !text-base xl:hidden"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
+          target="_blank"
+        >
+          List Project
+        </a>
         <a href="https://x.com/theregenatlas" target="_blank">
           <XLogo size={24} />
         </a>
@@ -25,20 +39,6 @@ export default ({
         </a>
         <a href="https://paragraph.xyz/@regenatlas" target="_blank">
           <ParagraphIcon className="w-5 h-5" />
-        </a>
-        <a
-          className="hover:text-primary-400"
-          href="https://regen-atlas.gitbook.io/regen-atlas-docs"
-          target="_blank"
-        >
-          Documentation
-        </a>
-        <a
-          className="ml-6 block button button-gradient text-center button-gradient !text-base"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
-          target="_blank"
-        >
-          Register Asset
         </a>
       </div>
     </footer>
