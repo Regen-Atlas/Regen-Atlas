@@ -16,6 +16,7 @@ import { NewAsset, RelatedAsset } from "../shared/types";
 import NewAssetCard from "../Explore/NewAssetCard";
 import React, { useState } from "react";
 import { AssetsOrbit } from "./AssetsOrbit";
+import { Retirement } from "../modules/retirement/Retirement";
 
 export default (): React.ReactElement => {
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
@@ -44,6 +45,11 @@ export default (): React.ReactElement => {
   const tokenOut = celoContractAddress
     ? CELO_TOKENS_MAP[celoContractAddress]
     : "";
+
+  const celoRetireWalletAddress: Address = asset.metadata
+    ?.celo_retire_wallet_address as Address;
+
+  console.log("celoRetireWalletAddress", celoRetireWalletAddress);
 
   const handleAssetOpenClick = (id: string) => {
     navigate(`/assets/${id}`);
@@ -89,6 +95,14 @@ export default (): React.ReactElement => {
                     <div className="w-full">
                       <UniswapTrading tokenPair={[tokenIn, tokenOut]} />
                     </div>
+                  </div>
+                )}
+                {celoRetireWalletAddress && (
+                  <div className="mt-4">
+                    <Retirement
+                      retirementWallet={celoRetireWalletAddress}
+                      retirementChainId="42220"
+                    />
                   </div>
                 )}
               </div>

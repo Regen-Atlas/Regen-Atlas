@@ -63,6 +63,7 @@ export interface NewAsset {
     };
   }>;
   second_order: boolean;
+  metadata: Record<string, any>;
 }
 
 export interface RelatedAsset {
