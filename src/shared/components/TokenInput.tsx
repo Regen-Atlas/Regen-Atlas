@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import { NumberInput } from "./NumberInput";
-import { Logo42220 } from "../../modules/chains/logos/Logo42220";
 import { TokenSelect } from "./TokenSelect";
 import { Token } from "../types";
 

@@ -39,10 +39,7 @@ const buttonText: Record<RetirementState, string> = {
   error: "Confirm Swap",
 };
 
-export const Retirement: React.FC<RetirementProps> = ({
-  retirementWallet,
-  retirementChainId,
-}) => {
+export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
   const [selectedToken, setSelectedToken] = useState<Token>(
     CELO_CELO_TOKEN as Token
   );
@@ -215,6 +212,11 @@ export const Retirement: React.FC<RetirementProps> = ({
         >
           {buttonText[status]}
         </button>
+        {transferHash && (
+          <div className="text-xs text-center mt-2">
+            Transaction hash: {transferHash}
+          </div>
+        )}
       </div>
     </>
   );
