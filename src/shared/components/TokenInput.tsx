@@ -1,7 +1,8 @@
-import { Token } from "@uniswap/sdk-core";
 import clsx from "clsx";
 import { NumberInput } from "./NumberInput";
 import { Logo42220 } from "../../modules/chains/logos/Logo42220";
+import { TokenSelect } from "./TokenSelect";
+import { Token } from "../types";
 
 interface TokenInputProps {
   type?: "buy" | "sell" | "retire";
@@ -10,7 +11,9 @@ interface TokenInputProps {
   token: Token;
   formattedBalance: string;
   displayBalance: boolean;
+  text?: string;
   onChange: (value: string) => void;
+  onTokenChange: (token: Token) => void;
 }
 
 export const TokenInput: React.FC<TokenInputProps> = ({
@@ -20,7 +23,9 @@ export const TokenInput: React.FC<TokenInputProps> = ({
   token,
   formattedBalance,
   displayBalance,
+  text,
   onChange,
+  onTokenChange,
 }) => {
   const symbol = token.symbol?.toUpperCase();
 
@@ -28,49 +33,32 @@ export const TokenInput: React.FC<TokenInputProps> = ({
     return <div>Invalid token</div>;
   }
 
-  const tokenLogo = `${symbol}.${["PLASTIK", "CUSD"].includes(symbol) ? "png" : "svg"}`;
-
   return (
     <div className="grid p-4 rounded-lg border-2 border-gray-400 bg-cardBackground">
       {type && <span className="text-sm capitalize">{type}</span>}
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
+        {text && <span className="text-2xl mr-4">{text}</span>}
         <NumberInput
-          className="py-2 border-none outline-none bg-transparent text-3xl w-full"
+          className="py-2 border-none outline-none bg-transparent text-2xl w-full"
           value={value}
           placeholder={placeholder}
           onChange={onChange}
         />
 
         <div className="flex-shrink-0">
-          <div className="flex gap-2 items-center">
-            <div className="relative">
-              <img
-                src={`/tokens/${tokenLogo}`}
-                alt={token.symbol}
-                className="w-8 h-8"
-              />
-              <div
-                className={clsx(
-                  "absolute bottom-0 right-0",
-                  "border-[1px] border-cardBackground",
-                  "w-[14px] h-[14px] flex items-center justify-center rounded-sm"
-                )}
-                style={{
-                  backgroundColor: "#FCFF52",
-                }}
-              >
-                <Logo42220 size={8} />
-              </div>
-            </div>
-            <span className="text-xl font-bold uppercase">{token.symbol}</span>
-          </div>
-          {displayBalance && (
-            <div className="text-xs text-right mt-1">
-              Balance: {formattedBalance}
-            </div>
+          {token.symbol && (
+            <TokenSelect
+              selectedToken={token}
+              onTokenChange={(token) => onTokenChange(token)}
+            />
           )}
         </div>
       </div>
+      {displayBalance && (
+        <div className="text-xs text-right mt-1">
+          Balance: {formattedBalance}
+        </div>
+      )}
     </div>
   );
 };

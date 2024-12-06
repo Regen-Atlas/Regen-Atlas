@@ -1,3 +1,4 @@
+import { Token as UniswapToken } from "@uniswap/sdk-core";
 import { ChainBranding } from "../modules/chains";
 
 export type MapStyles = "map" | "satellite";
@@ -87,4 +88,8 @@ export interface AssetTypeWithSubtypes {
       asset_count: number;
     }>;
   }[];
+}
+
+export interface Token extends UniswapToken {
+  symbol: string;
 }

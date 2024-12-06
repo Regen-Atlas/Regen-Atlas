@@ -1,11 +1,15 @@
-import { Address } from "viem";
+import { Address, parseEther } from "viem";
 import { TokenInput } from "../../shared/components/TokenInput";
 import { CELO_CUSD_TOKEN } from "../uniswap";
 import { useEffect, useState } from "react";
-import { useTokenBalance } from "../uniswap/hooks/useFormattedBalance";
 import { useAccount, useAccountEffect } from "wagmi";
 import { parseNumber } from "../../shared/helpers";
 import { NumberInput } from "../../shared/components/NumberInput";
+import { useWriteContract } from "wagmi";
+import { ABI_CELO_ERC_20_TOKEN } from "../../shared/abi";
+import { CELO_CELO_TOKEN } from "../../shared/consts";
+import { Token } from "../../shared/types";
+import { useTokensBalances } from "../../shared/hooks/useTokensBalances";
 
 interface RetirementProps {
   retirementWallet: Address;
@@ -39,20 +43,26 @@ export const Retirement: React.FC<RetirementProps> = ({
   retirementWallet,
   retirementChainId,
 }) => {
+  const [selectedToken, setSelectedToken] = useState<Token>(
+    CELO_CELO_TOKEN as Token
+  );
   const [project, setProject] = useState<any>();
   const [creditsAmount, setCreditsAmount] = useState("");
   const [tokenAmount, setTokenAmount] = useState("");
   const { address } = useAccount();
-  const tokenInBalance = useTokenBalance({
-    token: CELO_CUSD_TOKEN,
+
+  const balances = useTokensBalances({
+    tokens: [CELO_CELO_TOKEN as Token, CELO_CUSD_TOKEN as Token],
     account: address,
   });
+  console.log("balances", balances);
   const [status, setStatus] = useState<RetirementState>(
     !address ? "connect_wallet" : "enter_amount"
   );
+  const { data: transferHash, writeContract } = useWriteContract();
 
   useEffect(() => {
-    const fetchTokenBalance = async () => {
+    const fetchCreditDetails = async () => {
       try {
         const res = await fetch(import.meta.env.VITE_ECOTOKEN_ENDPOINT, {
           method: "POST",
@@ -71,7 +81,7 @@ export const Retirement: React.FC<RetirementProps> = ({
       }
     };
 
-    fetchTokenBalance();
+    fetchCreditDetails();
   }, []);
 
   useAccountEffect({
@@ -95,7 +105,7 @@ export const Retirement: React.FC<RetirementProps> = ({
     }
   };
 
-  const amountChangeSideeffect = (value: string) => {
+  const amountChangeSideeffect = (value: string, updatedToken?: Token) => {
     const amount = parseFloat(value);
 
     if (isNaN(amount) || amount === 0) {
@@ -106,7 +116,10 @@ export const Retirement: React.FC<RetirementProps> = ({
     const formattedAmount = parseNumber(value, CELO_CUSD_TOKEN.decimals);
 
     if (address) {
-      if (tokenInBalance.value < formattedAmount) {
+      if (
+        balances[updatedToken ? updatedToken.address : selectedToken.address]
+          .value < formattedAmount
+      ) {
         setStatus("insufficient_balance");
       } else {
         setStatus("ready");
@@ -114,17 +127,48 @@ export const Retirement: React.FC<RetirementProps> = ({
     }
   };
 
-  const handleButtonClick = () => {};
+  const handleButtonClick = () => {
+    writeContract({
+      abi: ABI_CELO_ERC_20_TOKEN,
+      functionName: "transfer",
+      args: [retirementWallet, parseEther("0.01")],
+      address: selectedToken.address as Address,
+    });
+  };
 
   const onCreditsChange = (value: string) => {
     setCreditsAmount(value);
-    const amount = `${(parseFloat(value) * project?.priceInCelo).toFixed(3)}`;
+
+    let updatedTokenAmount;
+    if (selectedToken.symbol === "CELO") {
+      updatedTokenAmount = `${(parseFloat(value) * project.priceInCelo).toFixed(3)}`;
+    } else {
+      updatedTokenAmount = `${(parseFloat(value) * project.price).toFixed(3)}`;
+    }
     if (value === "") {
       setTokenAmount("");
     } else {
-      setTokenAmount(amount);
+      setTokenAmount(updatedTokenAmount);
     }
-    amountChangeSideeffect(amount);
+    amountChangeSideeffect(updatedTokenAmount);
+  };
+
+  const onTokenChange = (token: Token) => {
+    setSelectedToken(token);
+    // recalculating the amount
+    let updatedTokenAmount;
+    if (token.symbol === "CELO") {
+      updatedTokenAmount = `${(parseFloat(creditsAmount) * project.priceInCelo).toFixed(3)}`;
+    } else {
+      updatedTokenAmount = `${(parseFloat(creditsAmount) * project.price).toFixed(3)}`;
+    }
+
+    if (updatedTokenAmount === "") {
+      setTokenAmount("");
+    } else {
+      setTokenAmount(updatedTokenAmount);
+    }
+    amountChangeSideeffect(updatedTokenAmount, token);
   };
 
   return (
@@ -151,11 +195,13 @@ export const Retirement: React.FC<RetirementProps> = ({
         </div>
         <TokenInput
           placeholder="0"
-          token={CELO_CUSD_TOKEN}
+          token={selectedToken}
           value={tokenAmount}
-          formattedBalance={tokenInBalance.formattedBalance}
+          formattedBalance={balances[selectedToken.address].formattedBalance}
           displayBalance={!!address}
+          text="For:"
           onChange={(value) => handleAmountChange(value)}
+          onTokenChange={(token) => onTokenChange(token)}
         />
 
         <button
