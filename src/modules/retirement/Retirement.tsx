@@ -319,9 +319,7 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
                   className="button button-gradient my-4"
                   onClick={() => {
                     if (transferHash) {
-                      getTransactionConfirmation(
-                        "0x5ef73bf47311c4f92416f874f00723c48e9a2ff9e500e0245e5f15937471bda6"
-                      );
+                      getTransactionConfirmation(transferHash);
                     }
                   }}
                 >
