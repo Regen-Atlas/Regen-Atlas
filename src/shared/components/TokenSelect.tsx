@@ -18,7 +18,6 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
   onTokenChange,
 }) => {
   const handleTokenSelect = (token: Token) => {
-    console.log("Selected token", token);
     const elem: any = document.activeElement;
     if (elem) {
       elem?.blur();
