@@ -10,6 +10,9 @@ import { ABI_CELO_ERC_20_TOKEN } from "../../shared/abi";
 import { CELO_CELO_TOKEN } from "../../shared/consts";
 import { Token } from "../../shared/types";
 import { useTokensBalances } from "../../shared/hooks/useTokensBalances";
+import { useModal } from "connectkit";
+import { useWaitForTransactionReceipt } from "wagmi";
+import { Modal } from "../../shared/components";
 
 interface RetirementProps {
   retirementWallet: Address;
@@ -20,43 +23,63 @@ type RetirementState =
   | "connect_wallet"
   | "enter_amount"
   | "insufficient_balance"
+  | "minimum_not_met"
   | "ready"
-  | "confirm_approve"
-  | "awaiting_approval_confirmation"
-  | "swap"
+  | "approving"
   | "done"
   | "error";
+
+interface RetirementConfirmation {
+  beneficiary: string;
+  creditsRetired: string;
+  description: string;
+  isValid: boolean;
+  protocolAddress: string;
+  retirementHash: string;
+  status: string;
+  timeStamp: string;
+  tokenAddress: string;
+  usdValue: string;
+  wallet: string;
+}
 
 const buttonText: Record<RetirementState, string> = {
   connect_wallet: "Connect Wallet",
   enter_amount: "Enter an amount",
   insufficient_balance: "Insufficient Balance",
+  minimum_not_met: "Minimum ",
+  approving: "approve in your wallet",
   ready: "Retire",
-  confirm_approve: "Approve and swap",
-  awaiting_approval_confirmation: "Awaiting confirmation",
-  swap: "Swap",
   done: "Swap",
-  error: "Confirm Swap",
+  error: "Retire",
 };
 
 export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
+  const [minimumCredits, setMinimumCredits] = useState(1);
+  const [showModal, setShowModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<Token>(
     CELO_CELO_TOKEN as Token
   );
+  const [retirementAmount, setRetirementAmount] = useState("");
   const [project, setProject] = useState<any>();
   const [creditsAmount, setCreditsAmount] = useState("");
   const [tokenAmount, setTokenAmount] = useState("");
   const { address } = useAccount();
+  const { setOpen: connectWallet } = useModal();
+  const [retirementConfirmation, setRetirementConfirmation] =
+    useState<RetirementConfirmation>();
 
   const balances = useTokensBalances({
     tokens: [CELO_CELO_TOKEN as Token, CELO_CUSD_TOKEN as Token],
     account: address,
   });
-  console.log("balances", balances);
   const [status, setStatus] = useState<RetirementState>(
     !address ? "connect_wallet" : "enter_amount"
   );
-  const { data: transferHash, writeContract } = useWriteContract();
+  const { data: transferHash, writeContractAsync } = useWriteContract();
+  const { isSuccess } = useWaitForTransactionReceipt({
+    hash: transferHash,
+  });
 
   useEffect(() => {
     const fetchCreditDetails = async () => {
@@ -71,8 +94,8 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
           }),
         });
         const data = await res.json();
-        console.log("data", data);
         setProject(data);
+        setMinimumCredits(2 / data.price);
       } catch (error) {
         console.log("Error fetching token details", error);
       }
@@ -94,11 +117,20 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
     setTokenAmount(value);
     amountChangeSideeffect(value);
 
-    const creditAmount = `${(parseFloat(value) / project.priceInCelo).toFixed(3)}`;
+    let updatedCreditsAmount;
+    if (selectedToken.symbol === "CELO") {
+      updatedCreditsAmount = `${(parseFloat(value) / project.priceInCelo).toFixed(3)}`;
+    } else {
+      updatedCreditsAmount = `${(parseFloat(value) / project.price).toFixed(3)}`;
+    }
+
     if (value === "") {
       setCreditsAmount("");
     } else {
-      setCreditsAmount(creditAmount);
+      setCreditsAmount(updatedCreditsAmount);
+      if (parseFloat(updatedCreditsAmount) < minimumCredits) {
+        setStatus("minimum_not_met");
+      }
     }
   };
 
@@ -124,13 +156,45 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
     }
   };
 
-  const handleButtonClick = () => {
-    writeContract({
-      abi: ABI_CELO_ERC_20_TOKEN,
-      functionName: "transfer",
-      args: [retirementWallet, parseEther("0.01")],
-      address: selectedToken.address as Address,
-    });
+  const handleButtonClick = async () => {
+    setStatus("approving");
+    if (status === "connect_wallet") {
+      connectWallet(true);
+    } else if (status === "ready" || status === "error") {
+      try {
+        await writeContractAsync({
+          abi: ABI_CELO_ERC_20_TOKEN,
+          functionName: "transfer",
+          args: [retirementWallet, parseEther(tokenAmount)],
+          address: selectedToken.address as Address,
+        });
+        setRetirementAmount(`${tokenAmount} ${selectedToken.symbol}`);
+        setStatus("done");
+      } catch {
+        setStatus("error");
+      }
+    }
+  };
+
+  const getTransactionConfirmation = async (hash: Address) => {
+    try {
+      const data = await fetch(import.meta.env.VITE_ECOTOKEN_CONFIRMATION, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tx: hash,
+        }),
+      });
+      const res = await data.json();
+      console.log("Transaction details", res);
+
+      setRetirementConfirmation(res.validationResult);
+      setShowModal(true);
+    } catch {
+      console.log("Error fetching transaction details");
+    }
   };
 
   const onCreditsChange = (value: string) => {
@@ -148,6 +212,9 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
       setTokenAmount(updatedTokenAmount);
     }
     amountChangeSideeffect(updatedTokenAmount);
+    if (parseFloat(value) < minimumCredits) {
+      setStatus("minimum_not_met");
+    }
   };
 
   const onTokenChange = (token: Token) => {
@@ -174,50 +241,176 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
         <h3 className="text-xl font-semibold my-2">
           Buy and retire (${project.price} per credit)
         </h3>
-        <p className="text-sm mb-4">
-          Lorem Ipsum change this to describe what user can expect to happen.
-          Lorem Ipsum change this to describe what user can expect to happen.
-          Lorem Ipsum change this to describe what user can expect to happen.
-          Lorem Ipsum change this to describe what user can expect to happen.{" "}
-        </p>
-        <div className="mb-2 flex items-center justify-start p-4 rounded-lg border-2 border-gray-400 bg-cardBackground">
-          <span className="text-2xl mr-4">Retire</span>
-          <NumberInput
-            className="py-2 border-none outline-none bg-transparent text-2xl w-20"
-            value={creditsAmount}
-            placeholder="0"
-            onChange={onCreditsChange}
-          />
-          <span>Credit(s)</span>
-        </div>
-        <TokenInput
-          placeholder="0"
-          token={selectedToken}
-          value={tokenAmount}
-          formattedBalance={balances[selectedToken.address].formattedBalance}
-          displayBalance={!!address}
-          text="For:"
-          onChange={(value) => handleAmountChange(value)}
-          onTokenChange={(token) => onTokenChange(token)}
-        />
+        {status !== "done" && (
+          <div>
+            <p className="text-sm mb-4">
+              Lorem Ipsum change this to describe what user can expect to
+              happen. Lorem Ipsum change this to describe what user can expect
+              to happen. Lorem Ipsum change this to describe what user can
+              expect to happen. Lorem Ipsum change this to describe what user
+              can expect to happen.{" "}
+            </p>
+            <div className="mb-2 p-4 rounded-lg border-2 border-gray-400 bg-cardBackground">
+              <div className="flex items-center justify-start ">
+                <div>
+                  <span className="text-2xl mr-4">Retire</span>
+                </div>
+                <NumberInput
+                  className="py-2 border-none outline-none bg-transparent text-2xl w-20"
+                  value={creditsAmount}
+                  placeholder="0"
+                  onChange={onCreditsChange}
+                />
+                <span>Credit(s)</span>
+              </div>
+              <div className="text-xs font-medium">
+                Minimum {minimumCredits} credit{minimumCredits === 1 ? "" : "s"}
+              </div>
+            </div>
+            <TokenInput
+              placeholder="0"
+              token={selectedToken}
+              value={tokenAmount}
+              formattedBalance={
+                balances[selectedToken.address].formattedBalance
+              }
+              displayBalance={!!address}
+              text="For:"
+              onChange={(value) => handleAmountChange(value)}
+              onTokenChange={(token) => onTokenChange(token)}
+            />
 
-        <button
-          className="button button-gradient w-full my-2"
-          onClick={handleButtonClick}
-          disabled={
-            status === "insufficient_balance" ||
-            status === "enter_amount" ||
-            status === "awaiting_approval_confirmation"
-          }
-        >
-          {buttonText[status]}
-        </button>
-        {transferHash && (
-          <div className="text-xs text-center mt-2">
-            Transaction hash: {transferHash}
+            <button
+              className="button button-gradient w-full my-2"
+              onClick={handleButtonClick}
+              disabled={
+                status === "insufficient_balance" ||
+                status === "enter_amount" ||
+                status === "approving" ||
+                status === "minimum_not_met"
+              }
+            >
+              {buttonText[status]}
+              {status === "minimum_not_met" &&
+                `${minimumCredits} ${minimumCredits === 1 ? "credit" : "credits"} required`}
+            </button>
+          </div>
+        )}
+        {status === "done" && (
+          <div>
+            {!isSuccess && (
+              <div className="h-40 flex items-center justify-center">
+                <div>
+                  <div>Processing credit retirement...</div>
+                  <div className="flex justify-center">
+                    <span className="loading loading-spinner loading-lg"></span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {isSuccess && (
+              <div className="h-40 flex flex-col items-center justify-center text-center">
+                <p>
+                  You successfully retired{" "}
+                  <span className="font-bold">{project.name}</span> credits
+                  worth <span className="font-bold">{retirementAmount}</span>
+                </p>
+                <button
+                  className="button button-gradient my-4"
+                  onClick={() => {
+                    if (transferHash) {
+                      getTransactionConfirmation(
+                        "0x5ef73bf47311c4f92416f874f00723c48e9a2ff9e500e0245e5f15937471bda6"
+                      );
+                    }
+                  }}
+                >
+                  Get confirmation
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
+      {showModal && (
+        <Modal
+          onClose={() => {
+            if (status === "done") {
+              setStatus("enter_amount");
+            }
+            setShowModal(false);
+          }}
+        >
+          {retirementConfirmation?.status === "Delivered" && (
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Retirement Details</h3>
+              <p className="my-2">
+                You have successfully retired{" "}
+                <span className="font-bold">{project.name}</span> worth{" "}
+                {retirementAmount}
+              </p>
+              <div>
+                This is the retirementHash, which serves as confirmation:
+                <p className="font-bold my-2">
+                  {retirementConfirmation?.retirementHash}
+                </p>
+                <a
+                  className="block text-center button button-gradient mt-4"
+                  href={`https://www.mintscan.io/regen/tx/${retirementConfirmation?.retirementHash}`}
+                  target="_blank"
+                >
+                  Check on Mintscan
+                </a>
+              </div>
+            </div>
+          )}
+          {retirementConfirmation?.status === "pooled" && (
+            <div className="max-w-[90vw] w-[720px]">
+              <h3 className="text-xl font-semibold mb-4">
+                Credits are being pooled
+              </h3>
+              <div>
+                They didn't reach the minimum $2 threshold. They will stay in
+                the pool until it reaches the minimum threshold and then be
+                retired. Take note of your transaction hash:
+              </div>
+              <div className="font-bold my-4 break-all">{transferHash}</div>
+              <div>
+                You can use it to check the status of the retirement on:
+              </div>
+              <a
+                className="block text-center button button-gradient mt-4"
+                href="https://scan.ecotoken.earth"
+                target="_blank"
+              >
+                Ecotoken scan
+              </a>
+            </div>
+          )}
+          {!retirementConfirmation?.isValid && (
+            <div className="max-w-[90vw] w-[720px]">
+              <h3 className="text-xl font-semibold mb-4">
+                Error retiring credits
+              </h3>
+              <div>
+                Transaction was not processed correctly. Please refer to your
+                wallet for more details. If the transaction went through you can
+                use the transaction hash to check the status of the retirement
+                on:
+              </div>
+              <div className="font-bold my-4 break-all">{transferHash}</div>
+              <div>You can check the retirement on:</div>
+              <a
+                className="block text-center button button-gradient mt-4"
+                href="https://scan.ecotoken.earth"
+                target="_blank"
+              >
+                Ecotoken scan
+              </a>
+            </div>
+          )}
+        </Modal>
+      )}
     </>
   );
 };

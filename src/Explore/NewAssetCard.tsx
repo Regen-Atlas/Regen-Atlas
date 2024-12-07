@@ -98,14 +98,14 @@ export default ({
         <div className="xxs:text-[13px] text-sm">
           <div className="flex justify-between items-center py-1">
             <p className="font-bold">Nativity</p>
-            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+            <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {asset.nativity ? NEW_NATIVITY_MAP[asset.nativity] : ""}
             </div>
           </div>
 
           <div className="flex justify-between items-center py-1">
             <p className="font-bold">Subtype</p>
-            <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
+            <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
               {asset.asset_subtypes[0].name}
             </div>
           </div>
@@ -218,6 +218,7 @@ export default ({
           )}
           {showExternalLink &&
             !celoContractAddress &&
+            !asset.metadata?.celo_retire_wallet_address &&
             (asset.issuer_link || asset.exchange_link) && (
               <a
                 className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
