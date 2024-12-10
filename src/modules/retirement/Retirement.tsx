@@ -95,7 +95,8 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
         });
         const data = await res.json();
         setProject(data);
-        setMinimumCredits(2 / data.price);
+        const minCredits = Math.round((2 / data.price) * 100) / 100;
+        setMinimumCredits(minCredits);
       } catch (error) {
         console.log("Error fetching token details", error);
       }
@@ -104,14 +105,37 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
     fetchCreditDetails();
   }, []);
 
+  const amountChangeSideeffect = (value: string, updatedToken?: Token) => {
+    const amount = parseFloat(value);
+
+    if (isNaN(amount) || amount === 0) {
+      setStatus("enter_amount");
+      return;
+    }
+
+    // @TODO this should be decimals of the token
+    const formattedAmount = parseNumber(value, CELO_CUSD_TOKEN.decimals);
+
+    if (address) {
+      if (
+        balances[updatedToken ? updatedToken.address : selectedToken.address]
+          .value < formattedAmount
+      ) {
+        setStatus("insufficient_balance");
+      } else {
+        setStatus("ready");
+      }
+    } else {
+      setStatus("connect_wallet");
+    }
+  };
+
   useAccountEffect({
-    onConnect: () => setStatus("enter_amount"),
+    onConnect: () => {
+      handleAmountChange("");
+    },
     onDisconnect: () => setStatus("connect_wallet"),
   });
-
-  if (!project) {
-    return <div>Loading...</div>;
-  }
 
   const handleAmountChange = (value: string) => {
     setTokenAmount(value);
@@ -130,28 +154,6 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
       setCreditsAmount(updatedCreditsAmount);
       if (parseFloat(updatedCreditsAmount) < minimumCredits) {
         setStatus("minimum_not_met");
-      }
-    }
-  };
-
-  const amountChangeSideeffect = (value: string, updatedToken?: Token) => {
-    const amount = parseFloat(value);
-
-    if (isNaN(amount) || amount === 0) {
-      setStatus("enter_amount");
-      return;
-    }
-
-    const formattedAmount = parseNumber(value, CELO_CUSD_TOKEN.decimals);
-
-    if (address) {
-      if (
-        balances[updatedToken ? updatedToken.address : selectedToken.address]
-          .value < formattedAmount
-      ) {
-        setStatus("insufficient_balance");
-      } else {
-        setStatus("ready");
       }
     }
   };
@@ -206,12 +208,15 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
     } else {
       updatedTokenAmount = `${(parseFloat(value) * project.price).toFixed(3)}`;
     }
+
     if (value === "") {
       setTokenAmount("");
     } else {
       setTokenAmount(updatedTokenAmount);
     }
+
     amountChangeSideeffect(updatedTokenAmount);
+
     if (parseFloat(value) < minimumCredits) {
       setStatus("minimum_not_met");
     }
@@ -235,6 +240,10 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
     amountChangeSideeffect(updatedTokenAmount, token);
   };
 
+  if (!project) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="card-shadow border-2 border-white p-3 rounded-[20px] bg-cardBackground">
@@ -244,11 +253,13 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
         {status !== "done" && (
           <div>
             <p className="text-sm mb-4">
-              Lorem Ipsum change this to describe what user can expect to
-              happen. Lorem Ipsum change this to describe what user can expect
-              to happen. Lorem Ipsum change this to describe what user can
-              expect to happen. Lorem Ipsum change this to describe what user
-              can expect to happen.{" "}
+              Retire Regen Network Carbon Credits on Celo using CELO or cUSD.
+              When a credit is retired, it means it is permanently removed from
+              circulation. This ensures its associated carbon reduction,
+              biodiversity preservation, or ecosystem restoration impact is
+              applied to offset your footprint and support regenerative action.
+              For more information about the project you're supporting, explore
+              its detail page.
             </p>
             <div className="mb-2 p-4 rounded-lg border-2 border-gray-400 bg-cardBackground">
               <div className="flex items-center justify-start ">
