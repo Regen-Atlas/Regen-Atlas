@@ -17,6 +17,7 @@ import NewAssetCard from "../Explore/NewAssetCard";
 import React, { useState } from "react";
 import { AssetsOrbit } from "./AssetsOrbit";
 import { Retirement } from "../modules/retirement/Retirement";
+import { AssetRetirement } from "./AssetRetirement";
 
 export default (): React.ReactElement => {
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
@@ -99,9 +100,8 @@ export default (): React.ReactElement => {
                 )}
                 {celoRetireWalletAddress && (
                   <div className="mt-4">
-                    <Retirement
+                    <AssetRetirement
                       retirementWallet={celoRetireWalletAddress}
-                      retirementChainId="42220"
                     />
                   </div>
                 )}

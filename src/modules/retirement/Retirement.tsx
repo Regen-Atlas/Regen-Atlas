@@ -1,7 +1,7 @@
 import { Address, parseEther } from "viem";
 import { TokenInput } from "../../shared/components/TokenInput";
 import { CELO_CUSD_TOKEN } from "../uniswap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAccount, useAccountEffect } from "wagmi";
 import { parseNumber } from "../../shared/helpers";
 import { NumberInput } from "../../shared/components/NumberInput";
@@ -16,7 +16,8 @@ import { Modal } from "../../shared/components";
 
 interface RetirementProps {
   retirementWallet: Address;
-  retirementChainId: string;
+  project: any;
+  minimumCredits: number;
 }
 
 type RetirementState =
@@ -54,20 +55,24 @@ const buttonText: Record<RetirementState, string> = {
   error: "Retire",
 };
 
-export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
-  const [minimumCredits, setMinimumCredits] = useState(1);
+export const Retirement: React.FC<RetirementProps> = ({
+  retirementWallet,
+  project,
+  minimumCredits,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<Token>(
     CELO_CELO_TOKEN as Token
   );
   const [retirementAmount, setRetirementAmount] = useState("");
-  const [project, setProject] = useState<any>();
   const [creditsAmount, setCreditsAmount] = useState("");
   const [tokenAmount, setTokenAmount] = useState("");
   const { address } = useAccount();
   const { setOpen: connectWallet } = useModal();
   const [retirementConfirmation, setRetirementConfirmation] =
     useState<RetirementConfirmation>();
+  const [retirementConfirmationError, setRetirementConfirmationError] =
+    useState(false);
 
   const balances = useTokensBalances({
     tokens: [CELO_CELO_TOKEN as Token, CELO_CUSD_TOKEN as Token],
@@ -80,30 +85,6 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
   const { isSuccess } = useWaitForTransactionReceipt({
     hash: transferHash,
   });
-
-  useEffect(() => {
-    const fetchCreditDetails = async () => {
-      try {
-        const res = await fetch(import.meta.env.VITE_ECOTOKEN_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            celo_wallet: retirementWallet,
-          }),
-        });
-        const data = await res.json();
-        setProject(data);
-        const minCredits = Math.round((2 / data.price) * 100) / 100;
-        setMinimumCredits(minCredits);
-      } catch (error) {
-        console.log("Error fetching token details", error);
-      }
-    };
-
-    fetchCreditDetails();
-  }, []);
 
   const amountChangeSideeffect = (value: string, updatedToken?: Token) => {
     const amount = parseFloat(value);
@@ -192,10 +173,42 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
       const res = await data.json();
       console.log("Transaction details", res);
 
-      setRetirementConfirmation(res.validationResult);
-      setShowModal(true);
+      if (res.validationResult.retirementHash) {
+        return res.validationResult;
+      } else {
+        throw new Error("Transaction retirement hash not found");
+      }
+    } catch (e) {
+      console.log(e ? e : "Error fetching transaction details");
+      throw new Error("Error fetching transaction details");
+    }
+  };
+
+  const handleGetTransactionConfirmation = async (hash: Address) => {
+    setShowModal(true);
+    try {
+      const validationResult = await getTransactionConfirmation(hash);
+      setRetirementConfirmation(validationResult);
     } catch {
-      console.log("Error fetching transaction details");
+      setTimeout(async () => {
+        try {
+          const validationResult = await getTransactionConfirmation(hash);
+          setRetirementConfirmation(validationResult);
+        } catch {
+          console.log("Error fetching transaction details for the second time");
+          setTimeout(async () => {
+            try {
+              const validationResult = await getTransactionConfirmation(hash);
+              setRetirementConfirmation(validationResult);
+            } catch {
+              console.log(
+                "Error fetching transaction details for the second time"
+              );
+              setRetirementConfirmationError(true);
+            }
+          }, 5000);
+        }
+      }, 5000);
     }
   };
 
@@ -253,8 +266,8 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
         {status !== "done" && (
           <div>
             <p className="text-sm mb-4">
-              Retire Regen Network Carbon Credits on Celo using CELO or cUSD.
-              When a credit is retired, it means it is permanently removed from
+              Retire Regen Network Credits on Celo using CELO or cUSD. When a
+              credit is retired, it means it is permanently removed from
               circulation. This ensures its associated carbon reduction,
               biodiversity preservation, or ecosystem restoration impact is
               applied to offset your footprint and support regenerative action.
@@ -330,7 +343,7 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
                   className="button button-gradient my-4"
                   onClick={() => {
                     if (transferHash) {
-                      getTransactionConfirmation(transferHash);
+                      handleGetTransactionConfirmation(transferHash);
                     }
                   }}
                 >
@@ -348,78 +361,114 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet }) => {
               setStatus("enter_amount");
             }
             setShowModal(false);
+            setRetirementConfirmation(undefined);
+            setRetirementConfirmationError(false);
           }}
         >
-          {retirementConfirmation?.status === "Delivered" && (
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Retirement Details</h3>
-              <p className="my-2">
-                You have successfully retired{" "}
-                <span className="font-bold">{project.name}</span> worth{" "}
-                {retirementAmount}
-              </p>
+          {!retirementConfirmation && transferHash && (
+            <div className="max-w-[90vw] w-[720px] flex items-center justify-center">
               <div>
-                This is the retirementHash, which serves as confirmation:
-                <p className="font-bold my-2">
-                  {retirementConfirmation?.retirementHash}
+                {retirementConfirmationError ? (
+                  <ErrorRetirement transferHash={transferHash} />
+                ) : (
+                  <>
+                    <div>Getting the confirmation</div>
+                    <div className="flex justify-center">
+                      <span className="loading loading-spinner loading-lg"></span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+          {retirementConfirmation &&
+            retirementConfirmation?.status === "Delivered" && (
+              <div className="max-w-[90vw] w-[720px]">
+                <h3 className="text-xl font-semibold mb-4">
+                  Retirement Details
+                </h3>
+                <p className="my-2">
+                  You have successfully retired{" "}
+                  <strong>
+                    {retirementConfirmation.creditsRetired} credit
+                    {retirementConfirmation.creditsRetired === "1"
+                      ? ""
+                      : "s"}{" "}
+                  </strong>
+                  for <span className="font-bold">{project.name}</span> worth{" "}
+                  {retirementConfirmation.description}
                 </p>
+                <div>
+                  The retirement hash is:
+                  <div className="font-bold mb-4 break-all">
+                    {retirementConfirmation.retirementHash}
+                  </div>
+                </div>
+                <div>
+                  <a
+                    className="block text-center button button-gradient mt-4"
+                    href={`https://scan.ecotoken.earth/?tx=${transferHash}`}
+                    target="_blank"
+                  >
+                    Check on Ecotoken scan
+                  </a>
+                </div>
+              </div>
+            )}
+          {retirementConfirmation &&
+            retirementConfirmation?.status === "pooled" && (
+              <div className="max-w-[90vw] w-[720px]">
+                <h3 className="text-xl font-semibold mb-4">
+                  Credits are being pooled
+                </h3>
+                <div>
+                  They didn't reach the minimum $2 threshold. They will stay in
+                  the pool until it reaches the minimum threshold and then be
+                  retired. Take note of your transaction hash:
+                </div>
+                <div className="font-bold my-4 break-all">{transferHash}</div>
+                <div>
+                  You can use it to check the status of the retirement on:
+                </div>
                 <a
                   className="block text-center button button-gradient mt-4"
-                  href={`https://www.mintscan.io/regen/tx/${retirementConfirmation?.retirementHash}`}
+                  href="https://scan.ecotoken.earth"
                   target="_blank"
                 >
-                  Check on Mintscan
+                  Ecotoken scan
                 </a>
               </div>
-            </div>
-          )}
-          {retirementConfirmation?.status === "pooled" && (
-            <div className="max-w-[90vw] w-[720px]">
-              <h3 className="text-xl font-semibold mb-4">
-                Credits are being pooled
-              </h3>
-              <div>
-                They didn't reach the minimum $2 threshold. They will stay in
-                the pool until it reaches the minimum threshold and then be
-                retired. Take note of your transaction hash:
-              </div>
-              <div className="font-bold my-4 break-all">{transferHash}</div>
-              <div>
-                You can use it to check the status of the retirement on:
-              </div>
-              <a
-                className="block text-center button button-gradient mt-4"
-                href="https://scan.ecotoken.earth"
-                target="_blank"
-              >
-                Ecotoken scan
-              </a>
-            </div>
-          )}
-          {!retirementConfirmation?.isValid && (
-            <div className="max-w-[90vw] w-[720px]">
-              <h3 className="text-xl font-semibold mb-4">
-                Error retiring credits
-              </h3>
-              <div>
-                Transaction was not processed correctly. Please refer to your
-                wallet for more details. If the transaction went through you can
-                use the transaction hash to check the status of the retirement
-                on:
-              </div>
-              <div className="font-bold my-4 break-all">{transferHash}</div>
-              <div>You can check the retirement on:</div>
-              <a
-                className="block text-center button button-gradient mt-4"
-                href="https://scan.ecotoken.earth"
-                target="_blank"
-              >
-                Ecotoken scan
-              </a>
-            </div>
-          )}
+            )}
+          {retirementConfirmation &&
+            !retirementConfirmation?.isValid &&
+            transferHash && <ErrorRetirement transferHash={transferHash} />}
         </Modal>
       )}
     </>
+  );
+};
+
+const ErrorRetirement: React.FC<{ transferHash: string }> = ({
+  transferHash,
+}) => {
+  return (
+    <div className="max-w-[90vw] w-[720px]">
+      <h3 className="text-xl font-semibold mb-4">Error retiring credits</h3>
+      <div>
+        Transaction was not processed correctly. Please refer to your wallet for
+        more details. If the transaction went through you can use the
+        transaction hash to check the status of the retirement. Transaction
+        hash:
+      </div>
+      <div className="font-bold my-4 break-all">{transferHash}</div>
+      <div>You can check the retirement on:</div>
+      <a
+        className="block text-center button button-gradient mt-4"
+        href="https://scan.ecotoken.earth"
+        target="_blank"
+      >
+        Ecotoken scan
+      </a>
+    </div>
   );
 };
