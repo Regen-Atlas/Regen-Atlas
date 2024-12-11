@@ -24,7 +24,7 @@ export function AssetRetirement({
         });
         const data = await res.json();
         setProject(data);
-        const minCredits = Math.round((0.002 / data.price) * 100) / 100;
+        const minCredits = Math.round((2 / data.price) * 100) / 100;
         setMinimumCredits(minCredits);
       } catch (error) {
         console.log("Error fetching token details", error);
