@@ -298,7 +298,6 @@ export const Retirement: React.FC<RetirementProps> = ({
         {status !== "done" && (
           <div>
             <p className="text-sm mb-4">
-              {status}
               Retire Regen Network Credits on Celo using CELO or cUSD. When a
               credit is retired, it means it is permanently removed from
               circulation. This ensures its associated carbon reduction,
