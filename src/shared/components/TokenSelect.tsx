@@ -73,7 +73,7 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
       </div>
       <div
         tabIndex={0}
-        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-60 p-2 shadow"
+        className="dropdown-content menu bg-base-100 rounded-box w-60 p-2 shadow z-10"
       >
         {tokens.map((token) => {
           return (
