@@ -236,11 +236,11 @@ export const Retirement: React.FC<RetirementProps> = ({
                   );
                   setRetirementConfirmationError(true);
                 }
-              }, 6000);
+              }, 8000);
             }
-          }, 6000);
+          }, 8000);
         }
-      }, 6000);
+      }, 8000);
     }
   };
 
@@ -409,7 +409,7 @@ export const Retirement: React.FC<RetirementProps> = ({
                       Getting the confirmation
                     </h3>
                     <div>
-                      This might take up to 15 seconds. Please don't refresh the
+                      This might take up to 20 seconds. Please don't refresh the
                       page don't close this modal.
                     </div>
                     <div className="flex justify-center">
