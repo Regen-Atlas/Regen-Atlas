@@ -1,8 +1,15 @@
 import clsx from "clsx";
 import { Logo42220 } from "../../modules/chains/logos/Logo42220";
 import { CaretDown } from "@phosphor-icons/react";
-import { CELO_CELO_TOKEN } from "../consts";
-import { CELO_CUSD_TOKEN } from "../../modules/uniswap";
+import {
+  CELO_CELO_TOKEN,
+  CELO_CUSD_TOKEN,
+  CELO_USDC_TOKEN,
+  CELO_USDC_WORMHOLE_TOKEN,
+  CELO_USDGLO_TOKEN,
+  CELO_USDT_TOKEN,
+  CELO_USDT_WORMHOLE_TOKEN,
+} from "../consts";
 import { Token } from "../types";
 
 interface TokenSelectProps {
@@ -10,7 +17,15 @@ interface TokenSelectProps {
   onTokenChange: (token: Token) => void;
 }
 
-const tokens = [CELO_CELO_TOKEN as Token, CELO_CUSD_TOKEN as Token];
+const tokens = [
+  CELO_CELO_TOKEN as Token,
+  CELO_CUSD_TOKEN as Token,
+  CELO_USDGLO_TOKEN as Token,
+  CELO_USDC_TOKEN as Token,
+  CELO_USDC_WORMHOLE_TOKEN as Token,
+  CELO_USDT_TOKEN as Token,
+  CELO_USDT_WORMHOLE_TOKEN as Token,
+];
 
 // Currently only supports CELO chain
 export const TokenSelect: React.FC<TokenSelectProps> = ({
@@ -28,11 +43,11 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
   const tokenLogo = `${selectedToken.symbol.toUpperCase()}.${["PLASTIK", "CUSD"].includes(selectedToken.symbol.toUpperCase()) ? "png" : "svg"}`;
 
   return (
-    <div className="dropdown">
+    <div className="dropdown dropdown-top">
       <div
         tabIndex={0}
         role="button"
-        className="bg-slate-200 p-1 rounded-full flex gap-2 items-center mb-1 border-[1px] border-slate-400"
+        className="bg-slate-200 p-1 rounded-full flex gap-2 items-center mt-1 border-[1px] border-slate-400"
       >
         <div className="relative">
           <img
@@ -58,19 +73,22 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
       </div>
       <div
         tabIndex={0}
-        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-60 p-2 shadow"
       >
         {tokens.map((token) => {
           return (
             <div
-              key={token.symbol}
-              className="flex gap-2 items-center cursor-pointer hover:bg-slate-200 mb-1 p-1 rounded"
+              key={token.address}
+              className={clsx(
+                "flex gap-2 items-center cursor-pointer hover:bg-slate-200 mb-1 p-1 rounded",
+                selectedToken?.address === token.address && "bg-slate-200"
+              )}
               onClick={() => handleTokenSelect(token)}
             >
               <div className="relative">
                 <img
                   src={`/tokens/${token.symbol.toUpperCase()}.${["PLASTIK", "CUSD"].includes(token.symbol.toUpperCase()) ? "png" : "svg"}`}
-                  alt={token?.symbol}
+                  alt={token?.name}
                   className="w-8 h-8"
                 />
                 <div
@@ -86,7 +104,7 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
                   <Logo42220 size={8} />
                 </div>
               </div>
-              <span className="text-lg font-bold">{token?.symbol}</span>
+              <span className="text-base font-bold">{token?.name}</span>
             </div>
           );
         })}

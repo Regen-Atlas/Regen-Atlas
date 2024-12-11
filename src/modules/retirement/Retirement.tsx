@@ -1,13 +1,20 @@
-import { Address, parseEther } from "viem";
+import { Address } from "viem";
 import { TokenInput } from "../../shared/components/TokenInput";
-import { CELO_CUSD_TOKEN } from "../uniswap";
 import { useState } from "react";
 import { useAccount, useAccountEffect } from "wagmi";
 import { parseNumber } from "../../shared/helpers";
 import { NumberInput } from "../../shared/components/NumberInput";
 import { useWriteContract } from "wagmi";
 import { ABI_CELO_ERC_20_TOKEN } from "../../shared/abi";
-import { CELO_CELO_TOKEN } from "../../shared/consts";
+import {
+  CELO_CELO_TOKEN,
+  CELO_CUSD_TOKEN,
+  CELO_USDC_TOKEN,
+  CELO_USDC_WORMHOLE_TOKEN,
+  CELO_USDGLO_TOKEN,
+  CELO_USDT_TOKEN,
+  CELO_USDT_WORMHOLE_TOKEN,
+} from "../../shared/consts";
 import { Token } from "../../shared/types";
 import { useTokensBalances } from "../../shared/hooks/useTokensBalances";
 import { useModal } from "connectkit";
@@ -55,6 +62,16 @@ const buttonText: Record<RetirementState, string> = {
   error: "Retire",
 };
 
+const tokens = [
+  CELO_CELO_TOKEN as Token,
+  CELO_CUSD_TOKEN as Token,
+  CELO_USDGLO_TOKEN as Token,
+  CELO_USDC_TOKEN as Token,
+  CELO_USDC_WORMHOLE_TOKEN as Token,
+  CELO_USDT_TOKEN as Token,
+  CELO_USDT_WORMHOLE_TOKEN as Token,
+];
+
 export const Retirement: React.FC<RetirementProps> = ({
   retirementWallet,
   project,
@@ -75,7 +92,7 @@ export const Retirement: React.FC<RetirementProps> = ({
     useState(false);
 
   const balances = useTokensBalances({
-    tokens: [CELO_CELO_TOKEN as Token, CELO_CUSD_TOKEN as Token],
+    tokens,
     account: address,
   });
   const [status, setStatus] = useState<RetirementState>(
@@ -94,8 +111,7 @@ export const Retirement: React.FC<RetirementProps> = ({
       return;
     }
 
-    // @TODO this should be decimals of the token
-    const formattedAmount = parseNumber(value, CELO_CUSD_TOKEN.decimals);
+    const formattedAmount = parseNumber(value, selectedToken.decimals);
 
     if (address) {
       if (
@@ -148,12 +164,16 @@ export const Retirement: React.FC<RetirementProps> = ({
         await writeContractAsync({
           abi: ABI_CELO_ERC_20_TOKEN,
           functionName: "transfer",
-          args: [retirementWallet, parseEther(tokenAmount)],
+          args: [
+            retirementWallet,
+            parseNumber(tokenAmount, selectedToken.decimals),
+          ],
           address: selectedToken.address as Address,
         });
         setRetirementAmount(`${tokenAmount} ${selectedToken.symbol}`);
         setStatus("done");
-      } catch {
+      } catch (e) {
+        console.log("Error retiring credits", e);
         setStatus("error");
       }
     }
@@ -257,7 +277,7 @@ export const Retirement: React.FC<RetirementProps> = ({
       updatedTokenAmount = `${(parseFloat(creditsAmount) * project.price).toFixed(3)}`;
     }
 
-    if (updatedTokenAmount === "") {
+    if (creditsAmount === "") {
       setTokenAmount("");
     } else {
       setTokenAmount(updatedTokenAmount);
@@ -278,6 +298,7 @@ export const Retirement: React.FC<RetirementProps> = ({
         {status !== "done" && (
           <div>
             <p className="text-sm mb-4">
+              {status}
               Retire Regen Network Credits on Celo using CELO or cUSD. When a
               credit is retired, it means it is permanently removed from
               circulation. This ensures its associated carbon reduction,

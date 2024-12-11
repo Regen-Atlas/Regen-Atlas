@@ -12,6 +12,8 @@ interface UseTokenBalancesProps {
   tokens: Token[];
   account: Address | undefined;
 }
+
+// @TODO: use memo
 export function useTokensBalances({
   tokens,
   account,
