@@ -190,6 +190,7 @@ export const Retirement: React.FC<RetirementProps> = ({
       const validationResult = await getTransactionConfirmation(hash);
       setRetirementConfirmation(validationResult);
     } catch {
+      console.log("Error fetching transaction details for the first time");
       setTimeout(async () => {
         try {
           const validationResult = await getTransactionConfirmation(hash);
@@ -202,9 +203,20 @@ export const Retirement: React.FC<RetirementProps> = ({
               setRetirementConfirmation(validationResult);
             } catch {
               console.log(
-                "Error fetching transaction details for the second time"
+                "Error fetching transaction details for the third time"
               );
-              setRetirementConfirmationError(true);
+              setTimeout(async () => {
+                try {
+                  const validationResult =
+                    await getTransactionConfirmation(hash);
+                  setRetirementConfirmation(validationResult);
+                } catch {
+                  console.log(
+                    "Error fetching transaction details for the fourth time"
+                  );
+                  setRetirementConfirmationError(true);
+                }
+              }, 5000);
             }
           }, 5000);
         }
@@ -356,6 +368,7 @@ export const Retirement: React.FC<RetirementProps> = ({
       </div>
       {showModal && (
         <Modal
+          closeOnOutsideClick={false}
           onClose={() => {
             if (status === "done") {
               setStatus("enter_amount");
@@ -372,7 +385,13 @@ export const Retirement: React.FC<RetirementProps> = ({
                   <ErrorRetirement transferHash={transferHash} />
                 ) : (
                   <>
-                    <div>Getting the confirmation</div>
+                    <h3 className="text-xl font-semibold mb-4">
+                      Getting the confirmation
+                    </h3>
+                    <div>
+                      This might take up to 15 seconds. Please don't refresh the
+                      page don't close this modal.
+                    </div>
                     <div className="flex justify-center">
                       <span className="loading loading-spinner loading-lg"></span>
                     </div>
