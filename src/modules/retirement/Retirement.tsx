@@ -216,11 +216,11 @@ export const Retirement: React.FC<RetirementProps> = ({
                   );
                   setRetirementConfirmationError(true);
                 }
-              }, 5000);
+              }, 6000);
             }
-          }, 5000);
+          }, 6000);
         }
-      }, 5000);
+      }, 6000);
     }
   };
 
