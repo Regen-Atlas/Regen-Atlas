@@ -16,7 +16,6 @@ import { NewAsset, RelatedAsset } from "../shared/types";
 import NewAssetCard from "../Explore/NewAssetCard";
 import React, { useState } from "react";
 import { AssetsOrbit } from "./AssetsOrbit";
-import { Retirement } from "../modules/retirement/Retirement";
 import { AssetRetirement } from "./AssetRetirement";
 
 export default (): React.ReactElement => {
