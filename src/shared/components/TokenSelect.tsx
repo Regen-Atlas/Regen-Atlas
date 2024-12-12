@@ -43,7 +43,7 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
   const tokenLogo = `${selectedToken.symbol.toUpperCase()}.${["PLASTIK", "CUSD"].includes(selectedToken.symbol.toUpperCase()) ? "png" : "svg"}`;
 
   return (
-    <div className="dropdown dropdown-top">
+    <div className="dropdown dropdown-top dropdown-end">
       <div
         tabIndex={0}
         role="button"

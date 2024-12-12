@@ -396,6 +396,7 @@ export const Retirement: React.FC<RetirementProps> = ({
             setShowModal(false);
             setRetirementConfirmation(undefined);
             setRetirementConfirmationError(false);
+            onCreditsChange("");
           }}
         >
           {!retirementConfirmation && transferHash && (
