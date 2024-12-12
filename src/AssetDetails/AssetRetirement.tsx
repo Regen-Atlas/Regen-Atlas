@@ -1,6 +1,7 @@
 import { Address } from "viem";
 import { Retirement } from "../modules/retirement/Retirement";
 import { useEffect, useState } from "react";
+import { roundUpToTwoDecimalPlaces } from "../shared/helpers";
 
 export function AssetRetirement({
   retirementWallet,
@@ -24,7 +25,7 @@ export function AssetRetirement({
         });
         const data = await res.json();
         setProject(data);
-        const minCredits = Math.round((2 / data.price) * 100) / 100;
+        const minCredits = roundUpToTwoDecimalPlaces(2 / data.price);
         setMinimumCredits(minCredits);
       } catch (error) {
         console.log("Error fetching token details", error);
@@ -43,7 +44,9 @@ export function AssetRetirement({
           minimumCredits={minimumCredits}
         />
       ) : (
-        <div>Loading...</div>
+        <div className="h-[492px] card-shadow border-2 border-white p-3 rounded-[20px] bg-cardBackground flex justify-center items-center">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
       )}
     </>
   );

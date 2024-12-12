@@ -32,7 +32,11 @@ export default (): React.ReactElement => {
   );
 
   if (!asset) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-svw h-svh flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
 
   const celoContractAddress: Address | undefined = asset?.tokens?.find(
