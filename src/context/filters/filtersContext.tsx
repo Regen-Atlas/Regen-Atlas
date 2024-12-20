@@ -1,55 +1,71 @@
 import React, { createContext, useReducer, ReactNode, Dispatch } from "react";
-import { Asset } from "../../modules/assets";
-import { filterAssets } from "./filterAssets";
-import { ALL_ASSETS } from "../../data";
-import { AssetTypeFilters, Filters } from "../../modules/filters";
+import { filterNewAssets } from "./filterAssets";
+import { NewAssetTypeFilters, NewFilters } from "../../modules/filters";
+import { NewAsset } from "../../shared/types";
 
-interface State {
-  filters: Filters;
-  filteredAssets: Asset[];
+interface NewState {
+  filters: NewFilters;
+  filteredAssets: NewAsset[];
+  allAssets: NewAsset[];
   selectedAssetId: string;
 }
 
-type SetAllFiltersAction = { type: "SET_FILTERS"; payload: Filters };
 type ResetFiltersAction = { type: "RESET_FILTERS" };
 type SetFilterAction = {
   type: "SET_FILTER";
   payload: { key: "provider" | "chainId"; value: string | number };
 };
-type SetTypeFilterAction = {
-  type: "SET_TYPE_FILTER";
-  payload: AssetTypeFilters;
-};
-type RemoveTypeFilterAction = { type: "REMOVE_TYPE_FILTER"; payload: string };
 
-type SetSubtypeFilterAction = {
+type NewSetTypeFilterAction = {
+  type: "SET_TYPE_FILTER";
+  payload: NewAssetTypeFilters;
+};
+
+type NewRemoveTypeFilterAction = {
+  type: "REMOVE_TYPE_FILTER";
+  payload: number;
+};
+
+type ResetTypeFiltersAction = {
+  type: "RESET_TYPE_FILTERS";
+};
+
+type ResetProviderFilterAction = {
+  type: "RESET_PROVIDER_FILTER";
+};
+
+type ResetChainFilterAction = {
+  type: "RESET_CHAIN_FILTER";
+};
+
+type NewSetSubtypeFilterAction = {
   type: "SET_SUBTYPE_FILTER";
   payload: {
-    typeId: string;
-    subtypeId: string;
+    typeId: number;
+    subtypeId: number;
   };
 };
 
-type RemoveSubtypeFilterAction = {
+type NewRemoveSubtypeFilterAction = {
   type: "REMOVE_SUBTYPE_FILTER";
   payload: {
-    typeId: string;
-    subtypeId: string;
+    typeId: number;
+    subtypeId: number;
   };
 };
 
-type SetProviderFilter = {
+type NewSetProviderFilter = {
   type: "SET_PROVIDER_FILTER";
-  payload: string;
+  payload: number;
 };
 
 type RemoveProviderFilter = {
   type: "REMOVE_PROVIDER_FILTER";
 };
 
-type SetChainIdFilter = {
+type NewSetChainIdFilter = {
   type: "SET_CHAIN_ID_FILTER";
-  payload: number | string;
+  payload: string;
 };
 
 type RemoveChainIdFilter = {
@@ -61,48 +77,53 @@ type SetSelectedAssetAction = {
   payload: string;
 };
 
-type Action =
-  | SetAllFiltersAction
+type SetAllAssetsAction = { type: "SET_ALL_ASSETS"; payload: NewAsset[] };
+
+type NewAction =
   | ResetFiltersAction
   | SetFilterAction
-  | SetTypeFilterAction
-  | RemoveTypeFilterAction
-  | SetSubtypeFilterAction
-  | RemoveSubtypeFilterAction
-  | SetProviderFilter
-  | SetChainIdFilter
+  | NewSetTypeFilterAction
+  | NewRemoveTypeFilterAction
+  | NewSetSubtypeFilterAction
+  | NewRemoveSubtypeFilterAction
+  | NewSetProviderFilter
+  | NewSetChainIdFilter
   | RemoveProviderFilter
   | RemoveChainIdFilter
-  | SetSelectedAssetAction;
+  | SetSelectedAssetAction
+  | SetAllAssetsAction
+  | ResetTypeFiltersAction
+  | ResetProviderFilterAction
+  | ResetChainFilterAction;
 
-const initialState: State = {
+const newInitialState: NewState = {
   filters: {
     assetTypes: {},
-    provider: "",
+    provider: null,
     chainId: "",
   },
-  filteredAssets: [...ALL_ASSETS],
+  filteredAssets: [],
+  allAssets: [],
   selectedAssetId: "",
 };
 
-const reducer = (state: State, action: Action): State => {
+const newReducer = (state: NewState, action: NewAction): NewState => {
   switch (action.type) {
-    case "SET_FILTERS":
-      return { ...state, filters: action.payload };
-    case "RESET_FILTERS":
-      return initialState;
-    case "SET_FILTER": {
-      const filters = {
-        ...state.filters,
-        [action.payload.key]: action.payload.value,
-      };
-
+    case "SET_ALL_ASSETS": {
       return {
         ...state,
-        filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: action.payload,
+        allAssets: action.payload,
       };
     }
+    case "RESET_FILTERS": {
+      return {
+        ...state,
+        filters: newInitialState.filters,
+        selectedAssetId: "",
+      };
+    }
+
     case "SET_TYPE_FILTER": {
       const filters = {
         ...state.filters,
@@ -114,7 +135,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
     case "REMOVE_TYPE_FILTER": {
@@ -129,9 +150,10 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
+
     case "SET_SUBTYPE_FILTER": {
       const filters = {
         ...state.filters,
@@ -150,7 +172,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
@@ -177,7 +199,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
@@ -190,20 +212,20 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
     case "REMOVE_PROVIDER_FILTER": {
       const filters = {
         ...state.filters,
-        provider: "",
+        provider: null,
       };
 
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
@@ -216,7 +238,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
@@ -229,7 +251,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         filters,
-        filteredAssets: filterAssets(ALL_ASSETS, filters),
+        filteredAssets: filterNewAssets(state.allAssets, filters),
       };
     }
 
@@ -252,28 +274,67 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, selectedAssetId: action.payload, filteredAssets };
     }
 
+    case "RESET_TYPE_FILTERS": {
+      const filters = {
+        ...state.filters,
+        assetTypes: {},
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "RESET_PROVIDER_FILTER": {
+      const filters = {
+        ...state.filters,
+        provider: null,
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "RESET_CHAIN_FILTER": {
+      const filters = {
+        ...state.filters,
+        chainId: "",
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
     default:
       throw new Error("Unknown action type");
   }
 };
 
-// Create context
-const FiltersStateContext = createContext<{
-  state: State;
-  dispatch: Dispatch<Action>;
-}>({ state: initialState, dispatch: () => undefined });
+// Create new context
+const NewFiltersStateContext = createContext<{
+  state: NewState;
+  dispatch: Dispatch<NewAction>;
+}>({ state: newInitialState, dispatch: () => undefined });
 
-// Create a provider component
-const FiltersStateProvider: React.FC<{ children: ReactNode }> = ({
+// Create a new provider component
+const NewFiltersStateProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(newReducer, newInitialState);
 
   return (
-    <FiltersStateContext.Provider value={{ state, dispatch }}>
+    <NewFiltersStateContext.Provider value={{ state, dispatch }}>
       {children}
-    </FiltersStateContext.Provider>
+    </NewFiltersStateContext.Provider>
   );
 };
 
-export { FiltersStateProvider, FiltersStateContext };
+export { NewFiltersStateProvider, NewFiltersStateContext };

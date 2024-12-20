@@ -1,19 +1,19 @@
 import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
-import AssetCard from "./AssetCard";
 import FiltersMobile from "./FiltersMobile";
-import { useFiltersDispatch, useFiltersState } from "../context/filters";
+import { useNewFiltersDispatch, useNewFiltersState } from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
 import { useEffect, useRef, useState } from "react";
-import { Asset } from "../modules/assets";
 import { useMapState } from "../context/map";
 import { MapBox } from "../shared/components/MapBox";
 import Header from "../Header";
+import { NewAsset } from "../shared/types";
+import NewAssetCard from "./NewAssetCard";
 
 export default (): React.ReactElement => {
-  const { filteredAssets, filters, selectedAssetId } = useFiltersState();
-  const dispatch = useFiltersDispatch();
+  const { filteredAssets, filters, selectedAssetId } = useNewFiltersState();
+  const dispatch = useNewFiltersDispatch();
   const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
   const mapRef = useRef<MapRef>();
   const { mapStyle } = useMapState();
@@ -28,10 +28,10 @@ export default (): React.ReactElement => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleAssetCardPinClick = (asset: Asset) => {
+  const handleAssetCardPinClick = (asset: NewAsset) => {
     setOpenPopupAssetId(asset.id);
     mapRef?.current?.flyTo({
-      center: [asset.geolocation.longitude, asset.geolocation.latitude],
+      center: [asset.coordinates.longitude, asset?.coordinates?.latitude],
       zoom: 10,
     });
   };
@@ -51,8 +51,8 @@ export default (): React.ReactElement => {
       <div className="main-container">
         <div
           className={clsx(
-            "pt-[60px] md:pt-[140px] lg:pt-[100px]",
-            "md:grid md:grid-cols-2 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_740px] md:gap-4"
+            "pt-[60px] md:pt-[140px] lg:pt-[80px]",
+            "md:grid md:grid-cols-2 lg:grid-cols-[444px_1fr] xl:grid-cols-[444px_1fr] md:gap-4"
           )}
         >
           <div
@@ -67,8 +67,8 @@ export default (): React.ReactElement => {
                 "map-wrapper",
                 showCards() &&
                   "md:fixed md:top-[156px] md:w-[calc(50vw-32px)] md:h-[calc(100vh-140px)]",
-                showCards() && "lg:h-[calc(100vh-100px)]",
-                showCards() && "lg:top-[100px] lg:w-[600px] xl:w-[740px]"
+                showCards() && "lg:h-[calc(100vh-80px)]",
+                showCards() && "lg:top-[80px] lg:w-[calc(100vw-507px)]"
               )}
             >
               <MapBox
@@ -76,36 +76,41 @@ export default (): React.ReactElement => {
                 initialViewState={{
                   longitude: 15,
                   latitude: 30,
-                  zoom: 1,
+                  zoom: 1.6,
                 }}
-                showMapStyleSwitch={!!selectedAssetId}
+                showMapStyleSwitch={true}
                 mapRef={mapRef as React.RefObject<MapRef>}
               >
-                {filteredAssets.map((asset) => (
-                  <div key={asset.id}>
-                    <Marker
-                      key={asset.id}
-                      latitude={asset.geolocation.latitude}
-                      longitude={asset.geolocation.longitude}
-                      onClick={(e) => {
-                        e.originalEvent.stopPropagation();
-                        handleMarkerClick(asset.id);
-                      }}
-                    />
-                    {openPopupAssetId === asset.id && (
-                      <Popup
-                        latitude={asset.geolocation.latitude}
-                        longitude={asset.geolocation.longitude}
-                        closeButton={false}
-                      >
-                        <div className="font-bold">{asset.name}</div>
-                      </Popup>
-                    )}
-                  </div>
-                ))}
+                <div className="hidden lg:flex absolute top-2 right-2 rounded-full h-7 px-3 items-center bg-blue-950 text-white font-semibold">
+                  {filteredAssets.length} assets listed
+                </div>
+                {filteredAssets
+                  .filter((asset) => !asset.second_order)
+                  .map((asset) => (
+                    <div key={asset.id}>
+                      <Marker
+                        key={asset.id}
+                        latitude={asset?.coordinates?.latitude}
+                        longitude={asset?.coordinates?.longitude}
+                        onClick={(e) => {
+                          e.originalEvent.stopPropagation();
+                          handleMarkerClick(asset.id);
+                        }}
+                      />
+                      {openPopupAssetId === asset.id && (
+                        <Popup
+                          latitude={asset?.coordinates?.latitude}
+                          longitude={asset?.coordinates?.longitude}
+                          closeButton={false}
+                        >
+                          <div className="font-bold">{asset?.name}</div>
+                        </Popup>
+                      )}
+                    </div>
+                  ))}
               </MapBox>
               <div className="hidden md:block">
-                <Footer showMapStyleSwitch={!selectedAssetId} />
+                <Footer />
               </div>
             </div>
           </div>
@@ -131,7 +136,7 @@ export default (): React.ReactElement => {
             )}
           >
             {filteredAssets.map((asset) => (
-              <AssetCard
+              <NewAssetCard
                 key={asset.id}
                 className="mb-4"
                 asset={asset}

@@ -1,7 +1,10 @@
-import { Asset } from "../../modules/assets";
-import { Filters } from "../../modules/filters";
+import { NewFilters } from "../../modules/filters";
+import { NewAsset } from "../../shared/types";
 
-export const filterAssets = (assets: Asset[], filters: Filters): Asset[] => {
+export const filterNewAssets = (
+  assets: NewAsset[],
+  filters: NewFilters
+): NewAsset[] => {
   const {
     provider: filterProvider,
     chainId: filterChainId,
@@ -9,7 +12,10 @@ export const filterAssets = (assets: Asset[], filters: Filters): Asset[] => {
   } = filters;
 
   return assets.filter((asset) => {
-    const { providerId, tokens, assetTypeId, assetSubtypeId } = asset;
+    const providerId = asset.issuer.id;
+    const assetTypeId = asset.asset_types[0].id;
+    const chains = asset.chains;
+    const assetSubtypeId = asset.asset_subtypes[0].id;
 
     if (filterProvider && providerId !== filterProvider) {
       return false;
@@ -17,7 +23,7 @@ export const filterAssets = (assets: Asset[], filters: Filters): Asset[] => {
 
     if (
       filterChainId &&
-      tokens?.every((token) => token.chainId !== filterChainId)
+      chains.find((chain) => chain.id === filterChainId) === undefined
     ) {
       return false;
     }

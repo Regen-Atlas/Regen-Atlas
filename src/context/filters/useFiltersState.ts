@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { FiltersStateContext } from "./filtersContext";
+import { NewFiltersStateContext } from "./filtersContext";
 
-export function useFiltersState() {
-  const context = useContext(FiltersStateContext);
+export function useNewFiltersState() {
+  const context = useContext(NewFiltersStateContext);
   if (context === undefined) {
     throw new Error(
-      "useFiltersState must be used within a FiltersStateProvider"
+      "useNewFiltersState must be used within a FiltersStateProvider"
     );
   }
   return context.state;

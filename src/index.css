@@ -100,7 +100,7 @@ body.scrolled-360.modal-open .filters-row-mobile {
 .map-wrapper .mapboxgl-map {
   @apply !h-[360px] !w-full;
   @apply md:!h-[calc(100vh-190px)];
-  @apply lg:!h-[calc(100vh-150px)];
+  @apply lg:!h-[calc(100vh-130px)];
 }
 
 .asset-card {
@@ -108,6 +108,14 @@ body.scrolled-360.modal-open .filters-row-mobile {
   box-shadow: 0 4px 6px 0 rgb(46 95 169 / 0.08);
 }
 
+.card-shadow {
+  box-shadow: 0 4px 6px 0 rgb(46 95 169 / 0.08);
+}
+
 .main-container {
-  @apply bg-background max-w-[1232px] mx-auto px-3 md:px-4 pb-2 md:pb-0;
+  @apply bg-background max-w-full mx-auto px-3 md:px-4 pb-2 md:pb-0;
+}
+
+.second-order-asset-popup .mapboxgl-popup-tip {
+  display: none;
 }

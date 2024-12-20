@@ -58,3 +58,7 @@ export function divideBigInts(
 
   return `${integerPart}.${decimalPart}`;
 }
+
+export function roundUpToTwoDecimalPlaces(num: number): number {
+  return Math.ceil(num * 100) / 100;
+}

@@ -16,3 +16,22 @@ export interface AssetSubtype {
 }
 
 export type FiltersKeys = keyof Filters;
+
+export interface NewFilters {
+  assetTypes: Record<number, NewAssetTypeFilters>;
+  provider: number | null;
+  chainId: string;
+}
+
+export interface NewAssetTypeFilters {
+  id: number;
+  name: string;
+  subtypes: Array<number>; // ids
+}
+
+export interface NewAssetSubtype {
+  id: number;
+  name: string;
+}
+
+export type NewFiltersKeys = keyof NewFilters;
