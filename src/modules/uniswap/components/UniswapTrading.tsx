@@ -32,7 +32,6 @@ import {
 import { UniswapTradeSettings } from "./UniswapTradeSettings";
 import clsx from "clsx";
 import { analytics } from "../../analytics";
-import ReactGA from "react-ga4";
 
 interface UniswapTradingProps {
   tokenPair: [Token, Token];
