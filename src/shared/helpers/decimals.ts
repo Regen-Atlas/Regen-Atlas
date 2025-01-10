@@ -24,8 +24,7 @@ export function parseNumber(value: string, decimals = 18): bigint {
 }
 
 // Example usage:
-// const bigIntValue = parseUnits("1.000000000000000000"); // BigInt('1000000000000000000')
-// console.log(bigIntValue);
+// const parsed = parseNumber("1.23456", 18); // 1234560000000000000n
 
 export function divideBigInts(
   a: bigint,

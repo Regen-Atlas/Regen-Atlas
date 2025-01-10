@@ -7,6 +7,7 @@ import { router } from "./main";
 import clsx from "clsx";
 import FiltersDesktop from "./Explore/FiltersDesktop";
 import { ParagraphIcon } from "./shared/components/ParagraphIcon";
+import { analytics } from "./modules/analytics";
 
 const menuItems = [
   {
@@ -61,6 +62,13 @@ export default ({
             className="ml-6 hidden button button-gradient text-center button-gradient !text-base xl:block"
             href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
             target="_blank"
+            onClick={() => {
+              analytics.sendEvent({
+                category: "Link Click",
+                action: "List Project",
+                label: "Header Button",
+              });
+            }}
           >
             List Project
           </a>
@@ -83,6 +91,13 @@ export default ({
                         key={item.name}
                         href={item.url}
                         target="_blank"
+                        onClick={() => {
+                          analytics.sendEvent({
+                            category: "Link Click",
+                            action: item.name,
+                            label: "Mobile Menu",
+                          });
+                        }}
                       >
                         {item.name}
                       </a>

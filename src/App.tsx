@@ -1,12 +1,13 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useScrollClass } from "./shared/hooks/useScrollClass";
 import { HelmetProvider } from "react-helmet-async";
-import { useAnalytics, usePageTracking } from "./modules/analytics";
+import { analytics, useAnalytics, usePageTracking } from "./modules/analytics";
 import { useSupabaseTable } from "./shared/hooks/useSupabaseTable";
 import { AssetTypeWithSubtypes, NewAsset } from "./shared/types";
 import { useBaseDispatch, useBaseState } from "./context/base";
 import { useEffect } from "react";
 import { useNewFiltersDispatch } from "./context/filters";
+import { useAccountEffect } from "wagmi";
 
 function App() {
   useScrollClass();
@@ -53,6 +54,22 @@ function App() {
       dispatchFilters({ type: "SET_ALL_ASSETS", payload: allAssets });
     }
   }, [allAssets, dispatchFilters]);
+
+  useAccountEffect({
+    onConnect: ({ address }) => {
+      analytics.sendEvent({
+        category: "Wallet",
+        action: "Wallet Connected",
+        label: `Address: ${address}`,
+      });
+    },
+    onDisconnect: () => {
+      analytics.sendEvent({
+        category: "Wallet",
+        action: "Wallet Disconnected",
+      });
+    },
+  });
 
   return (
     <HelmetProvider>
