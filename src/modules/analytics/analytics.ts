@@ -32,6 +32,25 @@ export const analytics = {
     }
     ReactGA.event(event);
   },
+  sendFiltersEvent: ({
+    action,
+    label,
+    value,
+  }: {
+    action: string;
+    label: string;
+    value?: number;
+  }) => {
+    const event: UaEventOptions = {
+      category: "Filters",
+      action,
+      label,
+    };
+    if (value) {
+      event.value = value;
+    }
+    ReactGA.event(event);
+  },
   sendSwappingEvent: ({
     action,
     value,

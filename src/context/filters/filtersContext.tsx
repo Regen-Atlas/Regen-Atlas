@@ -2,6 +2,7 @@ import React, { createContext, useReducer, ReactNode, Dispatch } from "react";
 import { filterNewAssets } from "./filterAssets";
 import { NewAssetTypeFilters, NewFilters } from "../../modules/filters";
 import { NewAsset } from "../../shared/types";
+import { analytics } from "../../modules/analytics";
 
 interface NewState {
   filters: NewFilters;
@@ -125,6 +126,11 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
     }
 
     case "SET_TYPE_FILTER": {
+      analytics.sendFiltersEvent({
+        action: "Type Filter",
+        label: action.payload.name,
+        value: action.payload.id,
+      });
       const filters = {
         ...state.filters,
         assetTypes: {
@@ -155,6 +161,12 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
     }
 
     case "SET_SUBTYPE_FILTER": {
+      analytics.sendFiltersEvent({
+        action: "Subtype Filter",
+        label: `${action.payload.subtypeId}`,
+        value: action.payload.subtypeId,
+      });
+
       const filters = {
         ...state.filters,
         assetTypes: {
@@ -204,6 +216,12 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
     }
 
     case "SET_PROVIDER_FILTER": {
+      analytics.sendFiltersEvent({
+        action: "Issuer Filter",
+        label: `${action.payload}`,
+        value: action.payload,
+      });
+
       const filters = {
         ...state.filters,
         provider: action.payload,
@@ -230,6 +248,10 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
     }
 
     case "SET_CHAIN_ID_FILTER": {
+      analytics.sendFiltersEvent({
+        action: "Chain Filter",
+        label: action.payload,
+      });
       const filters = {
         ...state.filters,
         chainId: action.payload,
