@@ -29,6 +29,14 @@ const menuItems = [
     link: "#",
     url: "https://paragraph.xyz/@regenatlas",
   },
+  {
+    name: "Privacy Policy",
+    link: "/privacy-policy",
+  },
+  {
+    name: "Imprint",
+    link: "/imprint",
+  },
 ];
 
 export default ({
@@ -136,6 +144,7 @@ export default ({
                     <ParagraphIcon className="w-7 h-7" />
                   </a>
                 </div>
+                <p className="mt-4">© Regen Atlas 2025</p>
               </div>
             </div>
           </Modal>

@@ -109,8 +109,8 @@ export default (): React.ReactElement => {
                     </div>
                   ))}
               </MapBox>
-              <div className="hidden md:block">
-                <Footer />
+              <div className="hidden lg:block">
+                <Footer twoRows={!!showCards()} />
               </div>
             </div>
           </div>
