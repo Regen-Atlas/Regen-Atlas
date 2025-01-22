@@ -8,6 +8,7 @@ import { useBaseDispatch, useBaseState } from "./context/base";
 import { useEffect } from "react";
 import { useNewFiltersDispatch } from "./context/filters";
 import { useAccountEffect } from "wagmi";
+// @ts-ignore
 import * as klaro from "klaro";
 import klaroConfig from "./TnC/klaroConfig";
 
