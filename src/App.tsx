@@ -8,6 +8,8 @@ import { useBaseDispatch, useBaseState } from "./context/base";
 import { useEffect } from "react";
 import { useNewFiltersDispatch } from "./context/filters";
 import { useAccountEffect } from "wagmi";
+import * as klaro from "klaro";
+import klaroConfig from "./TnC/klaroConfig";
 
 function App() {
   useScrollClass();
@@ -70,6 +72,10 @@ function App() {
       });
     },
   });
+
+  useEffect(() => {
+    klaro.setup(klaroConfig);
+  }, []);
 
   return (
     <HelmetProvider>

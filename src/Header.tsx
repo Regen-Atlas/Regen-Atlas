@@ -90,7 +90,7 @@ export default ({
         {isModalOpen && (
           <Modal fullScreen={true} onClose={() => setIsModalOpen(false)}>
             <div className="flex flex-col justify-between h-full">
-              <div className="flex flex-col items-center mt-[120px]">
+              <div className="flex flex-col items-center mt-[40px]">
                 {menuItems.map((item) => {
                   if (item.url) {
                     return (
@@ -127,7 +127,7 @@ export default ({
                   }
                 })}
               </div>
-              <div className="flex flex-col justify-center items-center pb-20">
+              <div className="flex flex-col justify-center items-center pb-12">
                 <ConnectKitButton />
                 <div className="flex pt-6 gap-6 justify-center">
                   <a href="https://x.com/theregenatlas" target="_blank">

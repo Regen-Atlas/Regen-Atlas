@@ -119,3 +119,15 @@ body.scrolled-360.modal-open .filters-row-mobile {
 .second-order-asset-popup .mapboxgl-popup-tip {
   display: none;
 }
+
+/* Klaro */
+
+.cm-btn-success {
+  background-color: rgb(94, 173, 247) !important;
+}
+
+.klaro .cookie-modal a,
+.klaro .context-notice a,
+.klaro .cookie-notice a {
+  color: rgb(94, 173, 247);
+}
