@@ -57,6 +57,7 @@ export interface NewAsset {
     id: number;
     value: number;
     description: string;
+    description_short: string;
     certification_source: string;
     certifier: {
       id: number;

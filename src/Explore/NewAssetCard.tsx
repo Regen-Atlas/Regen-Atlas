@@ -176,15 +176,15 @@ export default ({
                         target="_blank"
                       >
                         <p>
-                          {certification.description
-                            ? certification.description
+                          {certification.description_short
+                            ? certification.description_short
                             : certification.value}
                         </p>
                       </a>
                     ) : (
                       <p>
-                        {certification.description
-                          ? certification.description
+                        {certification.description_short
+                          ? certification.description_short
                           : certification.value}
                       </p>
                     )}
