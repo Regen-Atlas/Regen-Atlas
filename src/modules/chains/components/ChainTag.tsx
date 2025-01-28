@@ -9,6 +9,7 @@ import { Logo8453 } from "../logos/Logo8453";
 import { LogoAlgorandMainnet } from "../logos/LogoAlgorandMainnet";
 import { LogoChainDefault } from "../logos/LogoChainDefault";
 import { LogoRegen1 } from "../logos/LogoRegen1";
+import { LogoSolanaMainnet } from "../logos/LogoSolanaMainnet";
 import { ChainBranding } from "../types";
 
 export const ChainTag = ({ chain }: { chain: ChainBranding }) => {
@@ -34,6 +35,8 @@ export const ChainTag = ({ chain }: { chain: ChainBranding }) => {
         return <LogoRegen1 />;
       case "algorand-mainnet":
         return <LogoAlgorandMainnet />;
+      case "solana-mainnet":
+        return <LogoSolanaMainnet />;
       default:
         return <LogoChainDefault />;
     }

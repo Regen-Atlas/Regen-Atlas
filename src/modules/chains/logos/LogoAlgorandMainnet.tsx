@@ -3,7 +3,7 @@ export const LogoAlgorandMainnet = ({ size = 28 }: { size?: number }) => {
     <div>
       <img
         src="/chains/algorand-mainnet.svg"
-        alt="Ethereum"
+        alt="Algorand"
         style={{ width: `${size}px`, height: `${size}px` }}
       />
     </div>
