@@ -62,6 +62,7 @@ export interface NewAsset {
     certifier: {
       id: number;
       name: string;
+      short_name: string;
     };
   }>;
   second_order: boolean;

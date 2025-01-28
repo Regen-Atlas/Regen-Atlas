@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
+import {
+  ArrowUpRight,
+  Dot,
+  Export,
+  MapPin,
+  Question,
+} from "@phosphor-icons/react";
 import { useState } from "react";
 import { NEW_NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
@@ -167,26 +173,57 @@ export default ({
               </div>
               <div className="flex gap-4">
                 {asset.certifications.map((certification) => (
-                  <div key={certification.id}>
-                    <p className="font-bold">{certification.certifier.name}</p>
+                  <div key={certification.id} className="grid">
+                    {certification.certifier.short_name ? (
+                      <div
+                        className="font-bold tooltip cursor-pointer"
+                        data-tip={certification.certifier.name}
+                      >
+                        <div className="flex">
+                          {certification.certifier.short_name}
+
+                          <Question size={16} />
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="font-bold">
+                        {certification.certifier.name}
+                      </p>
+                    )}
                     {certification.certification_source ? (
                       <a
                         href={certification.certification_source}
                         className="hover:underline hover:text-primary-300"
                         target="_blank"
                       >
-                        <p>
-                          {certification.description_short
-                            ? certification.description_short
-                            : certification.value}
-                        </p>
+                        {certification.description_short ? (
+                          certification.description ? (
+                            <div
+                              className="tooltip"
+                              data-tip={certification.description}
+                            >
+                              {certification.description_short}
+                            </div>
+                          ) : (
+                            <p>{certification.description}</p>
+                          )
+                        ) : (
+                          <p>{certification.value}</p>
+                        )}
                       </a>
+                    ) : certification.description_short ? (
+                      certification.description ? (
+                        <div
+                          className="tooltip"
+                          data-tip={certification.description}
+                        >
+                          {certification.description_short}
+                        </div>
+                      ) : (
+                        <p>{certification.description}</p>
+                      )
                     ) : (
-                      <p>
-                        {certification.description_short
-                          ? certification.description_short
-                          : certification.value}
-                      </p>
+                      <p>{certification.value}</p>
                     )}
                   </div>
                 ))}
