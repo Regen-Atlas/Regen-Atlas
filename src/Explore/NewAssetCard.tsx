@@ -205,7 +205,7 @@ export default ({
                               {certification.description_short}
                             </div>
                           ) : (
-                            <p>{certification.description}</p>
+                            <p>{certification.description_short}</p>
                           )
                         ) : (
                           <p>{certification.value}</p>
