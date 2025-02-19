@@ -8,7 +8,7 @@ import { X } from "@phosphor-icons/react";
 export default (): React.ReactElement => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<
-    "assetType" | "issuers" | "chains"
+    "assetType" | "issuers" | "platforms"
   >("assetType");
   const { filters } = useNewFiltersState();
   const base = useBaseState();
@@ -93,13 +93,13 @@ export default (): React.ReactElement => {
         </div>
 
         <div className="relative">
-          {filters.chainId && (
+          {filters.platform && (
             <div
               className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-black flex items-center justify-center
                 cursor-pointer hover:bg-red-600 transition-all"
               onClick={(e) => {
                 e.stopPropagation();
-                dispatchFilters({ type: "RESET_CHAIN_FILTER" });
+                dispatchFilters({ type: "RESET_PLATFORM_FILTER" });
               }}
             >
               <X size={14} color="white" />
@@ -111,13 +111,14 @@ export default (): React.ReactElement => {
               "hover:bg-gray-300 transition-all h-full"
             )}
             onClick={() => {
-              setSelectedFilter("chains");
+              setSelectedFilter("platforms");
               setIsDropdownOpen(!isDropdownOpen);
             }}
           >
-            {filters.chainId
-              ? base.chains.find((chain) => chain.id === filters.chainId)
-                  ?.name || "Unknown chain"
+            {filters.platform
+              ? base.platforms.find(
+                  (platform) => platform.id === filters.platform
+                )?.name || "Unknown chain"
               : "Chain"}
           </div>
         </div>

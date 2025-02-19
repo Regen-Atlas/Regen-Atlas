@@ -68,7 +68,7 @@ export default ({
         {showMapStyleSwitch && <MapStyleSwitch />}
         <div className="flex items-center gap-4">
           <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/imprint">Impressum</Link>
+          <Link to="/imprint">Imprint</Link>
           <a
             className="hover:text-primary-400"
             href="https://regen-atlas.gitbook.io/regen-atlas-docs"

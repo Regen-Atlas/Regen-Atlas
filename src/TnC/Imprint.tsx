@@ -4,7 +4,7 @@ export const Imprint: React.FC = () => {
   return (
     <SimplePage>
       <div className="prose">
-        <h1>Impressum</h1>
+        <h1>Imprint</h1>
         <p>
           <strong>Regen Atlas</strong> is a project by{" "}
           <strong>CL Cybernetix GmbH</strong>.

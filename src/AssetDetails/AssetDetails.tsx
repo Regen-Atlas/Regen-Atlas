@@ -12,7 +12,7 @@ import {
   UniswapTrading,
 } from "../modules/uniswap";
 import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
-import { NewAsset, RelatedAsset } from "../shared/types";
+import { Asset, RelatedAsset } from "../modules/assets";
 import NewAssetCard from "../Explore/NewAssetCard";
 import React, { useState } from "react";
 import { AssetsOrbit } from "./AssetsOrbit";
@@ -26,8 +26,8 @@ export default (): React.ReactElement => {
   const navigate = useNavigate();
   const { mapStyle } = useMapState();
   // Fetch the asset
-  const { item: asset } = useSupabaseItemById<NewAsset>(
-    "assets_published",
+  const { item: asset } = useSupabaseItemById<Asset>(
+    "assets_published_view",
     assetId
   );
 
@@ -39,9 +39,9 @@ export default (): React.ReactElement => {
     );
   }
 
-  const celoContractAddress: Address | undefined = asset?.tokens?.find(
-    (t) => t.chain_id === "42220"
-  )?.address as Address;
+  const celoContractAddress: Address | undefined = asset?.tokens[0]?.platforms
+    .find((platform) => platform.id === "celo")
+    ?.contract_address.toLowerCase() as Address;
 
   const tokenIn = celoContractAddress
     ? TOKEN_POOL_TOKEN_MAP[celoContractAddress]
@@ -52,8 +52,6 @@ export default (): React.ReactElement => {
 
   const celoRetireWalletAddress: Address = asset.metadata
     ?.celo_retire_wallet_address as Address;
-
-  console.log("celoRetireWalletAddress", celoRetireWalletAddress);
 
   const handleAssetOpenClick = (id: string) => {
     navigate(`/assets/${id}`);
@@ -133,7 +131,6 @@ export default (): React.ReactElement => {
                           primaryAsset={asset}
                           secondOrderAssets={asset.child_assets}
                           onPrimaryAssetClick={(assetId) => {
-                            console.log("Primary asset clicked", assetId);
                             setOpenedSecondOrderAsset(null);
                             setOpenPopupAssetId(assetId);
                           }}

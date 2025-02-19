@@ -12,13 +12,13 @@ import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Link } from "react-router-dom";
-import { NewAsset } from "../shared/types";
 import { SUPPORTED_TOKENS } from "../modules/uniswap";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
+import { Asset } from "../modules/assets";
 
 interface AssetCardProps {
   className?: string;
-  asset: NewAsset;
+  asset: Asset;
   showExternalLink?: boolean;
   onPinClicked: () => void;
 }
@@ -54,8 +54,8 @@ export default ({
           </div>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
-              {asset?.chains?.map((chain) => (
-                <ChainTag key={chain.id} chain={chain} />
+              {asset?.platforms?.map((platform) => (
+                <ChainTag key={platform.id} platform={platform} />
               ))}
               <Export
                 className="cursor-pointer"

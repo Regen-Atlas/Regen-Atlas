@@ -1,9 +1,9 @@
 import { ArrowLeft, ArrowsIn } from "@phosphor-icons/react";
 import React from "react";
-import { NewAsset, RelatedAsset } from "../shared/types";
+import { Asset, RelatedAsset } from "../modules/assets";
 
 interface OrbitProps {
-  primaryAsset: NewAsset;
+  primaryAsset: Asset;
   secondOrderAssets: Array<RelatedAsset>;
   onPrimaryAssetClick: (assetId: string) => void;
   onSecondOrderAssetClick: (asset: RelatedAsset) => void;
