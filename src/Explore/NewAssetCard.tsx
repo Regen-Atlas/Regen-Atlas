@@ -37,8 +37,9 @@ export default ({
   };
 
   const celoContractAddress: string =
-    asset?.tokens?.find((t) => SUPPORTED_TOKENS.includes(t.address))?.address ||
-    "";
+    asset?.tokens[0]?.platforms?.find((plat) =>
+      SUPPORTED_TOKENS.includes(plat.contract_address)
+    )?.contract_address || "";
 
   return (
     <>
