@@ -40,7 +40,7 @@ export default (): React.ReactElement => {
   }
 
   const celoContractAddress: Address | undefined = asset?.tokens[0]?.platforms
-    .find((platform) => platform.id === "celo")
+    ?.find((platform) => platform.id === "celo")
     ?.contract_address.toLowerCase() as Address;
 
   const tokenIn = celoContractAddress
