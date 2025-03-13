@@ -1,73 +1,82 @@
-import { ChainId } from "../chains";
-import { IssuerId } from "../issuers";
+import { AssetNativity } from "../../shared/types";
+
+export interface Issuer {
+  id: number;
+  name: string;
+}
+
+type AssetStatus = "DRAFT" | "PUBLISHED" | "DELETED";
+
+export interface Platform {
+  id: string;
+  name: string;
+  color: string;
+  text_color: string;
+  background_color?: string;
+  image: {
+    large: string;
+    small: string;
+    thumb: string;
+  };
+}
+
+export interface RelatedAsset {
+  id: string;
+  name: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+}
 
 export interface Asset {
-  cid: string;
   id: string;
   name: string;
   description: string;
-  assetTypeId: AssetTypeId;
-  assetSubtypeId: string;
-  providerId: IssuerId;
-  learnMoreLink?: string;
-  providerLink: string;
-  tokens?: Array<{
-    chainId: ChainId;
-    contractAddress: string;
+  nativity: AssetNativity;
+  status: AssetStatus;
+  issuer_link: string;
+  exchange_link: string;
+  main_image: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+  issuer: Issuer;
+  tokens: {
+    id: string;
+    name: string;
+    symbol: string;
+    platforms: Array<{
+      id: string;
+      contract_address: string;
+    }>;
+  }[];
+  platforms: Platform[];
+  asset_subtypes: {
+    id: number;
+    name: string;
+  }[];
+  asset_types: {
+    id: number;
+    name: string;
+  }[];
+  country_code: string;
+  region: string;
+  child_assets: Array<RelatedAsset>;
+  parent_assets: Array<RelatedAsset>;
+  certifications: Array<{
+    id: number;
+    value: number;
+    description: string;
+    description_short: string;
+    certification_source: string;
+    certifier: {
+      id: number;
+      name: string;
+      short_name: string;
+    };
   }>;
-  geolocation: {
-    latitude: number;
-    longitude: number;
-  };
-  physicalAddress: {
-    region: string;
-    country: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-  imageHash: string;
-  nativity?:
-    | "native"
-    | "tokenized"
-    | "onchain_enforcement"
-    | "onchain_integration";
-  // | "STATUS_QUO"
-  // | "ONCHAIN_REPRESENTATION"
-  // | "ONCHAIN_INTEGRATION"
-  // | "ONCHAIN_ENFORCEMENT"
-  // | "FULLY_ONCHAIN";
-  imageUrl?: string;
-}
-
-export interface AssetCreateStructure {
-  name: string;
-  description: string;
-  assetTypeId: string;
-  assetSubtypeId: string;
-  providerId: string;
-  providerLink: string;
-  geolocation: {
-    latitude: number;
-    longitude: number;
-  };
-}
-
-export type AssetTypeId =
-  | "ownership"
-  | "nonpossessory_rights"
-  | "environmental_process_tokens"
-  | "debt"
-  | "derivatives"
-  | "currency";
-
-export interface AssetType {
-  id: AssetTypeId;
-  name: string;
-  subtypes: AssetSubtype[];
-}
-
-export interface AssetSubtype {
-  id: string;
-  name: string;
-  assetTypeId: string;
+  second_order: boolean;
+  metadata: Record<string, any>;
 }

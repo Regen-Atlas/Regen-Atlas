@@ -7,6 +7,7 @@ import { router } from "./main";
 import clsx from "clsx";
 import FiltersDesktop from "./Explore/FiltersDesktop";
 import { ParagraphIcon } from "./shared/components/ParagraphIcon";
+import { analytics } from "./modules/analytics";
 
 const menuItems = [
   {
@@ -27,6 +28,14 @@ const menuItems = [
     name: "Blog",
     link: "#",
     url: "https://paragraph.xyz/@regenatlas",
+  },
+  {
+    name: "Privacy Policy",
+    link: "/privacy-policy",
+  },
+  {
+    name: "Imprint",
+    link: "/imprint",
   },
 ];
 
@@ -61,6 +70,13 @@ export default ({
             className="ml-6 hidden button button-gradient text-center button-gradient !text-base xl:block"
             href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
             target="_blank"
+            onClick={() => {
+              analytics.sendEvent({
+                category: "Link Click",
+                action: "List Project",
+                label: "Header Button",
+              });
+            }}
           >
             List Project
           </a>
@@ -74,7 +90,7 @@ export default ({
         {isModalOpen && (
           <Modal fullScreen={true} onClose={() => setIsModalOpen(false)}>
             <div className="flex flex-col justify-between h-full">
-              <div className="flex flex-col items-center mt-[120px]">
+              <div className="flex flex-col items-center mt-[40px]">
                 {menuItems.map((item) => {
                   if (item.url) {
                     return (
@@ -83,6 +99,13 @@ export default ({
                         key={item.name}
                         href={item.url}
                         target="_blank"
+                        onClick={() => {
+                          analytics.sendEvent({
+                            category: "Link Click",
+                            action: item.name,
+                            label: "Mobile Menu",
+                          });
+                        }}
                       >
                         {item.name}
                       </a>
@@ -104,7 +127,7 @@ export default ({
                   }
                 })}
               </div>
-              <div className="flex flex-col justify-center items-center pb-20">
+              <div className="flex flex-col justify-center items-center pb-12">
                 <ConnectKitButton />
                 <div className="flex pt-6 gap-6 justify-center">
                   <a href="https://x.com/theregenatlas" target="_blank">
@@ -121,6 +144,7 @@ export default ({
                     <ParagraphIcon className="w-7 h-7" />
                   </a>
                 </div>
+                <p className="mt-4">© Regen Atlas 2025</p>
               </div>
             </div>
           </Modal>

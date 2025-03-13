@@ -1,18 +1,24 @@
 import clsx from "clsx";
-import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
+import {
+  ArrowUpRight,
+  Dot,
+  Export,
+  MapPin,
+  Question,
+} from "@phosphor-icons/react";
 import { useState } from "react";
 import { NEW_NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Link } from "react-router-dom";
-import { NewAsset } from "../shared/types";
 import { SUPPORTED_TOKENS } from "../modules/uniswap";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
+import { Asset } from "../modules/assets";
 
 interface AssetCardProps {
   className?: string;
-  asset: NewAsset;
+  asset: Asset;
   showExternalLink?: boolean;
   onPinClicked: () => void;
 }
@@ -31,8 +37,9 @@ export default ({
   };
 
   const celoContractAddress: string =
-    asset?.tokens?.find((t) => SUPPORTED_TOKENS.includes(t.address))?.address ||
-    "";
+    asset?.tokens[0]?.platforms?.find((plat) =>
+      SUPPORTED_TOKENS.includes(plat.contract_address)
+    )?.contract_address || "";
 
   return (
     <>
@@ -48,8 +55,8 @@ export default ({
           </div>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
-              {asset?.chains?.map((chain) => (
-                <ChainTag key={chain.id} chain={chain} />
+              {asset?.platforms?.map((platform) => (
+                <ChainTag key={platform.id} platform={platform} />
               ))}
               <Export
                 className="cursor-pointer"
@@ -167,26 +174,57 @@ export default ({
               </div>
               <div className="flex gap-4">
                 {asset.certifications.map((certification) => (
-                  <div key={certification.id}>
-                    <p className="font-bold">{certification.certifier.name}</p>
+                  <div key={certification.id} className="grid">
+                    {certification.certifier.short_name ? (
+                      <div
+                        className="font-bold tooltip cursor-pointer"
+                        data-tip={certification.certifier.name}
+                      >
+                        <div className="flex">
+                          {certification.certifier.short_name}
+
+                          <Question size={16} />
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="font-bold">
+                        {certification.certifier.name}
+                      </p>
+                    )}
                     {certification.certification_source ? (
                       <a
                         href={certification.certification_source}
                         className="hover:underline hover:text-primary-300"
                         target="_blank"
                       >
-                        <p>
-                          {certification.description
-                            ? certification.description
-                            : certification.value}
-                        </p>
+                        {certification.description_short ? (
+                          certification.description ? (
+                            <div
+                              className="tooltip"
+                              data-tip={certification.description}
+                            >
+                              {certification.description_short}
+                            </div>
+                          ) : (
+                            <p>{certification.description_short}</p>
+                          )
+                        ) : (
+                          <p>{certification.value}</p>
+                        )}
                       </a>
+                    ) : certification.description_short ? (
+                      certification.description ? (
+                        <div
+                          className="tooltip"
+                          data-tip={certification.description}
+                        >
+                          {certification.description_short}
+                        </div>
+                      ) : (
+                        <p>{certification.description}</p>
+                      )
                     ) : (
-                      <p>
-                        {certification.description
-                          ? certification.description
-                          : certification.value}
-                      </p>
+                      <p>{certification.value}</p>
                     )}
                   </div>
                 ))}

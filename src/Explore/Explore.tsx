@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
 import { useMapState } from "../context/map";
 import { MapBox } from "../shared/components/MapBox";
 import Header from "../Header";
-import { NewAsset } from "../shared/types";
 import NewAssetCard from "./NewAssetCard";
+import { Asset } from "../modules/assets";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useNewFiltersState();
@@ -28,7 +28,7 @@ export default (): React.ReactElement => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleAssetCardPinClick = (asset: NewAsset) => {
+  const handleAssetCardPinClick = (asset: Asset) => {
     setOpenPopupAssetId(asset.id);
     mapRef?.current?.flyTo({
       center: [asset.coordinates.longitude, asset?.coordinates?.latitude],
@@ -40,7 +40,7 @@ export default (): React.ReactElement => {
     return (
       Object.keys(filters.assetTypes).length > 0 ||
       filters.provider ||
-      filters.chainId ||
+      filters.platform ||
       selectedAssetId
     );
   };
@@ -109,8 +109,8 @@ export default (): React.ReactElement => {
                     </div>
                   ))}
               </MapBox>
-              <div className="hidden md:block">
-                <Footer />
+              <div className="hidden lg:block">
+                <Footer twoRows={!!showCards()} />
               </div>
             </div>
           </div>

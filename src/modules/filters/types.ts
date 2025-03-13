@@ -1,7 +1,7 @@
 export interface Filters {
   assetTypes: Record<string, AssetTypeFilters>;
   provider: string;
-  chainId: number | string;
+  platform: string;
 }
 
 export interface AssetTypeFilters {
@@ -20,7 +20,7 @@ export type FiltersKeys = keyof Filters;
 export interface NewFilters {
   assetTypes: Record<number, NewAssetTypeFilters>;
   provider: number | null;
-  chainId: string;
+  platform: string;
 }
 
 export interface NewAssetTypeFilters {

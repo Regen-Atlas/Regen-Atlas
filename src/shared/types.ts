@@ -1,5 +1,4 @@
 import { Token as UniswapToken } from "@uniswap/sdk-core";
-import { ChainBranding } from "../modules/chains";
 
 export type MapStyles = "map" | "satellite";
 
@@ -19,62 +18,6 @@ export type AssetNativity =
   | "ONCHAIN_ENFORCEMENT"
   | "FULLY_ONCHAIN"
   | "PRETOKEN";
-
-export interface NewAsset {
-  id: string;
-  name: string;
-  coordinates: {
-    latitude: number;
-    longitude: number;
-  };
-  issuer: NewIssuer;
-  description: string;
-  nativity: AssetNativity;
-  status: NewStatus;
-  issuer_link: string;
-  exchange_link: string;
-  main_image: string;
-  tokens: {
-    address: string;
-    name: string;
-    symbol: string;
-    chain_id: string;
-  }[];
-  chains: ChainBranding[];
-  asset_subtypes: {
-    id: number;
-    name: string;
-  }[];
-  asset_types: {
-    id: number;
-    name: string;
-  }[];
-  country_code: string;
-  region: string;
-  child_assets: Array<RelatedAsset>;
-  parent_assets: Array<RelatedAsset>;
-  certifications: Array<{
-    id: number;
-    value: number;
-    description: string;
-    certification_source: string;
-    certifier: {
-      id: number;
-      name: string;
-    };
-  }>;
-  second_order: boolean;
-  metadata: Record<string, any>;
-}
-
-export interface RelatedAsset {
-  id: string;
-  name: string;
-  coordinates: {
-    latitude: number;
-    longitude: number;
-  };
-}
 
 export interface AssetTypeWithSubtypes {
   id: number;

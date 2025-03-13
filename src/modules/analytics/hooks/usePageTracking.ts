@@ -7,7 +7,6 @@ export const usePageTracking = () => {
 
   useEffect(() => {
     const sendPageView = (url: string) => {
-      console.log("sendPageView", url);
       analytics.sendPageView({
         page: url,
         title: document.title,

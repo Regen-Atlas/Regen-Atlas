@@ -1,20 +1,20 @@
+import { Asset } from "../../modules/assets";
 import { NewFilters } from "../../modules/filters";
-import { NewAsset } from "../../shared/types";
 
 export const filterNewAssets = (
-  assets: NewAsset[],
+  assets: Asset[],
   filters: NewFilters
-): NewAsset[] => {
+): Asset[] => {
   const {
     provider: filterProvider,
-    chainId: filterChainId,
     assetTypes: filterAssetTypes,
+    platform: filterPlatform,
   } = filters;
 
   return assets.filter((asset) => {
     const providerId = asset.issuer.id;
     const assetTypeId = asset.asset_types[0].id;
-    const chains = asset.chains;
+    const platforms = asset.platforms;
     const assetSubtypeId = asset.asset_subtypes[0].id;
 
     if (filterProvider && providerId !== filterProvider) {
@@ -22,8 +22,8 @@ export const filterNewAssets = (
     }
 
     if (
-      filterChainId &&
-      chains.find((chain) => chain.id === filterChainId) === undefined
+      filterPlatform &&
+      !platforms.map((platform) => platform.id).includes(filterPlatform)
     ) {
       return false;
     }

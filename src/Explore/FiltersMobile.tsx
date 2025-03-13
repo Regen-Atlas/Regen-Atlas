@@ -16,7 +16,7 @@ export default (): React.ReactElement => {
   const filtersCount =
     (Object.keys(filters.assetTypes).length > 0 ? 1 : 0) +
     (filters.provider ? 1 : 0) +
-    (filters.chainId ? 1 : 0);
+    (filters.platform ? 1 : 0);
 
   return (
     <div className="flex justify-between py-4">

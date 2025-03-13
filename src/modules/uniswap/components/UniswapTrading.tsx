@@ -189,6 +189,10 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   };
 
   const handleBuy = async () => {
+    analytics.sendSwappingEvent({
+      action: "Buying process started",
+      label: `Wallet: ${address}`,
+    });
     if (!amountIn || !address) {
       return;
     }
@@ -217,9 +221,11 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
         ),
       };
 
-      analytics.sendTradingEvent(
-        `Request Token Swap Confirmation, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
-      );
+      analytics.sendSwappingEvent({
+        action: `Request Token Swap Confirmation`,
+        value: parseFloat(amountIn),
+        label: `${tokenIn.symbol} to ${tokenOut.symbol}`,
+      });
 
       const res = await executeTrade({
         options: tradeOptions,
@@ -237,19 +243,24 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
       setAmountIn("");
       setAmountOut("");
       setStatus("done");
-      analytics.sendTradingEvent(
-        `Token Swap Completed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
-      );
+      analytics.sendSwappingEvent({
+        action: `Token Swap Completed`,
+        value: parseFloat(amountIn),
+        label: `${tokenIn.symbol} to ${tokenOut.symbol} ${res}`,
+      });
     } catch (e) {
-      analytics.sendTradingEvent(
-        `Token Swap Failed, ${amountIn} ${tokenIn.symbol} to ${tokenOut.symbol}`
-      );
+      analytics.sendSwappingEvent({
+        action: `Token Swap Failed`,
+        value: parseFloat(amountIn),
+        label: `${tokenIn.symbol} to ${tokenOut.symbol}`,
+      });
       setStatus("error");
     }
   };
 
   const handleButtonClick = () => {
     if (status === "connect_wallet") {
+      analytics.sendSwappingEvent({ action: "Connect Wallet" });
       setOpen(true);
     } else if (status === "ready") {
       setShowModal(true);
@@ -264,9 +275,11 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({
   };
 
   const requestTokenSpendingApproval = async () => {
-    analytics.sendTradingEvent(
-      `Request Token Spending Approval for ${tokenIn.symbol}`
-    );
+    analytics.sendSwappingEvent({
+      action: `Request Token Spending Approval`,
+      value: parseFloat(amountIn),
+      label: tokenIn.symbol,
+    });
     const amountInWithDecimals = parseUnits(
       amountIn.toString(),
       tokenIn.decimals

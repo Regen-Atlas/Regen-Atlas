@@ -1,12 +1,17 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useScrollClass } from "./shared/hooks/useScrollClass";
 import { HelmetProvider } from "react-helmet-async";
-import { useAnalytics, usePageTracking } from "./modules/analytics";
+import { analytics, useAnalytics, usePageTracking } from "./modules/analytics";
 import { useSupabaseTable } from "./shared/hooks/useSupabaseTable";
-import { AssetTypeWithSubtypes, NewAsset } from "./shared/types";
+import { AssetTypeWithSubtypes } from "./shared/types";
 import { useBaseDispatch, useBaseState } from "./context/base";
 import { useEffect } from "react";
 import { useNewFiltersDispatch } from "./context/filters";
+import { useAccountEffect } from "wagmi";
+import { Asset } from "./modules/assets";
+// @ts-ignore
+import * as klaro from "klaro";
+import klaroConfig from "./TnC/klaroConfig";
 
 function App() {
   useScrollClass();
@@ -15,23 +20,23 @@ function App() {
   const dispatchFilters = useNewFiltersDispatch();
   const dispatchBase = useBaseDispatch();
   const baseState = useBaseState();
-  const { data: allAssets } = useSupabaseTable<NewAsset>("assets_published");
+  const { data: allAssets } = useSupabaseTable<Asset>("assets_published_view");
   const { data: assetTypes } = useSupabaseTable<AssetTypeWithSubtypes>(
     "asset_types_with_subtypes_and_issuers"
   );
-  const { data: chains } = useSupabaseTable<{ id: string; name: string }>(
-    "chains_with_assets"
+  const { data: platforms } = useSupabaseTable<{ id: number; name: string }>(
+    "platforms_with_published_assets"
   );
   const { data: issuers } = useSupabaseTable<{ id: number; name: string }>(
     "issuers_with_published_assets"
   );
 
-  // Dispatch the chains only when they are loaded and not yet in the baseState
+  // Dispatch the platforms only when they are loaded and not yet in the baseState
   useEffect(() => {
-    if (chains?.length && !baseState.chains.length) {
-      dispatchBase({ type: "SET_CHAINS", payload: chains });
+    if (platforms?.length && !baseState.platforms.length) {
+      dispatchBase({ type: "SET_PLATFORMS", payload: platforms });
     }
-  }, [chains, baseState.chains.length, dispatchBase]);
+  }, [platforms, baseState.platforms.length, dispatchBase]);
 
   // Dispatch the asset types only when they are loaded and not yet in the baseState
   useEffect(() => {
@@ -53,6 +58,26 @@ function App() {
       dispatchFilters({ type: "SET_ALL_ASSETS", payload: allAssets });
     }
   }, [allAssets, dispatchFilters]);
+
+  useAccountEffect({
+    onConnect: ({ address }) => {
+      analytics.sendEvent({
+        category: "Wallet",
+        action: "Wallet Connected",
+        label: `Address: ${address}`,
+      });
+    },
+    onDisconnect: () => {
+      analytics.sendEvent({
+        category: "Wallet",
+        action: "Wallet Disconnected",
+      });
+    },
+  });
+
+  useEffect(() => {
+    klaro.setup(klaroConfig);
+  }, []);
 
   return (
     <HelmetProvider>

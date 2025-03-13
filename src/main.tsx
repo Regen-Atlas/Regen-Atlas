@@ -18,6 +18,8 @@ import AssetDetails from "./AssetDetails/AssetDetails.tsx";
 import { MapStateProvider } from "./context/map/mapContext.tsx";
 import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
 import { BaseStateProvider } from "./context/base/baseContext.tsx";
+import { PrivacyPolicy } from "./TnC/PrivacyPolicy.tsx";
+import { Imprint } from "./TnC/Imprint.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -39,6 +41,14 @@ export const router = createBrowserRouter([
       {
         path: "/assets/:assetId",
         element: <AssetDetails />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/imprint",
+        element: <Imprint />,
       },
     ],
   },

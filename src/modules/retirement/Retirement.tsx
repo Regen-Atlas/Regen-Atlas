@@ -20,6 +20,7 @@ import { useTokensBalances } from "../../shared/hooks/useTokensBalances";
 import { useModal } from "connectkit";
 import { useWaitForTransactionReceipt } from "wagmi";
 import { Modal } from "../../shared/components";
+import { analytics } from "../analytics";
 
 interface RetirementProps {
   retirementWallet: Address;
@@ -158,10 +159,16 @@ export const Retirement: React.FC<RetirementProps> = ({
   const handleButtonClick = async () => {
     setStatus("approving");
     if (status === "connect_wallet") {
+      analytics.sendRetiringEvent({ action: "Connect Wallet" });
       connectWallet(true);
     } else if (status === "ready" || status === "error") {
       try {
-        await writeContractAsync({
+        analytics.sendRetiringEvent({
+          action: "Retirement initiated",
+          label: project.name,
+          value: parseFloat(creditsAmount),
+        });
+        const transactionHash = await writeContractAsync({
           abi: ABI_CELO_ERC_20_TOKEN,
           functionName: "transfer",
           args: [
@@ -171,9 +178,19 @@ export const Retirement: React.FC<RetirementProps> = ({
           address: selectedToken.address as Address,
         });
         setRetirementAmount(`${tokenAmount} ${selectedToken.symbol}`);
+        analytics.sendRetiringEvent({
+          action: `Retirement success: ${project.name}`,
+          label: `Hash: ${transactionHash}`,
+          value: parseFloat(creditsAmount),
+        });
         setStatus("done");
       } catch (e) {
         console.log("Error retiring credits", e);
+        analytics.sendRetiringEvent({
+          action: "Retirement error",
+          label: project.name,
+          value: parseFloat(creditsAmount),
+        });
         setStatus("error");
       }
     }

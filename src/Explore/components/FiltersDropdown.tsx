@@ -10,14 +10,14 @@ export default ({
   openFilter,
   onClose,
 }: {
-  openFilter: "assetType" | "issuers" | "chains";
+  openFilter: "assetType" | "issuers" | "platforms";
   onClose: () => void;
 }): React.ReactElement => {
   const { filters } = useNewFiltersState();
   const dispatchFilters = useNewFiltersDispatch();
   const base = useBaseState();
 
-  if (!base.chains.length || !base.types.length || !base.issuers.length) {
+  if (!base.platforms.length || !base.types.length || !base.issuers.length) {
     return <div>Loading...</div>;
   }
 
@@ -50,7 +50,7 @@ export default ({
           "absolute top-[72px]",
           openFilter === "assetType" &&
             "left-[calc((100vw-1000px)/2)] w-[1000px]",
-          (openFilter === "issuers" || openFilter === "chains") &&
+          (openFilter === "issuers" || openFilter === "platforms") &&
             "left-[calc((100vw-720px)/2)] w-[720px]"
         )}
         onClick={(e) => e.stopPropagation()}
@@ -227,12 +227,12 @@ export default ({
           </div>
         )}
 
-        {openFilter === "chains" && (
+        {openFilter === "platforms" && (
           <div className="grid grid-cols-3 gap-4">
-            {base.chains.map((chain) => {
-              const selected = filters.chainId === chain.id;
+            {base.platforms.map((plat) => {
+              const selected = filters.platform === plat.id;
               return (
-                <div key={chain.id}>
+                <div key={plat.id}>
                   <div
                     className={clsx(
                       "flex items-center gap-2",
@@ -241,12 +241,12 @@ export default ({
                     onClick={() => {
                       if (selected) {
                         dispatchFilters({
-                          type: "REMOVE_CHAIN_ID_FILTER",
+                          type: "REMOVE_PLATFORM_FILTER",
                         });
                       } else {
                         dispatchFilters({
-                          type: "SET_CHAIN_ID_FILTER",
-                          payload: chain.id,
+                          type: "SET_PLATFORM_FILTER",
+                          payload: plat.id,
                         });
                       }
                     }}
@@ -256,7 +256,7 @@ export default ({
                       className="!border-blue-950 flex-shrink-0"
                       checked={selected}
                     />
-                    <div className="text-lg">{chain.name}</div>
+                    <div className="text-lg">{plat.name}</div>
                   </div>
                 </div>
               );

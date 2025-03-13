@@ -11,13 +11,13 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
   const [openFilters, setOpenFilters] = useState({
     type: false,
     issuers: false,
-    chains: false,
+    platforms: false,
   });
   const [openType, setOpenType] = useState<number>();
   const { filters } = useNewFiltersState();
   const base = useBaseState();
 
-  if (!base.chains.length || !base.types.length || !base.issuers.length) {
+  if (!base.platforms.length || !base.types.length || !base.issuers.length) {
     return <div>Loading...</div>;
   }
 
@@ -31,8 +31,8 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
     setOpenFilters((prev) => ({ ...prev, issuers: !prev.issuers }));
   };
 
-  const handleToggleChainFilter = () => {
-    setOpenFilters((prev) => ({ ...prev, chains: !prev.chains }));
+  const handleTogglePlatformFilter = () => {
+    setOpenFilters((prev) => ({ ...prev, platforms: !prev.platforms }));
   };
 
   const handleSubtypeClick = ({
@@ -217,45 +217,45 @@ export default ({ onClose }: { onClose: () => void }): JSX.Element => {
           </Modal>
         )}
         <FilterSummaryMobile
-          onClick={handleToggleChainFilter}
-          className={clsx(filters.chainId && "!border-blue-950")}
+          onClick={handleTogglePlatformFilter}
+          className={clsx(filters.platform && "!border-blue-950")}
           title="Chains"
           value={
-            filters.chainId
-              ? base.chains.find((chain) => chain.id === filters.chainId)
+            filters.platform
+              ? base.platforms.find((plat) => plat.id === filters.platform)
                   ?.name || "Unknown chain"
               : "All"
           }
           defaultValue="All"
         />
-        {openFilters.chains && (
-          <Modal fullScreen onClose={handleToggleChainFilter}>
+        {openFilters.platforms && (
+          <Modal fullScreen onClose={handleTogglePlatformFilter}>
             <div className="text-2xl font-semibold mb-6">Chains</div>
             <div className="grid gap-4 pl-8">
-              {base.chains.map((chain) => {
+              {base.platforms.map((plat) => {
                 return (
                   <div
-                    key={chain.id}
+                    key={plat.id}
                     className="flex items-center gap-2 cursor-pointer"
                     onClick={() => {
-                      if (filters.chainId === chain.id) {
+                      if (filters.platform === plat.id) {
                         dispatchFilters({
-                          type: "REMOVE_CHAIN_ID_FILTER",
+                          type: "REMOVE_PLATFORM_FILTER",
                         });
                       } else {
                         dispatchFilters({
-                          type: "SET_CHAIN_ID_FILTER",
-                          payload: chain.id,
+                          type: "SET_PLATFORM_FILTER",
+                          payload: plat.id,
                         });
                       }
-                      setOpenFilters((prev) => ({ ...prev, chains: false }));
+                      setOpenFilters((prev) => ({ ...prev, platforms: false }));
                     }}
                   >
                     <CheckboxBox
-                      checked={filters.chainId === chain.id}
+                      checked={filters.platform === plat.id}
                       className="flex-shrink-0"
                     />
-                    <div>{chain.name}</div>
+                    <div>{plat.name}</div>
                   </div>
                 );
               })}

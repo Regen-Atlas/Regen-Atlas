@@ -1,14 +1,15 @@
 import { createContext, Dispatch, ReactNode, useReducer } from "react";
-import { AssetTypeWithSubtypes, NewIssuer } from "../../shared/types";
+import { AssetTypeWithSubtypes } from "../../shared/types";
+import { Issuer } from "../../modules/assets";
 
 interface IState {
-  chains: { id: string; name: string }[];
   types: AssetTypeWithSubtypes[];
-  issuers: NewIssuer[];
+  issuers: Issuer[];
+  platforms: { id: string; name: string }[];
 }
 
-type SetChainsAction = {
-  type: "SET_CHAINS";
+type SetPlatformsAction = {
+  type: "SET_PLATFORMS";
   payload: any[];
 };
 
@@ -22,19 +23,18 @@ type SetIssuersAction = {
   payload: any[];
 };
 
-type Action = SetChainsAction | SetTypesAction | SetIssuersAction;
+type Action = SetTypesAction | SetIssuersAction | SetPlatformsAction;
 
 const initialState: IState = {
-  chains: [],
   types: [],
   issuers: [],
+  platforms: [],
 };
 
 const reducer = (state: IState, action: Action): IState => {
   switch (action.type) {
-    case "SET_CHAINS": {
-      console.log("Setting chains", action.payload);
-      return { ...state, chains: action.payload };
+    case "SET_PLATFORMS": {
+      return { ...state, platforms: action.payload };
     }
     case "SET_TYPES": {
       return { ...state, types: action.payload };
