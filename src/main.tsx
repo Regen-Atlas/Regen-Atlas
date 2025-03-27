@@ -20,6 +20,7 @@ import { Kitchensink } from "./Kitchensink/Kitchensink.tsx";
 import { BaseStateProvider } from "./context/base/baseContext.tsx";
 import { PrivacyPolicy } from "./TnC/PrivacyPolicy.tsx";
 import { Imprint } from "./TnC/Imprint.tsx";
+import Ecosystems from "./Ecosystems/Ecosystems.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
         path: "/imprint",
         element: <Imprint />,
       },
+      { path: "orgs", element: <Ecosystems /> },
     ],
   },
   {

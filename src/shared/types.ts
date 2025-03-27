@@ -36,3 +36,13 @@ export interface AssetTypeWithSubtypes {
 export interface Token extends UniswapToken {
   symbol: string;
 }
+
+export interface Org {
+  id: number;
+  name: string;
+  link: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+}

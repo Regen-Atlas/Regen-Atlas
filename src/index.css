@@ -103,6 +103,11 @@ body.scrolled-360.modal-open .filters-row-mobile {
   @apply lg:!h-[calc(100vh-130px)];
 }
 
+.map-wrapper-orgs .mapboxgl-map {
+  @apply !h-[500px] !w-full;
+  @apply md:!h-[calc(100vh-130px)];
+}
+
 .asset-card {
   /* box-shadow: 0 4px 4px 0 rgb(0 0 0 / 0.25); */
   box-shadow: 0 4px 6px 0 rgb(46 95 169 / 0.08);
