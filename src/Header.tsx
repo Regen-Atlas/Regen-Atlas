@@ -17,7 +17,7 @@ const menuItems = [
   {
     name: "List Project",
     link: "#",
-    url: "https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform",
   },
   {
     name: "Docs",
@@ -68,7 +68,7 @@ export default ({
         <div className="hidden lg:flex items-center gap-4">
           <a
             className="ml-6 hidden button button-gradient text-center button-gradient !text-base xl:block"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform"
             target="_blank"
             onClick={() => {
               analytics.sendEvent({
