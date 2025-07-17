@@ -109,8 +109,10 @@ export default (): React.ReactElement => {
                     </div>
                   ))}
               </MapBox>
-              <div className="hidden lg:block">
-                <Footer twoRows={!!showCards()} />
+              <div
+                className={`hidden lg:block ${!!showCards() && "w-[100vw] fixed left-0 bottom-0 z-50 bg-background pr-8 h-[80px]"}`}
+              >
+                <Footer />
               </div>
             </div>
           </div>
@@ -123,7 +125,7 @@ export default (): React.ReactElement => {
             <div
               className={clsx(
                 "filters-row-mobile bg-background",
-                "md:fixed md:!top-[80px] md:left-0 md:w-full md:!px-4"
+                "md:fixed md:!top-[70px] md:left-0 md:w-full md:!px-4"
               )}
             >
               <FiltersMobile />

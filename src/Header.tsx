@@ -145,6 +145,13 @@ export default ({
                   </a>
                 </div>
                 <p className="mt-4">© Regen Atlas 2025</p>
+                <div className="flex flex-col items-center">
+                  <img src="/BMWE_de_v3__Web_farbig.svg" width="200" />
+                  <p className="text-xs text-center">
+                    Funded by the Federal Ministry for Economic Affairs and
+                    Energy (BMWi) based on a decision of the German Bundestag.
+                  </p>
+                </div>
               </div>
             </div>
           </Modal>
