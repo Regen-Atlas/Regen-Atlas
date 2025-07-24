@@ -5,6 +5,7 @@ import type { MapRef } from "react-map-gl";
 import type { MapboxGeoJSONFeature, MapMouseEvent } from "mapbox-gl";
 import type { Point } from "geojson";
 
+
 interface Coordinates {
   longitude: number;
   latitude: number;
@@ -20,7 +21,9 @@ interface Asset {
 
 interface ClusteredAssetLayerProps {
   assets: Asset[];
+  onAssetClick?: (id: string) => void; // ✅ new optional prop
 }
+
 
 function lngLatToPixel({ longitude, latitude }: Coordinates, map: MapRef) {
   return map.project([longitude, latitude]);
@@ -99,7 +102,7 @@ function spiderfyFeatures(assets: Asset[], map: MapRef, pixelRadius = 5): Asset[
   return features;
 }
 
-export function ClusteredAssetLayer({ assets }: ClusteredAssetLayerProps) {
+export function ClusteredAssetLayer({ assets, onAssetClick }: ClusteredAssetLayerProps) {
   const { current: map } = useMap(); // ✅ moved to top
   const dispatch = useNewFiltersDispatch();
   const hoveredStateIdRef = useRef<string | number | null>(null);
@@ -157,10 +160,15 @@ export function ClusteredAssetLayer({ assets }: ClusteredAssetLayerProps) {
       if (!features.length) return;
       const feature = features[0];
 
-      if (feature.layer?.id === "unclustered-point") {
-        dispatch({ type: "SET_SELECTED_ASSET", payload: feature.properties?.id ?? null });
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+if (feature.layer?.id === "unclustered-point") {
+  const assetId = feature.properties?.id ?? null;
+  if (onAssetClick && typeof assetId === "string") {
+    onAssetClick(assetId); // ✅ use external navigation
+  } else {
+    dispatch({ type: "SET_SELECTED_ASSET", payload: assetId });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
 
       if (
         feature.layer?.id === "clusters" &&
