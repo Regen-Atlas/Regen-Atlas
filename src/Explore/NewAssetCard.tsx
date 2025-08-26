@@ -14,7 +14,7 @@ import { ExpandableText } from "../shared/components/ExpandableText";
 import { Link } from "react-router-dom";
 import { SUPPORTED_TOKENS } from "../modules/uniswap";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
-import { Asset } from "../modules/assets";
+import { Asset, RelatedAsset } from "../modules/assets";
 
 interface AssetCardProps {
   className?: string;
@@ -62,7 +62,7 @@ export default ({
       SUPPORTED_TOKENS.includes(plat.contract_address)
     )?.contract_address || "";
 
-  const renderDropdown = (items: Asset[], type: "child" | "parent") => {
+  const renderDropdown = (items: RelatedAsset[], type: "child" | "parent") => {
     const page = dropdownPage[type];
     const start = 1 + page * ITEMS_PER_PAGE;
     const end = start + ITEMS_PER_PAGE;
@@ -131,7 +131,10 @@ export default ({
         ></div>
         <h3 className="text-xl xl:text-2xl font-bold">{asset.name}</h3>
         <div className="flex items-center pt-1 pb-2 text-sm">
-          <div className="flex items-center cursor-pointer" onClick={onPinClicked}>
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={onPinClicked}
+          >
             <MapPin size={16} />
             {asset.region ? `${asset.region}, ` : ""}
             {COUNTRY_CODE_TO_NAME[asset.country_code]}
@@ -202,7 +205,8 @@ export default ({
                     <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
                       +{asset.child_assets.length - 1}
                     </div>
-                    {dropdownVisible === "child" && renderDropdown(asset.child_assets, "child")}
+                    {dropdownVisible === "child" &&
+                      renderDropdown(asset.child_assets, "child")}
                   </div>
                 )}
               </div>
@@ -240,7 +244,8 @@ export default ({
                     <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
                       +{asset.parent_assets.length - 1}
                     </div>
-                    {dropdownVisible === "parent" && renderDropdown(asset.parent_assets, "parent")}
+                    {dropdownVisible === "parent" &&
+                      renderDropdown(asset.parent_assets, "parent")}
                   </div>
                 )}
               </div>
@@ -316,7 +321,9 @@ export default ({
           )}
         </div>
 
-        <div className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}>
+        <div
+          className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}
+        >
           {showExternalLink && (asset.issuer_link || asset.exchange_link) && (
             <a
               href={asset.issuer_link || asset.exchange_link}

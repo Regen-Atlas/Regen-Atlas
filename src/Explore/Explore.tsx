@@ -78,7 +78,9 @@ export default (): React.ReactElement => {
                   {filteredAssets.length} assets listed
                 </div>
 
-                <ClusteredAssetLayer assets={filteredAssets.filter(asset => !asset.second_order)} />
+                <ClusteredAssetLayer
+                  assets={filteredAssets.filter((asset) => !asset.second_order)}
+                />
               </MapBox>
               <div
                 className={`hidden lg:block ${!!showCards() && "w-[100vw] fixed left-0 bottom-0 z-50 bg-background pr-8 h-[80px]"}`}
