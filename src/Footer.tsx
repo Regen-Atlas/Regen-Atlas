@@ -15,7 +15,7 @@ export default ({
   return (
     <footer
       className={clsx(
-        "flex justify-between items-center h-[50px]",
+        "flex justify-between items-center h-[100px] pt-4",
         twoRows && "lg:flex-col xl:flex-row lg:text-sm xl:text-base"
       )}
     >
@@ -63,10 +63,21 @@ export default ({
           </a>
         </div>
       )}
-      <div className="flex items-center justify-between w-full">
-        <p>© Regen Atlas 2025</p>
+      <div className="flex items-start justify-between w-full">
+        <div className="flex items-start">
+          <img
+            src="/BMWE_de_v3__Web_farbig.svg"
+            width="140"
+            className="-mt-4"
+          />
+          <p className="text-xs w-[400px]">
+            Funded by the Federal Ministry for Economic Affairs and Energy
+            (BMWi) based on a decision of the German Bundestag.
+          </p>
+        </div>
         {showMapStyleSwitch && <MapStyleSwitch />}
         <div className="flex items-center gap-4">
+          <p>© Regen Atlas 2025</p>
           <Link to="/privacy-policy">Privacy Policy</Link>
           <Link to="/imprint">Imprint</Link>
           <a
@@ -85,7 +96,7 @@ export default ({
           </a>
           <a
             className="ml-6 block button button-gradient text-center button-gradient !text-base xl:hidden"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfYpVlE7WYf73nArn2r__SQyGeI11-4OW53EYk8aOd3qzfC8A/viewform"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform"
             target="_blank"
             onClick={() => {
               analytics.sendEvent({

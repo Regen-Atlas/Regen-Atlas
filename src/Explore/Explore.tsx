@@ -1,20 +1,19 @@
-import { Marker, Popup } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import FiltersMobile from "./FiltersMobile";
 import { useNewFiltersDispatch, useNewFiltersState } from "../context/filters";
 import clsx from "clsx";
 import Footer from "../Footer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useMapState } from "../context/map";
 import { MapBox } from "../shared/components/MapBox";
 import Header from "../Header";
 import NewAssetCard from "./NewAssetCard";
 import { Asset } from "../modules/assets";
+import { ClusteredAssetLayer } from "../shared/components/ClusteredAssetLayer";
 
 export default (): React.ReactElement => {
   const { filteredAssets, filters, selectedAssetId } = useNewFiltersState();
   const dispatch = useNewFiltersDispatch();
-  const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
   const mapRef = useRef<MapRef>();
   const { mapStyle } = useMapState();
 
@@ -22,14 +21,8 @@ export default (): React.ReactElement => {
     window.dispatchEvent(new Event("resize"));
   }, [filters, selectedAssetId]);
 
-  const handleMarkerClick = (assetId: string) => {
-    setOpenPopupAssetId(assetId);
-    dispatch({ type: "SET_SELECTED_ASSET", payload: assetId });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   const handleAssetCardPinClick = (asset: Asset) => {
-    setOpenPopupAssetId(asset.id);
+    dispatch({ type: "SET_SELECTED_ASSET", payload: asset.id });
     mapRef?.current?.flyTo({
       center: [asset.coordinates.longitude, asset?.coordinates?.latitude],
       zoom: 10,
@@ -84,33 +77,15 @@ export default (): React.ReactElement => {
                 <div className="hidden lg:flex absolute top-2 right-2 rounded-full h-7 px-3 items-center bg-blue-950 text-white font-semibold">
                   {filteredAssets.length} assets listed
                 </div>
-                {filteredAssets
-                  .filter((asset) => !asset.second_order)
-                  .map((asset) => (
-                    <div key={asset.id}>
-                      <Marker
-                        key={asset.id}
-                        latitude={asset?.coordinates?.latitude}
-                        longitude={asset?.coordinates?.longitude}
-                        onClick={(e) => {
-                          e.originalEvent.stopPropagation();
-                          handleMarkerClick(asset.id);
-                        }}
-                      />
-                      {openPopupAssetId === asset.id && (
-                        <Popup
-                          latitude={asset?.coordinates?.latitude}
-                          longitude={asset?.coordinates?.longitude}
-                          closeButton={false}
-                        >
-                          <div className="font-bold">{asset?.name}</div>
-                        </Popup>
-                      )}
-                    </div>
-                  ))}
+
+                <ClusteredAssetLayer
+                  assets={filteredAssets.filter((asset) => !asset.second_order)}
+                />
               </MapBox>
-              <div className="hidden lg:block">
-                <Footer twoRows={!!showCards()} />
+              <div
+                className={`hidden lg:block ${!!showCards() && "w-[100vw] fixed left-0 bottom-0 z-50 bg-background pr-8 h-[80px]"}`}
+              >
+                <Footer />
               </div>
             </div>
           </div>
@@ -123,7 +98,7 @@ export default (): React.ReactElement => {
             <div
               className={clsx(
                 "filters-row-mobile bg-background",
-                "md:fixed md:!top-[80px] md:left-0 md:w-full md:!px-4"
+                "md:fixed md:!top-[70px] md:left-0 md:w-full md:!px-4"
               )}
             >
               <FiltersMobile />
