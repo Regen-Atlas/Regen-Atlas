@@ -6,7 +6,7 @@ import {
   MapPin,
   Question,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NEW_NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
@@ -14,7 +14,7 @@ import { ExpandableText } from "../shared/components/ExpandableText";
 import { Link } from "react-router-dom";
 import { SUPPORTED_TOKENS } from "../modules/uniswap";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
-import { Asset } from "../modules/assets";
+import { Asset, RelatedAsset } from "../modules/assets";
 
 interface AssetCardProps {
   className?: string;
@@ -30,16 +30,75 @@ export default ({
   onPinClicked,
 }: AssetCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState<string | null>(null);
+  const [dropdownPage, setDropdownPage] = useState({ child: 0, parent: 0 });
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const shareUrl = `${window.location.origin}/assets/${asset.id}`;
+  const ITEMS_PER_PAGE = 3;
 
   const handleShareClick = async () => {
     setShowShareOptions(true);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownVisible(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const celoContractAddress: string =
     asset?.tokens[0]?.platforms?.find((plat) =>
       SUPPORTED_TOKENS.includes(plat.contract_address)
     )?.contract_address || "";
+
+  const renderDropdown = (items: RelatedAsset[], type: "child" | "parent") => {
+    const page = dropdownPage[type];
+    const start = 1 + page * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const paginatedItems = items.slice(start, end);
+    const hasMore = end < items.length;
+
+    return (
+      <div
+        ref={dropdownRef}
+        className="absolute z-50 top-9 left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
+      >
+        <div className="flex flex-col divide-y divide-gray-100">
+          {paginatedItems.map((item) => (
+            <Link key={item.id} to={`/assets/${item.id}`}>
+              <div className="px-4 py-2 truncate hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors duration-150 text-sm font-medium max-w-full">
+                {item.name}
+              </div>
+            </Link>
+          ))}
+          {hasMore && (
+            <div
+              className="px-4 py-2 text-blue-500 text-sm font-medium cursor-pointer hover:underline"
+              onClick={() =>
+                setDropdownPage((prev) => ({
+                  ...prev,
+                  [type]: prev[type] + 1,
+                }))
+              }
+            >
+              + more available
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -51,7 +110,7 @@ export default ({
       >
         <div className="flex justify-between">
           <div className="font-bold text-gray-600">
-            {asset.asset_types[0].name}
+            {asset.asset_types[0]?.name}
           </div>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
@@ -68,9 +127,7 @@ export default ({
         </div>
         <div
           className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px]"
-          style={{
-            backgroundImage: `url(${asset.main_image})`,
-          }}
+          style={{ backgroundImage: `url(${asset.main_image})` }}
         ></div>
         <h3 className="text-xl xl:text-2xl font-bold">{asset.name}</h3>
         <div className="flex items-center pt-1 pb-2 text-sm">
@@ -113,7 +170,7 @@ export default ({
           <div className="flex justify-between items-center py-1">
             <p className="font-bold">Subtype</p>
             <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-              {asset.asset_subtypes[0].name}
+              {asset.asset_subtypes[0]?.name}
             </div>
           </div>
 
@@ -132,8 +189,24 @@ export default ({
                   </div>
                 </Link>
                 {asset.child_assets.length > 1 && (
-                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-                    +{asset.child_assets.length - 1}
+                  <div
+                    className="relative"
+                    onMouseEnter={() => {
+                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                      setDropdownVisible("child");
+                    }}
+                    onMouseLeave={() => {
+                      timeoutRef.current = setTimeout(() => {
+                        setDropdownVisible(null);
+                        setDropdownPage((prev) => ({ ...prev, child: 0 }));
+                      }, 500);
+                    }}
+                  >
+                    <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
+                      +{asset.child_assets.length - 1}
+                    </div>
+                    {dropdownVisible === "child" &&
+                      renderDropdown(asset.child_assets, "child")}
                   </div>
                 )}
               </div>
@@ -155,8 +228,24 @@ export default ({
                   </div>
                 </Link>
                 {asset.parent_assets.length > 1 && (
-                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-                    +{asset.parent_assets.length - 1}
+                  <div
+                    className="relative"
+                    onMouseEnter={() => {
+                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                      setDropdownVisible("parent");
+                    }}
+                    onMouseLeave={() => {
+                      timeoutRef.current = setTimeout(() => {
+                        setDropdownVisible(null);
+                        setDropdownPage((prev) => ({ ...prev, parent: 0 }));
+                      }, 1000);
+                    }}
+                  >
+                    <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
+                      +{asset.parent_assets.length - 1}
+                    </div>
+                    {dropdownVisible === "parent" &&
+                      renderDropdown(asset.parent_assets, "parent")}
                   </div>
                 )}
               </div>
@@ -182,7 +271,6 @@ export default ({
                       >
                         <div className="flex">
                           {certification.certifier.short_name}
-
                           <Question size={16} />
                         </div>
                       </div>
