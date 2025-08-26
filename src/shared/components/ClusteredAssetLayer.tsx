@@ -5,7 +5,6 @@ import type { MapRef } from "react-map-gl";
 import type { MapboxGeoJSONFeature, MapMouseEvent } from "mapbox-gl";
 import type { Point } from "geojson";
 
-
 interface Coordinates {
   longitude: number;
   latitude: number;
@@ -24,17 +23,23 @@ interface ClusteredAssetLayerProps {
   onAssetClick?: (id: string) => void; // ✅ new optional prop
 }
 
-
 function lngLatToPixel({ longitude, latitude }: Coordinates, map: MapRef) {
   return map.project([longitude, latitude]);
 }
 
-function pixelToLngLat(pixel: { x: number; y: number }, map: MapRef): Coordinates {
+function pixelToLngLat(
+  pixel: { x: number; y: number },
+  map: MapRef
+): Coordinates {
   const { lng, lat } = map.unproject([pixel.x, pixel.y]);
   return { longitude: lng, latitude: lat };
 }
 
-function spiderfyFeatures(assets: Asset[], map: MapRef, pixelRadius = 5): Asset[] {
+function spiderfyFeatures(
+  assets: Asset[],
+  map: MapRef,
+  pixelRadius = 5
+): Asset[] {
   const features: Asset[] = [];
   const pixelThreshold = pixelRadius * 1.2;
 
@@ -102,7 +107,10 @@ function spiderfyFeatures(assets: Asset[], map: MapRef, pixelRadius = 5): Asset[
   return features;
 }
 
-export function ClusteredAssetLayer({ assets, onAssetClick }: ClusteredAssetLayerProps) {
+export function ClusteredAssetLayer({
+  assets,
+  onAssetClick,
+}: ClusteredAssetLayerProps) {
   const { current: map } = useMap(); // ✅ moved to top
   const dispatch = useNewFiltersDispatch();
   const hoveredStateIdRef = useRef<string | number | null>(null);
@@ -121,7 +129,8 @@ export function ClusteredAssetLayer({ assets, onAssetClick }: ClusteredAssetLaye
 
   const geojson = useMemo(() => {
     if (!map) return { type: "FeatureCollection", features: [] };
-    const filteredAssets = zoom > clusterMaxZoom ? spiderfyFeatures(assets, map, 20) : assets;
+    const filteredAssets =
+      zoom > clusterMaxZoom ? spiderfyFeatures(assets, map, 20) : assets;
 
     return {
       type: "FeatureCollection" as const,
@@ -160,15 +169,15 @@ export function ClusteredAssetLayer({ assets, onAssetClick }: ClusteredAssetLaye
       if (!features.length) return;
       const feature = features[0];
 
-if (feature.layer?.id === "unclustered-point") {
-  const assetId = feature.properties?.id ?? null;
-  if (onAssetClick && typeof assetId === "string") {
-    onAssetClick(assetId); // ✅ use external navigation
-  } else {
-    dispatch({ type: "SET_SELECTED_ASSET", payload: assetId });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-}
+      if (feature.layer?.id === "unclustered-point") {
+        const assetId = feature.properties?.id ?? null;
+        if (onAssetClick && typeof assetId === "string") {
+          onAssetClick(assetId); // ✅ use external navigation
+        } else {
+          dispatch({ type: "SET_SELECTED_ASSET", payload: assetId });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
 
       if (
         feature.layer?.id === "clusters" &&
@@ -180,10 +189,17 @@ if (feature.layer?.id === "unclustered-point") {
           const source = map.getSource("assets") as any;
 
           if (source && "getClusterExpansionZoom" in source) {
-            source.getClusterExpansionZoom(clusterId, (err: any, newZoom: number) => {
-              if (err || newZoom == null) return;
-              map.easeTo({ center: coords as [number, number], zoom: newZoom, duration: 500 });
-            });
+            source.getClusterExpansionZoom(
+              clusterId,
+              (err: any, newZoom: number) => {
+                if (err || newZoom == null) return;
+                map.easeTo({
+                  center: coords as [number, number],
+                  zoom: newZoom,
+                  duration: 500,
+                });
+              }
+            );
           }
         }
       }
@@ -195,11 +211,17 @@ if (feature.layer?.id === "unclustered-point") {
       }) as MapboxGeoJSONFeature[];
 
       if (hoveredStateIdRef.current !== null) {
-        map.setFeatureState({ source: "assets", id: hoveredStateIdRef.current }, { hover: false });
+        map.setFeatureState(
+          { source: "assets", id: hoveredStateIdRef.current },
+          { hover: false }
+        );
         hoveredStateIdRef.current = null;
       }
       if (hoveredClusterIdRef.current !== null) {
-        map.setFeatureState({ source: "assets", id: hoveredClusterIdRef.current }, { hover: false });
+        map.setFeatureState(
+          { source: "assets", id: hoveredClusterIdRef.current },
+          { hover: false }
+        );
         hoveredClusterIdRef.current = null;
       }
 
@@ -208,20 +230,32 @@ if (feature.layer?.id === "unclustered-point") {
 
       if (feature.layer?.id === "unclustered-point" && feature.id != null) {
         hoveredStateIdRef.current = feature.id;
-        map.setFeatureState({ source: "assets", id: feature.id }, { hover: true });
+        map.setFeatureState(
+          { source: "assets", id: feature.id },
+          { hover: true }
+        );
       } else if (feature.layer?.id === "clusters" && feature.id != null) {
         hoveredClusterIdRef.current = feature.id;
-        map.setFeatureState({ source: "assets", id: feature.id }, { hover: true });
+        map.setFeatureState(
+          { source: "assets", id: feature.id },
+          { hover: true }
+        );
       }
     };
 
     const handleMouseLeave = () => {
       if (hoveredStateIdRef.current !== null) {
-        map.setFeatureState({ source: "assets", id: hoveredStateIdRef.current }, { hover: false });
+        map.setFeatureState(
+          { source: "assets", id: hoveredStateIdRef.current },
+          { hover: false }
+        );
         hoveredStateIdRef.current = null;
       }
       if (hoveredClusterIdRef.current !== null) {
-        map.setFeatureState({ source: "assets", id: hoveredClusterIdRef.current }, { hover: false });
+        map.setFeatureState(
+          { source: "assets", id: hoveredClusterIdRef.current },
+          { hover: false }
+        );
         hoveredClusterIdRef.current = null;
       }
       map.getCanvas().style.cursor = "";
@@ -309,12 +343,18 @@ if (feature.layer?.id === "unclustered-point") {
           "circle-color": [
             "match",
             ["get", "type_id"],
-            5, "#F4D35E",
-            1, "#4CAF50",
-            6, "#00ACC1",
-            7, "#BA68C8",
-            4, "#FF8A65",
-            8, "#90A4AE",
+            5,
+            "#F4D35E",
+            1,
+            "#4CAF50",
+            6,
+            "#00ACC1",
+            7,
+            "#BA68C8",
+            4,
+            "#FF8A65",
+            8,
+            "#90A4AE",
             "#BDBDBD",
           ],
           "circle-radius": [

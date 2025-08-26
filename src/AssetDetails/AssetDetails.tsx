@@ -11,17 +11,14 @@ import {
 } from "../modules/uniswap";
 import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
 import { useSupabaseItemsByIds } from "../shared/hooks/useSupabaseItemsByIds";
-import { Asset, RelatedAsset } from "../modules/assets";
+import { Asset } from "../modules/assets";
 import NewAssetCard from "../Explore/NewAssetCard";
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { AssetRetirement } from "./AssetRetirement";
 import { ClusteredAssetLayer } from "../shared/components/ClusteredAssetLayer";
 import type { Address } from "viem";
 
 export default (): React.ReactElement => {
-  const [openPopupAssetId, setOpenPopupAssetId] = useState<string | null>(null);
-  const [openedSecondOrderAsset, setOpenedSecondOrderAsset] = useState<RelatedAsset | null>(null);
-
   const { assetId } = useParams<{ assetId: string }>();
   const navigate = useNavigate();
   const { mapStyle } = useMapState();
@@ -31,10 +28,12 @@ export default (): React.ReactElement => {
     assetId
   );
 
-  const parentAssetIds =
-    asset?.second_order && asset.parent_assets
-      ? asset.parent_assets.map((p) => p.id)
-      : [];
+  const parentAssetIds = useMemo(() => {
+    if (!asset?.second_order || !asset.parent_assets) {
+      return [];
+    }
+    return asset.parent_assets.map((p) => p.id);
+  }, [asset?.second_order, asset?.parent_assets]);
 
   const { items: fullParentAssets } = useSupabaseItemsByIds<Asset>(
     "assets_published_view",
@@ -52,13 +51,11 @@ export default (): React.ReactElement => {
     ? CELO_TOKENS_MAP[celoContractAddress]
     : "";
 
-  const celoRetireWalletAddress: Address = asset?.metadata?.celo_retire_wallet_address as Address;
+  const celoRetireWalletAddress: Address = asset?.metadata
+    ?.celo_retire_wallet_address as Address;
 
   const handleAssetOpenClick = (id: string) => {
-    console.log("Navigating to:", id);
     navigate(`/assets/${id}`);
-    setOpenedSecondOrderAsset(null);
-    setOpenPopupAssetId(null);
   };
 
   if (!asset) {
@@ -74,14 +71,18 @@ export default (): React.ReactElement => {
       return (
         <ClusteredAssetLayer
           assets={[asset]}
-          onAssetClick={(clickedAssetId: string) => handleAssetOpenClick(clickedAssetId)}
+          onAssetClick={(clickedAssetId: string) =>
+            handleAssetOpenClick(clickedAssetId)
+          }
         />
       );
     } else if (fullParentAssets.length > 0) {
       return (
         <ClusteredAssetLayer
           assets={fullParentAssets}
-          onAssetClick={(clickedAssetId: string) => handleAssetOpenClick(clickedAssetId)}
+          onAssetClick={(clickedAssetId: string) =>
+            handleAssetOpenClick(clickedAssetId)
+          }
         />
       );
     }
