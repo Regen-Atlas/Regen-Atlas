@@ -110,7 +110,7 @@ export default ({
       >
         <div className="flex justify-between">
           <div className="font-bold text-gray-600">
-            {asset.asset_types[0].name}
+            {asset.asset_types[0]?.name}
           </div>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
@@ -170,7 +170,7 @@ export default ({
           <div className="flex justify-between items-center py-1">
             <p className="font-bold">Subtype</p>
             <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-              {asset.asset_subtypes[0].name}
+              {asset.asset_subtypes[0]?.name}
             </div>
           </div>
 
