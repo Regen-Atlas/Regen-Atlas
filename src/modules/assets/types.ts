@@ -79,4 +79,7 @@ export interface Asset {
   }>;
   second_order: boolean;
   metadata: Record<string, any>;
+  prefinancing: boolean;
+  pretoken: boolean;
+  yield_bearing: boolean;
 }

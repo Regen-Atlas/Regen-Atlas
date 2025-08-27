@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import {
   ArrowUpRight,
+  Check,
   Dot,
   Export,
   MapPin,
   Question,
 } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
-import { NEW_NATIVITY_MAP } from "../shared/consts";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
@@ -111,6 +111,7 @@ export default ({
         <div className="flex justify-between">
           <div className="font-bold text-gray-600">
             {asset.asset_types[0]?.name}
+            {asset.asset_types[1] ? `, ${asset.asset_types[1]?.name}` : ""}
           </div>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
@@ -144,6 +145,38 @@ export default ({
             Issued by <span className="font-bold">{asset.issuer.name}</span>
           </div>
         </div>
+
+        {(asset.prefinancing || asset.pretoken || asset.yield_bearing) && (
+          <div className="flex justify-between items-center mb-2 text-sm">
+            <div className="flex gap-2">
+              {asset.prefinancing && (
+                <div className="flex gap-1 rounded-full p-[2px] pr-2 border border-gray-300">
+                  <div className="bg-green-400 rounded-full w-5 h-5 flex items-center justify-center">
+                    <Check size={16} className="text-white" />
+                  </div>
+                  <div>Prefinancing</div>
+                </div>
+              )}
+              {asset.pretoken && (
+                <div className="flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300">
+                  <div className="bg-green-400 rounded-full w-5 h-5 flex items-center justify-center">
+                    <Check size={16} className="text-white" />
+                  </div>
+                  <div>Pretoken</div>
+                </div>
+              )}
+              {asset.yield_bearing && (
+                <div className="flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300">
+                  <div className="bg-green-400 rounded-full w-5 h-5 flex items-center justify-center">
+                    <Check size={16} className="text-white" />
+                  </div>
+                  <div>Yield-bearing</div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         <div className="lg:hidden">
           <ExpandableText
             text={asset.description}
@@ -160,17 +193,16 @@ export default ({
         </div>
 
         <div className="xxs:text-[13px] text-sm">
-          <div className="flex justify-between items-center py-1">
-            <p className="font-bold">Nativity</p>
-            <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-              {asset.nativity ? NEW_NATIVITY_MAP[asset.nativity] : ""}
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center py-1">
-            <p className="font-bold">Subtype</p>
-            <div className="h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold">
-              {asset.asset_subtypes[0]?.name}
+          <div className="flex justify-between items-center py-1 min-h-9">
+            <p className="font-bold mr-4">Subtype</p>
+            <div className="xxs:text-xs text-sm font-bold text-right flex items-center">
+              {asset.asset_subtypes[0]?.name.replace(/ /g, "\u00A0")}
+              {asset.asset_subtypes[1]
+                ? `, ${asset.asset_subtypes[1]?.name.replace(/ /g, "\u00A0")}`
+                : ""}
+              {asset.asset_subtypes[2]
+                ? `, ${asset.asset_subtypes[2]?.name.replace(/ /g, "\u00A0")}`
+                : ""}
             </div>
           </div>
 
