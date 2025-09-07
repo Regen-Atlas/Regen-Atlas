@@ -5,6 +5,7 @@ import {
 } from "../../context/filters";
 import { CheckboxBox } from "../../shared/components";
 import { useBaseState } from "../../context/base";
+import { Check } from "@phosphor-icons/react";
 
 export default ({
   openFilter,
@@ -56,137 +57,230 @@ export default ({
         onClick={(e) => e.stopPropagation()}
       >
         {openFilter === "assetType" && (
-          <div className="grid grid-cols-3 gap-4">
-            {base.types.map((assetType) => {
-              const selected = filters.assetTypes[assetType.id];
-              return (
-                <div key={assetType.id}>
-                  <div
-                    className={clsx(
-                      "flex items-center gap-2",
-                      "mb-4",
-                      "cursor-pointer hover:text-gray-600"
-                    )}
-                    onClick={() => {
-                      // if no provider is selected and the type has no assets, do nothing
-                      if (
-                        !filters.provider &&
-                        !assetType.asset_subtypes.find(
-                          (item) =>
-                            item?.total_asset_count &&
-                            item?.total_asset_count > 0
-                        )
-                      ) {
-                        return;
-                      }
-
-                      if (
-                        filters.provider &&
-                        !assetType.asset_subtypes.find((subtype) =>
-                          subtype.issuer_counts?.find(
-                            (issuer) => issuer.issuer_id === filters.provider
-                          )
-                        )
-                      ) {
-                        return;
-                      }
-
-                      if (!selected) {
-                        dispatchFilters({
-                          type: "SET_TYPE_FILTER",
-                          payload: {
-                            id: assetType.id,
-                            name: assetType.name,
-                            subtypes: assetType.asset_subtypes.map(
-                              (subtype) => subtype.id
-                            ),
-                          },
-                        });
-                      } else {
-                        dispatchFilters({
-                          type: "REMOVE_TYPE_FILTER",
-                          payload: assetType.id,
-                        });
-                      }
-                    }}
-                  >
-                    <CheckboxBox
-                      variant="small"
-                      className="!border-blue-950 flex-shrink-0"
-                      checked={!!filters.assetTypes[assetType.id]}
-                    />
-                    <div className="font-bold text-lg">{assetType.name}</div>
-                  </div>
-                  {assetType.asset_subtypes.map((subtype) => (
+          <div className="grid grid-cols-[170px_1fr] gap-4">
+            <div className="flex flex-col items-center gap-4 border-r border-gray-300 pr-4">
+              <div
+                className="group flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300 cursor-pointer w-[150px]
+                hover:border-green-400"
+                onClick={() => {
+                  if (filters.flags.prefinancing === true) {
+                    dispatchFilters({
+                      type: "REMOVE_FLAG_FILTER",
+                      payload: "prefinancing",
+                    });
+                  } else {
+                    dispatchFilters({
+                      type: "SET_FLAG_FILTER",
+                      payload: { flag: "prefinancing", value: true },
+                    });
+                  }
+                }}
+              >
+                <div
+                  className={clsx(
+                    "rounded-full w-6 h-6 flex items-center justify-center group-hover:bg-green-400",
+                    filters.flags.prefinancing === true
+                      ? "bg-green-400"
+                      : "bg-gray-400"
+                  )}
+                >
+                  <Check size={16} className="text-white" />
+                </div>
+                <div>Prefinancing</div>
+              </div>
+              <div
+                className="group flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300 cursor-pointer w-[150px]
+                hover:border-green-400"
+                onClick={() => {
+                  if (filters.flags.pretoken === true) {
+                    dispatchFilters({
+                      type: "REMOVE_FLAG_FILTER",
+                      payload: "pretoken",
+                    });
+                  } else {
+                    dispatchFilters({
+                      type: "SET_FLAG_FILTER",
+                      payload: { flag: "pretoken", value: true },
+                    });
+                  }
+                }}
+              >
+                <div
+                  className={clsx(
+                    "rounded-full w-6 h-6 flex items-center justify-center group-hover:bg-green-400",
+                    filters.flags.pretoken === true
+                      ? "bg-green-400"
+                      : "bg-gray-400"
+                  )}
+                >
+                  <Check size={16} className="text-white" />
+                </div>
+                <div>Pretoken</div>
+              </div>
+              <div
+                className="group flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300 cursor-pointer w-[150px]
+                hover:border-green-400"
+                onClick={() => {
+                  if (filters.flags.yield_bearing === true) {
+                    dispatchFilters({
+                      type: "REMOVE_FLAG_FILTER",
+                      payload: "yield_bearing",
+                    });
+                  } else {
+                    dispatchFilters({
+                      type: "SET_FLAG_FILTER",
+                      payload: { flag: "yield_bearing", value: true },
+                    });
+                  }
+                }}
+              >
+                <div
+                  className={clsx(
+                    "rounded-full w-6 h-6 flex items-center justify-center group-hover:bg-green-400",
+                    filters.flags.yield_bearing === true
+                      ? "bg-green-400"
+                      : "bg-gray-400"
+                  )}
+                >
+                  <Check size={16} className="text-white" />
+                </div>
+                <div>Yield-bearing</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {base.types.map((assetType) => {
+                const selected = filters.assetTypes[assetType.id];
+                return (
+                  <div key={assetType.id}>
                     <div
-                      key={subtype.id}
                       className={clsx(
-                        "flex items-start gap-2",
-                        "ml-4 mb-4",
+                        "flex items-center gap-2",
+                        "mb-4",
                         "cursor-pointer hover:text-gray-600"
                       )}
                       onClick={() => {
+                        // if no provider is selected and the type has no assets, do nothing
                         if (
                           !filters.provider &&
-                          subtype.total_asset_count === 0
-                        ) {
-                          return;
-                        }
-                        if (
-                          filters.provider &&
-                          !subtype.issuer_counts?.find(
-                            (issuer) => issuer.issuer_id === filters.provider
+                          !assetType.asset_subtypes.find(
+                            (item) =>
+                              item?.total_asset_count &&
+                              item?.total_asset_count > 0
                           )
                         ) {
                           return;
                         }
 
-                        handleSubtypeClick({
-                          typeId: assetType.id,
-                          subtypeId: subtype.id,
-                        });
+                        if (
+                          filters.provider &&
+                          !assetType.asset_subtypes.find((subtype) =>
+                            subtype.issuer_counts?.find(
+                              (issuer) => issuer.issuer_id === filters.provider
+                            )
+                          )
+                        ) {
+                          return;
+                        }
+
+                        if (!selected) {
+                          dispatchFilters({
+                            type: "SET_TYPE_FILTER",
+                            payload: {
+                              id: assetType.id,
+                              name: assetType.name,
+                              subtypes: assetType.asset_subtypes.map(
+                                (subtype) => subtype.id
+                              ),
+                            },
+                          });
+                        } else {
+                          dispatchFilters({
+                            type: "REMOVE_TYPE_FILTER",
+                            payload: assetType.id,
+                          });
+                        }
                       }}
                     >
                       <CheckboxBox
                         variant="small"
                         className="!border-blue-950 flex-shrink-0"
-                        checked={filters.assetTypes[
-                          assetType.id
-                        ]?.subtypes.includes(subtype.id)}
+                        checked={!!filters.assetTypes[assetType.id]}
                       />
+                      <div className="font-bold text-lg">{assetType.name}</div>
+                    </div>
+                    {assetType.asset_subtypes.map((subtype) => (
                       <div
+                        key={subtype.id}
                         className={clsx(
-                          "leading-none",
-                          !filters.provider &&
-                            subtype.total_asset_count === 0 &&
-                            "text-gray-400",
-                          filters.provider &&
+                          "flex items-start gap-2",
+                          "ml-4 mb-4",
+                          "cursor-pointer hover:text-gray-600"
+                        )}
+                        onClick={() => {
+                          if (
+                            !filters.provider &&
+                            subtype.total_asset_count === 0
+                          ) {
+                            return;
+                          }
+                          if (
+                            filters.provider &&
                             !subtype.issuer_counts?.find(
                               (issuer) => issuer.issuer_id === filters.provider
-                            ) &&
-                            "text-gray-400"
-                        )}
-                      >
-                        {subtype.name}
-
-                        {filters.provider ? (
-                          <span>
-                            {" "}
-                            (
-                            {subtype.issuer_counts?.find(
-                              (issuer) => issuer.issuer_id === filters.provider
-                            )?.asset_count || 0}
                             )
-                          </span>
-                        ) : (
-                          <span> ({subtype.total_asset_count})</span>
-                        )}
+                          ) {
+                            return;
+                          }
+
+                          handleSubtypeClick({
+                            typeId: assetType.id,
+                            subtypeId: subtype.id,
+                          });
+                        }}
+                      >
+                        <CheckboxBox
+                          variant="small"
+                          className="!border-blue-950 flex-shrink-0"
+                          checked={filters.assetTypes[
+                            assetType.id
+                          ]?.subtypes.includes(subtype.id)}
+                        />
+                        <div
+                          className={clsx(
+                            "leading-none",
+                            !filters.provider &&
+                              subtype.total_asset_count === 0 &&
+                              "text-gray-400",
+                            filters.provider &&
+                              !subtype.issuer_counts?.find(
+                                (issuer) =>
+                                  issuer.issuer_id === filters.provider
+                              ) &&
+                              "text-gray-400"
+                          )}
+                        >
+                          {subtype.name}
+
+                          {filters.provider ? (
+                            <span>
+                              {" "}
+                              (
+                              {subtype.issuer_counts?.find(
+                                (issuer) =>
+                                  issuer.issuer_id === filters.provider
+                              )?.asset_count || 0}
+                              )
+                            </span>
+                          ) : (
+                            <span> ({subtype.total_asset_count})</span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 

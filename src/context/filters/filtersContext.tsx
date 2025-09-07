@@ -69,6 +69,23 @@ type ResetPlatformFilter = {
   type: "RESET_PLATFORM_FILTER";
 };
 
+type SetFlagFilter = {
+  type: "SET_FLAG_FILTER";
+  payload: {
+    flag: "prefinancing" | "pretoken" | "yield_bearing";
+    value: boolean | null;
+  };
+};
+
+type RemoveFlagFilter = {
+  type: "REMOVE_FLAG_FILTER";
+  payload: "prefinancing" | "pretoken" | "yield_bearing";
+};
+
+type ResetFlagsFilter = {
+  type: "RESET_FLAGS_FILTER";
+};
+
 type SetSelectedAssetAction = {
   type: "SET_SELECTED_ASSET";
   payload: string;
@@ -90,13 +107,21 @@ type NewAction =
   | ResetProviderFilterAction
   | SetPlatformFilter
   | RemovePlatformFilter
-  | ResetPlatformFilter;
+  | ResetPlatformFilter
+  | SetFlagFilter
+  | RemoveFlagFilter
+  | ResetFlagsFilter;
 
 const newInitialState: NewState = {
   filters: {
     assetTypes: {},
     provider: null,
     platform: "",
+    flags: {
+      prefinancing: null,
+      pretoken: null,
+      yield_bearing: null,
+    },
   },
   filteredAssets: [],
   allAssets: [],
@@ -321,6 +346,61 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
       const filters = {
         ...state.filters,
         platform: "",
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "SET_FLAG_FILTER": {
+      analytics.sendFiltersEvent({
+        action: "Flag Filter",
+        label: action.payload.flag,
+        value: action.payload.value === null ? 0 : action.payload.value ? 1 : 0,
+      });
+
+      const filters = {
+        ...state.filters,
+        flags: {
+          ...state.filters.flags,
+          [action.payload.flag]: action.payload.value,
+        },
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "REMOVE_FLAG_FILTER": {
+      const filters = {
+        ...state.filters,
+        flags: {
+          ...state.filters.flags,
+          [action.payload]: null,
+        },
+      };
+
+      return {
+        ...state,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
+      };
+    }
+
+    case "RESET_FLAGS_FILTER": {
+      const filters = {
+        ...state.filters,
+        flags: {
+          prefinancing: null,
+          pretoken: null,
+          yield_bearing: null,
+        },
       };
 
       return {

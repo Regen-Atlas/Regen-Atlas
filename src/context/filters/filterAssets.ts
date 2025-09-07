@@ -9,6 +9,7 @@ export const filterNewAssets = (
     provider: filterProvider,
     assetTypes: filterAssetTypes,
     platform: filterPlatform,
+    flags: filterFlags,
   } = filters;
 
   return assets.filter((asset) => {
@@ -69,6 +70,33 @@ export const filterNewAssets = (
         if (!hasMatchingSubtype) {
           return false;
         }
+      }
+    }
+
+    // Check flags filter
+    if (filterFlags) {
+      // Check prefinancing flag
+      if (
+        filterFlags.prefinancing !== null &&
+        asset.prefinancing !== filterFlags.prefinancing
+      ) {
+        return false;
+      }
+
+      // Check pretoken flag
+      if (
+        filterFlags.pretoken !== null &&
+        asset.pretoken !== filterFlags.pretoken
+      ) {
+        return false;
+      }
+
+      // Check yield_bearing flag
+      if (
+        filterFlags.yield_bearing !== null &&
+        asset.yield_bearing !== filterFlags.yield_bearing
+      ) {
+        return false;
       }
     }
 

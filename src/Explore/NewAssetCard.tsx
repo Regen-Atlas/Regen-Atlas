@@ -150,7 +150,7 @@ export default ({
           <div className="flex justify-between items-center mb-2 text-sm">
             <div className="flex gap-2">
               {asset.prefinancing && (
-                <div className="flex gap-1 rounded-full p-[2px] pr-2 border border-gray-300">
+                <div className="flex gap-2 rounded-full p-[2px] pr-2 border border-gray-300">
                   <div className="bg-green-400 rounded-full w-5 h-5 flex items-center justify-center">
                     <Check size={16} className="text-white" />
                   </div>
