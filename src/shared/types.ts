@@ -1,4 +1,5 @@
 import { Token as UniswapToken } from "@uniswap/sdk-core";
+import { Platform } from "../modules/assets";
 
 export type MapStyles = "map" | "satellite";
 
@@ -40,9 +41,34 @@ export interface Token extends UniswapToken {
 export interface Org {
   id: number;
   name: string;
+  status: NewStatus;
   link: string;
   coordinates: {
     latitude: number;
     longitude: number;
   };
+  description: string;
+  impact_link: string | null;
+  established: string | null;
+  address: string | null;
+  social: Array<{
+    platform: string;
+    link: string;
+  }>;
+  treasury: Array<{
+    link: string;
+    platform: Platform;
+  }>;
+  main_image: string | null;
+  issuers: Array<{
+    id: number;
+    name: string;
+    status: NewStatus;
+  }>;
+  ecosystems: Array<{
+    id: number;
+    name: string;
+    status: NewStatus;
+    icon: string;
+  }>;
 }
