@@ -7,7 +7,6 @@ import { MapBox } from "../shared/components/MapBox";
 import Header from "../Header";
 import { Org } from "../shared/types";
 import supabase from "../shared/helpers/supabase";
-import { Link } from "react-router-dom";
 
 export default (): React.ReactElement => {
   const [openPopupOrgId, setOpenPopupOrgId] = useState<number | null>(null);
