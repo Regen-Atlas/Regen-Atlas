@@ -71,4 +71,8 @@ export interface Org {
     status: NewStatus;
     icon: string;
   }>;
+  assets: Array<{
+    id: string;
+    name: string;
+  }>;
 }

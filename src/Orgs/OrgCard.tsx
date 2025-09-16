@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Org } from "../shared/types";
-import { Asset } from "../modules/assets";
-import { useSupabaseTable } from "../shared/hooks/useSupabaseTable";
+import { Link } from "react-router-dom";
+import SocialLinks from "./SocialLinks";
 
 interface OrgCardProps {
   className?: string;
@@ -20,19 +20,51 @@ export default ({
   onPinClicked,
 }: OrgCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [dropdownPage, setDropdownPage] = useState(0);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const ITEMS_PER_PAGE = 3;
 
   const shareUrl = `${window.location.origin}/orgs/${org.id}`;
 
   const handleShareClick = async () => {
     setShowShareOptions(true);
   };
-  const { data: assets } = useSupabaseTable<Asset>("assets_published_view");
 
-  if (!assets) {
-    return <div>Loading...</div>;
-  }
+  const renderDropdown = (assets: Array<{ id: string; name: string }>) => {
+    const page = dropdownPage;
+    const start = 1 + page * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const paginatedItems = assets.slice(start, end);
+    const hasMore = end < assets.length;
 
-  console.log(assets);
+    return (
+      <div
+        ref={dropdownRef}
+        className="absolute z-50 top-9 left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
+      >
+        <div className="flex flex-col divide-y divide-gray-100">
+          {paginatedItems.map((item) => (
+            <Link key={item.id} to={`/assets/${item.id}`}>
+              <div className="px-4 py-2 truncate hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors duration-150 text-sm font-medium max-w-full">
+                {item.name}
+              </div>
+            </Link>
+          ))}
+          {hasMore && (
+            <div
+              className="px-4 py-2 text-blue-500 text-sm font-medium cursor-pointer hover:underline"
+              onClick={() => setDropdownPage((prev) => prev + 1)}
+            >
+              + more available
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -99,24 +131,38 @@ export default ({
         </div>
 
         <div className="xxs:text-[13px] text-sm">
-          <div className="flex justify-between items-start py-1 min-h-9">
-            <p className="font-bold mr-4">Associated Assets</p>
-            <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
-              <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
-                {
-                  assets.filter((asset) =>
-                    org.issuers.some((issuer) => issuer.id === asset.issuer.id)
-                  )[0]?.name
-                }
-              </div>
-              <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
-                +
-                {assets.filter((asset) =>
-                  org.issuers.some((issuer) => issuer.id === asset.issuer.id)
-                ).length - 1}
+          {org.assets.length > 0 && (
+            <div className="flex justify-between items-start py-1 min-h-9">
+              <p className="font-bold mr-4">Associated Assets</p>
+              <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
+                <Link to={`/assets/${org.assets[0].id}`}>
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
+                    {org.assets[0].name.length > 20
+                      ? `${org.assets[0].name.substring(0, 17)}...`
+                      : org.assets[0].name}
+                  </div>
+                </Link>
+                <div
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                    setDropdownVisible(true);
+                  }}
+                  onMouseLeave={() => {
+                    timeoutRef.current = setTimeout(() => {
+                      setDropdownVisible(false);
+                      setDropdownPage(0);
+                    }, 500);
+                  }}
+                >
+                  <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
+                    +{org.assets.length - 1}
+                  </div>
+                  {dropdownVisible && renderDropdown(org.assets)}
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <div className="flex justify-between items-start py-1 min-h-9">
             <p className="font-bold mr-4">Associated Issuers</p>
             <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
@@ -148,6 +194,8 @@ export default ({
             </div>
           </div>
         </div>
+
+        <SocialLinks org={org} />
 
         <div
           className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}
