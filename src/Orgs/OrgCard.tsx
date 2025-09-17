@@ -1,12 +1,13 @@
 import clsx from "clsx";
-import { ArrowUpRight, Export, MapPin } from "@phosphor-icons/react";
+import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Org } from "../shared/types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLinks from "./SocialLinks";
+import { useNewFiltersDispatch } from "../context/filters";
 
 interface OrgCardProps {
   className?: string;
@@ -17,7 +18,8 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownPage, setDropdownPage] = useState(0);
-
+  const dispatchFilters = useNewFiltersDispatch();
+  const navigate = useNavigate();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const ITEMS_PER_PAGE = 3;
@@ -26,6 +28,17 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
 
   const handleShareClick = async () => {
     setShowShareOptions(true);
+  };
+
+  const handleIssuerClick = (issuer: { id: number; name: string }) => {
+    dispatchFilters({
+      type: "RESET_FILTERS",
+    });
+    dispatchFilters({
+      type: "SET_PROVIDER_FILTER",
+      payload: issuer.id,
+    });
+    navigate(`/`);
   };
 
   const renderDropdown = (assets: Array<{ id: string; name: string }>) => {
@@ -38,7 +51,7 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
     return (
       <div
         ref={dropdownRef}
-        className="absolute z-50 top-9 left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
+        className="absolute z-50 top-9 right-0 md:right-auto md:left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
       >
         <div className="flex flex-col divide-y divide-gray-100">
           {paginatedItems.map((item) => (
@@ -70,13 +83,14 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
         )}
       >
         <div className="flex justify-between">
-          <h3 className="font-bold text-xl">{org.name}</h3>
+          <h3 className="font-bold md:text-xl">{org.name}</h3>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
               {org.ecosystems.map((ecosystem) => (
                 <div
-                  className="w-7 h-7 flex items-center justify-center rounded-full"
+                  className="w-7 h-7 flex items-center justify-center rounded-full tooltip tooltip-left"
                   key={ecosystem.id}
+                  data-tip={ecosystem.name}
                 >
                   <img
                     src={ecosystem.icon}
@@ -101,10 +115,18 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
         ></div>
         {org.address && (
           <div className="flex items-center pt-1 pb-2 text-sm">
-            <div className="flex items-center cursor-pointer">
+            <div className="flex items-center font-bold">
               <MapPin size={16} />
               {org.address}
             </div>
+            {org.established && (
+              <>
+                <Dot size={16} />
+                <div className="flex items-center">
+                  <span>Est. {new Date(org.established).getFullYear()}</span>
+                </div>
+              </>
+            )}
           </div>
         )}
 
@@ -126,7 +148,10 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
         <div className="xxs:text-[13px] text-sm">
           {org.assets.length > 0 && (
             <div className="flex justify-between items-start py-1 min-h-9">
-              <p className="font-bold mr-4">Associated Assets</p>
+              <p className="font-bold mr-4 hidden md:block">
+                Associated Assets
+              </p>
+              <p className="font-bold mr-2 md:hidden">Assoc. Assets</p>
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
                 <Link to={`/assets/${org.assets[0].id}`}>
                   <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
@@ -156,36 +181,44 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
               </div>
             </div>
           )}
-          <div className="flex justify-between items-start py-1 min-h-9">
-            <p className="font-bold mr-4">Associated Issuers</p>
-            <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
-              {org?.issuers?.map((issuer) => (
-                <div
-                  className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer"
-                  key={issuer.id}
-                >
-                  {issuer.name}
-                </div>
-              ))}
+          {org.issuers.length > 0 && (
+            <div className="flex justify-between items-start py-1 min-h-9">
+              <p className="font-bold mr-4 hidden md:block">
+                Associated Issuers
+              </p>
+              <p className="font-bold mr-2 md:hidden">Assoc. Issuers</p>
+              <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
+                {org?.issuers?.map((issuer) => (
+                  <div
+                    onClick={() => handleIssuerClick(issuer)}
+                    className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer"
+                    key={issuer.id}
+                  >
+                    {issuer.name}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="flex justify-between items-center py-1 min-h-9">
-            <p className="font-bold mr-4">Treasury</p>
-            <div className="xxs:text-xs text-sm font-bold text-right flex items-center gap-2">
-              {org?.treasury?.map((treasury) => (
-                <a
-                  key={treasury.platform.id}
-                  href={treasury.link}
-                  target="_blank"
-                >
-                  <ChainTag
+          )}
+          {org.treasury.length > 0 && (
+            <div className="flex justify-between items-center py-1 min-h-9">
+              <p className="font-bold mr-4">Treasury</p>
+              <div className="xxs:text-xs text-sm font-bold text-right flex items-center gap-2">
+                {org?.treasury?.map((treasury) => (
+                  <a
                     key={treasury.platform.id}
-                    platform={treasury.platform}
-                  />
-                </a>
-              ))}
+                    href={treasury.link}
+                    target="_blank"
+                  >
+                    <ChainTag
+                      key={treasury.platform.id}
+                      platform={treasury.platform}
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="flex justify-end border-t border-gray-200 pt-2 mt-2">

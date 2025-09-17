@@ -72,7 +72,7 @@ export default ({
     return (
       <div
         ref={dropdownRef}
-        className="absolute z-50 top-9 left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
+        className="absolute z-50 top-9 right-0 md:right-auto md:left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
       >
         <div className="flex flex-col divide-y divide-gray-100">
           {paginatedItems.map((item) => (

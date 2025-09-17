@@ -118,6 +118,11 @@ export function ClusteredAssetLayer({
   const [zoom, setZoom] = useState(0);
   const clusterMaxZoom = 15;
 
+  // Detect mobile device
+  const isMobile = useMemo(() => {
+    return window.innerWidth < 768;
+  }, []);
+
   useEffect(() => {
     if (!map) return () => {};
     setZoom(map.getZoom());
@@ -360,8 +365,8 @@ export function ClusteredAssetLayer({
           "circle-radius": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
-            10,
-            6,
+            10, // Hover radius (same for all devices)
+            isMobile ? 12 : 8, // Mobile vs Desktop normal radius
           ],
           "circle-stroke-width": [
             "case",
