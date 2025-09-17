@@ -11,14 +11,9 @@ import SocialLinks from "./SocialLinks";
 interface OrgCardProps {
   className?: string;
   org: Org;
-  onPinClicked: () => void;
 }
 
-export default ({
-  className,
-  org,
-  onPinClicked,
-}: OrgCardProps): React.ReactElement => {
+export default ({ className, org }: OrgCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownPage, setDropdownPage] = useState(0);
@@ -104,16 +99,14 @@ export default ({
           className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px]"
           style={{ backgroundImage: `url(${org.main_image})` }}
         ></div>
-        <div className="flex items-center pt-1 pb-2 text-sm">
-          <div
-            className="flex items-center cursor-pointer"
-            onClick={onPinClicked}
-          >
-            <MapPin size={16} />
-            {org.address}
+        {org.address && (
+          <div className="flex items-center pt-1 pb-2 text-sm">
+            <div className="flex items-center cursor-pointer">
+              <MapPin size={16} />
+              {org.address}
+            </div>
           </div>
-          <Dot size={16} />
-        </div>
+        )}
 
         <div className="lg:hidden">
           <ExpandableText
@@ -178,7 +171,7 @@ export default ({
           </div>
           <div className="flex justify-between items-center py-1 min-h-9">
             <p className="font-bold mr-4">Treasury</p>
-            <div className="xxs:text-xs text-sm font-bold text-right flex items-center">
+            <div className="xxs:text-xs text-sm font-bold text-right flex items-center gap-2">
               {org?.treasury?.map((treasury) => (
                 <a
                   key={treasury.platform.id}
@@ -195,7 +188,9 @@ export default ({
           </div>
         </div>
 
-        <SocialLinks org={org} />
+        <div className="flex justify-end border-t border-gray-200 pt-2 mt-2">
+          <SocialLinks org={org} />
+        </div>
 
         <div
           className={clsx("flex gap-3 mt-3 justify-between xxs:text-[13px]")}
@@ -212,7 +207,7 @@ export default ({
           <a
             href={org.link || ""}
             target="_blank"
-            className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
+            className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
           >
             <span className="mr-1">Website</span>
             <ArrowUpRight size={16} />

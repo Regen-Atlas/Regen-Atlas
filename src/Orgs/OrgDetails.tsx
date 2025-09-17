@@ -37,7 +37,7 @@ export default (): React.ReactElement => {
         <div className="pt-[60px] md:pt-[80px]">
           <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
             <div>
-              <OrgCard org={org} onPinClicked={() => {}} />
+              <OrgCard org={org} />
             </div>
             <div>
               <MapBox
