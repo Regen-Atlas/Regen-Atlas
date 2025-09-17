@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ArrowUpRight, Dot, Export, MapPin } from "@phosphor-icons/react";
+import { ArrowUpRight, Export, MapPin } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import { ChainTag } from "../modules/chains/components/ChainTag";
 import { TextShareModal } from "../shared/components/TextShareModal";
