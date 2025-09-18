@@ -9,13 +9,17 @@ export const filterNewAssets = (
     provider: filterProvider,
     assetTypes: filterAssetTypes,
     platform: filterPlatform,
+    flags: filterFlags,
   } = filters;
 
   return assets.filter((asset) => {
     const providerId = asset.issuer.id;
     const assetTypeId = asset.asset_types[0].id;
+    const assetTypeId2 = asset.asset_types[1]?.id;
     const platforms = asset.platforms;
     const assetSubtypeId = asset.asset_subtypes[0].id;
+    const assetSubtypeId2 = asset.asset_subtypes[1]?.id;
+    const assetSubtypeId3 = asset.asset_subtypes[2]?.id;
 
     if (filterProvider && providerId !== filterProvider) {
       return false;
@@ -28,16 +32,71 @@ export const filterNewAssets = (
       return false;
     }
 
-    if (filterAssetTypes) {
-      if (filterAssetTypes[assetTypeId]) {
-        if (filterAssetTypes[assetTypeId].subtypes.length > 0) {
-          if (!filterAssetTypes[assetTypeId].subtypes.includes(assetSubtypeId))
-            return false;
-        }
-      } else if (Object.keys(filterAssetTypes).length > 0) {
+    if (filterAssetTypes && Object.keys(filterAssetTypes).length > 0) {
+      // Check if the asset has any of the selected asset types
+      const hasSelectedAssetType =
+        filterAssetTypes[assetTypeId] || filterAssetTypes[assetTypeId2];
+
+      if (!hasSelectedAssetType) {
         return false;
-      } else {
-        return true;
+      }
+
+      // If the asset has a selected asset type, check if any subtypes are selected
+      const selectedSubtypes = new Set<number>();
+
+      // Collect all selected subtypes from both asset types
+      if (filterAssetTypes[assetTypeId]) {
+        filterAssetTypes[assetTypeId].subtypes.forEach((subtype) =>
+          selectedSubtypes.add(subtype)
+        );
+      }
+      if (filterAssetTypes[assetTypeId2]) {
+        filterAssetTypes[assetTypeId2].subtypes.forEach((subtype) =>
+          selectedSubtypes.add(subtype)
+        );
+      }
+
+      // If subtypes are selected, check if the asset has any of them
+      if (selectedSubtypes.size > 0) {
+        const assetSubtypes = [
+          assetSubtypeId,
+          assetSubtypeId2,
+          assetSubtypeId3,
+        ].filter(Boolean);
+        const hasMatchingSubtype = assetSubtypes.some((subtype) =>
+          selectedSubtypes.has(subtype)
+        );
+
+        if (!hasMatchingSubtype) {
+          return false;
+        }
+      }
+    }
+
+    // Check flags filter
+    if (filterFlags) {
+      // Check prefinancing flag
+      if (
+        filterFlags.prefinancing !== null &&
+        asset.prefinancing !== filterFlags.prefinancing
+      ) {
+        return false;
+      }
+
+      // Check pretoken flag
+      if (
+        filterFlags.pretoken !== null &&
+        asset.pretoken !== filterFlags.pretoken
+      ) {
+        return false;
+      }
+
+      // Check yield_bearing flag
+      if (
+        filterFlags.yield_bearing !== null &&
+        asset.yield_bearing !== filterFlags.yield_bearing
+      ) {
+        return false;
       }
     }
 

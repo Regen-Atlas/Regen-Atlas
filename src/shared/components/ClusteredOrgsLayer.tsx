@@ -1,26 +1,26 @@
 import { Source, Layer, useMap } from "react-map-gl";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { useNewFiltersDispatch } from "../../context/filters/useFiltersDispatch";
 import type { MapRef } from "react-map-gl";
 import type { MapboxGeoJSONFeature, MapMouseEvent } from "mapbox-gl";
 import type { Point } from "geojson";
+import { Org } from "../types";
 
 interface Coordinates {
   longitude: number;
   latitude: number;
 }
 
-interface Asset {
-  id: string;
-  coordinates: Coordinates;
-  issuer?: { name?: string };
-  asset_types?: { id?: number; name?: string }[];
-  [key: string]: any;
-}
-
-interface ClusteredAssetLayerProps {
-  assets: Asset[];
-  onAssetClick?: (id: string) => void; // ✅ new optional prop
+interface ClusteredOrgsLayerProps {
+  orgs: Org[];
+  onOrgClick: ({
+    orgId,
+    lng,
+    lat,
+  }: {
+    orgId: number;
+    lng: number;
+    lat: number;
+  }) => void;
 }
 
 function lngLatToPixel({ longitude, latitude }: Coordinates, map: MapRef) {
@@ -35,18 +35,14 @@ function pixelToLngLat(
   return { longitude: lng, latitude: lat };
 }
 
-function spiderfyFeatures(
-  assets: Asset[],
-  map: MapRef,
-  pixelRadius = 5
-): Asset[] {
-  const features: Asset[] = [];
+function spiderfyFeatures(orgs: Org[], map: MapRef, pixelRadius = 5): Org[] {
+  const features: Org[] = [];
   const pixelThreshold = pixelRadius * 1.2;
 
-  const pixelAssets = assets
-    .map((asset) => {
-      const lng = asset?.coordinates?.longitude;
-      const lat = asset?.coordinates?.latitude;
+  const pixelOrgs = orgs
+    .map((org) => {
+      const lng = org?.coordinates?.longitude;
+      const lat = org?.coordinates?.latitude;
 
       if (
         typeof lng !== "number" ||
@@ -58,27 +54,27 @@ function spiderfyFeatures(
       }
 
       const pixel = lngLatToPixel({ longitude: lng, latitude: lat }, map);
-      return { asset, pixel };
+      return { org, pixel };
     })
-    .filter(Boolean) as { asset: Asset; pixel: { x: number; y: number } }[];
+    .filter(Boolean) as { org: Org; pixel: { x: number; y: number } }[];
 
   const visited = new Set<number>();
 
-  for (let i = 0; i < pixelAssets.length; i++) {
+  for (let i = 0; i < pixelOrgs.length; i++) {
     if (visited.has(i)) continue;
 
-    const group = [pixelAssets[i]];
+    const group = [pixelOrgs[i]];
     visited.add(i);
 
-    for (let j = i + 1; j < pixelAssets.length; j++) {
+    for (let j = i + 1; j < pixelOrgs.length; j++) {
       if (visited.has(j)) continue;
 
-      const dx = pixelAssets[i].pixel.x - pixelAssets[j].pixel.x;
-      const dy = pixelAssets[i].pixel.y - pixelAssets[j].pixel.y;
+      const dx = pixelOrgs[i].pixel.x - pixelOrgs[j].pixel.x;
+      const dy = pixelOrgs[i].pixel.y - pixelOrgs[j].pixel.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dist < pixelThreshold) {
-        group.push(pixelAssets[j]);
+        group.push(pixelOrgs[j]);
         visited.add(j);
       }
     }
@@ -92,7 +88,7 @@ function spiderfyFeatures(
         const offset = pixelToLngLat({ x, y }, map);
 
         features.push({
-          ...entry.asset,
+          ...entry.org,
           coordinates: {
             longitude: offset.longitude,
             latitude: offset.latitude,
@@ -100,19 +96,18 @@ function spiderfyFeatures(
         });
       });
     } else {
-      features.push(group[0].asset);
+      features.push(group[0].org);
     }
   }
 
   return features;
 }
 
-export function ClusteredAssetLayer({
-  assets,
-  onAssetClick,
-}: ClusteredAssetLayerProps) {
+export function ClusteredOrgsLayer({
+  orgs,
+  onOrgClick,
+}: ClusteredOrgsLayerProps) {
   const { current: map } = useMap(); // ✅ moved to top
-  const dispatch = useNewFiltersDispatch();
   const hoveredStateIdRef = useRef<string | number | null>(null);
   const hoveredClusterIdRef = useRef<string | number | null>(null);
   const [zoom, setZoom] = useState(0);
@@ -134,25 +129,27 @@ export function ClusteredAssetLayer({
 
   const geojson = useMemo(() => {
     if (!map) return { type: "FeatureCollection", features: [] };
-    const filteredAssets =
-      zoom > clusterMaxZoom ? spiderfyFeatures(assets, map, 20) : assets;
+    const filteredOrgs =
+      zoom > clusterMaxZoom ? spiderfyFeatures(orgs, map, 20) : orgs;
 
     return {
       type: "FeatureCollection" as const,
-      features: filteredAssets.map((asset, index) => {
-        const assetType = asset.asset_types?.[0];
-        const type_id = assetType?.id ?? "NO_TYPE";
-        const issuer_name = asset.issuer?.name ?? "Unknown";
-        const lng = asset.coordinates?.longitude ?? 0;
-        const lat = asset.coordinates?.latitude ?? 0;
+      features: filteredOrgs.map((org, index) => {
+        const ecosystemType = org.ecosystems.join(", ");
+        const type_id = ecosystemType;
+        const issuer_name = org.name;
+        const lng = org.coordinates?.longitude ?? 0;
+        const lat = org.coordinates?.latitude ?? 0;
 
         return {
           type: "Feature" as const,
-          id: asset.id ?? index,
+          id: org.id ?? index,
           properties: {
-            id: asset.id,
+            id: org.id,
             type_id,
             issuer_name,
+            lng,
+            lat,
           },
           geometry: {
             type: "Point" as const,
@@ -161,7 +158,7 @@ export function ClusteredAssetLayer({
         };
       }),
     };
-  }, [assets, map, zoom]);
+  }, [orgs, map, zoom]);
 
   useEffect(() => {
     if (!map) return;
@@ -175,13 +172,12 @@ export function ClusteredAssetLayer({
       const feature = features[0];
 
       if (feature.layer?.id === "unclustered-point") {
-        const assetId = feature.properties?.id ?? null;
-        if (onAssetClick && typeof assetId === "string") {
-          onAssetClick(assetId); // ✅ use external navigation
-        } else {
-          dispatch({ type: "SET_SELECTED_ASSET", payload: assetId });
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+        const orgId = feature.properties?.id ?? null;
+        onOrgClick({
+          orgId,
+          lng: feature.properties?.lng ?? 0,
+          lat: feature.properties?.lat ?? 0,
+        });
       }
 
       if (
@@ -191,7 +187,7 @@ export function ClusteredAssetLayer({
         const coords = (feature.geometry as Point).coordinates;
         if (Array.isArray(coords) && coords.length === 2) {
           const clusterId = feature.properties?.cluster_id;
-          const source = map.getSource("assets") as any;
+          const source = map.getSource("orgs") as any;
 
           if (source && "getClusterExpansionZoom" in source) {
             source.getClusterExpansionZoom(
@@ -217,14 +213,14 @@ export function ClusteredAssetLayer({
 
       if (hoveredStateIdRef.current !== null) {
         map.setFeatureState(
-          { source: "assets", id: hoveredStateIdRef.current },
+          { source: "orgs", id: hoveredStateIdRef.current },
           { hover: false }
         );
         hoveredStateIdRef.current = null;
       }
       if (hoveredClusterIdRef.current !== null) {
         map.setFeatureState(
-          { source: "assets", id: hoveredClusterIdRef.current },
+          { source: "orgs", id: hoveredClusterIdRef.current },
           { hover: false }
         );
         hoveredClusterIdRef.current = null;
@@ -236,13 +232,13 @@ export function ClusteredAssetLayer({
       if (feature.layer?.id === "unclustered-point" && feature.id != null) {
         hoveredStateIdRef.current = feature.id;
         map.setFeatureState(
-          { source: "assets", id: feature.id },
+          { source: "orgs", id: feature.id },
           { hover: true }
         );
       } else if (feature.layer?.id === "clusters" && feature.id != null) {
         hoveredClusterIdRef.current = feature.id;
         map.setFeatureState(
-          { source: "assets", id: feature.id },
+          { source: "orgs", id: feature.id },
           { hover: true }
         );
       }
@@ -251,14 +247,14 @@ export function ClusteredAssetLayer({
     const handleMouseLeave = () => {
       if (hoveredStateIdRef.current !== null) {
         map.setFeatureState(
-          { source: "assets", id: hoveredStateIdRef.current },
+          { source: "orgs", id: hoveredStateIdRef.current },
           { hover: false }
         );
         hoveredStateIdRef.current = null;
       }
       if (hoveredClusterIdRef.current !== null) {
         map.setFeatureState(
-          { source: "assets", id: hoveredClusterIdRef.current },
+          { source: "orgs", id: hoveredClusterIdRef.current },
           { hover: false }
         );
         hoveredClusterIdRef.current = null;
@@ -289,11 +285,11 @@ export function ClusteredAssetLayer({
       map.off("mouseenter", "unclustered-point", disableCursor);
       map.off("mouseenter", "clusters", disableCursor);
     };
-  }, [map, dispatch]);
+  }, [map]);
 
   return (
     <Source
-      id="assets"
+      id="orgs"
       type="geojson"
       data={geojson as any}
       cluster={true}
@@ -304,14 +300,14 @@ export function ClusteredAssetLayer({
       <Layer
         id="clusters"
         type="circle"
-        source="assets"
+        source="orgs"
         filter={["has", "point_count"]}
         paint={{
           "circle-color": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
             "#ffffff",
-            "#00BCD4",
+            "#5eadf7",
           ],
           "circle-radius": [
             "case",
@@ -319,7 +315,7 @@ export function ClusteredAssetLayer({
             24,
             20,
           ],
-          "circle-stroke-color": "#00BCD4",
+          "circle-stroke-color": "#5eadf7",
           "circle-stroke-width": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
@@ -331,7 +327,7 @@ export function ClusteredAssetLayer({
       <Layer
         id="cluster-count"
         type="symbol"
-        source="assets"
+        source="orgs"
         filter={["has", "point_count"]}
         layout={{
           "text-field": "{point_count_abbreviated}",
@@ -342,26 +338,10 @@ export function ClusteredAssetLayer({
       <Layer
         id="unclustered-point"
         type="circle"
-        source="assets"
+        source="orgs"
         filter={["!", ["has", "point_count"]]}
         paint={{
-          "circle-color": [
-            "match",
-            ["get", "type_id"],
-            5,
-            "#F4D35E",
-            1,
-            "#4CAF50",
-            6,
-            "#00ACC1",
-            7,
-            "#BA68C8",
-            4,
-            "#FF8A65",
-            8,
-            "#90A4AE",
-            "#BDBDBD",
-          ],
+          "circle-color": "#177fe0",
           "circle-radius": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
@@ -377,7 +357,7 @@ export function ClusteredAssetLayer({
           "circle-stroke-color": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
-            "#11b4da",
+            "#5eadf7",
             "#fff",
           ],
         }}
@@ -385,7 +365,7 @@ export function ClusteredAssetLayer({
       <Layer
         id="unclustered-label"
         type="symbol"
-        source="assets"
+        source="orgs"
         filter={["!", ["has", "point_count"]]}
         layout={{
           "text-field": ["get", "issuer_name"],

@@ -21,6 +21,11 @@ export interface NewFilters {
   assetTypes: Record<number, NewAssetTypeFilters>;
   provider: number | null;
   platform: string;
+  flags: {
+    prefinancing: boolean | null;
+    pretoken: boolean | null;
+    yield_bearing: boolean | null;
+  };
 }
 
 export interface NewAssetTypeFilters {

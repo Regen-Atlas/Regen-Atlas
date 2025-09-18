@@ -106,7 +106,7 @@ export default (): React.ReactElement => {
           </div>
           <div
             className={clsx(
-              "md:order-2 md:row-start-2 lg:row-start-1 lg:row-end-2 md:row-end-3",
+              "md:order-2 md:row-start-2 lg:row-start-1 lg:row-end-2 md:row-end-3 lg:pb-20",
               !showCards() && "md:hidden"
             )}
           >

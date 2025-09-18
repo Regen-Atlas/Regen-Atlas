@@ -15,6 +15,10 @@ const menuItems = [
     link: "/",
   },
   {
+    name: "Orgs",
+    link: "/orgs",
+  },
+  {
     name: "List Project",
     link: "#",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform",
@@ -66,20 +70,19 @@ export default ({
           </div>
         )}
         <div className="hidden lg:flex items-center gap-4">
-          <a
-            className="ml-6 hidden button button-gradient text-center button-gradient !text-base xl:block"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform"
-            target="_blank"
+          <Link
+            className="ml-6 block button button-gradient text-center button-gradient !text-base"
+            to="/orgs"
             onClick={() => {
               analytics.sendEvent({
                 category: "Link Click",
-                action: "List Project",
+                action: "Orgs",
                 label: "Header Button",
               });
             }}
           >
-            List Project
-          </a>
+            Orgs
+          </Link>
           <ConnectKitButton />
         </div>
         <List
