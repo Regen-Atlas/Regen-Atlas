@@ -1,6 +1,5 @@
 import { Source, Layer, useMap } from "react-map-gl";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { useNewFiltersDispatch } from "../../context/filters/useFiltersDispatch";
 import type { MapRef } from "react-map-gl";
 import type { MapboxGeoJSONFeature, MapMouseEvent } from "mapbox-gl";
 import type { Point } from "geojson";
@@ -109,7 +108,6 @@ export function ClusteredOrgsLayer({
   onOrgClick,
 }: ClusteredOrgsLayerProps) {
   const { current: map } = useMap(); // ✅ moved to top
-  const dispatch = useNewFiltersDispatch();
   const hoveredStateIdRef = useRef<string | number | null>(null);
   const hoveredClusterIdRef = useRef<string | number | null>(null);
   const [zoom, setZoom] = useState(0);
@@ -287,7 +285,7 @@ export function ClusteredOrgsLayer({
       map.off("mouseenter", "unclustered-point", disableCursor);
       map.off("mouseenter", "clusters", disableCursor);
     };
-  }, [map, dispatch]);
+  }, [map]);
 
   return (
     <Source
