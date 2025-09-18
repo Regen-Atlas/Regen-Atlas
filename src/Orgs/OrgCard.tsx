@@ -12,9 +12,14 @@ import { useNewFiltersDispatch } from "../context/filters";
 interface OrgCardProps {
   className?: string;
   org: Org;
+  selectClicked: () => void;
 }
 
-export default ({ className, org }: OrgCardProps): React.ReactElement => {
+export default ({
+  className,
+  org,
+  selectClicked,
+}: OrgCardProps): React.ReactElement => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownPage, setDropdownPage] = useState(0);
@@ -55,7 +60,13 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
       >
         <div className="flex flex-col divide-y divide-gray-100">
           {paginatedItems.map((item) => (
-            <Link key={item.id} to={`/assets/${item.id}`}>
+            <Link
+              key={item.id}
+              to={`/assets/${item.id}`}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <div className="px-4 py-2 truncate hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors duration-150 text-sm font-medium max-w-full">
                 {item.name}
               </div>
@@ -64,7 +75,10 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
           {hasMore && (
             <div
               className="px-4 py-2 text-blue-500 text-sm font-medium cursor-pointer hover:underline"
-              onClick={() => setDropdownPage((prev) => prev + 1)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setDropdownPage((prev) => prev + 1);
+              }}
             >
               + more available
             </div>
@@ -83,7 +97,9 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
         )}
       >
         <div className="flex justify-between">
-          <h3 className="font-bold md:text-xl">{org.name}</h3>
+          <h3 className="font-bold md:text-xl" onClick={selectClicked}>
+            {org.name}
+          </h3>
           <div className="flex gap-3 justify-between items-center">
             <div className="flex gap-3">
               {org.ecosystems.map((ecosystem) => (
@@ -104,7 +120,10 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
               <Export
                 className="cursor-pointer"
                 size={25}
-                onClick={handleShareClick}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShareClick();
+                }}
               />
             </div>
           </div>
@@ -112,10 +131,14 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
         <div
           className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px]"
           style={{ backgroundImage: `url(${org.main_image})` }}
+          onClick={selectClicked}
         ></div>
         {org.address && (
           <div className="flex items-center pt-1 pb-2 text-sm">
-            <div className="flex items-center font-bold">
+            <div
+              className="flex items-center font-bold"
+              onClick={selectClicked}
+            >
               <MapPin size={16} />
               {org.address}
             </div>
@@ -147,13 +170,18 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
 
         <div className="xxs:text-[13px] text-sm">
           {org.assets.length > 0 && (
-            <div className="flex justify-between items-start py-1 min-h-9">
+            <div className="flex justify-between items-start py-2 min-h-9">
               <p className="font-bold mr-4 hidden md:block">
                 Associated Assets
               </p>
               <p className="font-bold mr-2 md:hidden">Assoc. Assets</p>
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
-                <Link to={`/assets/${org.assets[0].id}`}>
+                <Link
+                  to={`/assets/${org.assets[0].id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
                   <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
                     {org.assets[0].name.length > 20
                       ? `${org.assets[0].name.substring(0, 17)}...`
@@ -172,6 +200,9 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
                       setDropdownPage(0);
                     }, 500);
                   }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
                   <div className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer">
                     +{org.assets.length - 1}
@@ -182,7 +213,7 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
             </div>
           )}
           {org.issuers.length > 0 && (
-            <div className="flex justify-between items-start py-1 min-h-9">
+            <div className="flex justify-between items-start py-2 min-h-9">
               <p className="font-bold mr-4 hidden md:block">
                 Associated Issuers
               </p>
@@ -190,7 +221,10 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
                 {org?.issuers?.map((issuer) => (
                   <div
-                    onClick={() => handleIssuerClick(issuer)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleIssuerClick(issuer);
+                    }}
                     className="bg-grayTag h-7 flex justify-center items-center rounded-full px-4 xxs:text-xs text-sm font-bold cursor-pointer"
                     key={issuer.id}
                   >
@@ -201,7 +235,7 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
             </div>
           )}
           {org.treasury.length > 0 && (
-            <div className="flex justify-between items-center py-1 min-h-9">
+            <div className="flex justify-between items-center py-2 min-h-9">
               <p className="font-bold mr-4">Treasury</p>
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center gap-2">
                 {org?.treasury?.map((treasury) => (
@@ -209,6 +243,11 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
                     key={treasury.platform.id}
                     href={treasury.link}
                     target="_blank"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="cursor-pointer tooltip"
+                    data-tip={treasury.platform.name}
                   >
                     <ChainTag
                       key={treasury.platform.id}
@@ -232,6 +271,9 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
             href={org.impact_link || ""}
             target="_blank"
             className="button !bg-grayButton !text-blue-950 max-w-[190px] flex-1 flex justify-center items-center"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <span className="mr-1">Impact</span>
             <ArrowUpRight size={16} />
@@ -241,6 +283,9 @@ export default ({ className, org }: OrgCardProps): React.ReactElement => {
             href={org.link || ""}
             target="_blank"
             className="flex items-center justify-center max-w-[190px] flex-1 button button-gradient text-center justify-self-end"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <span className="mr-1">Website</span>
             <ArrowUpRight size={16} />

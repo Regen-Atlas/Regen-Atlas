@@ -8,6 +8,7 @@ import { useSupabaseItemById } from "../shared/hooks/useSupabaseItemById";
 import { Org } from "../shared/types";
 import OrgCard from "./OrgCard";
 import React from "react";
+import { Marker } from "react-map-gl";
 
 export default (): React.ReactElement => {
   const { id } = useParams<{ id: string }>();
@@ -37,7 +38,7 @@ export default (): React.ReactElement => {
         <div className="pt-[60px] md:pt-[80px]">
           <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
             <div>
-              <OrgCard org={org} />
+              <OrgCard org={org} selectClicked={() => {}} />
             </div>
             <div>
               <MapBox
@@ -47,7 +48,13 @@ export default (): React.ReactElement => {
                   latitude: org.coordinates.latitude,
                   zoom: 5,
                 }}
-              ></MapBox>
+              >
+                <Marker
+                  key={org.id}
+                  latitude={org?.coordinates?.latitude}
+                  longitude={org?.coordinates?.longitude}
+                />
+              </MapBox>
             </div>
           </div>
           <div className="hidden md:block">

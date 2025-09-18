@@ -104,8 +104,8 @@ body.scrolled-360.modal-open .filters-row-mobile {
 }
 
 .map-wrapper-orgs .mapboxgl-map {
-  @apply !h-[500px] !w-full;
-  @apply md:!h-[calc(100vh-130px)];
+  @apply !h-[360px] !w-full;
+  @apply md:!h-[calc(100vh-160px)];
 }
 
 .asset-card {
