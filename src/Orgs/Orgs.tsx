@@ -1,4 +1,3 @@
-import { Marker } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +8,7 @@ import { Org } from "../shared/types";
 import supabase from "../shared/helpers/supabase";
 import OrgCard from "./OrgCard";
 import Footer from "../Footer";
+import { ClusteredOrgsLayer } from "../shared/components/ClusteredOrgsLayer";
 
 export default (): React.ReactElement => {
   const [selectedOrgId, setSelectedOrgId] = useState<number | null>(null);
@@ -32,11 +32,18 @@ export default (): React.ReactElement => {
     fetchOrgs();
   }, []);
 
-  const handleMarkerClick = (orgId: number) => {
+  const handleMarkerClick = ({
+    orgId,
+    lng,
+    lat,
+  }: {
+    orgId: number;
+    lng: number;
+    lat: number;
+  }) => {
     setSelectedOrgId(orgId);
-    const coordinates = orgs.find((org) => org.id === orgId)?.coordinates;
     mapRef?.current?.flyTo({
-      center: [coordinates?.longitude ?? 0, coordinates?.latitude ?? 0],
+      center: [lng, lat],
       zoom: 6,
     });
   };
@@ -90,19 +97,10 @@ export default (): React.ReactElement => {
                   showMapStyleSwitch={true}
                   mapRef={mapRef as React.RefObject<MapRef>}
                 >
-                  {orgs.map((org) => (
-                    <div key={org.id}>
-                      <Marker
-                        key={org.id}
-                        latitude={org?.coordinates?.latitude}
-                        longitude={org?.coordinates?.longitude}
-                        onClick={(e) => {
-                          e.originalEvent.stopPropagation();
-                          handleMarkerClick(org.id);
-                        }}
-                      />
-                    </div>
-                  ))}
+                  <ClusteredOrgsLayer
+                    orgs={orgs}
+                    onOrgClick={handleMarkerClick}
+                  />
                 </MapBox>
                 <div
                   className={`hidden lg:block w-[100vw] fixed left-0 bottom-0 z-50 bg-background pr-8 h-[80px]`}

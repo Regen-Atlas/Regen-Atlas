@@ -70,18 +70,22 @@ export default ({
             width="140"
             className="-mt-4"
           />
-          <p className="text-xs w-[400px]">
+          <p className="text-[10px] xl:text-xs xl:w-[400px] lg:w-[300px]">
             Funded by the Federal Ministry for Economic Affairs and Energy
             (BMWi) based on a decision of the German Bundestag.
           </p>
         </div>
         {showMapStyleSwitch && <MapStyleSwitch />}
         <div className="flex items-center gap-4">
-          <p>© Regen Atlas 2025</p>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/imprint">Imprint</Link>
+          <p className="lg:text-sm xl:text-base">© Regen Atlas 2025</p>
+          <Link to="/privacy-policy" className="lg:text-sm xl:text-base">
+            Privacy Policy
+          </Link>
+          <Link to="/imprint" className="lg:text-sm xl:text-base">
+            Imprint
+          </Link>
           <a
-            className="hover:text-primary-400"
+            className="hover:text-primary-400 lg:text-sm xl:text-base"
             href="https://regen-atlas.gitbook.io/regen-atlas-docs"
             target="_blank"
             onClick={() => {
@@ -95,7 +99,7 @@ export default ({
             Docs
           </a>
           <a
-            className="ml-6 block button button-gradient text-center button-gradient !text-base xl:hidden"
+            className="ml-6 block button button-gradient text-center button-gradient lg:text-sm xl:text-base"
             href="https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform"
             target="_blank"
             onClick={() => {
