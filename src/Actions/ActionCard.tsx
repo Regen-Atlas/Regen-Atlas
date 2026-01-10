@@ -12,7 +12,6 @@ import { TextShareModal } from "../shared/components/TextShareModal";
 import { ExpandableText } from "../shared/components/ExpandableText";
 import { Action } from "../shared/types";
 import { Link } from "react-router-dom";
-import { ChainTag } from "../modules/chains/components/ChainTag";
 import { COUNTRY_CODE_TO_NAME } from "../shared/countryCodes";
 
 interface ActionCardProps {
@@ -28,11 +27,6 @@ const formatDate = (dateString: string | null): string => {
     month: "short",
     year: "numeric",
   });
-};
-
-const getSDGIconPath = (code: string): string => {
-  const goalNum = parseInt(code.split(".")[0], 10);
-  return `/sdgs/goal-${goalNum}/GOAL_${goalNum}_PRIMARY_ICON/GOAL_${goalNum}_SVG/GOAL_${goalNum}_SVG_WHITE_BG.svg`;
 };
 
 export default ({
