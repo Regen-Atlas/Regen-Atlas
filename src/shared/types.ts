@@ -76,3 +76,71 @@ export interface Org {
     name: string;
   }>;
 }
+
+// SDG types
+export interface SDG {
+  id: number;
+  code: string;
+  title: string;
+}
+
+// Action Actor types
+export interface ActionActor {
+  id: string;
+  name: string;
+  website: string | null;
+}
+
+// Action Protocol types
+export interface ActionProtocol {
+  id: string;
+  name: string;
+  logo: string | null;
+  color: string;
+  website: string | null;
+}
+
+// Action Proof types
+export interface ActionProof {
+  id: string;
+  proof_link: string;
+  minted_at: string | null;
+  proof_metadata_link: string | null;
+  proof_image_link: string | null;
+  proof_transaction_hash: string | null;
+  proof_explorer_link: string | null;
+  protocol: ActionProtocol;
+  platform: {
+    id: string;
+    name: string;
+    shortname: string;
+    color: string;
+    image: {
+      thumb: string;
+      small: string;
+      large: string;
+    };
+  };
+}
+
+// Action types
+export interface Action {
+  id: string;
+  title: string;
+  description: string | null;
+  status: NewStatus;
+  location: {
+    latitude: number;
+    longitude: number;
+  } | null;
+  country_code: string | null;
+  region: string | null;
+  action_start_date: string | null;
+  action_end_date: string | null;
+  main_image: string | null;
+  created_at: string;
+  edited_at: string | null;
+  actors: ActionActor[];
+  sdg_outcomes: SDG[];
+  proofs: ActionProof[];
+}
