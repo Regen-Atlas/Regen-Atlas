@@ -22,6 +22,8 @@ import { PrivacyPolicy } from "./TnC/PrivacyPolicy.tsx";
 import { Imprint } from "./TnC/Imprint.tsx";
 import Orgs from "./Orgs/Orgs.tsx";
 import OrgDetails from "./Orgs/OrgDetails.tsx";
+import Actions from "./Actions/Actions.tsx";
+import ActionDetails from "./Actions/ActionDetails.tsx";
 
 globalThis.Buffer = Buffer;
 
@@ -62,6 +64,19 @@ export const router = createBrowserRouter([
           {
             path: ":id",
             element: <OrgDetails />,
+          },
+        ],
+      },
+      {
+        path: "actions",
+        children: [
+          {
+            path: "",
+            element: <Actions />,
+          },
+          {
+            path: ":id",
+            element: <ActionDetails />,
           },
         ],
       },
