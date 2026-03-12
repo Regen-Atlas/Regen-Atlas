@@ -65,10 +65,6 @@ export const ActionsFiltersBar = ({
     name: `${s.code} - ${getSDGShortTitle(s.code, s.title)}`,
   }));
 
-  const hasActiveFilters =
-    selectedProtocols.length > 0 ||
-    selectedSDGs.length > 0;
-
   const filtersCount =
     (selectedProtocols.length > 0 ? 1 : 0) +
     (selectedSDGs.length > 0 ? 1 : 0);
