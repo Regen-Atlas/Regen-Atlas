@@ -47,6 +47,8 @@ export default ({
       ? `${formatDate(action.action_start_date)}${action.action_start_date && action.action_end_date ? " - " : ""}${formatDate(action.action_end_date)}`
       : null;
 
+  const isEcocertainImage = action.main_image?.includes("ecocertain.xyz") || false;
+
   return (
     <>
       <div
@@ -80,11 +82,18 @@ export default ({
         </div>
 
         {action.main_image && (
-          <div
-            className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px] cursor-pointer"
-            style={{ backgroundImage: `url(${action.main_image})` }}
-            onClick={selectClicked}
-          />
+          <>
+            <div
+              className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px] cursor-pointer hidden lg:block"
+              style={{ backgroundImage: `url(${action.main_image})`, backgroundPositionY: isEcocertainImage ? "18%" : "50%" }}
+              onClick={selectClicked}
+            />
+            <div
+              className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px] lg:hidden"
+              style={{ backgroundImage: `url(${action.main_image})`, backgroundPositionY: isEcocertainImage ? "5%" : "50%" }}
+              onClick={selectClicked}
+            />
+          </>
         )}
 
         <h3
