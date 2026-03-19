@@ -62,10 +62,12 @@ export default ({
             {action.proofs.slice(0, 4).map((proof) => (
               <div
                 key={proof.id}
-                className="tooltip tooltip-right w-4 h-4 flex items-center justify-center rounded-full bg-grayTag text-xs font-bold"
+                className="tooltip tooltip-right flex-shrink-0"
                 data-tip={proof.protocol.name}
               >
-                <img src={proof.protocol.logo || ""} alt={proof.protocol.name} className="w-4 h-4" />
+                <div className="w-6 h-6 flex items-center justify-center rounded-full overflow-hidden bg-grayTag text-xs font-bold">
+                  <img src={proof.protocol.logo || ""} alt={proof.protocol.name} className="w-6 h-6" />
+                </div>
               </div>
             ))}
           </div>
@@ -224,10 +226,12 @@ export default ({
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="tooltip cursor-pointer"
+                    className="tooltip tooltip-left cursor-pointer flex-shrink-0"
                     data-tip={proof.protocol.name}
                   >
-                    <img src={proof.protocol.logo || ""} alt={proof.protocol.name} className="w-4 h-4" />
+                    <div className="w-6 h-6 flex items-center justify-center rounded-full overflow-hidden bg-grayTag">
+                      <img src={proof.protocol.logo || ""} alt={proof.protocol.name} className="w-6 h-6" />
+                    </div>
                   </a>
                 ))}
                 {action.proofs.length > 4 && (
