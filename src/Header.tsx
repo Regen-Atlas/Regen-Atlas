@@ -19,6 +19,10 @@ const menuItems = [
     link: "/orgs",
   },
   {
+    name: "Actions",
+    link: "/actions",
+  },
+  {
     name: "List Project",
     link: "#",
     url: "https://docs.google.com/forms/d/e/1FAIpQLSeznO5mTekWfSuj0Y1F70HQTKGOMf1HT6UVr45OAu_8ST7CuA/viewform",
@@ -65,13 +69,13 @@ export default ({
           <img src="/RA_logo-02.svg" alt="logo" className="h-[40px]" />
         </Link>
         {showFilters && (
-          <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-270px)]">
+          <div className="hidden lg:flex justify-center xl:absolute xl:top-5 xl:left-[calc(50vw-230px)]">
             <FiltersDesktop />
           </div>
         )}
         <div className="hidden lg:flex items-center gap-4">
           <Link
-            className="ml-6 block button button-gradient text-center button-gradient !text-base"
+            className="ml-6 block button button-gradient text-center button-gradient !text-sm !px-4"
             to="/orgs"
             onClick={() => {
               analytics.sendEvent({
@@ -82,6 +86,19 @@ export default ({
             }}
           >
             Orgs
+          </Link>
+          <Link
+            className="block button button-gradient text-center button-gradient !text-sm !px-4"
+            to="/actions"
+            onClick={() => {
+              analytics.sendEvent({
+                category: "Link Click",
+                action: "Actions",
+                label: "Header Button",
+              });
+            }}
+          >
+            Actions
           </Link>
           <ConnectKitButton />
         </div>
@@ -147,7 +164,7 @@ export default ({
                     <ParagraphIcon className="w-7 h-7" />
                   </a>
                 </div>
-                <p className="mt-4">© Regen Atlas 2025</p>
+                <p className="mt-4">© Regen Atlas 2026</p>
                 <div className="flex flex-col items-center">
                   <img src="/BMWE_de_v3__Web_farbig.svg" width="200" />
                   <p className="text-xs text-center">

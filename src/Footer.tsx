@@ -77,7 +77,7 @@ export default ({
         </div>
         {showMapStyleSwitch && <MapStyleSwitch />}
         <div className="flex items-center gap-4">
-          <p className="lg:text-sm xl:text-base">© Regen Atlas 2025</p>
+          <p className="lg:text-sm xl:text-base">© Regen Atlas 2026</p>
           <Link to="/privacy-policy" className="lg:text-sm xl:text-base">
             Privacy Policy
           </Link>
