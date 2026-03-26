@@ -136,3 +136,111 @@ body.scrolled-360.modal-open .filters-row-mobile {
 .klaro .cookie-notice a {
   color: rgb(94, 173, 247) !important;
 }
+
+/* Time slider: point selector (selected month only), not a cumulative fill */
+.time-slider-point {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.time-slider-point::-webkit-slider-runnable-track {
+  height: 8px;
+  background: rgb(229, 231, 235);
+  border-radius: 9999px;
+}
+
+.time-slider-point::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(0, 107, 207);
+  cursor: pointer;
+  margin-top: -6px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+.time-slider-point::-webkit-slider-thumb:hover {
+  background: rgb(0, 87, 169);
+}
+
+.time-slider-point::-moz-range-track {
+  height: 8px;
+  background: rgb(229, 231, 235);
+  border-radius: 9999px;
+}
+
+.time-slider-point::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(0, 107, 207);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+.time-slider-point::-moz-range-thumb:hover {
+  background: rgb(0, 87, 169);
+}
+
+/* All-dates mode: full track highlighted to indicate entire time span */
+.time-slider-all-dates {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.time-slider-all-dates::-webkit-slider-runnable-track {
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    rgb(157, 207, 253) 0%,
+    rgb(94, 173, 247) 50%,
+    rgb(157, 207, 253) 100%
+  );
+  border-radius: 9999px;
+}
+
+.time-slider-all-dates::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(0, 107, 207);
+  cursor: pointer;
+  margin-top: -6px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+.time-slider-all-dates::-webkit-slider-thumb:hover {
+  background: rgb(0, 87, 169);
+}
+
+.time-slider-all-dates::-moz-range-track {
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    rgb(157, 207, 253) 0%,
+    rgb(94, 173, 247) 50%,
+    rgb(157, 207, 253) 100%
+  );
+  border-radius: 9999px;
+}
+
+.time-slider-all-dates::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(0, 107, 207);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+.time-slider-all-dates::-moz-range-thumb:hover {
+  background: rgb(0, 87, 169);
+}

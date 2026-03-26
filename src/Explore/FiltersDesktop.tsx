@@ -26,9 +26,9 @@ export default (): React.ReactElement => {
     <div>
       <div
         className={clsx(
-          "w-[540px] h-10 gap-2 relative",
+          "w-[460px] h-10 gap-2 relative",
           "grid grid-cols-3 rounded-full p-1",
-          "bg-cardBackground border-[1px] border-white"
+          "bg-cardBackground border-[1px] border-white text-sm"
         )}
       >
         <div className="relative">
