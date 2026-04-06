@@ -173,9 +173,11 @@ const newReducer = (state: NewState, action: NewAction): NewState => {
       };
     }
     case "RESET_FILTERS": {
+      const filters = newInitialState.filters;
       return {
         ...state,
-        filters: newInitialState.filters,
+        filters,
+        filteredAssets: filterNewAssets(state.allAssets, filters),
         selectedAssetId: "",
       };
     }
