@@ -1,6 +1,7 @@
 import { X } from "@phosphor-icons/react";
 import clsx from "clsx";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -21,15 +22,16 @@ export const Modal = ({ children, onClose, closeOnOutsideClick = true, fullScree
     };
   }, []);
 
-  return (
+  /* Portal to body so z-index stacks above fixed header (e.g. modals opened from sticky Explore filters row). */
+  return createPortal(
     <div
-      className="fixed top-0 left-0 z-50 w-svw h-[100vh] flex justify-center items-center bg-black bg-opacity-60"
+      className="fixed inset-0 z-[100] flex justify-center items-center bg-black/60"
       onClick={() => (closeOnOutsideClick ? onClose() : "")}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         className={clsx(
-          "bg-background px-3 md:px-6 py-10 relative",
+          "bg-background px-3 lg:px-6 py-10 relative",
           fullScreen && "w-full h-full",
           !fullScreen && "rounded-md shadow-lg",
         )}
@@ -40,6 +42,7 @@ export const Modal = ({ children, onClose, closeOnOutsideClick = true, fullScree
         </div>
         <div className="overflow-y-auto h-full">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };

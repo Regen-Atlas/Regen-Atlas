@@ -83,14 +83,14 @@ export default function About() {
               className="absolute inset-0 w-full h-full object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#0a1e2e]/70 via-[#0a1e2e]/30 to-[#0a1e2e]/95" />
-            <div className="relative flex-1 flex flex-col items-center justify-center max-w-[1040px] mx-auto px-4 py-16 md:py-20 text-center">
+            <div className="relative flex-1 flex flex-col items-center justify-center max-w-[1040px] mx-auto px-4 py-16 lg:py-20 text-center">
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-primary-200/80 mb-5">
                 Open-Source / Onchain
               </p>
-              <h1 className="text-[36px] md:text-[48px] lg:text-[56px] font-bold leading-[1.08] tracking-[-0.025em] mb-5 max-w-[720px] mx-auto text-white">
+              <h1 className="text-[36px] lg:text-[56px] font-bold leading-[1.08] tracking-[-0.025em] mb-5 max-w-[720px] mx-auto text-white">
                 The onchain green economy — mapped, valued, verified
               </h1>
-              <p className="text-primary-200/60 text-sm md:text-base max-w-[520px] mx-auto mb-8 leading-relaxed">
+              <p className="text-primary-200/60 text-sm lg:text-base max-w-[520px] mx-auto mb-8 leading-relaxed">
                 Every green asset, actor, and onchain action — unified across chains and bioregions.
               </p>
               <div className="flex items-center justify-center gap-3 flex-wrap">
@@ -114,7 +114,7 @@ export default function About() {
               <div className="max-w-[1040px] mx-auto px-4 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 text-center">
                 {stats.map((s) => (
                   <div key={s.label}>
-                    <div className="text-2xl md:text-3xl font-bold tracking-tight text-white">{s.value}</div>
+                    <div className="text-2xl lg:text-3xl font-bold tracking-tight text-white">{s.value}</div>
                     <div className="text-[10px] uppercase tracking-[0.15em] text-white/40 mt-1 font-medium">
                       {s.label}
                     </div>
@@ -140,17 +140,17 @@ export default function About() {
 
           {/* Feature Cards — problem framing folded into intro */}
           <section className="bg-background">
-            <div className="max-w-[1040px] mx-auto px-4 py-16 md:py-20">
+            <div className="max-w-[1040px] mx-auto px-4 py-16 lg:py-20">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-primary-300 mb-4">
                 How It Works
               </p>
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">Index. Valuate. Verify.</h2>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-3 tracking-tight">Index. Valuate. Verify.</h2>
               <p className="text-sm text-gray-500 mb-10 max-w-[560px] leading-[1.7]">
                 Carbon credits on Polygon. Biodiversity tokens on Celo. Renewable energy on Ethereum. Nobody has the
                 full picture — so we built one. Every asset mapped to its bioregion, valued against peer-reviewed
                 economics, verified onchain.
               </p>
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid lg:grid-cols-2 gap-5">
                 <div className="bg-white border border-gray-200 p-7 flex flex-col hover:shadow-[0_8px_30px_rgba(94,173,185,0.1)] hover:border-primary-200/60 transition-all duration-300">
                   <MapTrifold size={28} weight="duotone" className="text-primary-300 mb-4" />
                   <h3 className="text-base font-semibold mb-2">Map Explorer</h3>
@@ -191,11 +191,11 @@ export default function About() {
 
           {/* Ecosystem Coverage */}
           <section className="border-t border-gray-200 bg-white">
-            <div className="max-w-[1040px] mx-auto px-4 py-12 md:py-16">
+            <div className="max-w-[1040px] mx-auto px-4 py-12 lg:py-16">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-primary-300 mb-4">
                 Ecosystem Services
               </p>
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">Beyond Carbon</h2>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-3 tracking-tight">Beyond Carbon</h2>
               <p className="text-sm text-gray-500 mb-10 max-w-[520px] leading-[1.7]">
                 Regen Atlas tracks onchain activity across the full spectrum of ecosystem services — not just carbon
                 credits, but biodiversity, water, soil, energy, and livelihoods.
@@ -227,8 +227,8 @@ export default function About() {
               className="absolute inset-0 w-full h-full object-cover opacity-30"
             />
             <div className="absolute inset-0 bg-[#0a1e2e]/60" />
-            <div className="relative max-w-[1040px] mx-auto px-4 py-20 md:py-24 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight text-white">Start exploring</h2>
+            <div className="relative max-w-[1040px] mx-auto px-4 py-20 lg:py-24 text-center">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-3 tracking-tight text-white">Start exploring</h2>
               <p className="text-sm text-primary-200/50 mb-8 max-w-[400px] mx-auto leading-relaxed">
                 500+ green assets, the organizations behind them, and their onchain activity — open-source across 17
                 chains.

@@ -71,7 +71,7 @@ export default ({ className, action, selectClicked }: ActionCardProps): React.Re
           />
         )}
 
-        <h3 className="font-bold md:text-xl cursor-pointer" onClick={selectClicked}>
+        <h3 className="font-bold lg:text-xl cursor-pointer" onClick={selectClicked}>
           {action.title}
         </h3>
 

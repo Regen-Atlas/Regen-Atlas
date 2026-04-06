@@ -53,7 +53,7 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
     return (
       <div
         ref={dropdownRef}
-        className="absolute z-50 top-9 right-0 md:right-auto md:left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
+        className="absolute z-50 top-9 right-0 lg:right-auto lg:left-0 w-64 bg-white border border-gray-300 rounded-xl shadow-xl overflow-y-auto max-h-60"
       >
         <div className="flex flex-col divide-y divide-gray-100">
           {paginatedItems.map((item) => (
@@ -89,7 +89,7 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
     <>
       <div className={clsx("asset-card border-2 border-white p-3 rounded-[20px] bg-cardBackground", className)}>
         <div className="flex justify-between">
-          <h3 className="font-bold md:text-xl" onClick={selectClicked}>
+          <h3 className="font-bold lg:text-xl" onClick={selectClicked}>
             {org.name}
           </h3>
           <div className="flex gap-3 justify-between items-center">
@@ -168,8 +168,8 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
         <div className="xxs:text-[13px] text-sm">
           {org.assets.length > 0 && (
             <div className="flex justify-between items-start py-2 min-h-9">
-              <p className="font-bold mr-4 hidden md:block">Associated Assets</p>
-              <p className="font-bold mr-2 md:hidden">Assoc. Assets</p>
+              <p className="font-bold mr-4 hidden lg:block">Associated Assets</p>
+              <p className="font-bold mr-2 lg:hidden">Assoc. Assets</p>
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
                 <Link
                   to={`/assets/${org.assets[0].id}`}
@@ -207,8 +207,8 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
           )}
           {org.issuers.length > 0 && (
             <div className="flex justify-between items-start py-2 min-h-9">
-              <p className="font-bold mr-4 hidden md:block">Associated Issuers</p>
-              <p className="font-bold mr-2 md:hidden">Assoc. Issuers</p>
+              <p className="font-bold mr-4 hidden lg:block">Associated Issuers</p>
+              <p className="font-bold mr-2 lg:hidden">Assoc. Issuers</p>
               <div className="xxs:text-xs text-sm font-bold text-right flex items-center flex-wrap gap-2">
                 {org?.issuers?.map((issuer) => (
                   <div

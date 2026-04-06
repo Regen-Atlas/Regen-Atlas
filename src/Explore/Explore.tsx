@@ -630,7 +630,7 @@ export default (): React.ReactElement => {
         <div
           className={clsx(
             "pt-[60px] lg:pt-[36px]",
-            "md:grid md:grid-cols-2 md:gap-4 lg:gap-0",
+            "lg:grid lg:gap-0",
             `lg:grid-cols-[var(--panel-w)_1fr] xl:grid-cols-[var(--panel-w)_1fr]`,
             "transition-[grid-template-columns] duration-300",
           )}
@@ -638,8 +638,8 @@ export default (): React.ReactElement => {
         >
           <div
             className={clsx(
-              "md:order-3 md:self-start md:row-start-2 md:row-end-3 lg:row-start-1 lg:row-end-2",
-              !showLeftPanel && "md:!col-span-2",
+              "lg:order-3 lg:self-start lg:row-start-1 lg:row-end-2",
+              !showLeftPanel && "lg:!col-span-2",
             )}
             onClick={() => panelExpanded && setPanelExpanded(false)}
           >
@@ -647,7 +647,6 @@ export default (): React.ReactElement => {
               className={clsx(
                 "w-full overflow-hidden",
                 "map-wrapper",
-                showLeftPanel && "md:fixed md:top-[100px] md:right-4 md:w-[calc(50vw-32px)] md:h-[calc(100vh-136px)]",
                 showLeftPanel && "lg:h-[calc(100vh-72px)]",
                 showLeftPanel && "lg:top-[36px] lg:left-[var(--panel-w)] lg:w-[calc(100vw-var(--panel-w))]",
                 "transition-[width] duration-300",
@@ -742,24 +741,14 @@ export default (): React.ReactElement => {
               </MapBox>
             </div>
           </div>
-          <div
-            className={clsx("h-[60px] z-10 md:row-start-1 md:row-end-2 md:order-1 md:col-span-2 lg:hidden", "md:h-0")}
-          >
-            <div
-              className={clsx(
-                "filters-row-mobile bg-background",
-                "md:fixed md:!top-[70px] md:left-0 md:w-full md:!px-4",
-              )}
-            >
-              <FiltersMobile actionFilters={actionFilters} onActionFiltersChange={setActionFilters} />
-            </div>
+          <div className="z-10 min-h-[60px] shrink-0 lg:hidden filters-row-mobile bg-background">
+            <FiltersMobile actionFilters={actionFilters} onActionFiltersChange={setActionFilters} />
           </div>
           <div
             className={clsx(
-              "md:order-2 md:row-start-2 lg:row-start-1 lg:row-end-2 md:row-end-3",
-              "md:bg-cardBackground md:h-[calc(100vh-160px)] md:flex md:flex-col md:overflow-hidden",
-              "lg:h-[calc(100vh-72px)]",
-              !showLeftPanel && "md:hidden",
+              "lg:order-2 lg:row-start-1 lg:row-end-2",
+              "lg:bg-cardBackground lg:flex lg:flex-col lg:overflow-hidden lg:h-[calc(100vh-72px)]",
+              !showLeftPanel && "lg:hidden",
               "relative",
             )}
           >
@@ -875,7 +864,7 @@ export default (): React.ReactElement => {
                   <>
                     <button
                       onClick={() => toggleSection("bioregion")}
-                      className="w-full flex items-center justify-between px-4 h-11 md:h-8 text-sm font-semibold text-white shrink-0 bg-esv-600"
+                      className="w-full flex items-center justify-between px-4 h-11 lg:h-8 text-sm font-semibold text-white shrink-0 bg-esv-600"
                     >
                       <span className="flex items-center gap-1.5">
                         <Globe size={14} />
@@ -931,7 +920,7 @@ export default (): React.ReactElement => {
                   <>
                     <button
                       onClick={() => toggleSection("asset")}
-                      className="w-full flex items-center justify-between px-4 h-11 md:h-8 text-sm font-semibold text-white shrink-0"
+                      className="w-full flex items-center justify-between px-4 h-11 lg:h-8 text-sm font-semibold text-white shrink-0"
                       style={{ backgroundColor: ENTITY_COLORS.asset.primary }}
                     >
                       <span className="flex items-center gap-1.5">
@@ -984,7 +973,7 @@ export default (): React.ReactElement => {
                   <>
                     <button
                       onClick={() => toggleSection("action")}
-                      className="w-full flex items-center justify-between px-4 h-11 md:h-8 text-sm font-semibold text-white shrink-0"
+                      className="w-full flex items-center justify-between px-4 h-11 lg:h-8 text-sm font-semibold text-white shrink-0"
                       style={{ backgroundColor: ENTITY_COLORS.action.primary }}
                     >
                       <span className="flex items-center gap-1.5">
@@ -1037,7 +1026,7 @@ export default (): React.ReactElement => {
                   <>
                     <button
                       onClick={() => toggleSection("actor")}
-                      className="w-full flex items-center justify-between px-4 h-11 md:h-8 text-sm font-semibold text-white shrink-0"
+                      className="w-full flex items-center justify-between px-4 h-11 lg:h-8 text-sm font-semibold text-white shrink-0"
                       style={{ backgroundColor: ENTITY_COLORS.actor.primary }}
                     >
                       <span className="flex items-center gap-1.5">

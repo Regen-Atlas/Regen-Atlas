@@ -86,7 +86,7 @@ export default function AgentDetails() {
       <>
         <Header />
         <div className="main-container" role="main" aria-busy="true" aria-label="Loading agent details">
-          <div className="pt-[60px] md:pt-[80px] flex items-center justify-center min-h-[50vh]">
+          <div className="pt-[60px] lg:pt-[80px] flex items-center justify-center min-h-[50vh]">
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 animate-pulse" />
               <p className="text-sm text-gray-500">Loading agent profile...</p>
@@ -102,7 +102,7 @@ export default function AgentDetails() {
       <>
         <Header />
         <div className="main-container" role="main">
-          <div className="pt-[60px] md:pt-[80px]">
+          <div className="pt-[60px] lg:pt-[80px]">
             <Link
               to="/?entity=actor"
               className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-6"
@@ -149,7 +149,7 @@ export default function AgentDetails() {
       </Helmet>
       <Header />
       <div className="main-container" role="main">
-        <div className="pt-[60px] md:pt-[80px]">
+        <div className="pt-[60px] lg:pt-[80px]">
           {/* Back navigation */}
           <Link
             to="/?entity=actor"
@@ -160,7 +160,7 @@ export default function AgentDetails() {
             <span>Back to Actors</span>
           </Link>
 
-          <div className="grid lg:grid-cols-[480px_1fr] md:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-[480px_1fr] gap-6">
             {/* Left Column - Agent Card */}
             <div className="space-y-4">
               {/* Main Card */}
@@ -406,7 +406,7 @@ export default function AgentDetails() {
             </div>
           </div>
 
-          <div className="hidden md:block mt-8">
+          <div className="hidden lg:block mt-8">
             <Footer />
           </div>
         </div>

@@ -47,7 +47,7 @@ export default (): React.ReactElement => {
         </div>
 
         {/* Center: List Project — hidden on small screens */}
-        <div className="hidden md:flex items-center h-full group/list">
+        <div className="hidden lg:flex items-center h-full group/list">
           <div className="w-px h-1/2 bg-gray-400/50 group-hover/list:bg-gray-400 transition-colors self-center" />
           <a
             className="h-full flex items-center px-6 text-[11px] font-medium hover:bg-gray-100 transition-colors"
@@ -82,9 +82,9 @@ export default (): React.ReactElement => {
         </div>
 
         {/* Right: Docs, Blog, social */}
-        <div className="flex items-center gap-3 md:gap-4 shrink-0">
+        <div className="flex items-center gap-3 lg:gap-4 shrink-0">
           <a
-            className="hidden md:inline text-[10px] text-gray-400"
+            className="hidden lg:inline text-[10px] text-gray-400"
             href="https://regen-atlas.gitbook.io/regen-atlas-docs"
             target="_blank"
             onClick={() => {
@@ -99,7 +99,7 @@ export default (): React.ReactElement => {
             Docs
           </a>
           <a
-            className="hidden md:inline text-[10px] text-gray-400"
+            className="hidden lg:inline text-[10px] text-gray-400"
             href="https://paragraph.xyz/@regenatlas"
             target="_blank"
             onClick={() => {

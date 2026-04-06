@@ -46,8 +46,8 @@ export default (): React.ReactElement => {
       </Helmet>
       <Header />
       <div className="main-container">
-        <div className="pt-[60px] md:pt-[80px]">
-          <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
+        <div className="pt-[60px] lg:pt-[80px]">
+          <div className="grid lg:grid-cols-[440px_1fr] gap-4">
             <div>
               <ActionCard action={action} selectClicked={() => {}} />
             </div>
@@ -66,7 +66,7 @@ export default (): React.ReactElement => {
               </div>
             )}
           </div>
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Footer />
           </div>
         </div>

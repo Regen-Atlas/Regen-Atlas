@@ -9,7 +9,7 @@ export const useScrollClass = () => {
         document.body.classList.remove("scrolled");
       }
 
-      if (window.scrollY > 360) {
+      if (window.scrollY > 465) {
         document.body.classList.add("scrolled-360");
       } else {
         document.body.classList.remove("scrolled-360");

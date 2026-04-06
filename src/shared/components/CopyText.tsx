@@ -25,7 +25,7 @@ export const CopyText = ({ text }: { text: string }): React.ReactElement => {
       <textarea
         ref={textarea}
         className={clsx(
-          "break-all h-20 md:h-auto w-[60vw] md:w-[400px] resize-none focus:outline-none disabled:bg-white",
+          "break-all h-20 lg:h-auto w-[60vw] lg:w-[400px] resize-none focus:outline-none disabled:bg-white",
           isCopied && "selection:text-[#181818]",
         )}
         value={text}

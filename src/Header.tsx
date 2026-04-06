@@ -56,17 +56,17 @@ export default (): React.ReactElement => {
   return (
     <header
       className={clsx(
-        "px-3 md:px-4 z-20 fixed top-0 left-0 w-full",
+        "px-3 lg:px-4 z-20 fixed top-0 left-0 w-full",
         "bg-background site-header",
         "h-[60px] lg:h-[36px]",
       )}
     >
       {/* Single row nav */}
       <div className="flex items-center h-[60px] lg:h-[36px]">
-        <Link className="hidden md:block" to="/">
+        <Link className="hidden lg:block" to="/">
           <img src="/RA_logo-01.svg" alt="logo" className="h-[35px] lg:h-[24px]" />
         </Link>
-        <Link className="block md:hidden h-[32px]" to="/">
+        <Link className="block lg:hidden h-[32px]" to="/">
           <img src="/RA_logo-02.svg" alt="logo" className="h-[32px]" />
         </Link>
 

@@ -23,11 +23,13 @@
 
 html {
   min-height: 100%;
+  /* clip (not hidden) avoids breaking position:sticky on descendants; hidden creates overflow containment in Chromium */
+  overflow-x: clip;
 }
 
 body {
   @apply bg-background min-h-[100vh];
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .button {
@@ -80,27 +82,32 @@ body {
 
 body.scrolled .site-header {
   box-shadow: 0 3px 2px 0 rgb(0 0 0 / 0.08);
-  @apply md:shadow-none lg:shadow-md;
+  @apply shadow-md;
 }
 
 body.scrolled-360 .site-header {
-  @apply shadow-none lg:shadow-md;
+  box-shadow: none;
 }
 
 body.scrolled-360 .filters-row-mobile {
-  @apply top-[60px] left-0 w-full px-3 z-10;
-  box-shadow: 0 3px 2px 0 rgb(0 0 0 / 0.08);
+  @apply top-[58px] z-10 px-3;
   position: sticky;
+  /* Full viewport width while inside padded .main-container (break out of parent width) */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  box-shadow: 0 3px 2px 0 rgb(0 0 0 / 0.08);
+  box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   body.scrolled-360 .filters-row-mobile {
     position: fixed;
   }
 }
 
 body.scrolled .filters-row-mobile {
-  @apply md:shadow-md;
+  @apply lg:shadow-md;
 }
 
 body.scrolled-360.modal-open .filters-row-mobile {
@@ -109,13 +116,12 @@ body.scrolled-360.modal-open .filters-row-mobile {
 
 .map-wrapper .mapboxgl-map {
   @apply !h-[50vh] !w-full;
-  @apply md:!h-[calc(100vh-100px)];
   @apply lg:!h-[calc(100vh-72px)];
 }
 
 .map-wrapper-orgs .mapboxgl-map {
   @apply !h-[360px] !w-full;
-  @apply md:!h-[calc(100vh-160px)];
+  @apply lg:!h-[calc(100vh-160px)];
 }
 
 .asset-card {
@@ -128,7 +134,7 @@ body.scrolled-360.modal-open .filters-row-mobile {
 }
 
 .main-container {
-  @apply bg-background max-w-full mx-auto px-3 md:px-4 pb-2 md:pb-0;
+  @apply bg-background max-w-full mx-auto px-3 lg:px-4 pb-2 lg:pb-0;
 }
 
 .second-order-asset-popup .mapboxgl-popup-tip {

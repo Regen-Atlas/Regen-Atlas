@@ -189,7 +189,7 @@ export function MapFilterBar({
   };
 
   return (
-    <div className="hidden md:block absolute top-0 left-0 right-0 z-10">
+    <div className="hidden lg:block absolute top-0 left-0 right-0 z-10">
       <div className="bg-gray-900/90 backdrop-blur-sm flex items-center px-2 h-8">
         {/* ── Assets + subfilters ── */}
         <div className="flex items-center h-full">

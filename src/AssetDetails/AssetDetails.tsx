@@ -310,8 +310,8 @@ export default (): React.ReactElement => {
       </Helmet>
       <Header />
       <div className="main-container">
-        <div className="pt-[60px] md:pt-[80px]">
-          <div className="grid lg:grid-cols-[440px_1fr] md:grid-cols-2 gap-4">
+        <div className="pt-[60px] lg:pt-[80px]">
+          <div className="grid lg:grid-cols-[440px_1fr] gap-4">
             <div>
               {asset.parent_assets.length > 0 && (
                 <div className="bg-primary-400 text-white rounded-2xl h-8 w-[200px] font-bold flex justify-center items-center mb-4">
@@ -356,7 +356,7 @@ export default (): React.ReactElement => {
               </MapBox>
             </div>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Footer />
           </div>
         </div>

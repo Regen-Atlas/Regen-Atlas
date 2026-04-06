@@ -158,11 +158,11 @@ export default function ListProject() {
     <>
       <Header />
       <div className="min-h-screen bg-background pt-[60px] lg:pt-[36px]">
-        <div className="max-w-[640px] mx-auto px-4 py-12 md:py-16 pb-24">
+        <div className="max-w-[640px] mx-auto px-4 py-12 lg:py-16 pb-24">
           <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-primary-300 mb-4">
             List Your Project
           </p>
-          <h1 className="text-2xl md:text-3xl font-bold mb-2 tracking-tight">Add to Regen Atlas</h1>
+          <h1 className="text-2xl lg:text-3xl font-bold mb-2 tracking-tight">Add to Regen Atlas</h1>
           <p className="text-sm text-gray-500 mb-10 leading-relaxed">
             Submit an asset, actor, or action to be listed on the map. All submissions are reviewed before publishing.
           </p>

@@ -20,7 +20,7 @@ export const TextShareModal = ({
 }): React.ReactElement => {
   return (
     <Modal onClose={onClose}>
-      <div className="max-w-[84vw] md:max-w-[500px] pt-3">
+      <div className="max-w-[84vw] lg:max-w-[500px] pt-3">
         <CopyText text={text} />
 
         <div className="mt-6 flex justify-end gap-4">
