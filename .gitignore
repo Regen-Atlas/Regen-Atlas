@@ -1,0 +1,21 @@
+.git-broken/
+node_modules/
+.DS_Store
+.env
+.env.local
+integrations/.env
+*.log
+.vscode/
+.idea/
+
+# Build artifacts
+**/dist/
+**/out/
+**/cache/
+**/node_modules/
+contracts/broadcast/
+
+# Claude Code local
+.claude/
+.vercel
+CLAUDE.md
