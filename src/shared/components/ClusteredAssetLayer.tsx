@@ -41,7 +41,7 @@ function spiderfyFeatures(assets: Asset[], map: MapRef, pixelRadius = 5): Asset[
       const lng = asset?.coordinates?.longitude;
       const lat = asset?.coordinates?.latitude;
 
-      if (typeof lng !== "number" || typeof lat !== "number" || isNaN(lng) || isNaN(lat)) {
+      if (typeof lng !== "number" || typeof lat !== "number" || Number.isNaN(lng) || Number.isNaN(lat)) {
         return null;
       }
 

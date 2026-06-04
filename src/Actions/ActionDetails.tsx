@@ -31,7 +31,7 @@ export default (): React.ReactElement => {
   if (!action) {
     return (
       <div className="w-svw h-svh flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+        <span className="loading loading-spinner loading-lg" />
       </div>
     );
   }
@@ -56,12 +56,12 @@ export default (): React.ReactElement => {
                 <MapBox
                   mapStyle={mapStyle}
                   initialViewState={{
-                    longitude: action.location!.longitude,
-                    latitude: action.location!.latitude,
+                    longitude: action.location?.longitude,
+                    latitude: action.location?.latitude,
                     zoom: 5,
                   }}
                 >
-                  <Marker key={action.id} latitude={action.location!.latitude} longitude={action.location!.longitude} />
+                  <Marker key={action.id} latitude={action.location?.latitude} longitude={action.location?.longitude} />
                 </MapBox>
               </div>
             )}

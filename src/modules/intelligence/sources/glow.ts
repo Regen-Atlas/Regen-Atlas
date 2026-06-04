@@ -116,9 +116,7 @@ export async function fetchGlowFarmData(week?: number): Promise<GlowFilteredFarm
       if (response.ok) {
         return response.json();
       }
-    } catch {
-      continue;
-    }
+    } catch {}
   }
   return [];
 }
@@ -131,7 +129,7 @@ export async function fetchGlowAuditFarms(): Promise<GlowAuditFarm[]> {
     if (response.ok) {
       const data = await response.json();
       // The API returns an array of audit farm objects
-      const farms: GlowAuditFarm[] = (Array.isArray(data) ? data : data.farms ?? []).map(
+      const farms: GlowAuditFarm[] = (Array.isArray(data) ? data : (data.farms ?? [])).map(
         (f: Record<string, unknown>) => ({
           farmId: (f.farmId ?? f.id ?? "") as string,
           farmName: (f.farmName ?? f.humanReadableName ?? "") as string,

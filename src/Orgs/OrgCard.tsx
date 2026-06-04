@@ -40,7 +40,7 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
       type: "SET_PROVIDER_FILTER",
       payload: issuer.id,
     });
-    navigate(`/`);
+    navigate("/");
   };
 
   const renderDropdown = (assets: Array<{ id: string; name: string }>) => {
@@ -120,7 +120,7 @@ export default ({ className, org, selectClicked }: OrgCardProps): React.ReactEle
           className="h-40 bg-cover bg-center bg-no-repeat mt-3 mb-3 rounded-[20px]"
           style={{ backgroundImage: `url(${org.main_image})` }}
           onClick={selectClicked}
-        ></div>
+        />
         {org.address && (
           <div className="flex items-center pt-1 pb-2 text-sm">
             <div className="flex items-center font-bold" onClick={selectClicked}>

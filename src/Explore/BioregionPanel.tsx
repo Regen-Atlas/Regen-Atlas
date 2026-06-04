@@ -350,7 +350,7 @@ export function BioregionPanel({
                 displayedAssets.map((asset) => {
                   const isAssetOpen = expandedAssetId === asset.id;
                   const primaryType = asset.asset_types[0];
-                  const typeColor = primaryType ? TYPE_COLORS[primaryType.id] ?? "#9CA3AF" : "#9CA3AF";
+                  const typeColor = primaryType ? (TYPE_COLORS[primaryType.id] ?? "#9CA3AF") : "#9CA3AF";
 
                   return (
                     <div key={asset.id} className="border-b border-gray-50">
@@ -823,7 +823,7 @@ export function BioregionPanel({
             for (const a of bioregionActions) {
               const k = groupKey(a);
               if (!groupMap.has(k)) groupMap.set(k, []);
-              groupMap.get(k)!.push(a);
+              groupMap.get(k)?.push(a);
             }
             const groups = Array.from(groupMap.values());
 

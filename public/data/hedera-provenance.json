@@ -132,9 +132,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.617744"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.617744"]
     }
   },
   {
@@ -200,9 +198,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.617748"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.617748"]
     }
   },
   {
@@ -268,9 +264,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.617752"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.617752"]
     }
   },
   {
@@ -336,9 +330,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1018034"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1018034"]
     }
   },
   {
@@ -404,9 +396,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1061955"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1061955"]
     }
   },
   {
@@ -472,9 +462,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1364821"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1364821"]
     }
   },
   {
@@ -540,9 +528,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1387470"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1387470"]
     }
   },
   {
@@ -608,9 +594,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1658303"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1658303"]
     }
   },
   {
@@ -676,9 +660,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / DOVU",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.1719750"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.1719750"]
     }
   },
   {
@@ -744,9 +726,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / Tolam Earth",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.8112020"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.8112020"]
     }
   },
   {
@@ -883,9 +863,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / Tolam Earth",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.8315181"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.8315181"]
     }
   },
   {
@@ -951,9 +929,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / Tolam Earth",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.8315201"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.8315201"]
     }
   },
   {
@@ -1019,9 +995,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / Tolam Earth",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.8315235"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.8315235"]
     }
   },
   {
@@ -1391,10 +1365,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6276431",
-        "https://hashscan.io/mainnet/token/0.0.6276875"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6276431", "https://hashscan.io/mainnet/token/0.0.6276875"]
     }
   },
   {
@@ -1531,9 +1502,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6262761"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6262761"]
     }
   },
   {
@@ -1599,9 +1568,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6262774"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6262774"]
     }
   },
   {
@@ -1667,9 +1634,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6279244"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6279244"]
     }
   },
   {
@@ -1735,9 +1700,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6896644"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6896644"]
     }
   },
   {
@@ -1803,9 +1766,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6908362"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6908362"]
     }
   },
   {
@@ -1969,9 +1930,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.6908436"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.6908436"]
     }
   },
   {
@@ -2037,9 +1996,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.9122157"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.9122157"]
     }
   },
   {
@@ -2174,9 +2131,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.9878536"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.9878536"]
     }
   },
   {
@@ -2311,9 +2266,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.10042614"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.10042614"]
     }
   },
   {
@@ -2602,9 +2555,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.10178194"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.10178194"]
     }
   },
   {
@@ -2741,9 +2692,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.10178198"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.10178198"]
     }
   },
   {
@@ -2809,9 +2758,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / OrbexCO2",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.10163204"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.10163204"]
     }
   },
   {
@@ -3017,9 +2964,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / GCR",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.4546232"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.4546232"]
     }
   },
   {
@@ -3085,9 +3030,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / GCR",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.5945736"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.5945736"]
     }
   },
   {
@@ -3153,9 +3096,7 @@
     "mrv": {
       "status": "verified",
       "provider": "Guardian / GCR",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/topic/0.0.6260119"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/topic/0.0.6260119"]
     }
   },
   {
@@ -3221,9 +3162,7 @@
     "mrv": {
       "status": "pending",
       "provider": "Guardian / TYMLEZ",
-      "documentCIDs": [
-        "https://hashscan.io/mainnet/token/0.0.1810776"
-      ]
+      "documentCIDs": ["https://hashscan.io/mainnet/token/0.0.1810776"]
     }
   }
 ]

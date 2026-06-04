@@ -30,7 +30,7 @@ export const CopyText = ({ text }: { text: string }): React.ReactElement => {
         )}
         value={text}
         onChange={() => {}}
-      ></textarea>
+      />
       <Copy className="cursor-pointer" size={24} onClick={handleCopy} />
     </div>
   );

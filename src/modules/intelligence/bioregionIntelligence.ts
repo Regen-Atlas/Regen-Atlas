@@ -30,10 +30,10 @@ export interface BioregionStats {
 function pointInRing(lng: number, lat: number, ring: number[][]): boolean {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const xi = ring[i][0],
-      yi = ring[i][1];
-    const xj = ring[j][0],
-      yj = ring[j][1];
+    const xi = ring[i][0];
+    const yi = ring[i][1];
+    const xj = ring[j][0];
+    const yj = ring[j][1];
     if (yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
       inside = !inside;
     }
@@ -102,7 +102,7 @@ export function mapAssetsToBioregions(assets: Asset[], geojson: GeoJSON.FeatureC
     if (feature) {
       const code = feature.properties?.code as string;
       if (!mapping.has(code)) mapping.set(code, []);
-      mapping.get(code)!.push(asset);
+      mapping.get(code)?.push(asset);
     }
   }
 

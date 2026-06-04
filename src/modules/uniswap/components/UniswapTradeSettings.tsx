@@ -67,7 +67,7 @@ export const UniswapTradeSettings: React.FC<{
           </div>
           <Gear size={24} weight="fill" className="text-gray-400" />
         </div>
-        <div tabIndex={0} className="dropdown-content rounded-md bg-base-100 z-[1] w-auto p-2 shadow">
+        <div className="dropdown-content rounded-md bg-base-100 z-[1] w-auto p-2 shadow">
           <div className="flex items-center gap-4">
             <span className="font-medium text-sm">Max.&nbsp;slippage</span>
             <label className="input input-bordered input-sm flex items-center gap-2">

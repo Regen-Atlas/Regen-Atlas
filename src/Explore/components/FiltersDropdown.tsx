@@ -269,7 +269,6 @@ export default ({
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search issuers..."
                       className="w-full pl-8 pr-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-gray-400"
-                      autoFocus
                     />
                   </div>
                   <div className="flex items-center border border-gray-200 rounded overflow-hidden shrink-0">
@@ -352,7 +351,6 @@ export default ({
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="Search chains..."
                       className="w-full pl-8 pr-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-gray-400"
-                      autoFocus
                     />
                   </div>
                   <div className="flex items-center border border-gray-200 rounded overflow-hidden shrink-0">

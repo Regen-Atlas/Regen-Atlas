@@ -41,7 +41,7 @@ function deduplicatePositions(positions: OrgMapPosition[]): OrgMapPosition[] {
 }
 
 function isValidCoordinate(lat: number, lng: number): boolean {
-  return !(lat === 0 && lng === 0) && !isNaN(lat) && !isNaN(lng);
+  return !(lat === 0 && lng === 0) && !Number.isNaN(lat) && !Number.isNaN(lng);
 }
 
 /** Get centroid of a bioregion feature from its properties */

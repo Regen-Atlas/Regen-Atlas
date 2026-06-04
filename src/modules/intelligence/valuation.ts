@@ -168,7 +168,7 @@ export function valuateRenewableEnergy(
     tier: "category-default",
     confidence: "medium",
     methodologyName: "Avoided Emissions via SCC",
-    formula: `MWh × grid_emission_factor × SCC range`,
+    formula: "MWh × grid_emission_factor × SCC range",
     inputs: [
       { label: "Generation", value: `${mwhGenerated.toLocaleString()} MWh` },
       { label: "Grid Factor", value: `${emissionFactor} tCO2e/MWh`, source: "EPA eGRID" },
@@ -209,7 +209,7 @@ export function valuateMarineStewardship(hectares: number): VerifiableProvenance
     tier: "category-default",
     confidence: "low",
     methodologyName: "TEEB Coastal/Marine Valuation",
-    formula: `hectares × TEEB_coastal_value_range`,
+    formula: "hectares × TEEB_coastal_value_range",
     inputs: [
       { label: "Area", value: `${hectares.toLocaleString()} ha` },
       {
@@ -341,7 +341,7 @@ export function addDirectCreditGap(
  */
 export function npvFactor(rate = 0.03, years = 30): number {
   if (rate <= 0) return years;
-  return (1 - Math.pow(1 + rate, -years)) / rate;
+  return (1 - (1 + rate) ** -years) / rate;
 }
 
 // Reference data export for the UI

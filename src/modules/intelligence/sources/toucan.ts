@@ -179,7 +179,7 @@ export async function fetchPoolSummary(poolName: string, poolAddress: string): P
   let tokenCount = 0;
   for (const p of pooled) {
     const amount = Number.parseFloat(p.amount) / 1e18;
-    if (!isNaN(amount) && amount > 0) {
+    if (!Number.isNaN(amount) && amount > 0) {
       totalTCO2e += amount;
       tokenCount++;
     }

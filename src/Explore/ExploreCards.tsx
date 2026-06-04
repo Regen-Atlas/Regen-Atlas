@@ -275,7 +275,7 @@ export function ActionExploreCard({ action, onLocate }: ActionExploreCardProps) 
                   {protocol.name}
                 </span>
               )}
-              {actor && actor.name && !actor.name.startsWith("0x") && (
+              {actor?.name && !actor.name.startsWith("0x") && (
                 <span className="text-[11px] text-gray-400 truncate">{actor.name}</span>
               )}
               {sortedSdgs.length > 0 && (

@@ -64,7 +64,7 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({ selectedToken, onToken
         <span className="text-lg font-bold">{selectedToken?.symbol}</span>
         <CaretDown size={20} weight="bold" />
       </div>
-      <div tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box w-60 p-2 shadow z-10">
+      <div className="dropdown-content menu bg-base-100 rounded-box w-60 p-2 shadow z-10">
         {tokens.map((token) => {
           return (
             <div

@@ -103,7 +103,7 @@ function spiderfyFeatures(items: SpiderfyItem[], map: MapRef, pixelRadius = 20):
   const pixelItems = items
     .map((item) => {
       const { longitude: lng, latitude: lat } = item.coords;
-      if (typeof lng !== "number" || typeof lat !== "number" || isNaN(lng) || isNaN(lat)) return null;
+      if (typeof lng !== "number" || typeof lat !== "number" || Number.isNaN(lng) || Number.isNaN(lat)) return null;
       const pixel = lngLatToPixel({ longitude: lng, latitude: lat }, map);
       return { item, pixel };
     })
@@ -268,10 +268,10 @@ export function CompositeClusterLayer({
             entity_type: "action",
             id: a.id,
             label: a.title,
-            lng: a.location!.longitude,
-            lat: a.location!.latitude,
+            lng: a.location?.longitude,
+            lat: a.location?.latitude,
           },
-          coords: { longitude: a.location!.longitude, latitude: a.location!.latitude },
+          coords: { longitude: a.location?.longitude, latitude: a.location?.latitude },
         }));
 
       if (zoom > clusterMaxZoom) {
@@ -317,7 +317,7 @@ export function CompositeClusterLayer({
       if (!e.id.startsWith(CLUSTER_ICON_PREFIX)) return;
 
       const parts = e.id.slice(CLUSTER_ICON_PREFIX.length).split("-").map(Number);
-      if (parts.length !== 3 || parts.some(isNaN)) return;
+      if (parts.length !== 3 || parts.some(Number.isNaN)) return;
 
       const [assetCount, actorCount, actionCount] = parts;
       const canvas = generateClusterIcon(assetCount, actorCount, actionCount);

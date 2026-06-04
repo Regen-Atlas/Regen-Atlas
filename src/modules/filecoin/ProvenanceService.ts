@@ -208,7 +208,7 @@ function matchProvenance(provenance: VerifiableProvenance, assets: Asset[]): Ass
   }
 
   // Unique key for this provenance (used for hash distribution)
-  const pKey = provenance.origin.project + "|" + provenance.asset.name;
+  const pKey = `${provenance.origin.project}|${provenance.asset.name}`;
 
   // 2. Protocol → issuer: narrow to same-protocol assets
   const expectedIssuer = PROTOCOL_ISSUER_MAP[provenance.source.protocol];
@@ -400,7 +400,7 @@ export async function ingestAllSources(
       for (const p of [...bctPooled, ...nctPooled]) {
         const sym = p.token.symbol;
         const amount = Number.parseFloat(p.amount) / 1e18;
-        if (!isNaN(amount) && amount > 0) {
+        if (!Number.isNaN(amount) && amount > 0) {
           poolAmountBySymbol.set(sym, (poolAmountBySymbol.get(sym) ?? 0) + amount);
         }
       }
@@ -413,7 +413,7 @@ export async function ingestAllSources(
       for (const r of retirements) {
         const sym = r.token.symbol;
         const amount = Number.parseFloat(r.amount) / 1e18;
-        if (!isNaN(amount) && amount > 0) {
+        if (!Number.isNaN(amount) && amount > 0) {
           poolAmountBySymbol.set(sym, (poolAmountBySymbol.get(sym) ?? 0) + amount);
         }
       }

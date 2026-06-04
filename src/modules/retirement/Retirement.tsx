@@ -97,7 +97,7 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet, projec
   const amountChangeSideeffect = (value: string, updatedToken?: Token) => {
     const amount = Number.parseFloat(value);
 
-    if (isNaN(amount) || amount === 0) {
+    if (Number.isNaN(amount) || amount === 0) {
       setStatus("enter_amount");
       return;
     }
@@ -196,9 +196,8 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet, projec
 
       if (res.validationResult.retirementHash) {
         return res.validationResult;
-      } else {
-        throw new Error("Transaction retirement hash not found");
       }
+      throw new Error("Transaction retirement hash not found");
     } catch (e) {
       console.log(e ? e : "Error fetching transaction details");
       throw new Error("Error fetching transaction details");
@@ -348,7 +347,7 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet, projec
                 <div>
                   <div>Processing credit retirement...</div>
                   <div className="flex justify-center">
-                    <span className="loading loading-spinner loading-lg"></span>
+                    <span className="loading loading-spinner loading-lg" />
                   </div>
                 </div>
               </div>
@@ -397,7 +396,7 @@ export const Retirement: React.FC<RetirementProps> = ({ retirementWallet, projec
                     <h3 className="text-xl font-semibold mb-4">Getting the confirmation</h3>
                     <div>This might take up to 20 seconds. Please don't refresh the page don't close this modal.</div>
                     <div className="flex justify-center">
-                      <span className="loading loading-spinner loading-lg"></span>
+                      <span className="loading loading-spinner loading-lg" />
                     </div>
                   </>
                 )}

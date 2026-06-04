@@ -100,7 +100,7 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({ tokenPair }) => 
     setAmountIn(value);
     const amount = Number.parseFloat(value);
 
-    if (isNaN(amount) || amount === 0) {
+    if (Number.isNaN(amount) || amount === 0) {
       setStatus("enter_amount");
       setAmountOut("");
       return;
@@ -135,7 +135,7 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({ tokenPair }) => 
     setAmountOut(value);
     const amount = Number.parseFloat(value);
 
-    if (isNaN(amount) || amount === 0) {
+    if (Number.isNaN(amount) || amount === 0) {
       setStatus("enter_amount");
       setAmountIn("");
       return;
@@ -193,7 +193,7 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({ tokenPair }) => 
       };
 
       analytics.sendSwappingEvent({
-        action: `Request Token Swap Confirmation`,
+        action: "Request Token Swap Confirmation",
         value: Number.parseFloat(amountIn),
         label: `${tokenIn.symbol} to ${tokenOut.symbol}`,
       });
@@ -215,13 +215,13 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({ tokenPair }) => 
       setAmountOut("");
       setStatus("done");
       analytics.sendSwappingEvent({
-        action: `Token Swap Completed`,
+        action: "Token Swap Completed",
         value: Number.parseFloat(amountIn),
         label: `${tokenIn.symbol} to ${tokenOut.symbol} ${res}`,
       });
     } catch (e) {
       analytics.sendSwappingEvent({
-        action: `Token Swap Failed`,
+        action: "Token Swap Failed",
         value: Number.parseFloat(amountIn),
         label: `${tokenIn.symbol} to ${tokenOut.symbol}`,
       });
@@ -247,7 +247,7 @@ export const UniswapTrading: React.FC<UniswapTradingProps> = ({ tokenPair }) => 
 
   const requestTokenSpendingApproval = async () => {
     analytics.sendSwappingEvent({
-      action: `Request Token Spending Approval`,
+      action: "Request Token Spending Approval",
       value: Number.parseFloat(amountIn),
       label: tokenIn.symbol,
     });

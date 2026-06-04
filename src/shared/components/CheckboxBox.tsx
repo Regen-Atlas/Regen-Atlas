@@ -18,6 +18,6 @@ export const CheckboxBox = ({
         variant === "small" ? "!w-3.5 !h-3.5 rounded-none" : variant === "medium" ? "w-5 h-5" : "w-6 h-6",
         className && className,
       )}
-    ></div>
+    />
   );
 };

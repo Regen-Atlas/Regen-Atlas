@@ -231,7 +231,7 @@ function ProvenanceSection({
                     </a>
                   </div>
                 )}
-                {p.pieceCid && p.pieceCid.startsWith("local:") && (
+                {p.pieceCid?.startsWith("local:") && (
                   <div className="text-xs text-gray-400">Pending upload (local hash: {p.pieceCid.slice(6, 46)}...)</div>
                 )}
               </div>
@@ -278,7 +278,7 @@ export default (): React.ReactElement => {
   if (!asset) {
     return (
       <div className="w-svw h-svh flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+        <span className="loading loading-spinner loading-lg" />
       </div>
     );
   }
@@ -291,7 +291,8 @@ export default (): React.ReactElement => {
           onAssetClick={(clickedAssetId: string) => handleAssetOpenClick(clickedAssetId)}
         />
       );
-    } else if (fullParentAssets.length > 0) {
+    }
+    if (fullParentAssets.length > 0) {
       return (
         <ClusteredAssetLayer
           assets={fullParentAssets}
