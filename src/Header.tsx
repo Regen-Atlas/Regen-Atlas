@@ -109,7 +109,7 @@ export default (): React.ReactElement => {
                 onClick={show}
                 className="h-full px-4 text-[11px] font-medium hover:bg-gray-100 transition-colors flex items-center"
               >
-                {isConnected ? ensName ?? truncatedAddress : "Connect Wallet"}
+                {isConnected ? (ensName ?? truncatedAddress) : "Connect Wallet"}
               </button>
             )}
           </ConnectKitButton.Custom>

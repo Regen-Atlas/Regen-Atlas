@@ -41,7 +41,7 @@ export function AssetRetirement({
         <Retirement retirementWallet={retirementWallet} project={project} minimumCredits={minimumCredits} />
       ) : (
         <div className="h-[492px] card-shadow border-2 border-white p-3 rounded-[20px] bg-cardBackground flex justify-center items-center">
-          <span className="loading loading-spinner loading-lg"></span>
+          <span className="loading loading-spinner loading-lg" />
         </div>
       )}
     </>

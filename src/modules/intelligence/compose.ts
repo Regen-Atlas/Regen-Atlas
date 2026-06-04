@@ -161,9 +161,9 @@ function formatVintage(start: string, end: string): string {
   const toYear = (s: string) => {
     if (!s || s === "0") return null;
     const n = Number(s);
-    if (!isNaN(n) && n > 1e9) return new Date(n * 1000).getFullYear();
+    if (!Number.isNaN(n) && n > 1e9) return new Date(n * 1000).getFullYear();
     const d = new Date(s);
-    return isNaN(d.getTime()) ? null : d.getFullYear();
+    return Number.isNaN(d.getTime()) ? null : d.getFullYear();
   };
   const startYear = toYear(start);
   const endYear = toYear(end);

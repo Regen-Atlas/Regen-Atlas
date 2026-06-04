@@ -31,7 +31,7 @@ export default (): React.ReactElement => {
   if (!org) {
     return (
       <div className="w-svw h-svh flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+        <span className="loading loading-spinner loading-lg" />
       </div>
     );
   }

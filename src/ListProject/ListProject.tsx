@@ -210,7 +210,7 @@ export default function ListProject() {
                     name="description"
                     required
                     rows={3}
-                    className={inputClass + " resize-none"}
+                    className={`${inputClass} resize-none`}
                     placeholder="What is this asset? What impact does it represent?"
                   />
                 </div>
@@ -340,7 +340,7 @@ export default function ListProject() {
                     name="description"
                     required
                     rows={3}
-                    className={inputClass + " resize-none"}
+                    className={`${inputClass} resize-none`}
                     placeholder={
                       actorSubtype === "organization"
                         ? "What does the organization do?"
@@ -418,7 +418,7 @@ export default function ListProject() {
                 {/* Social links */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <label className={labelClass + " mb-0"}>Social Links</label>
+                    <label className={`${labelClass} mb-0`}>Social Links</label>
                     <button
                       type="button"
                       onClick={addSocialLink}
@@ -484,7 +484,7 @@ export default function ListProject() {
                     name="description"
                     required
                     rows={3}
-                    className={inputClass + " resize-none"}
+                    className={`${inputClass} resize-none`}
                     placeholder="What action was taken? What impact was generated?"
                   />
                 </div>
@@ -562,7 +562,7 @@ export default function ListProject() {
                 {/* SDG selector */}
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
-                    <label className={labelClass + " mb-0"}>Sustainable Development Goals</label>
+                    <label className={`${labelClass} mb-0`}>Sustainable Development Goals</label>
                     <div className="relative group">
                       <Info size={13} className="text-gray-400 cursor-help" />
                       <div className="absolute left-0 bottom-full mb-1 w-64 bg-gray-900 text-white text-[10px] leading-relaxed p-3 rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity z-50">
@@ -618,7 +618,7 @@ export default function ListProject() {
               <textarea
                 name="notes"
                 rows={2}
-                className={inputClass + " resize-none"}
+                className={`${inputClass} resize-none`}
                 placeholder="Additional context, links, documentation, or notes"
               />
             </div>

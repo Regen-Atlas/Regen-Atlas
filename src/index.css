@@ -177,12 +177,7 @@ body.scrolled-360.modal-open .filters-row-mobile {
 
 /* About page — gradient headline */
 .about-gradient-text {
-  background: linear-gradient(
-    135deg,
-    rgb(23, 127, 224) 0%,
-    rgb(94, 173, 247) 50%,
-    rgb(23, 127, 224) 100%
-  );
+  background: linear-gradient(135deg, rgb(23, 127, 224) 0%, rgb(94, 173, 247) 50%, rgb(23, 127, 224) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -191,20 +186,8 @@ body.scrolled-360.modal-open .filters-row-mobile {
 /* About page — infinite chain rail */
 .about-chain-rail {
   position: relative;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
 .about-chain-rail-inner {

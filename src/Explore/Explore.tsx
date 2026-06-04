@@ -452,12 +452,12 @@ export default (): React.ReactElement => {
 
   // The currently selected asset (for three-state rendering)
   const selectedAsset = useMemo(
-    () => (selectedAssetId ? allAssets.find((a) => a.id === selectedAssetId) ?? null : null),
+    () => (selectedAssetId ? (allAssets.find((a) => a.id === selectedAssetId) ?? null) : null),
     [selectedAssetId, allAssets],
   );
 
   const selectedOrg = useMemo(
-    () => (selectedOrgId ? allOrgs.find((o) => o.id === selectedOrgId) ?? null : null),
+    () => (selectedOrgId ? (allOrgs.find((o) => o.id === selectedOrgId) ?? null) : null),
     [selectedOrgId, allOrgs],
   );
 
@@ -467,13 +467,13 @@ export default (): React.ReactElement => {
       (o) =>
         o.id !== selectedOrg.id &&
         o.coordinates &&
-        Math.abs(o.coordinates.latitude - selectedBioregion.centroid![1]) < 5 &&
-        Math.abs(o.coordinates.longitude - selectedBioregion.centroid![0]) < 10,
+        Math.abs(o.coordinates.latitude - selectedBioregion.centroid?.[1]) < 5 &&
+        Math.abs(o.coordinates.longitude - selectedBioregion.centroid?.[0]) < 10,
     );
   }, [selectedOrg, selectedBioregion, allOrgs]);
 
   const selectedAction = useMemo(
-    () => (selectedActionId ? allActions.find((a) => a.id === selectedActionId) ?? null : null),
+    () => (selectedActionId ? (allActions.find((a) => a.id === selectedActionId) ?? null) : null),
     [selectedActionId, allActions],
   );
 
@@ -492,8 +492,8 @@ export default (): React.ReactElement => {
       ? allActions.filter(
           (a) =>
             a.location &&
-            Math.abs(a.location.latitude - selectedBioregion.centroid![1]) < 5 &&
-            Math.abs(a.location.longitude - selectedBioregion.centroid![0]) < 10,
+            Math.abs(a.location.latitude - selectedBioregion.centroid?.[1]) < 5 &&
+            Math.abs(a.location.longitude - selectedBioregion.centroid?.[0]) < 10,
         )
       : allActions;
     const selectedKey = groupKey(selectedAction);
@@ -631,16 +631,13 @@ export default (): React.ReactElement => {
           className={clsx(
             "pt-[60px] lg:pt-[36px]",
             "lg:grid lg:gap-0",
-            `lg:grid-cols-[var(--panel-w)_1fr] xl:grid-cols-[var(--panel-w)_1fr]`,
+            "lg:grid-cols-[var(--panel-w)_1fr] xl:grid-cols-[var(--panel-w)_1fr]",
             "transition-[grid-template-columns] duration-300",
           )}
           style={{ "--panel-w": `${panelWidth}px` } as React.CSSProperties}
         >
           <div
-            className={clsx(
-              "lg:order-3 lg:self-start lg:row-start-1 lg:row-end-2",
-              !showLeftPanel && "lg:!col-span-2",
-            )}
+            className={clsx("lg:order-3 lg:self-start lg:row-start-1 lg:row-end-2", !showLeftPanel && "lg:!col-span-2")}
             onClick={() => panelExpanded && setPanelExpanded(false)}
           >
             <div

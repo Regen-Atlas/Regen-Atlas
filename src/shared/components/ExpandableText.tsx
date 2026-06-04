@@ -10,7 +10,7 @@ interface ExpandableTextProps {
 export const ExpandableText = ({ text, maxChars = 150, className }: ExpandableTextProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const truncatedText = text.length > maxChars ? text.slice(0, maxChars).trimEnd() + "..." : text;
+  const truncatedText = text.length > maxChars ? `${text.slice(0, maxChars).trimEnd()}...` : text;
 
   const toggle = () => {
     setIsExpanded(!isExpanded);
@@ -22,7 +22,7 @@ export const ExpandableText = ({ text, maxChars = 150, className }: ExpandableTe
       {text.length > maxChars && (
         <span onClick={toggle} className="font-bold cursor-pointer">
           {" "}
-          {isExpanded ? " read\u00A0less" : `read\u00A0more`}
+          {isExpanded ? " read\u00A0less" : "read\u00A0more"}
         </span>
       )}
     </div>
